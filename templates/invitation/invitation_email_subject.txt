@@ -1,1 +1,0 @@
-You have been invited by {{ user }} to join {{ site.name }}!

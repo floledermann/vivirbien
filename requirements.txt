@@ -15,3 +15,7 @@ django-atomformat==0.1.1dev
 Markdown
 smartypants
 creole==1.0.1
+
+# -----------------------------
+
+-e hg+https://floledermann@bitbucket.org/floledermann/django-invitation/#egg=django-invitation
