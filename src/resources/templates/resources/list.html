@@ -1,0 +1,10 @@
+{% extends "resources/base.html" %}
+
+{% block resources_content %}
+<h1>List of resources</h1>
+<ul>
+{% for resource in resources %}
+<li><a href="{% url resources_resource key=resource.shortname%}">{{ resource.name }}</a></li>
+{% endfor %}
+</ul>
+{% endblock %}

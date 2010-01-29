@@ -25,7 +25,7 @@ html, body {
     vertical-align: -2px;
 }
 
-.navi {
+.header {
     padding: 10px;
 }
 
@@ -39,6 +39,14 @@ ul#messages {
     padding: 5px;
 }
 
+.navi {
+    float: left;
+}
+
 .language-switcher {
+    display: inline;
+}
+
+.user-actions {
     float: right;
 }

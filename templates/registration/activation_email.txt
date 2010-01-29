@@ -4,7 +4,7 @@ Dein Username lautet: {{ user.username }}
 
 Bitte klicke innerhalb der naechsten {{expiration_days}} Tage auf folgenden Link, um deinen Account zu aktivieren:
 
-http://{{site.domain}}/activate/{{activation_key}}
+http://{{site.domain}}{% url registration_activate activation_key=activation_key %}
 
 Viel Spass!
 

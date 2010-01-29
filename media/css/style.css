@@ -3,7 +3,7 @@ body {
     font-size: 12px;
 }
 
-.navi, .footer {
+.header, .footer {
     background-color: #eeeeee;
 }
 
@@ -13,4 +13,9 @@ h1 {
 
 h2 {
     font-size: 14px;
+}
+
+.username,
+.language-switcher {
+    color: #666666;
 }

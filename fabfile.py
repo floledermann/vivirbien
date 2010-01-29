@@ -282,11 +282,15 @@ def deploy():
     reload()
 
 def syncdb():
+    # TODO migrations fail in some cases when using sqlite
+    # in these cases migrations can be circumvented using 'python manage.py syncdb --all'
     if not env.hosts:
         local('env\Scripts\python manage.py syncdb', capture=False)
+        local('env\Scripts\python manage.py migrate', capture=False)
     else:
         # we are in a symlinked directory so we have to add one more '../' !
         run('cd %(sites_home)s%(project_name)s/current-release; ../../env/bin/python manage.py syncdb --noinput' % env) 
+        run('cd %(sites_home)s%(project_name)s/current-release; ../../env/bin/python manage.py migrate' % env)
 
 def translate():
     makemessages()
@@ -298,15 +302,43 @@ def makemessages():
     if env.hosts:
         abort('Please create translations locally')
     local('cd templates & django-admin.py makemessages -l de', capture=False)
-    local('cd src\wiki & django-admin.py makemessages -l de', capture=False)
+    local('cd src/wiki & django-admin.py makemessages -l de', capture=False)
+    local('cd env/src/django-invitation/invitation & django-admin.py makemessages -l de -e html -e txt', capture=False)
 
 def compilemessages():
     if env.hosts:
         abort('Please create translations locally')
     local('cd templates & django-admin.py compilemessages', capture=False)
     local('cd src/wiki & django-admin.py compilemessages', capture=False)
+    local('cd env/src/django-invitation/invitation & django-admin.py compilemessages', capture=False)
 
+def convert_to_south(app_name=None):
+    if not app_name:
+        abort('Please specify an app name like create_migration:<appname>')
+    if not env.hosts:
+        # local codebase will be converted
+        local('env\Scripts\python manage.py convert_to_south %s' % app_name)
+    else:
+        # already deployed code; tell south to activate, migrations (created locally) must be already deployed!
+        deploy_nosyncdb()
+        # first migration should be the current state - so just fake it
+        run('cd %s%s/current-release; ../../env/bin/python manage.py migrate %s 0001 --fake' % (env.sites_home, env.project_name, app_name)) 
+        # apply remaining migrations
+        syncdb()
+        reload()
 
+def create_migration(app_name=None, manual=False):
+    if not app_name:
+        abort('Please specify an app name like create_migration:<appname>')
+    if not manual:
+        auto_str = ' --auto'
+    else:
+        auto_str = ''
+    migration_name = prompt('Migration Name: ', validate=r'^[a-z_0-9]+$')
+    local('env\Scripts\python manage.py startmigration %s %s %s' % (app_name, migration_name, auto_str), capture=False)
+    if console.confirm('Please review migration code; Apply now?'):
+        local('env\Scripts\python manage.py migrate', capture=False)
+        
 # ---------------------------------------------------------
 # helper functions
 # ---------------------------------------------------------
