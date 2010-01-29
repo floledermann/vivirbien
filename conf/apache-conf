@@ -1,0 +1,68 @@
+#<VirtualHost *:80>
+#	ServerName www.vivirbien-2.at
+#	ServerAlias vivirbien-2.at
+#	RewriteEngine On
+#	RewriteRule ^/(.*)           http://www.vivirbien.at/$1 [R=301,L]
+#</VirtualHost>
+
+<VirtualHost *:80>
+	ServerAdmin mail@floledermann.com
+	ServerName vivirbien.mediavirus.org
+#	ServerAlias www.vivirbien.at vivirbien.at
+   
+	<Location />
+		Order allow,deny
+		allow from all
+		SetHandler python-program
+		# PythonHandler django.core.handlers.modpython
+		PythonHandler modpython_virtualenv
+		PythonPath "['/home/flo/sites/vivirbien/','/home/flo/sites/vivirbien/current-release/','/home/flo/sites/vivirbien/current-release/src'] + sys.path"
+		SetEnv DJANGO_SETTINGS_MODULE settings
+		SetEnv DJANGO_CONFIG server_architekt
+# DEVELOPMENT SETTINGS
+		PythonDebug On
+	</Location>
+
+	<Directory /home/flo/sites/vivirbien/>
+		Options +FollowSymLinks		
+	</Directory>
+
+    alias /robots.txt /home/flo/sites/vivirbien/current-release/conf/robots.txt
+    <Location "/robots.txt">
+        SetHandler None
+    </Location> 
+
+    LogLevel warn
+	ErrorLog /home/flo/sites/vivirbien/log/apache-error.log
+	CustomLog /home/flo/sites/vivirbien/log/apache-access.log combined
+	
+</VirtualHost>
+
+<VirtualHost *:80>
+	ServerAdmin mail@floledermann.com
+	ServerName vivirbien-media.floledermann.com
+
+	<Directory /home/flo/sites/vivirbien/>
+		Options +FollowSymLinks		
+	</Directory>
+
+	DocumentRoot /home/flo/sites/vivirbien/current-release/media
+	<Directory /home/flo/sites/vivirbien/current-release/media>
+		Order allow,deny
+		allow from all
+	</Directory>
+
+	ExpiresActive On
+	ExpiresByType image/gif A604800
+	ExpiresByType image/png A604800
+	ExpiresByType image/jpg A604800
+	ExpiresByType image/jpeg A604800
+	ExpiresByType text/javascript A604800
+	ExpiresByType application/x-javascript A604800
+	ExpiresByType text/css A604800
+
+    LogLevel warn
+	ErrorLog /home/flo/sites/vivirbien/log/apache-error.log
+	CustomLog /home/flo/sites/vivirbien/log/apache-access.log combined
+	
+</VirtualHost>

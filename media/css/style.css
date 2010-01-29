@@ -1,0 +1,16 @@
+body {
+    font-family: Georgia, Times, serif;
+    font-size: 12px;
+}
+
+.navi, .footer {
+    background-color: #eeeeee;
+}
+
+h1 {
+    font-size: 32px;
+}
+
+h2 {
+    font-size: 14px;
+}

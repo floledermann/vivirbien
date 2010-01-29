@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="cmspage registrationpage">
+
+{% if account %}
+<div class="topline">
+<h2>Willkommen auf Kunstwien, {{account.get_full_name}}</h2>
+</div>
+
+<p class="section">
+Dein User {{ account.username }} wurde aktiviert! Jetzt geht's aber wirklich los... Viel Spass!
+</p>
+
+<form action="/login/" method="POST">
+<ul>
+{{login_form.as_ul}}
+</ul>
+
+<button type="submit">{% with "anmelden" as label %}{% include "components/button.html" %}{% endwith %}</button>
+</form>
+
+
+{% else %}
+
+<div class="topline">
+<h2>Falscher Aktivierungsschlüssel!</h2>
+</div>
+
+<p>
+Der angegebene Registrierungs&shy;schlüssel ist ungültig oder abgelaufen - <a href="/door/">Melde Dich hier an</a>, um es nochmals zu probieren.
+</p>
+{% endif %}
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,1 @@
+This project was bootstrapped using Flo Ledermann's django_project_template

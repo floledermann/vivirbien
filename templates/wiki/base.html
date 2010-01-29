@@ -1,0 +1,27 @@
+{% extends "page_base.html" %}
+{% load i18n %}
+
+{% block head %}
+{{ block.super }}
+<link rel="stylesheet" href="{{MEDIA_URL}}css/wikiapp.css">
+{% endblock %}
+
+{% block body_class %}wikipage{% endblock %}
+
+{% block page_content %}
+{# {% include "wiki/searchbox.html" %} #}
+{% include "wiki/messages.html" %}
+
+<div id="actions">
+  {% block footer %}{% endblock %}
+  <a href="{% url wiki_list %}">{% trans "List all articles" %}</a> |
+  <a href="{% url wiki_history %}">{% trans "Recent Changes" %}</a>
+</div>
+
+<div class="wikicontent">
+{% block content %}
+{% endblock %}
+</div>
+
+{% endblock %}
+

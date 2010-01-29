@@ -1,0 +1,10 @@
+Hallo und willkommen bei {{site.name}}!
+
+Dein Username lautet: {{ user.username }}
+
+Bitte klicke innerhalb der naechsten {{expiration_days}} Tage auf folgenden Link, um deinen Account zu aktivieren:
+
+http://{{site.domain}}/activate/{{activation_key}}
+
+Viel Spass!
+

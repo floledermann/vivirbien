@@ -1,0 +1,14 @@
+.deploy-ignore
+.gitignore
+.hgignore
+.project
+.pydevproject
+settings_secret.py
+.pyc
+commandline.bat
+\env\
+\releases\
+\uploads\
+\documents\
+\_resources\
+\.hg\

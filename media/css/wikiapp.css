@@ -1,0 +1,107 @@
+
+#head {
+    overflow: auto;
+    height: 120px;
+}
+
+#head h1 {
+    float: left;
+    font-size: 42px;
+}
+
+#searchbox {
+    float: right;
+}
+
+#actions {
+    xtext-align: right;
+}
+
+#article h1 {
+    border-bottom: 1px solid #000;
+}
+
+p {
+    text-align: justify;
+}
+
+p label {
+    display: block;
+}
+
+p.required label {
+    font-weight: bold;
+}
+
+.wikicontent table {
+    margin: 10px 0;
+    border-collapse: collapse;
+    border: 2px solid #eeeeee;
+}
+
+.wikicontent table td,
+.wikicontent table th {
+    padding: 2px 5px;
+    border: 1px solid #eeeeee;
+}
+
+.wikicontent table th {
+    font-weight: bold;
+}
+
+.wikicontent a {
+    color: #000099;
+}
+
+.wikicontent .tbheader {
+    background: #ccc;
+}
+
+.tbodd {
+    background: #fff;
+}
+
+.tbeven {
+    background: #eee;
+}
+
+ul.errorlist {
+    padding:  5px;
+    margin-bottom:  10px;
+    list-style:  none;
+}
+
+ul.errorlist li:before {
+    content: "<!> ";
+}
+
+ul.errorlist li {
+    background: #C00;
+    color: #FFF;
+}
+
+#footer {
+    border-top: 1px solid #ccc;
+    text-align: center;
+    background: #fff;
+}
+
+#id_comment, textarea {
+    width: 80%;
+}
+
+#id_tags, #id_comment, #id_title, textarea {
+    font-size: 1em;
+    background: #fff;
+    color: #000;
+    border: 1px solid #ccc;
+}
+
+#id_comment:focus, #id_title:focus, #id_tags:focus, input:focus, textarea:focus {
+    background: #ffc;
+}
+
+#messages {
+    border: 1px solid #c90;
+    background: #ff9;
+}

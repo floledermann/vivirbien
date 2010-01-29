@@ -1,0 +1,54 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-01-21 10:59+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: .\base.html.py:6
+msgid "Untitled Page"
+msgstr "Ohne Titel"
+
+#: .\page_base.html.py:15
+msgid "Resources"
+msgstr "Ressourcen"
+
+#: .\page_base.html.py:17 .\invitation\invitation_form.html.py:6
+msgid "Invite a friend"
+msgstr "Leute einladen"
+
+#: .\page_base.html.py:37
+msgid "Resources for non-capitalist lifestyles"
+msgstr "Ressourcen für nichtkapitalistische Lebensweisen"
+
+#: .\invitation\invitation_complete.html.py:6
+msgid "Invitation sent"
+msgstr "Die Einladung wurde verschickt"
+
+#: .\invitation\invitation_complete.html.py:8
+msgid "Your friend will receive an email with your invitation soon!"
+msgstr ""
+"Der/die Empfänger/in wird in Kürze eine Email mit deiner Einladung erhalten."
+
+#: .\invitation\invitation_form.html.py:13
+msgid "Send Invitation"
+msgstr "Einladung abschicken"
+
+#: .\wiki\base.html.py:17
+msgid "List all articles"
+msgstr "Alle Artikel"
+
+#: .\wiki\base.html.py:18
+msgid "Recent Changes"
+msgstr "Letzte Änderungen"

@@ -1,0 +1,19 @@
+{% extends "page_base.html" %}
+
+{% block page_content %}
+
+<h2>Anmeldung</h2>
+
+<form action="{% url registration_register %}" method="POST">
+{% if invitation_key %}
+<input type="hidden" name="invitation_key" value="{{ invitation_key }}" />
+{% endif %}
+<table>
+{{form.as_table}}
+</table>
+
+<input type="submit" value="Submit" />
+</form>
+
+
+{% endblock %}

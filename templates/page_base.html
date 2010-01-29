@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block head %}
+{{ block.super }}
+<link rel="stylesheet" href="{{MEDIA_URL}}css/base.css">
+<link rel="stylesheet" href="{{MEDIA_URL}}css/layout.css">
+<link rel="stylesheet" href="{{MEDIA_URL}}css/style.css">
+{% endblock %}
+
+{% block body %}
+
+<div class="main-wrapper">
+<div class="navi">
+<a href="/">{% trans "Resources" %}</a>
+| <a href="/wiki/VivirBien/">Wiki</a>
+{% if user.is_active %}| <a href="/accounts/invite/">{% trans "Invite a friend" %}</a>{% endif %}
+{% if user.is_staff %}| <a href="/admin/">Admin</a>{% endif %}
+
+<form class="language-switcher" action="/i18n/setlang/" method="post">
+<!--<input name="next" type="hidden" value="/next/page/" />-->
+<select name="language">
+{% for lang in LANGUAGES %}
+<option value="{{ lang.0 }}"{% ifequal lang.0 LANGUAGE_CODE%} selected="selected"{% endifequal %}>{{ lang.1 }}</option>
+{% endfor %}
+</select>
+<input type="submit" value="Go" />
+</form>
+</div>
+<div class="content">
+{% block page_content %}
+{% endblock %}
+</div>
+</div>
+
+<div class="footer">
+Vivir bien &mdash; {% trans "Resources for non-capitalist lifestyles" %} &mdash;
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img alt="Creative Commons License" src="http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" /></a>
+</div>
+
+
+{% endblock %}

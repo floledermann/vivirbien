@@ -1,0 +1,7 @@
+You have been invited by {{ user }} to join {{ site.name }}!
+
+Go to http://{{site.domain}}{% url invitation_invited invitation_key=invitation_key.key %} to join!
+
+All the best,
+
+The Team
