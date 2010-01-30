@@ -6,7 +6,7 @@ from resources.models import *
 class TagInline(admin.TabularInline):
     model = Tag
 #    exclude = ['creator', ]
-    extra = 3
+    extra = 1
     
     def formfield_for_dbfield(self, db_field, **kwargs):
         

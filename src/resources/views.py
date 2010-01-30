@@ -34,11 +34,26 @@ def edit(request, key=None):
     if request.method == "POST":
         form = ResourceForm(request.POST, request.FILES, instance=resource)
         if form.is_valid():
-            form.save()
-            formset = TagFormSet(request.POST, request.FILES, instance=form.instance)
+            
+            if not resource:
+                # new resource
+                resource = form.save(commit=False)
+                resource.creator = request.user
+                resource.save()
+            else:
+                form.save()
+                
+            formset = TagFormSet(request.POST, request.FILES, instance=resource)
             if formset.is_valid():
-                formset.save()
-                return redirect_to(request, reverse('resources_resource', kwargs={'key':form.instance.shortname}))               
+                formset.saved_forms = []
+                formset.save_existing_objects()
+                tags = formset.save_new_objects(commit=False)
+                for tag in tags:
+                    tag.creator = request.user
+                    tag.save()
+                return redirect_to(request, reverse('resources_resource', kwargs={'key':resource.shortname}))               
+        else:
+            formset = TagFormSet(instance=resource)
     else:
         form = ResourceForm(instance=resource)
         formset = TagFormSet(instance=resource)

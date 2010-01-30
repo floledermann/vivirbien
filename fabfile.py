@@ -303,6 +303,7 @@ def makemessages():
         abort('Please create translations locally')
     local('cd templates & django-admin.py makemessages -l de', capture=False)
     local('cd src/wiki & django-admin.py makemessages -l de', capture=False)
+    local('cd src/resources & django-admin.py makemessages -l de', capture=False)
     local('cd env/src/django-invitation/invitation & django-admin.py makemessages -l de -e html -e txt', capture=False)
 
 def compilemessages():
@@ -310,6 +311,7 @@ def compilemessages():
         abort('Please create translations locally')
     local('cd templates & django-admin.py compilemessages', capture=False)
     local('cd src/wiki & django-admin.py compilemessages', capture=False)
+    local('cd src/resources & django-admin.py compilemessages', capture=False)
     local('cd env/src/django-invitation/invitation & django-admin.py compilemessages', capture=False)
 
 def convert_to_south(app_name=None):

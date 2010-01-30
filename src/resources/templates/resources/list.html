@@ -4,7 +4,7 @@
 {% block resources_content %}
 {% include "resources/includes/actions.html" %}
 <h1>{% trans "List of resources" %}</h1>
-<ul>
+<ul class="resourceslist">
 {% for resource in resources %}
 <li><a href="{% url resources_resource key=resource.shortname%}">{{ resource.name }}</a></li>
 {% endfor %}

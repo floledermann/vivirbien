@@ -1,6 +1,8 @@
 {% load i18n %}
 <a href="{% url resources_list %}">{% trans "All resources" %}</a>
+{% if not form %}
 | <a href="{% url resources_new %}">{% trans "Add resource" %}</a>
+{% endif %}
 {% if resource %}
 | <a href="{% url resources_edit key=resource.shortname %}">{% trans "Edit this resource" %}</a>
 {% endif %}

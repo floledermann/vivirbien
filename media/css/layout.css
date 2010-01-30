@@ -50,3 +50,22 @@ ul#messages {
 .user-actions {
     float: right;
 }
+
+textarea {
+    height: 25px;
+}
+
+.resource-page .tags-table {
+    margin-bottom: 10px;
+}
+
+.resource-page .tags-table td {
+    border: 1px solid #999999;
+    padding: 2px 5px;
+}
+
+.resource-page form table td,
+.resource-page form table th {
+    padding: 2px 10px 2px 0px;
+}
+
