@@ -1,6 +1,8 @@
 {% extends "resources/base.html" %}
+{% load i18n %}
 
 {% block resources_content %}
+{% include "resources/includes/actions.html" %}
 <h1>{{ resource.name }}</h1>
 <table>
 {% for tag in resource.tags.all %}

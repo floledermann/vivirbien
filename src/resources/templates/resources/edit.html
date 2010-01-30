@@ -1,0 +1,35 @@
+{% extends "resources/base.html" %}
+{% load i18n %}
+
+{% block resources_content %}
+{% include "resources/includes/actions.html %}
+<h1>{{ resource.name }}</h1>
+<form method="post" action="{% url resources_edit key=resource.shortname %}">
+{{ form.as_p }}
+<!-- ##### -->
+{{ formset.management_form }}
+<table>
+<thead><tr>
+{% for field in formset.form.visible_fields %}
+        <th{% if forloop.first %} colspan="2"{% endif %}>{{ field.label }}</th>
+{% endfor %}
+{% if formset.can_delete %}<th>{% trans "Delete?" %}</th>{% endif %}
+</tr></thead>
+<tbody>
+{% for form in formset.forms %}
+<tr>
+    <td class="hidden">
+    {% for field in form.hidden_fields %}
+        {% if field.is_hidden %} {{ field }} {% endif %}
+    {% endfor %}
+    </td>
+    {% for field in form.visible_fields %}
+        <td>{{ field }}</td>
+    {% endfor %}
+</tr>
+{% endfor %}
+</tbody>
+</table>
+<button type="submit">{% trans "Submit" %}</button><a href="{% url resources_resource key=resource.shortname %}">{% trans "Cancel" %}</a>
+</form>
+{% endblock %}

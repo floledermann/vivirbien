@@ -1,7 +1,9 @@
 {% extends "resources/base.html" %}
+{% load i18n %}
 
 {% block resources_content %}
-<h1>List of resources</h1>
+{% include "resources/includes/actions.html" %}
+<h1>{% trans "List of resources" %}</h1>
 <ul>
 {% for resource in resources %}
 <li><a href="{% url resources_resource key=resource.shortname%}">{{ resource.name }}</a></li>
