@@ -1,20 +1,31 @@
 {% extends "page_base.html" %}
+{% load i18n %}
 
 {% block page_content %}
 
 {% if account %}
-<h2>Welcome to {{ site.name }}, {{account.username}}!</h2>
+<h2>{% trans "Welcome to" %} Vivir Bien, {{account.username}}!</h2>
 
 <p>
-Dein User {{ account.username }} wurde aktiviert! Jetzt geht's aber wirklich los... Viel Spass!
+{% blocktrans with user.username as username %}Your user {{ username }} has been activated! Have fun!{% endblocktrans %}
 </p>
+
+<form method="post" action="{% url auth_login %}">
+<input id="id_username" type="hidden" name="username" value="{{ account.username }}" />
+
+<label for="id_password">{% trans "Password" %}</label>
+<input type="password" name="password" id="id_password" /><br />
+
+<button type="submit">{% trans "login" %}</button>
+<input type="hidden" name="next" value="/" />
+</form>
 
 {% else %}
 
-<h2>Falscher Aktivierungsschlüssel!</h2>
+<h2>{% trans "Invalid activation key!" %}</h2>
 
 <p>
-Der angegebene Registrierungsschlüssel ist ungültig oder abgelaufen!
+{% trans "The given activation key is invalid or outdated!" %}
 </p>
 {% endif %}
 

@@ -1,1 +1,1 @@
-{{site.name}}: Deinen User aktivieren
+{% load i18n %}{{site.name}}: {% trans "Activate your user" %}

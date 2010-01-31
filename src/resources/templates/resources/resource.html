@@ -10,8 +10,13 @@ function show_reply_form(comment_id, url, person_name) {
 
     var comment_reply = $('#' + comment_id);
     
+    var pname = '';
+    if (person_name) {
+        pname = '<p>Reply to ' + person_name + ':</p>'
+    }
+    
     var to_add = $( new Array(
-    '<div class="response"><p>Reply to ' + person_name + ':</p>',
+    '<div class="">' + pname,
     '<form method="POST" action="' + url + '">',
     '<ul>',  '<label for="id_comment">Kommentar:</label><textarea id="id_comment" name="comment" cols="40" rows="10"></textarea>',
     '<li><input type="submit" value="Submit Comment" /></li>',
@@ -24,7 +29,7 @@ function show_reply_form(comment_id, url, person_name) {
         comment_reply.replaceWith(new Array('<a id="',
         comment_id,'" href="javascript:hide_reply_form(\'',
         comment_id, '\',\'', url, '\',\'', person_name,
-        '\')">Stop Replying</a>').join(''));
+        '\')">Cancel</a>').join(''));
     });
 }
 function hide_reply_form(comment_id, url, person_name) {
@@ -42,33 +47,38 @@ function hide_reply_form(comment_id, url, person_name) {
 </script>
 {% endblock %}
 
+{% block title %}Vivir Bien: {{ resource.name }}{% endblock %}
 
 {% block resources_content %}
 {% include "resources/includes/actions.html" %}
+<div class="resource-details">
 <h1>{{ resource.name }}</h1>
 <table class="tags-table">
 {% for tag in resource.tags.all %}
-<tr><td>{{ tag.key }} [<a href="{% url wiki_article title=tag.key|prefix:"Key:" %}">?</a>]</td><td>{{ tag.value }} [<a href="{% url wiki_article title=tag.get_tag|prefix:"Tag:" %}">?</a>]</td></li>
+<tr><td>{{ tag.key }} <a class="action" href="{% url wiki_article title=tag.key|prefix:"Key:" %}">?</a></td><td>{{ tag.value }} <a class="action" href="{% url wiki_article title=tag.get_tag|prefix:"Tag:" %}">?</a></td></li>
 {% endfor %}
 </table>
-<a href="{% url resources_edit key=resource.shortname %}">{% trans "Edit" %}</a>
+</div>
 
-<h3>Comments:</h3>
+<div class="actions">
+<a href="{% url resources_edit key=resource.shortname %}">{% trans "Edit" %}</a>
+</div>
+
 {% get_threaded_comment_tree for resource as tree %}
+{% if tree %}
+<div class="comments">
+<h2>{% trans "Comments:" %}</h2>
 {% for comment in tree %}
     <div style="margin-left: {{ comment.depth }}em;" class="comment">
-        {{ comment.user.username }} said:<br/>
-        {% auto_transform_markup comment %}
-        <a id="c{{ comment.id }}" href="javascript:show_reply_form('c{{ comment.id }}','{% get_comment_url resource comment %}','{{ comment.user.username }}')">Reply</a>
+        <h3>{% trans "Comment by" %} {{ comment.user.username }}:</h3>
+        {{ comment.comment|linebreaks }}
+        <a class="action" id="c{{ comment.id }}" href="javascript:show_reply_form('c{{ comment.id }}','{% get_comment_url resource comment %}','{{ comment.user.username }}')">{% trans "Reply" %}</a>
     </div>
 {% endfor %}
-<p>New Comment:</p>
-<form method="POST" action="{% get_comment_url resource %}">
-
-<label for="id_comment">Kommentar:</label>
-<textarea id="id_comment" name="comment" cols="40" rows="10"></textarea>
-<input type="submit" value="Submit Comment" />
-
-</form>
+</div>
+{% endif %}
+<div class="actions">
+<a id="newcomment" href="javascript:show_reply_form('newcomment','{% get_comment_url resource %}')">{% trans "New Comment" %}</a>
+</div>
 
 {% endblock %}

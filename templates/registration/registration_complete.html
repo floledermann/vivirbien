@@ -1,13 +1,11 @@
 {% extends "page_base.html" %}
+{% load i18n %}
 
 {% block page_content %}
 
-<h2>Registrierung abgeschlossen</h2>
+<h2>{% trans "Registration complete" %}</h2>
 <p>
-Eine Email mit einem Link zur Aktivierung des Users sollte in den nächsten
-Minuten in deiner Inbox liegen! (Die Aktivierung ist notwenig, 
-um deine Email-Adresse zu überprüfen.)
+{% blocktrans %}An email with your personal account activation code has been sent to you.<br />
+(Activation is needed to verify your email address.){% endblocktrans %}
 </p>
-
-
 {% endblock %}

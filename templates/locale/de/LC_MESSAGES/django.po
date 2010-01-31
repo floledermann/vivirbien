@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-30 23:07+0100\n"
+"POT-Creation-Date: 2010-01-31 17:44+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,25 +16,91 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: .\base.html.py:6
-msgid "Untitled Page"
-msgstr "Ohne Titel"
-
 #: .\page_base.html.py:19
 msgid "Resources"
 msgstr "Ressourcen"
 
+#: .\page_base.html.py:24
+msgid "Welcome,"
+msgstr "Hallo,"
+
 #: .\page_base.html.py:25
+msgid "Not logged in"
+msgstr "Nicht angemeldet"
+
+#: .\page_base.html.py:26
 msgid "Invite a friend"
 msgstr "Leute einladen"
 
-#: .\page_base.html.py:26
+#: .\page_base.html.py:27
 msgid "Log out"
 msgstr "Abmelden"
 
-#: .\page_base.html.py:47
+#: .\page_base.html.py:29
+msgid "language:"
+msgstr "Sprache:"
+
+#: .\page_base.html.py:48
 msgid "Resources for non-capitalist lifestyles"
 msgstr "Ressourcen für nichtkapitalistische Lebensweisen"
+
+#: .\registration\activate.html.py:7 .\registration\activation_email.txt.py:2
+msgid "Welcome to"
+msgstr "Willkommen bei"
+
+#: .\registration\activate.html.py:10
+#, python-format
+msgid "Your user %(username)s has been activated! Have fun!"
+msgstr ""
+"Dein User %(username)s wurde aktiviert! Jetzt geht's aber wirklich los... "
+"Viel Spass!"
+
+#: .\registration\activate.html.py:16
+msgid "Password"
+msgstr "Passwort"
+
+#: .\registration\activate.html.py:19
+msgid "login"
+msgstr ""
+
+#: .\registration\activate.html.py:25
+msgid "Invalid activation key!"
+msgstr "Ungültiger Aktivierungsschlüssel!"
+
+#: .\registration\activate.html.py:28
+msgid "The given activation key is invalid or outdated!"
+msgstr "Der angegebene Registrierungsschlüssel ist ungültig oder abgelaufen!"
+
+#: .\registration\activation_email.txt.py:4
+#, python-format
+msgid ""
+"Please click on the link below within the next %(expiration_days)s days to "
+"activate your account:"
+msgstr ""
+"Bitte klicke innerhalb der nächsten %(expiration_days)s Tage auf folgenden "
+"Link, um deinen Account zu aktivieren:"
+
+#: .\registration\activation_email.txt.py:8
+msgid "Have fun!"
+msgstr "Viel Spaß!"
+
+#: .\registration\activation_email_subject.txt.py:1
+msgid "Activate your user"
+msgstr "Deinen User aktivieren"
+
+#: .\registration\registration_complete.html.py:6
+msgid "Registration complete"
+msgstr "Registrierung abgeschlossen"
+
+#: .\registration\registration_complete.html.py:8
+msgid ""
+"An email with your personal account activation code has been sent to you."
+"<br />\n"
+"(Activation is needed to verify your email address.)"
+msgstr ""
+"Eine Email mit einem Link zur Aktivierung des Users sollte in den "
+"nächsten<br />Minuten in deiner Inbox liegen!<br />(Die Aktivierung ist "
+"notwenig,um deine Email-Adresse zu überprüfen.)"
 
 #: .\wiki\base.html.py:17
 msgid "List all articles"
@@ -43,3 +109,6 @@ msgstr "Alle Artikel"
 #: .\wiki\base.html.py:18
 msgid "Recent Changes"
 msgstr "Letzte Änderungen"
+
+#~ msgid "Untitled Page"
+#~ msgstr "Ohne Titel"

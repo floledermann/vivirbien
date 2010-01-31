@@ -21,11 +21,12 @@
 {% if user.is_staff %}| <a href="/admin/">Admin</a>{% endif %}
 </div>
 <div class="user-actions">
-<span class="username">{{ user.username }}</span>
+<span class="username">{% if user.is_active %}{% trans "Welcome," %} {{ user.username }}
+{% else %}{% trans "Not logged in" %}{% endif %}</span>
 {% if user.is_active %}| <a href="/accounts/invite/">{% trans "Invite a friend" %}</a>{% endif %}
 {% if user.is_active %}| <a href="{% url auth_logout %}">{% trans "Log out" %}</a>{% endif %}
 | <form class="language-switcher" action="/i18n/setlang/" method="post">
-language: 
+{% trans "language:" %} 
 <select name="language">
 {% for lang in LANGUAGES %}
 <option value="{{ lang.0 }}"{% ifequal lang.0 LANGUAGE_CODE%} selected="selected"{% endifequal %}>{{ lang.1 }}</option>

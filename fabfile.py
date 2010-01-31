@@ -301,7 +301,7 @@ def translate():
 def makemessages():
     if env.hosts:
         abort('Please create translations locally')
-    local('cd templates & django-admin.py makemessages -l de', capture=False)
+    local('cd templates & django-admin.py makemessages -l de -e html -e txt', capture=False)
     local('cd src/wiki & django-admin.py makemessages -l de', capture=False)
     local('cd src/resources & django-admin.py makemessages -l de', capture=False)
     local('cd env/src/django-invitation/invitation & django-admin.py makemessages -l de -e html -e txt', capture=False)

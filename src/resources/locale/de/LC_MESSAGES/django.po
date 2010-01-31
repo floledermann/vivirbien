@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-30 23:07+0100\n"
+"POT-Creation-Date: 2010-01-31 17:44+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,28 +26,43 @@ msgstr "Neue Ressource"
 
 #: .\templates\resources\edit.html.py:60
 msgid "Submit"
-msgstr "Abschicken"
+msgstr "Speichern"
 
 #: .\templates\resources\edit.html.py:63 .\templates\resources\edit.html.py:65
 msgid "Cancel"
 msgstr "Cancel"
 
-#: .\templates\resources\list.html.py:6
+#: .\templates\resources\list.html.py:4 .\templates\resources\list.html.py:8
 msgid "List of resources"
 msgstr "Alle Ressourcen"
 
-#: .\templates\resources\resource.html.py:12
+#: .\templates\resources\resource.html.py:64
 msgid "Edit"
 msgstr "Bearbeiten"
 
-#: .\templates\resources\includes\actions.html.py:2
+#: .\templates\resources\resource.html.py:70
+msgid "Comments:"
+msgstr "Kommentare:"
+
+#: .\templates\resources\resource.html.py:73
+msgid "Comment by"
+msgstr "Kommentar von"
+
+#: .\templates\resources\resource.html.py:75
+msgid "Reply"
+msgstr "Antworten"
+
+#: .\templates\resources\resource.html.py:81
+msgid "New Comment"
+msgstr "Neuer Kommentar"
+
+#: .\templates\resources\includes\actions.html.py:3
 msgid "All resources"
 msgstr "Alle Ressourcen"
 
-#: .\templates\resources\includes\actions.html.py:4
+#: .\templates\resources\includes\actions.html.py:5
 msgid "Add resource"
 msgstr "Neue Ressource"
 
-#: .\templates\resources\includes\actions.html.py:7
-msgid "Edit this resource"
-msgstr "Ressource bearbeiten"
+#~ msgid "Edit this resource"
+#~ msgstr "Ressource bearbeiten"

@@ -60,9 +60,9 @@ jQuery(function($) {
 <button type="submit">{% trans "Submit" %}</button>
 
 {% if resource %}
-<a href="{% url resources_resource key=resource.shortname %}">{% trans "Cancel" %}</a>
+<a class="action" href="{% url resources_resource key=resource.shortname %}">{% trans "Cancel" %}</a>
 {% else %}
-<a href="{% url resources_list %}">{% trans "Cancel" %}</a>
+<a class="action" href="{% url resources_list %}">{% trans "Cancel" %}</a>
 {% endif %}
 
 </form>

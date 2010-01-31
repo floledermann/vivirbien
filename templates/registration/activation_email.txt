@@ -1,10 +1,8 @@
-Hallo und willkommen bei {{site.name}}!
+{% load i18n %}
+{% trans "Welcome to" %} {{site.name}}!
 
-Dein Username lautet: {{ user.username }}
-
-Bitte klicke innerhalb der naechsten {{expiration_days}} Tage auf folgenden Link, um deinen Account zu aktivieren:
+{% blocktrans %}Please click on the link below within the next {{expiration_days}} days to activate your account:{% endblocktrans %}
 
 http://{{site.domain}}{% url registration_activate activation_key=activation_key %}
 
-Viel Spass!
-
+{% trans "Have fun!" %}
