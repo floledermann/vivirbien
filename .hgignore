@@ -3,7 +3,6 @@ syntax: glob
 
 settings_secret.py
 *.pyc
-*.mo
 env/
 _resources/
 releases/
