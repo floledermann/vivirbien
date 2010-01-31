@@ -1,6 +1,8 @@
 
 DEBUG = False
 TEMPLATE_DEBUG = False
+SERVE_STATIC = False
+    
 _ = lambda s: s
 
 ADMINS = (

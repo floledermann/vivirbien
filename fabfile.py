@@ -1,5 +1,7 @@
 # fabfile for fabric 0.9
 # (incompatible with older versions)
+# inspired by
+# http://morethanseven.net/2009/07/27/fabric-django-git-apache-mod_wsgi-virtualenv-and-p/
 
 from __future__ import with_statement
 
@@ -30,6 +32,7 @@ env.db_superuser = 'postgres'
 def staging():
     env.hosts = ['flo@architekt.mediavirus.org:667']
     env.sites_home = '/home/flo/sites/'
+    env.path = env.sites_home + env.project_name
     env.db_host = 'mail.semicolon.at'
     
 # ---------------------------------------------------------
@@ -83,6 +86,7 @@ def bootstrap():
     # TODO find a way to use provided password! (use SQL instead of command)    
     # -e echo-sql S no-superuser D no-createdb R no-createrole l can-login
     # P prompt-for-passwd -U <login role> -O <owner role> -h <hostname>
+    # TODO find a way to use provided password! (use SQL instead of command)
     local('createuser -e -SDRlP -U postgres -h localhost %s' % db_user)
     
     # -U <login role> -O <owner role> -h <hostname>
@@ -90,7 +94,9 @@ def bootstrap():
 
     create_secret_settings(db_pass=db_pass)
 
-    _input('Project %s bootstrapped OK - press any key to continue!')
+def testserver(fixture='testdata'):
+    local('python manage.py testserver fixtures\\%s' % fixture)
+
 
 # ---------------------------------------------------------
 # Remote setup
@@ -116,8 +122,9 @@ def install_requirements():
 def create_db():
     "Create database and db role for the project"
     
-    env.db_user = _input('DB username for %s' % env.host, env.project_name)
-    env.db_password = _input('DB password for %s' % env.host)
+    env.db_user = prompt('DB user for %s:' % env.host, default=env.project_name)
+    env.db_password = prompt('DB password for %s:' % env.host)
+    
     print '---------------------- execute commands manually: -------------------------'
     print 'createuser -e -SDRlP -U %s -h %s %s' % (env.db_superuser, env.db_host, env.db_user)
     print 'createdb -e -E UTF8 -O %s -U %s -h %s %s' % (env.db_user, env.db_superuser, env.db_host, env.project_name)
@@ -135,6 +142,10 @@ def create_db():
     # -U <login role> -O <owner role> -h <hostname>
     run('createdb -e -E UTF8 -O %s -U %s -h %s %s' % (db_user, env.db_superuser, env.db_host, env.project_name))
 
+    # or maybe with sql
+    # psql -h mail.semicolon.at -U postgres
+    # CREATE ROLE foo LOGIN PASSWORD 'foo' NOINHERIT VALID UNTIL 'infinity';
+    # CREATE DATABASE henka WITH ENCODING='UTF8' OWNER=henka;
 
 def create_secret_settings(db_pass='', email_pass=''):
     "Creates a settings_secret.py file in the target location"
@@ -249,6 +260,7 @@ def upload():
     run('cd %s%s/releases/%s; ln -s ../../settings_secret.py settings_secret.py' % (env.sites_home, env.project_name, env.release))
     # create symbolic link for admin media
     run('cd %s%s/releases/%s; ln -s ../../../env/lib/python2.5/site-packages/django/contrib/admin/media/ media/admin' % (env.sites_home, env.project_name, env.release))
+    run('cd %s%s/releases/%s; ln -s ../../../uploads/ media/uploads' % (env.sites_home, env.project_name, env.release))
     local('del releases\\%s.tar.gz' % env.release)
 
 def activate():
@@ -263,17 +275,19 @@ def activate():
 
 def reload():
     "Reload the web server"
-    # error moessages can be easily overlooked, so highlight server output
-    print '------------------------ reloading web server -----------------------------'
-    sudo('/etc/init.d/apache2 reload')
-    print '---------------------------------------------------------------------------'
+    with _frame('reloading web server'):
+        sudo('/etc/init.d/apache2 reload')
  
-def deploy_noreload():
+def deploy_nosyncdb():
     "Build the project and deploy it to a specified environment."
     require('hosts', provided_by = [staging])   
     package()
     upload()
     activate()
+
+def deploy_noreload():
+    "Build the project and deploy it to a specified environment."
+    deploy_nosyncdb()
     syncdb()
 
 def deploy():
@@ -291,28 +305,6 @@ def syncdb():
         # we are in a symlinked directory so we have to add one more '../' !
         run('cd %(sites_home)s%(project_name)s/current-release; ../../env/bin/python manage.py syncdb --noinput' % env) 
         run('cd %(sites_home)s%(project_name)s/current-release; ../../env/bin/python manage.py migrate' % env)
-
-def translate():
-    makemessages()
-    if not console.confirm('Please review/edit translation files - continue?'):
-        abort("Aborting on user request")    
-    compilemessages()
-    
-def makemessages():
-    if env.hosts:
-        abort('Please create translations locally')
-    local('cd templates & django-admin.py makemessages -l de -e html -e txt', capture=False)
-    local('cd src/wiki & django-admin.py makemessages -l de', capture=False)
-    local('cd src/resources & django-admin.py makemessages -l de', capture=False)
-    local('cd env/src/django-invitation/invitation & django-admin.py makemessages -l de -e html -e txt', capture=False)
-
-def compilemessages():
-    if env.hosts:
-        abort('Please create translations locally')
-    local('cd templates & django-admin.py compilemessages', capture=False)
-    local('cd src/wiki & django-admin.py compilemessages', capture=False)
-    local('cd src/resources & django-admin.py compilemessages', capture=False)
-    local('cd env/src/django-invitation/invitation & django-admin.py compilemessages', capture=False)
 
 def convert_to_south(app_name=None):
     if not app_name:
@@ -341,6 +333,54 @@ def create_migration(app_name=None, manual=False):
     if console.confirm('Please review migration code; Apply now?'):
         local('env\Scripts\python manage.py migrate', capture=False)
         
+def translate():
+    makemessages()
+    if not console.confirm('Please review/edit translation files - continue?'):
+        abort("Aborting on user request")    
+    compilemessages()
+    
+def makemessages():
+    if env.hosts:
+        abort('Please create translations locally')
+    local('cd templates & django-admin.py makemessages -l de -e html -e txt', capture=False)
+    local('cd src/wiki & django-admin.py makemessages -l de', capture=False)
+    local('cd src/resources & django-admin.py makemessages -l de', capture=False)
+    local('cd env/src/django-invitation/invitation & django-admin.py makemessages -l de -e html -e txt', capture=False)
+
+def compilemessages():
+    if env.hosts:
+        abort('Please create translations locally')
+    local('cd templates & django-admin.py compilemessages', capture=False)
+    local('cd src/wiki & django-admin.py compilemessages', capture=False)
+    local('cd src/resources & django-admin.py compilemessages', capture=False)
+    local('cd env/src/django-invitation/invitation & django-admin.py compilemessages', capture=False)
+
+# ---------------------------------------------------------
+# data handling
+# ---------------------------------------------------------
+
+def dump_data(filename='testdata.json'):
+    "Dump the applications data into a fixture using manage.py dumpdata"
+    local('python manage.py dumpdata --indent=2 > fixtures\\%s' % filename)
+
+def dump_db(db_name=env.project_name):
+    require('hosts', provided_by = [staging])   
+    with _frame('Issue these commands manually:') as f:
+        # -O ... no owner
+        # -D ... explicit INSERT statements
+        # -W ... force password prompt
+        f.run('cd %s; pg_dump -E utf8 -f %s-dump.sql -O -D -W -h %s -U %s %s' % (env.path, db_name, env.db_host, db_name, db_name)) 
+    
+def copy_db(from_db, to_db):
+    require('hosts', provided_by = [staging])   
+    with _frame('Issue these commands manually:') as f:
+        dump_db(from_db)
+        #f.run('cd %s; pg_dump -E utf8 -f %s-dump.sql --no-owner -h %s -U %s -W %s' % (env.path, from_db, env.db_host, from_db, from_db)) 
+        f.run('dropdb -h %s -U %s %s' % (env.db_host, env.db_superuser, to_db)) 
+        f.run('createdb -e -E UTF8 -O %s -U %s -h %s %s' % (to_db, env.db_superuser, env.db_host, to_db))
+        f.run('cd %s; psql -h %s -d %s -U %s -f %s-dump.sql' % (env.path, env.db_host, to_db, to_db, from_db)) 
+        f.run('cd %s; rm %s-dump.sql' % (env.path, from_db)) 
+
 # ---------------------------------------------------------
 # helper functions
 # ---------------------------------------------------------
@@ -353,73 +393,102 @@ def _input(prompt, default=None):
         return default
     return res 
 
+class _frame:
+    "Frame console output for increased visibility. Also provides methods for printing 'fake' commands to console."
+    
+    current_frame = None
+    
+    def __init__(self, message=None, width=75, wait=None, wait_prompt='Commands issued OK - continue?'):
+        self.message = message
+        self.width = width
+        self.wait = wait
+        self.command_issued = False
+        self.wait_prompt = wait_prompt
+        
+    def __enter__(self):
+        
+        if _frame.current_frame:
+            return _frame.current_frame
+        
+        _frame.current_frame = self
+        
+        if (self.message):
+            print '-' * int((self.width - len(self.message) - 2) / 2),
+            print self.message,
+            print '-' * int((self.width - len(self.message) - 2) / 2)
+        else:
+            print '-' * self.width
+        return self
+    
+    def __exit__(self, exc_type, exc_val, exc_trace):
+    
+        if not _frame.current_frame == self:
+            return
+    
+        _frame.current_frame = None
+    
+        print '-' * self.width
+        if self.wait or (self.wait is None and self.command_issued):
+            if not console.confirm(self.wait_prompt):
+                abort('User aborted command')            
+    
+    def run(self, command):
+        self.command_issued = True
+        print command
+    
+    def sudo(self, command):
+        self.run('sudo %s' % command)
 
-# http://morethanseven.net/2009/07/27/fabric-django-git-apache-mod_wsgi-virtualenv-and-p/
 
 
-# tasks
-def _test():
-    "Run the test suite and bail out if it fails"
-    local("cd $(project_name); python manage.py test", fail="abort")
-def _setup_server():
-    """
-    Setup a fresh virtualenv as well as a few useful directories, then run
-    a full deployment
-    """
-    require('hosts', provided_by=[local])
-    require('path')
-    sudo('aptitude install -y python-setuptools')
-    sudo('easy_install pip')
-    sudo('pip install virtualenv')
-    sudo('aptitude install -y apache2')
-    sudo('aptitude install -y libapache2-mod-wsgi')
-    # we want rid of the defult apache config
-    sudo('cd /etc/apache2/sites-available/; a2dissite default;')
-    run('mkdir -p %s; cd %s; virtualenv .;' % (env.path, env.path))
-    run('cd %s; mkdir releases; mkdir shared; mkdir packages;' % env.path, fail='ignore')
-    deploy()
-def _deploy():
-    """
-    Deploy the latest version of the site to the servers, install any
-    required third party modules, install the virtual host and 
-    then restart the webserver
-    """
-    require('hosts', provided_by=[local])
-    require('path')
-    import time
-    env.release = time.strftime('%Y%m%d%H%M%S')
-    upload_tar_from_git()
-    install_requirements()
-    install_site()
-    symlink_current_release()
-    migrate()
-    restart_webserver()
-def _deploy_version(version):
-    "Specify a specific version to be made live"
-    require('hosts', provided_by=[local])
-    require('path')
-    env.version = version
-    run('cd $(path); rm releases/previous; mv releases/current releases/previous;')
-    run('cd $(path); ln -s %s releases/current' % (env.version))
-    restart_webserver()
-def _rollback():
-    """
-    Limited rollback capability. Simple loads the previously current
-    version of the code. Rolling back again will swap between the two.
-    """
-    require('hosts', provided_by=[local])
-    require('path')
-    run('cd %s; mv releases/current releases/_previous;' % env.path)
-    run('cd %s; mv releases/previous releases/current;' % env.path)
-    run('cd %s; mv releases/_previous releases/previous;' % env.path)
-    restart_webserver()    
-# Helpers. These are called by other functions rather than directly
-def _upload_tar_from_git():
-    require('release', provided_by=[deploy, setup])
-    "Create an archive from the current Git master branch and upload it"
-    local('git archive --format=tar master | gzip > $(release).tar.gz')
-    run('mkdir $(path)/releases/$(release)')
-    put('$(release).tar.gz', '$(path)/packages/')
-    run('cd $(path)/releases/$(release) && tar zxf ../../packages/$(release).tar.gz')
-    local('rm $(release).tar.gz')
+
+
+
+# leftover functions / TODO
+
+#def _setup_server():
+#    """
+#    Setup a fresh virtualenv as well as a few useful directories, then run
+#    a full deployment
+#    """
+#    require('hosts', provided_by=[local])
+#    require('path')
+#    sudo('aptitude install -y python-setuptools')
+#    sudo('easy_install pip')
+#    sudo('pip install virtualenv')
+#    sudo('aptitude install -y apache2')
+#    sudo('aptitude install -y libapache2-mod-wsgi')
+#    # we want rid of the defult apache config
+#    sudo('cd /etc/apache2/sites-available/; a2dissite default;')
+#    run('mkdir -p %s; cd %s; virtualenv .;' % (env.path, env.path))
+#    run('cd %s; mkdir releases; mkdir shared; mkdir packages;' % env.path, fail='ignore')
+#    deploy()
+#def _deploy_version(version):
+#    "Specify a specific version to be made live"
+#    require('hosts', provided_by=[local])
+#    require('path')
+#    env.version = version
+#    run('cd $(path); rm releases/previous; mv releases/current releases/previous;')
+#    run('cd $(path); ln -s %s releases/current' % (env.version))
+#    restart_webserver()
+#def _rollback():
+#    """
+#    Limited rollback capability. Simple loads the previously current
+#    version of the code. Rolling back again will swap between the two.
+#    """
+#    require('hosts', provided_by=[local])
+#    require('path')
+#    run('cd %s; mv releases/current releases/_previous;' % env.path)
+#    run('cd %s; mv releases/previous releases/current;' % env.path)
+#    run('cd %s; mv releases/_previous releases/previous;' % env.path)
+#    restart_webserver()    
+## Helpers. These are called by other functions rather than directly
+#def _upload_tar_from_git():
+#    require('release', provided_by=[deploy, setup])
+#    "Create an archive from the current Git master branch and upload it"
+#    local('git archive --format=tar master | gzip > $(release).tar.gz')
+#    run('mkdir $(path)/releases/$(release)')
+#    put('$(release).tar.gz', '$(path)/packages/')
+#    run('cd $(path)/releases/$(release) && tar zxf ../../packages/$(release).tar.gz')
+#    local('rm $(release).tar.gz')
 

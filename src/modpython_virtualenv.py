@@ -1,4 +1,4 @@
-activate_this = '/home/flo/sites/resources/env/bin/activate_this.py'
+activate_this = '/home/flo/sites/vivirbien/env/bin/activate_this.py'
 execfile(activate_this, dict(__file__=activate_this))
 
 # import sys
