@@ -526,6 +526,8 @@ def revert_to_revision(request, title,
             'title': title,
         }, bridge=bridge)
         
+        url = url.replace("%", "%%")
+
         return redirect_to(request, url)
 
     return HttpResponseNotAllowed(['POST'])
@@ -564,6 +566,8 @@ def search_article(request,
             url = get_url('wiki_article', group, kw={
                 'title': search_term,
             }, bridge=bridge)
+            
+            url = url.replace("%", "%%")
             
             return redirect_to(request, url)
 
@@ -650,6 +654,8 @@ def observe_article(request, title,
             'title': article.title,
         }, bridge=bridge)
         
+        url = url.replace("%", "%%")
+        
         return redirect_to(request, url)
 
     return HttpResponseNotAllowed(['POST'])
@@ -693,6 +699,8 @@ def stop_observing_article(request, title,
         url = get_url('wiki_article', group, kw={
             'title': article.title,
         }, bridge=bridge)
+        
+        url = url.replace("%", "%%")
         
         return redirect_to(request, url)
     return HttpResponseNotAllowed(['POST'])

@@ -81,8 +81,8 @@ WIKI_REQUIRES_LOGIN = True
 #WIKI_MARKUP_CHOICES = (
 #        ('creole', _(u'Creole')),
 #    )
-WIKI_WORD_RE = r'(?:[A-Za-z0-9:=\s]+)'
-WIKI_URL_RE = r'(?:[A-Za-z0-9:=\s]+)'
+WIKI_WORD_RE = r'(?:[A-Za-z0-9:=\-_\s]+)'
+WIKI_URL_RE = r'(?:[A-Za-z0-9:=\-_\s]+)'
 
 MARKUP_FILTER = ('creole', { })
 
@@ -91,6 +91,12 @@ ACCOUNT_ACTIVATION_DAYS = 14
 INVITE_MODE = True
 INVITATIONS_PER_USER = 99
 
+LOGIN_REDIRECT_URL = '/'
+
+RESOURCES_TAG_HELP_LINKS = [
+    ('Tags','/wiki/Tags/'),
+    ('Tag-Proposals','/wiki/Tag-Proposals/'),
+]
 
 import os
 try:

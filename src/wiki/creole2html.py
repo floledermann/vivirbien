@@ -232,8 +232,8 @@ class HtmlEmitter:
             if m.group('extern_addr'):
                 return u'<a href="%s">%s</a>' % (
                     self.attr_escape(target), inside)
-            elif m.group('inter_wiki'):
-                raise NotImplementedError
+#            elif m.group('inter_wiki'):
+#                raise NotImplementedError
         return u'<a href="../%s/">%s</a>' % (
             self.url_escape(target), inside)
 

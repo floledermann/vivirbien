@@ -1,4 +1,4 @@
 
-# from django.conf import settings
+from django.conf import settings
 
-# TEST_SETTING = getattr(settings, 'TEST_SETTING', 'default value')
+TAG_HELP_LINKS = getattr(settings, 'RESOURCES_TAG_HELP_LINKS', None)

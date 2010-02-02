@@ -10,13 +10,14 @@
 
 {% block page_content %}
 {# {% include "wiki/searchbox.html" %} #}
-{% include "wiki/messages.html" %}
 
 <div class="actions">
   {% block footer %}{% endblock %}
   <a href="{% url wiki_list %}">{% trans "List all articles" %}</a> |
   <a href="{% url wiki_history %}">{% trans "Recent Changes" %}</a>
 </div>
+
+{% include "wiki/messages.html" %}
 
 <div class="wikicontent">
 {% block content %}

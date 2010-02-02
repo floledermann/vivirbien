@@ -55,7 +55,7 @@ function hide_reply_form(comment_id, url, person_name) {
 <h1>{{ resource.name }}</h1>
 <table class="tags-table">
 {% for tag in resource.tags.all %}
-<tr><td>{{ tag.key }} <a class="action" href="{% url wiki_article title=tag.key|prefix:"Key:" %}">?</a></td><td>{{ tag.value }} <a class="action" href="{% url wiki_article title=tag.get_tag|prefix:"Tag:" %}">?</a></td></li>
+<tr><td>{{ tag.key }} <a class="action" href="{% url wiki_article title=tag.key|prefix:"Key:" %}" title="{% trans "Documentation for key:" %} {{ tag.key }}">?</a></td><td>{{ tag.value }} <!--<a class="action" href="{% url wiki_article title=tag.get_tag|prefix:"Tag:" %}">?</a>--></td></li>
 {% endfor %}
 </table>
 </div>
@@ -65,9 +65,9 @@ function hide_reply_form(comment_id, url, person_name) {
 </div>
 
 {% get_threaded_comment_tree for resource as tree %}
+<h2>{% trans "Comments for" %} {{ resource.name }}</h2>
 {% if tree %}
 <div class="comments">
-<h2>{% trans "Comments:" %}</h2>
 {% for comment in tree %}
     <div style="margin-left: {{ comment.depth }}em;" class="comment">
         <h3>{% trans "Comment by" %} {{ comment.user.username }}:</h3>

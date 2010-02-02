@@ -15,6 +15,11 @@ h1 {
 
 h2 {
     font-size: 18px;
+    margin-bottom: 12px;
+}
+
+label {
+    padding-right: 5px;
 }
 
 .username,

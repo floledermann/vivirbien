@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-31 17:44+0100\n"
+"POT-Creation-Date: 2010-02-01 21:14+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,11 +24,15 @@ msgstr "(Wird Teil der URL)"
 msgid "New resource"
 msgstr "Neue Ressource"
 
-#: .\templates\resources\edit.html.py:60
+#: .\templates\resources\edit.html.py:62
+msgid "Help:"
+msgstr ""
+
+#: .\templates\resources\edit.html.py:70
 msgid "Submit"
 msgstr "Speichern"
 
-#: .\templates\resources\edit.html.py:63 .\templates\resources\edit.html.py:65
+#: .\templates\resources\edit.html.py:73 .\templates\resources\edit.html.py:75
 msgid "Cancel"
 msgstr "Cancel"
 
@@ -40,9 +44,9 @@ msgstr "Alle Ressourcen"
 msgid "Edit"
 msgstr "Bearbeiten"
 
-#: .\templates\resources\resource.html.py:70
-msgid "Comments:"
-msgstr "Kommentare:"
+#: .\templates\resources\resource.html.py:68
+msgid "Comments for"
+msgstr "Kommentare zu"
 
 #: .\templates\resources\resource.html.py:73
 msgid "Comment by"

@@ -249,16 +249,16 @@ class ChangeSet(models.Model):
 
         old_content = article.content
         old_title = article.title
-        old_markup = article.markup
+        #old_markup = article.markup
 
         article.content = content
         article.title = changeset.old_title
-        article.markup = changeset.old_markup
+        #article.markup = changeset.old_markup
         article.save()
 
         article.new_revision(
             old_content=old_content, old_title=old_title,
-            old_markup=old_markup,
+            #old_markup=old_markup,
             comment="Reverted to revision #%s" % self.revision,
             editor_ip=editor_ip, editor=editor)
 

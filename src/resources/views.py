@@ -9,6 +9,7 @@ from django.core.urlresolvers import reverse, NoReverseMatch
 
 from resources.models import *
 from resources.forms import *
+from resources import settings
 
 @login_required
 #@vary_on_headers('Accept-Language','Cookie')
@@ -57,6 +58,8 @@ def edit(request, key=None):
     else:
         form = ResourceForm(instance=resource)
         formset = TagFormSet(instance=resource)
+
+    tag_help = settings.TAG_HELP_LINKS
 
     return render_to_response('resources/edit.html', RequestContext(request, locals()))
     

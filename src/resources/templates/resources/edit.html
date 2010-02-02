@@ -57,6 +57,16 @@ jQuery(function($) {
 </table>
 {% endif %}
 
+{% if tag_help %}
+<div class="actions">
+{% trans "Help:" %} 
+{% for link in tag_help %}
+<a href="{{link.1}}">{{link.0}}</a>
+{% if not forloop.last %} | {% endif %}
+{% endfor %}
+</div>
+{% endif %}
+
 <button type="submit">{% trans "Submit" %}</button>
 
 {% if resource %}

@@ -1,6 +1,8 @@
 from django.conf.urls.defaults import *
 from django.conf import settings
 
+#django.views.generic.simple.redirect_to
+
 from django.contrib import admin
 admin.autodiscover()
 
@@ -14,6 +16,7 @@ urlpatterns = patterns('',
     (r'^accounts/', include('registration.urls')),
     (r'^resources/', include('resources.urls')),
     (r'^comments/', include('threadedcomments.urls')),
+    ('^$', 'django.views.generic.simple.redirect_to', {'url': '/wiki/Vivir%%20Bien/'}),
     (r'^$', 'resources.views.list'),
 )
 

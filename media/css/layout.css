@@ -9,7 +9,17 @@ html, body {
 }
 
 .content {
-    padding-top: 20px;
+    padding: 10px;
+    margin-bottom: 20px;
+    width: 600px;
+}
+
+.content p {
+    margin-bottom: 12px;
+}
+
+.content form {
+    margin-bottom: 10px;
 }
 
 .footer {
@@ -29,9 +39,6 @@ html, body {
     padding: 10px;
 }
 
-.content {
-    padding: 10px;
-}
 
 /* ------------------------------------------------ */
 
@@ -51,9 +58,7 @@ ul#messages {
     float: right;
 }
 
-textarea {
-    height: 25px;
-}
+/* ------------------------------------------------ */
 
 .resource-page .tags-table {
     margin-bottom: 10px;
@@ -68,4 +73,15 @@ textarea {
 .resource-page form table th {
     padding: 2px 10px 2px 0px;
 }
+
+.resource-page form table textarea {
+    height: 30px;
+}
+
+#messages,
+.messages {
+    margin-bottom: 10px;
+}
+
+
 
