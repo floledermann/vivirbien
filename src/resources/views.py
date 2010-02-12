@@ -63,3 +63,16 @@ def edit(request, key=None):
 
     return render_to_response('resources/edit.html', RequestContext(request, locals()))
     
+@login_required
+def by_tag(request, key, value=None):
+    
+    #key, _equals, value = tag.partition('=')
+    
+    resources = Resource.objects.filter(tags__key=key)
+    if value:
+        resources = resources.filter(tags__value=value)
+        
+    resources = resources.distinct()
+
+    return render_to_response('resources/list.html', RequestContext(request, locals()))
+    

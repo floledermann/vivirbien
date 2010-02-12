@@ -19,3 +19,4 @@ creole==1.0.1
 # -----------------------------
 
 -e hg+https://floledermann@bitbucket.org/floledermann/django-invitation/#egg=django-invitation
+hg+http://bitbucket.org/tyrion/django-autocomplete/#egg=django-autocomplete

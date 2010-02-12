@@ -68,7 +68,8 @@ p.required label {
 
 .wikicontent ul {
     list-style-type: disc;
-    list-style-position: inside;
+    xlist-style-position: inside;
+    padding-left: 18px;
 }
 
 .tbodd {

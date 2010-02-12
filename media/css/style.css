@@ -62,4 +62,7 @@ label {
     margin-bottom: 6px;
 }
 
-
+/* TODO: remove this when autocomplete widget has settled */
+.yui-skin-sam td .yui-ac-input {
+    position: static;
+}
