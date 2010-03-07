@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-01 21:14+0100\n"
+"POT-Creation-Date: 2010-02-15 15:47+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,43 +20,92 @@ msgstr ""
 msgid "(Will be part of the resources' URL)"
 msgstr "(Wird Teil der URL)"
 
-#: .\templates\resources\edit.html.py:27
-msgid "New resource"
-msgstr "Neue Ressource"
-
-#: .\templates\resources\edit.html.py:62
-msgid "Help:"
-msgstr ""
-
-#: .\templates\resources\edit.html.py:70
-msgid "Submit"
-msgstr "Speichern"
-
-#: .\templates\resources\edit.html.py:73 .\templates\resources\edit.html.py:75
-msgid "Cancel"
-msgstr "Cancel"
-
-#: .\templates\resources\list.html.py:4 .\templates\resources\list.html.py:8
+#: .\views.py:27 .\templates\resources\list.html.py:4
 msgid "List of resources"
 msgstr "Alle Ressourcen"
 
+#: .\views.py:31
+msgid "Resources with Location"
+msgstr "Ressourcen mit Ortsangabe"
+
+#: .\views.py:32
+msgid ""
+"Missing something? Add an <code>address</code> or <code>location</code> tag "
+"to make a resource show up here."
+msgstr ""
+"Fehlt etwas? Ergänze den <code>address</code> oder <code>location</code> "
+"Tag, damit eine Ressource hier aufscheint."
+
+#: .\views.py:34
+msgid "Online Resources"
+msgstr "Online Ressourcen"
+
+#: .\views.py:35
+msgid ""
+"Missing something? Add a <code>website</code> tag to make a resource show up "
+"here."
+msgstr ""
+"Fehlt etwas? Ergänze den <code>website</code> Tag, damit eine Ressource hier "
+"aufscheint."
+
+#: .\views.py:37
+msgid "Other Resources"
+msgstr "Andere Ressourcen"
+
+#: .\views.py:38
+msgid "All resources that have neither a location nor a website."
+msgstr "Ressourcen die weder Ortsangabe noch Website haben."
+
+#: .\views.py:40
+msgid "Recently Added"
+msgstr "Neueste Ressourcen"
+
+#: .\templates\resources\edit.html.py:30
+msgid "New resource"
+msgstr "Neue Ressource"
+
+#: .\templates\resources\edit.html.py:65
+msgid "Help:"
+msgstr "Hilfe:"
+
+#: .\templates\resources\edit.html.py:73
+msgid "Submit"
+msgstr "Speichern"
+
+#: .\templates\resources\edit.html.py:76 .\templates\resources\edit.html.py:78
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#: .\templates\resources\list.html.py:12
 #: .\templates\resources\resource.html.py:64
+msgid "Resources with tag:"
+msgstr "Ressourcen mit Tag:"
+
+#: .\templates\resources\resource.html.py:59
+msgid "Documentation for key:"
+msgstr "Dokumentation für Key:"
+
+#: .\templates\resources\resource.html.py:60
+msgid "Resources with key:"
+msgstr "Ressourcen mit Key:"
+
+#: .\templates\resources\resource.html.py:72
 msgid "Edit"
 msgstr "Bearbeiten"
 
-#: .\templates\resources\resource.html.py:68
+#: .\templates\resources\resource.html.py:76
 msgid "Comments for"
 msgstr "Kommentare zu"
 
-#: .\templates\resources\resource.html.py:73
+#: .\templates\resources\resource.html.py:81
 msgid "Comment by"
 msgstr "Kommentar von"
 
-#: .\templates\resources\resource.html.py:75
+#: .\templates\resources\resource.html.py:83
 msgid "Reply"
 msgstr "Antworten"
 
-#: .\templates\resources\resource.html.py:81
+#: .\templates\resources\resource.html.py:89
 msgid "New Comment"
 msgstr "Neuer Kommentar"
 

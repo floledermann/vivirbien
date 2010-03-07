@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-01 21:14+0100\n"
+"POT-Creation-Date: 2010-02-15 15:47+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -96,6 +96,22 @@ msgstr ""
 msgid "Activate your user"
 msgstr ""
 
+#: .\registration\login.html.py:7
+msgid "Your username and password didn't match. Please try again."
+msgstr ""
+
+#: .\registration\login.html.py:22
+msgid "Log in"
+msgstr ""
+
+#: .\registration\login.html.py:26
+msgid "Forgotten your password or username?"
+msgstr ""
+
+#: .\registration\logout.html.py:6
+msgid "You have been logged out!"
+msgstr ""
+
 #: .\registration\registration_complete.html.py:6
 msgid "Registration complete"
 msgstr ""
@@ -111,7 +127,7 @@ msgstr ""
 msgid "List all articles"
 msgstr ""
 
-#: .\wiki\base.html.py:17
+#: .\wiki\base.html.py:17 .\wiki\recentchanges.html.py:5
 msgid "Recent Changes"
 msgstr ""
 
@@ -129,4 +145,24 @@ msgstr ""
 
 #: .\wiki\edit.html.py:29
 msgid "Wiki format help"
+msgstr ""
+
+#: .\wiki\recentchanges.html.py:8
+msgid "Action"
+msgstr ""
+
+#: .\wiki\recentchanges.html.py:9
+msgid "Title"
+msgstr ""
+
+#: .\wiki\recentchanges.html.py:10
+msgid "Date"
+msgstr ""
+
+#: .\wiki\recentchanges.html.py:11
+msgid "Editor"
+msgstr ""
+
+#: .\wiki\recentchanges.html.py:12
+msgid "Comment"
 msgstr ""

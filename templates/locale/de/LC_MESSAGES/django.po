@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-01 21:14+0100\n"
+"POT-Creation-Date: 2010-02-15 15:47+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -55,7 +55,7 @@ msgstr ""
 
 #: .\invitation\invitation_form.html.py:15
 msgid "Send Invitation"
-msgstr ""
+msgstr "Einladung verschicken"
 
 #: .\registration\activate.html.py:7 .\registration\activation_email.txt.py:2
 msgid "Welcome to"
@@ -101,6 +101,22 @@ msgstr "Viel Spaß!"
 msgid "Activate your user"
 msgstr "Deinen User aktivieren"
 
+#: .\registration\login.html.py:7
+msgid "Your username and password didn't match. Please try again."
+msgstr "Username oder Passwort sind falsch. Bitte nochmals probieren."
+
+#: .\registration\login.html.py:22
+msgid "Log in"
+msgstr "Anmelden"
+
+#: .\registration\login.html.py:26
+msgid "Forgotten your password or username?"
+msgstr "Passwort oder Username vergessen?"
+
+#: .\registration\logout.html.py:6
+msgid "You have been logged out!"
+msgstr "Du bist jetzt abgemeldet"
+
 #: .\registration\registration_complete.html.py:6
 msgid "Registration complete"
 msgstr "Registrierung abgeschlossen"
@@ -119,7 +135,7 @@ msgstr ""
 msgid "List all articles"
 msgstr "Alle Artikel"
 
-#: .\wiki\base.html.py:17
+#: .\wiki\base.html.py:17 .\wiki\recentchanges.html.py:5
 msgid "Recent Changes"
 msgstr "Letzte Änderungen"
 
@@ -138,6 +154,26 @@ msgstr "Speichern"
 #: .\wiki\edit.html.py:29
 msgid "Wiki format help"
 msgstr "Wiki Formatierungshilfe"
+
+#: .\wiki\recentchanges.html.py:8
+msgid "Action"
+msgstr "Aktion"
+
+#: .\wiki\recentchanges.html.py:9
+msgid "Title"
+msgstr "Titel"
+
+#: .\wiki\recentchanges.html.py:10
+msgid "Date"
+msgstr "Datum"
+
+#: .\wiki\recentchanges.html.py:11
+msgid "Editor"
+msgstr "Autor"
+
+#: .\wiki\recentchanges.html.py:12
+msgid "Comment"
+msgstr "Kommentar"
 
 #~ msgid "Untitled Page"
 #~ msgstr "Ohne Titel"
