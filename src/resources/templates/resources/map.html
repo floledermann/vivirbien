@@ -3,6 +3,13 @@
 
 {% block title %}Vivir Bien: {% trans "List of resources" %}{% endblock %}
 
+{% block extra_head %}
+<script src="{{ MEDIA_URL }}js/OpenLayers-2.8/OpenLayers.js"></script>
+<script src="http://www.openstreetmap.org/openlayers/OpenStreetMap.js"></script>
+<script src="{{ MEDIA_URL }}js/jquery-1.3.2.js"></script>
+<script src="{{ MEDIA_URL }}resources/js/map.js"></script>
+{% endblock %}
+
 {% block resources_content %}
 {% include "resources/includes/actions.html" %}
 {% if title %}
@@ -11,6 +18,8 @@
 {% if key %}
 <h2>{% trans "Resources with tag:" %} {{ key }}{% if value %} = {{ value }}{% endif %}</h2>
 {% endif %}
+
+<div id="map" class="map"></div>
 
 {% if groups %}
 <div class="column">

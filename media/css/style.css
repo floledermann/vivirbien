@@ -22,6 +22,10 @@ label {
     padding-right: 5px;
 }
 
+code {
+    font-family: monospace;
+}
+
 .username,
 .language-switcher {
     color: #666666;
@@ -60,6 +64,15 @@ label {
 
 .comment p {
     margin-bottom: 6px;
+}
+
+.help {
+    font-size: 10px;
+    color: #999999;
+}
+
+.resource-page .content h2 {
+    margin-top: 10px;
 }
 
 /* TODO: remove this when autocomplete widget has settled */

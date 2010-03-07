@@ -19,6 +19,7 @@ autocomplete.register(
 
 urlpatterns = patterns('',
     url(r'^$', views.list, name='resources_index'),
+    url(r'^map/$', views.list, {'template':'resources/map.html'}, name='resources_list'),
     url(r'^list/$', views.list, name='resources_list'),
     url(r'^with/tag/(?P<key>.*)=(?P<value>.*)/$', views.by_tag, name='resources_with_tag'),
     url(r'^with/tag/(?P<key>.*)/$', views.by_tag, name='resources_with_key'),

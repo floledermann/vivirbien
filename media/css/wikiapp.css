@@ -123,3 +123,7 @@ ul.errorlist li {
     -webkit-border-radius: 4px;
     border-radius: 4px;
 }
+
+th.date-header {
+    width: 100px;
+}
