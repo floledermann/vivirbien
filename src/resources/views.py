@@ -5,7 +5,11 @@ from django.views.decorators.vary import vary_on_headers
 from django.views.generic.simple import redirect_to
 from django.shortcuts import render_to_response, get_object_or_404
 
+from django.db.models import Q
+
 from django.core.urlresolvers import reverse, NoReverseMatch
+
+from django.utils.translation import ugettext_lazy as _
 
 from resources.models import *
 from resources.forms import *
@@ -18,9 +22,25 @@ def resource(request, key):
     return render_to_response('resources/resource.html', RequestContext(request, locals()))
 
 @login_required
-def list(request):
-    resources = Resource.objects.all()
-    return render_to_response('resources/list.html', RequestContext(request, locals()))
+def list(request, template='resources/list.html'):
+    
+    title = _('List of resources')
+    groups = []
+    
+    #resources = Resource.objects.all()
+    groups.append({'title':_('Resources with Location'),
+                   'text':_('Missing something? Add an <code>address</code> or <code>location</code> tag to make a resource show up here.'),
+                   'resources': Resource.objects.filter(Q(tags__key='address') | Q(tags__key='location'))})
+    groups.append({'title':_('Online Resources'),
+                   'text':_('Missing something? Add a <code>website</code> tag to make a resource show up here.'),
+                   'resources': Resource.objects.exclude(tags__key='address').exclude(tags__key='location').filter(tags__key='website').distinct()})
+    groups.append({'title':_('Other Resources'),
+                   'text':_('All resources that have neither a location nor a website.'),
+                   'resources': Resource.objects.exclude(tags__key='address').exclude(tags__key='location').exclude(tags__key='website').distinct()})
+    groups.append({'title':_('Recently Added'),
+                   'resources': Resource.objects.order_by('-creation_date')[:4]})
+    
+    return render_to_response(template, RequestContext(request, locals()))
 
 @login_required
 def new(request):
@@ -64,7 +84,7 @@ def edit(request, key=None):
     return render_to_response('resources/edit.html', RequestContext(request, locals()))
     
 @login_required
-def by_tag(request, key, value=None):
+def by_tag(request, key, value=None, template='resources/list.html'):
     
     #key, _equals, value = tag.partition('=')
     
@@ -74,5 +94,5 @@ def by_tag(request, key, value=None):
         
     resources = resources.distinct()
 
-    return render_to_response('resources/list.html', RequestContext(request, locals()))
+    return render_to_response(template, RequestContext(request, locals()))
     

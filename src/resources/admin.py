@@ -1,11 +1,9 @@
 from django.contrib import admin
-from django import forms
 
 from resources.models import *
 
 class TagInline(admin.TabularInline):
     model = Tag
-#    exclude = ['creator', ]
     extra = 1
     
     def formfield_for_dbfield(self, db_field, **kwargs):
@@ -30,5 +28,20 @@ class ResourceAdmin(admin.ModelAdmin):
         ('Editing', {'fields': ('creator', ),
                      'classes': ('collapse', )}),
     )
+
+class TagQueryInline(admin.TabularInline):
     
+    model = TagQuery
+    extra = 1
+
+
+class ViewAdmin(admin.ModelAdmin):
+    inlines = [TagQueryInline]
+    prepopulated_fields = {'shortname': ('name',)} 
+    save_on_top = True
+
+
+
 admin.site.register(Resource, ResourceAdmin)
+admin.site.register(View, ViewAdmin)
+
