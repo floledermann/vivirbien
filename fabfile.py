@@ -356,6 +356,9 @@ def compilemessages():
     local('cd src/resources & django-admin.py compilemessages', capture=False)
     local('cd env/src/django-invitation/invitation & django-admin.py compilemessages', capture=False)
 
+def runserver():
+    cmd = 'runserver'
+    local('env\Scripts\python manage.py ' + cmd, capture=False)
 # ---------------------------------------------------------
 # data handling
 # ---------------------------------------------------------
