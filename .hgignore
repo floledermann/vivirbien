@@ -7,3 +7,5 @@ env/
 _resources/
 releases/
 .settings/
+glob:Thumbs.db
+glob:media/js/OpenLayers-2.8-debug/
