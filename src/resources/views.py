@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_requiredfrom django.views.deco
 from django.views.decorators.vary import vary_on_headers
 from django.views.generic.simple import redirect_to
 from django.shortcuts import render_to_response, get_object_or_404
+from django.http import HttpResponse, Http404
 
 from django.db.models import Q
 
@@ -22,7 +23,7 @@ def resource(request, key):
     return render_to_response('resources/resource.html', RequestContext(request, locals()))
 
 @login_required
-def list(request, template='resources/list.html'):
+def list_view(request, template='resources/list.html'):
     
     title = _('List of resources')
     groups = []
@@ -41,6 +42,42 @@ def list(request, template='resources/list.html'):
                    'resources': Resource.objects.order_by('-creation_date')[:4]})
     
     return render_to_response(template, RequestContext(request, locals()))
+
+@login_required
+def geojson(request):
+    from django.utils import simplejson as json
+    from django.core import serializers
+    from django.db.models.query import QuerySet
+    from django.core.serializers.json import DateTimeAwareJSONEncoder
+    
+    resources = Resource.objects.filter(tags__key='location')
+    
+    class GeoJSONEncoder(DateTimeAwareJSONEncoder):
+        """ simplejson.JSONEncoder extension: handle querysets """
+        def default(self, obj):
+            if isinstance(obj, QuerySet):
+                return {
+                        'type': 'FeatureCollection',
+                        'features': list(obj)
+                }
+            if isinstance(obj, Resource):
+                return {
+                        'type':'Feature',
+                        'geometry': {
+                                'type': 'Point', 
+                                'coordinates': ['TODO','TODO']
+                        },
+                        'properties': {}
+                }
+            return super(GeoJSONEncoder, self).default(obj)
+
+    
+    str = json.dumps(resources, cls=GeoJSONEncoder, indent=2)
+    
+    return HttpResponse(str, {'mimetype':'text/html'}) #'application/json'
+    
+    
+    
 
 @login_required
 def new(request):

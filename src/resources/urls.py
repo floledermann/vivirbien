@@ -18,9 +18,10 @@ autocomplete.register(
 )
 
 urlpatterns = patterns('',
-    url(r'^$', views.list, name='resources_index'),
-    url(r'^map/$', views.list, {'template':'resources/map.html'}, name='resources_list'),
-    url(r'^list/$', views.list, name='resources_list'),
+    url(r'^$', views.list_view, name='resources_index'),
+    url(r'^map/$', views.list_view, {'template':'resources/map.html'}, name='resources_map'),
+    url(r'^list/$', views.list_view, name='resources_list'),
+    url(r'^json/$', views.geojson, name='geojson'),
     url(r'^with/tag/(?P<key>.*)=(?P<value>.*)/$', views.by_tag, name='resources_with_tag'),
     url(r'^with/tag/(?P<key>.*)/$', views.by_tag, name='resources_with_key'),
     url(r'^resource/(?P<key>.*)/$', views.resource, name='resources_resource'),

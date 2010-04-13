@@ -10,6 +10,7 @@ $(document).ready(function(){
         controls:[
             new OpenLayers.Control.Navigation(),
             new OpenLayers.Control.PanZoomBar(),
+            new OpenLayers.Control.ScaleLine(),
             //new OpenLayers.Control.LayerSwitcher(),
             new OpenLayers.Control.MousePosition(),
             new OpenLayers.Control.Attribution()],
@@ -69,7 +70,8 @@ $(document).ready(function(){
     layer_vector = new OpenLayers.Layer.Vector("Vectors", {
         attribution: 'Resource Data CC-By-NC-SA by <a href="http://vivirbien.mediavirus.org/">Vivir Bien</a>',
         styleMap: new OpenLayers.StyleMap({"default": style}),
-        strategies: [strategy]
+        strategies: [strategy],
+        projection: new OpenLayers.Projection("EPSG:4326")
     });
     
     map.addLayer(layer_vector);
@@ -83,7 +85,41 @@ $(document).ready(function(){
     var point2 = new OpenLayers.Geometry.Point(lon+0.01,lat+0.01).transform(proj, map.getProjectionObject());
     var pointFeature2 = new OpenLayers.Feature.Vector(point2, {title: 'Marker 2'});
     
-    layer_vector.addFeatures([pointFeature,pointFeature2]);
+    //layer_vector.addFeatures([pointFeature,pointFeature2]);
+    
+    var featurecollection = {
+              "type": "FeatureCollection", 
+              "features": [
+                {
+                	"type": "Feature",
+                	"id": "foobar-0",
+                	"geometry": {
+                            "type":"Point", 
+                            "coordinates":[lon, lat]
+                    },
+                    "properties": {}
+                }
+              ]
+           };
+    var features = '{"resources": [{"type": "resource","location": "latlng:48.2,16.35"}]}';
+    
+    var geojson_format = new OpenLayers.Format.GeoJSON({
+        internalProjection: new OpenLayers.Projection("EPSG:900913"),
+        externalProjection: new OpenLayers.Projection("EPSG:4326")
+    });
+    
+    var fts = geojson_format.read(features, null, function(key, value) {
+        switch (key) {
+        	case "resources":   break;
+        }
+        return value;
+    });
+    
+    layer_vector.addFeatures(fts);
+
+    //var control = new OpenLayers.Control.EditingToolbar(layer_vector);
+    //map.addControl(control);
+    //control.activate();
         
     //var control = new OpenLayers.Control.DrawFeature(layer_vector, OpenLayers.Handler.Point);
     //map.addControl(control);
