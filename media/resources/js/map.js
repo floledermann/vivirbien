@@ -56,7 +56,9 @@ $(document).ready(function(){
         graphicHeight: 25,
         graphicXOffset: -10,
         graphicYOffset: -25,
-        graphicTitle: '${title}'
+        graphicTitle: '${title}',
+        cursor: 'pointer',
+        graphicOpacity:0.7
     },{
         context: {
             title: function(feature) {
@@ -64,12 +66,17 @@ $(document).ready(function(){
             }
         }
     });
+    
+    var select_style = OpenLayers.Util.extend({}, style);
+    select_style.graphicOpacity = 1.0;
 
     var strategy = new OpenLayers.Strategy.Cluster({distance: 8, threshold: 2});
     
     layer_vector = new OpenLayers.Layer.Vector("Vectors", {
         attribution: 'Resource Data CC-By-NC-SA by <a href="http://vivirbien.mediavirus.org/">Vivir Bien</a>',
-        styleMap: new OpenLayers.StyleMap({"default": style}),
+        styleMap: new OpenLayers.StyleMap({
+        	"default": style,
+        	"select": select_style}),
         strategies: [strategy],
         projection: new OpenLayers.Projection("EPSG:4326")
     });
@@ -108,15 +115,59 @@ $(document).ready(function(){
         externalProjection: new OpenLayers.Projection("EPSG:4326")
     });
     
-    var fts = geojson_format.read(features, null, function(key, value) {
-        switch (key) {
-        	case "resources":   break;
-        }
-        return value;
+    $.get('/resources/json/',function(data) {
+	    var features = geojson_format.read(data);
+	    for (f in features) {
+	    	f.data = {
+	    	  popupContentHTML: "Hello",
+	    	  overflow: "hidden"
+	    	  
+	    	}
+/*	    	
+	    	var markerClick = function (evt) {
+                if (this.popup == null) {
+                    this.popup = this.createPopup(true); // use closebox
+                    map.addPopup(this.popup);
+                    this.popup.show();
+                } else {
+                    this.popup.toggle();
+                }
+                //currentPopup = this.popup;
+                OpenLayers.Event.stop(evt);
+            };*/
+	    	/*
+	    	f.events.register("mousedown", feature, markerClick);
+	    	*/
+	    }
+	    layer_vector.addFeatures(features);
     });
-    
-    layer_vector.addFeatures(fts);
 
+    var select = new OpenLayers.Control.SelectFeature(layer_vector, {
+        onSelect: function(feature) {
+            var content = "<a href='" + feature.data.url + "'>"+feature.data.title + "</a>";
+            popup = new OpenLayers.Popup.FramedCloud("chicken", 
+                                     feature.geometry.getBounds().getCenterLonLat(),
+                                     new OpenLayers.Size(100,100),
+                                     content,
+                                     null, true, onPopupClose);
+            feature.popup = popup;
+            map.addPopup(popup);
+        },
+        onUnselect: function(feature) {
+            if (feature.popup) {
+                map.removePopup(feature.popup);
+                feature.popup.destroy();
+                delete feature.popup;
+            }
+        }
+    });
+    map.addControl(select);
+    select.activate();
+
+    function onPopupClose(evt) {
+        select.unselectAll();
+    }
+    
     //var control = new OpenLayers.Control.EditingToolbar(layer_vector);
     //map.addControl(control);
     //control.activate();

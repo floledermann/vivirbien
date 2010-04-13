@@ -61,14 +61,21 @@ def geojson(request):
                         'features': list(obj)
                 }
             if isinstance(obj, Resource):
-                return {
-                        'type':'Feature',
-                        'geometry': {
+                location = obj.tags.filter(key='location').values_list('value', flat=True)
+                if len(location) > 0:
+                    latlng = location[0].partition(':')[2].split(',')
+                    return {
+                            'type':'Feature',
+                            'geometry': {
                                 'type': 'Point', 
-                                'coordinates': ['TODO','TODO']
-                        },
-                        'properties': {}
-                }
+                                'coordinates': [float(latlng[0]),float(latlng[1])]
+                            },
+                            'properties': {
+                                'title': obj.name,
+                                'url': reverse('resources_resource', kwargs={'key':obj.shortname})
+                            }
+                    }
+                return None
             return super(GeoJSONEncoder, self).default(obj)
 
     

@@ -17,7 +17,7 @@ urlpatterns = patterns('',
     (r'^resources/', include('resources.urls')),
     (r'^comments/', include('threadedcomments.urls')),
     ('^$', 'django.views.generic.simple.redirect_to', {'url': '/wiki/Vivir%%20Bien/'}),
-    (r'^$', 'resources.views.list'),
+    (r'^$', 'resources.views.list_view'),
 )
 
 if settings.SERVE_STATIC:
