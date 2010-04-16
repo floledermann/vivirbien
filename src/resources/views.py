@@ -44,6 +44,19 @@ def list_view(request, template='resources/list.html'):
     return render_to_response(template, RequestContext(request, locals()))
 
 @login_required
+def map_view(request, template='resources/map.html'):
+    
+    title = _('Map of resources')
+    groups = []
+    
+    #resources = Resource.objects.all()
+    groups.append({'title':_('Resources missing on the Map'),
+                   'text':_('These resources have an <code>address</code>, but no <code>location</code> tag set.'),
+                   'resources': Resource.objects.filter(tags__key='address').exclude(tags__key='location')})
+    
+    return render_to_response(template, RequestContext(request, locals()))
+
+@login_required
 def geojson(request):
     from django.utils import simplejson as json
     from django.core import serializers
@@ -116,7 +129,10 @@ def edit(request, key=None):
                 for tag in tags:
                     tag.creator = request.user
                     tag.save()
-                return redirect_to(request, reverse('resources_resource', kwargs={'key':resource.shortname}))               
+                if 'action' in request.POST and request.POST['action'] == 'add_tag':
+                    return redirect_to(request, reverse('resources_edit', kwargs={'key':resource.shortname}))               
+                else:
+                    return redirect_to(request, reverse('resources_resource', kwargs={'key':resource.shortname}))               
         else:
             formset = TagFormSet(instance=resource)
     else:

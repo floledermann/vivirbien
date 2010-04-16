@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-15 15:47+0100\n"
+"POT-Creation-Date: 2010-04-16 16:25+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,19 +16,40 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: .\models.py:10
+#: .\models.py:10 .\models.py:45
 msgid "(Will be part of the resources' URL)"
 msgstr "(Wird Teil der URL)"
 
-#: .\views.py:27 .\templates\resources\list.html.py:4
+#: .\models.py:36
+msgid "is present"
+msgstr "ist gesetzt."
+
+#: .\models.py:37
+msgid "equals"
+msgstr "ist gleich"
+
+#: .\models.py:38
+msgid "begins with"
+msgstr "beginnt mit"
+
+#: .\models.py:63
+msgid "AND"
+msgstr "UND"
+
+#: .\models.py:63
+msgid "OR"
+msgstr "ODER"
+
+#: .\views.py:28 .\templates\resources\list.html.py:4
+#: .\templates\resources\map.html.py:4
 msgid "List of resources"
 msgstr "Alle Ressourcen"
 
-#: .\views.py:31
+#: .\views.py:32
 msgid "Resources with Location"
 msgstr "Ressourcen mit Ortsangabe"
 
-#: .\views.py:32
+#: .\views.py:33
 msgid ""
 "Missing something? Add an <code>address</code> or <code>location</code> tag "
 "to make a resource show up here."
@@ -36,11 +57,11 @@ msgstr ""
 "Fehlt etwas? Ergänze den <code>address</code> oder <code>location</code> "
 "Tag, damit eine Ressource hier aufscheint."
 
-#: .\views.py:34
+#: .\views.py:35
 msgid "Online Resources"
 msgstr "Online Ressourcen"
 
-#: .\views.py:35
+#: .\views.py:36
 msgid ""
 "Missing something? Add a <code>website</code> tag to make a resource show up "
 "here."
@@ -48,35 +69,56 @@ msgstr ""
 "Fehlt etwas? Ergänze den <code>website</code> Tag, damit eine Ressource hier "
 "aufscheint."
 
-#: .\views.py:37
+#: .\views.py:38
 msgid "Other Resources"
 msgstr "Andere Ressourcen"
 
-#: .\views.py:38
+#: .\views.py:39
 msgid "All resources that have neither a location nor a website."
 msgstr "Ressourcen die weder Ortsangabe noch Website haben."
 
-#: .\views.py:40
+#: .\views.py:41
 msgid "Recently Added"
 msgstr "Neueste Ressourcen"
 
-#: .\templates\resources\edit.html.py:30
+#: .\views.py:49
+#, fuzzy
+msgid "Map of resources"
+msgstr "Alle Ressourcen"
+
+#: .\views.py:53
+msgid "Resources missing on the Map"
+msgstr "Auf der Karte nicht angezeigt:"
+
+#: .\views.py:54
+msgid ""
+"These resources have an <code>address</code>, but no <code>location</code> "
+"tag set."
+msgstr ""
+"Diese Ressourcen haben den <code>address</code> Tag, aber nicht den <code>location</code> "
+"Tag gesetzt."
+
+#: .\templates\resources\edit.html.py:50
 msgid "New resource"
 msgstr "Neue Ressource"
 
-#: .\templates\resources\edit.html.py:65
+#: .\templates\resources\edit.html.py:85
 msgid "Help:"
 msgstr "Hilfe:"
 
-#: .\templates\resources\edit.html.py:73
-msgid "Submit"
+#: .\templates\resources\edit.html.py:93
+msgid "Save"
 msgstr "Speichern"
 
-#: .\templates\resources\edit.html.py:76 .\templates\resources\edit.html.py:78
+#: .\templates\resources\edit.html.py:94
+msgid "Save and continue"
+msgstr "Speichern &amp; weiter bearbeiten"
+
+#: .\templates\resources\edit.html.py:97 .\templates\resources\edit.html.py:99
 msgid "Cancel"
 msgstr "Abbrechen"
 
-#: .\templates\resources\list.html.py:12
+#: .\templates\resources\list.html.py:12 .\templates\resources\map.html.py:20
 #: .\templates\resources\resource.html.py:64
 msgid "Resources with tag:"
 msgstr "Ressourcen mit Tag:"
@@ -110,12 +152,22 @@ msgid "New Comment"
 msgstr "Neuer Kommentar"
 
 #: .\templates\resources\includes\actions.html.py:3
-msgid "All resources"
-msgstr "Alle Ressourcen"
+msgid "List"
+msgstr "Liste"
 
-#: .\templates\resources\includes\actions.html.py:5
+#: .\templates\resources\includes\actions.html.py:4
+msgid "Map"
+msgstr "Karte"
+
+#: .\templates\resources\includes\actions.html.py:6
 msgid "Add resource"
 msgstr "Neue Ressource"
+
+#~ msgid "Submit"
+#~ msgstr "Speichern"
+
+#~ msgid "All resources"
+#~ msgstr "Alle Ressourcen"
 
 #~ msgid "Edit this resource"
 #~ msgstr "Ressource bearbeiten"

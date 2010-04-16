@@ -8,6 +8,11 @@
 {{ formset.media }}
 
 <script type="text/javascript">
+
+var editor_lookup = {
+    'location': 'Location widget'
+}
+
 jQuery(function($) {
     $('#id_shortname').change(function() {
         this._dirty = true;
@@ -18,6 +23,21 @@ jQuery(function($) {
             el.val(URLify($(this).val(), 100));
         }
     });
+    
+    $('input[type=text][id$=-key]').change(function() {
+        var key_field = $(this);
+        var key = key_field.val();
+                
+        var widget = editor_lookup[key];
+        if (widget) {
+	        var value_field_id = this.id.substring(0, this.id.indexOf('-key')) + '-value';
+	        var value_field = $('#' + value_field_id);
+	        
+	        value_field.after('<div class="value-widget">' + widget + '</div>');           
+            //value_field.css({'display': 'none'});
+        }
+    });
+    
 });
 </script>
 {% endblock %}
@@ -70,7 +90,8 @@ jQuery(function($) {
 </div>
 {% endif %}
 
-<button type="submit">{% trans "Submit" %}</button>
+<button type="submit">{% trans "Save" %}</button>
+<button name="action" value="add_tag" type="submit">{% trans "Save and continue" %}</button>
 
 {% if resource %}
 <a class="action" href="{% url resources_resource key=resource.shortname %}">{% trans "Cancel" %}</a>

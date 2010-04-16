@@ -30,6 +30,8 @@ function yui_autocomplete(name, ac_url, force_selection) {
         autocomplete.resultTypeList = false;
         autocomplete.queryDelay = .5;
         autocomplete.forceSelection = force_selection;
+        autocomplete.minQueryLength = 0;
+        autocomplete.typeAhead = true;          
 
         var selected_item = {label: null, id: null};
         var hidden = document.getElementById("id_hidden_"+name);
