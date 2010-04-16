@@ -12,3 +12,5 @@ commandline.bat
 \documents\
 \_resources\
 \.hg\
+\.settings\
+\OpenLayers-2.8-debug\

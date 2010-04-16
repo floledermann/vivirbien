@@ -94,7 +94,7 @@ def geojson(request):
     
     str = json.dumps(resources, cls=GeoJSONEncoder, indent=2)
     
-    return HttpResponse(str, {'mimetype':'text/html'}) #'application/json'
+    return HttpResponse(str, mimetype='application/json') #
     
     
     

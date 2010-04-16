@@ -6,6 +6,9 @@ var zoom=12;
 var map;
 
 $(document).ready(function(){
+	
+	var media_url = MEDIA_URL || "";
+	
     map = new OpenLayers.Map ("map", {
         controls:[
             new OpenLayers.Control.Navigation(),
@@ -51,7 +54,7 @@ $(document).ready(function(){
     map.setCenter (lonLat, zoom);
 
     var style = new OpenLayers.Style({
-        externalGraphic: "/media/images/marker.png",
+        externalGraphic: media_url + "images/marker.png",
         graphicWidth: 21,
         graphicHeight: 25,
         graphicXOffset: -10,
