@@ -31,7 +31,7 @@ def list_view(request, template='resources/list.html'):
     #resources = Resource.objects.all()
     groups.append({'title':_('Resources with Location'),
                    'text':_('Missing something? Add an <code>address</code> or <code>location</code> tag to make a resource show up here.'),
-                   'resources': Resource.objects.filter(Q(tags__key='address') | Q(tags__key='location'))})
+                   'resources': Resource.objects.filter(Q(tags__key='address') | Q(tags__key='location')).distinct()})
     groups.append({'title':_('Online Resources'),
                    'text':_('Missing something? Add a <code>website</code> tag to make a resource show up here.'),
                    'resources': Resource.objects.exclude(tags__key='address').exclude(tags__key='location').filter(tags__key='website').distinct()})
@@ -39,7 +39,7 @@ def list_view(request, template='resources/list.html'):
                    'text':_('All resources that have neither a location nor a website.'),
                    'resources': Resource.objects.exclude(tags__key='address').exclude(tags__key='location').exclude(tags__key='website').distinct()})
     groups.append({'title':_('Recently Added'),
-                   'resources': Resource.objects.order_by('-creation_date')[:4]})
+                   'resources': Resource.objects.order_by('-creation_date')[:15]})
     
     return render_to_response(template, RequestContext(request, locals()))
 
@@ -52,7 +52,7 @@ def map_view(request, template='resources/map.html'):
     #resources = Resource.objects.all()
     groups.append({'title':_('Resources missing on the Map'),
                    'text':_('These resources have an <code>address</code>, but no <code>location</code> tag set.'),
-                   'resources': Resource.objects.filter(tags__key='address').exclude(tags__key='location')})
+                   'resources': Resource.objects.filter(tags__key='address').exclude(tags__key='location').distinct()})
     
     return render_to_response(template, RequestContext(request, locals()))
 
@@ -76,18 +76,28 @@ def geojson(request):
             if isinstance(obj, Resource):
                 location = obj.tags.filter(key='location').values_list('value', flat=True)
                 if len(location) > 0:
-                    latlng = location[0].partition(':')[2].split(',')
-                    return {
+                    lonlat = location[0].partition(':')[2].split(',')
+                    json = {
                             'type':'Feature',
-                            'geometry': {
-                                'type': 'Point', 
-                                'coordinates': [float(latlng[0]),float(latlng[1])]
-                            },
                             'properties': {
                                 'title': obj.name,
-                                'url': reverse('resources_resource', kwargs={'key':obj.shortname})
+                                'url': reverse('resources_resource', kwargs={'key':obj.shortname}),
+                                'tags': {}
                             }
                     }
+                    
+                    for tag in obj.tags.all():
+                        json['properties']['tags'][tag.key] = tag.value
+                        
+                    try:
+                        json['geometry'] = {
+                                'type': 'Point', 
+                                'coordinates': [float(lonlat[0]),float(lonlat[1])]
+                            }
+                    except:
+                        # fail silently if something geos wrong with extracting coords
+                        pass
+                    return json
                 return None
             return super(GeoJSONEncoder, self).default(obj)
 

@@ -3,9 +3,6 @@ body {
     font-size: 12px;
 }
 
-.header, .footer {
-    background-color: #eeeeee;
-}
 
 h1 {
     font-size: 32px;
@@ -26,6 +23,22 @@ code {
     font-family: monospace;
 }
 
+em {
+    font-style: italic;
+}
+
+.header, .footer {
+    background-color: #eeeeee;
+}
+
+.navi .active {
+    background: #ffffff;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    padding: 5px;
+}
+
 .username,
 .language-switcher {
     color: #666666;
@@ -43,7 +56,7 @@ code {
     -webkit-border-radius: 4px;
     border-radius: 4px;
     padding: 3px;
-    max-width: 600px;
+    max-width: 100%;
     margin-bottom: 10px;
 }
 

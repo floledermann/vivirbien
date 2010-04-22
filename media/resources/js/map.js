@@ -97,22 +97,6 @@ $(document).ready(function(){
     
     //layer_vector.addFeatures([pointFeature,pointFeature2]);
     
-    var featurecollection = {
-              "type": "FeatureCollection", 
-              "features": [
-                {
-                	"type": "Feature",
-                	"id": "foobar-0",
-                	"geometry": {
-                            "type":"Point", 
-                            "coordinates":[lon, lat]
-                    },
-                    "properties": {}
-                }
-              ]
-           };
-    var features = '{"resources": [{"type": "resource","location": "latlng:48.2,16.35"}]}';
-    
     var geojson_format = new OpenLayers.Format.GeoJSON({
         internalProjection: new OpenLayers.Projection("EPSG:900913"),
         externalProjection: new OpenLayers.Projection("EPSG:4326")
@@ -122,9 +106,8 @@ $(document).ready(function(){
 	    var features = geojson_format.read(data);
 	    for (f in features) {
 	    	f.data = {
-	    	  popupContentHTML: "Hello",
-	    	  overflow: "hidden"
-	    	  
+	    	  //popupContentHTML: "Hello",
+	    	  overflow: "hidden"	    	  
 	    	}
 /*	    	
 	    	var markerClick = function (evt) {
@@ -147,7 +130,16 @@ $(document).ready(function(){
 
     var select = new OpenLayers.Control.SelectFeature(layer_vector, {
         onSelect: function(feature) {
-            var content = "<a href='" + feature.data.url + "'>"+feature.data.title + "</a>";
+        	var content = "";
+        	if (feature.cluster) {
+        		content += "<h4>" + feature.cluster.length + " Resources</h4>"
+        		for (var i=0; i < feature.cluster.length; i++) {
+        			content += "<a href='" + feature.cluster[i].data.url + "'>"+feature.cluster[i].data.title + "</a><br />";
+        		}
+        	}
+        	else {
+                content = "<a href='" + feature.data.url + "'>"+feature.data.title + "</a>";
+        	}
             popup = new OpenLayers.Popup.FramedCloud("chicken", 
                                      feature.geometry.getBounds().getCenterLonLat(),
                                      new OpenLayers.Size(100,100),
