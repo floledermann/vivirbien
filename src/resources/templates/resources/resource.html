@@ -56,8 +56,7 @@ function hide_reply_form(comment_id, url, person_name) {
 <table class="tags-table">
 {% for tag in resource.tags.all %}
 <tr><td>{{ tag.key }}
-<a class="action" href="{% url wiki_article title=tag.key|prefix:"Key:" %}" title="{% trans "Documentation for key:" %} {{ tag.key }}">?</a>
-<a class="action" href="{% url resources_with_key key=tag.key %}" title="{% trans "Resources with key:" %} {{ tag.key }}">:</a>
+{% include "resources/includes/tag_actions.html" %}
 </td><td>{{ tag.value|urlize }}
 {# <a class="action" href="{% url wiki_article title=tag.get_tag|prefix:"Tag:" %}">?</a> #}
 {% ifequal tag.value|wordcount 1 %}

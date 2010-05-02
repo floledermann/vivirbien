@@ -1,0 +1,42 @@
+{% extends "resources/base.html" %}
+{% load texttools i18n %}
+
+{% block title %}Vivir Bien: {% trans "List of resources" %}{% endblock %}
+
+{% block resources_content %}
+{% include "resources/includes/actions.html" %}
+<h1>{% trans "Resources with tag:" %} {{ key }} = {% if value %}{{ value }}{% else %}*{% endif %}</h1>
+
+{% if user.is_staff %}
+<form class="action" method="post" action="{% url resources_rename_tag %}">
+Rename <em>all</em> such tags to:<br />
+<input type="hidden" name="key" value="{{ key }}" />
+{% if value %}
+<input type="hidden" name="value" value="{{ value }}" />
+{% endif %}
+Key: <input type="text" name="new_key" value="{{ key }}" />
+{% if value %}
+Value: <input type="text" name="new_value" value="{{ value }}" />
+{% endif %}
+<button type="submit">Submit</button>
+</form>
+{% endif %}
+
+<div class="actions">
+<a href="{% url wiki_article title=tag.key|prefix:"Key:" %}">{% trans "Wiki Page for Key:" %} {{key}}</a>
+</div>
+
+{% regroup tags by resource as resources %}
+
+<ul class="resourceslist">
+{% for resource_tags in resources %}
+<li><h3><a href="{% url resources_resource key=resource_tags.grouper.shortname%}">{{ resource_tags.grouper.name }}</a></h3>
+<ul class="tags help">
+{% for tag in resource_tags.list %}
+<li>{{ tag.key }}: {{ tag.value }} <a class="action" href="{% url resources_with_tag key=tag.key value=tag.value|urlencode %}" title="{% trans "Resources with tag:" %} {{ tag.key }} = {{ tag.value }}">:</a></li>
+{% endfor %}
+</ul>
+</li>
+{% endfor %}
+</ul>
+{% endblock %}

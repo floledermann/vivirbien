@@ -9,6 +9,7 @@ from django.http import HttpResponse, Http404
 from django.db.models import Q
 
 from django.core.urlresolvers import reverse, NoReverseMatch
+from django.db.models import Count
 
 from django.utils.translation import ugettext_lazy as _
 
@@ -148,21 +149,73 @@ def edit(request, key=None):
     else:
         form = ResourceForm(instance=resource)
         formset = TagFormSet(instance=resource)
+        
+        popular_tags = Tag.objects.values('key').annotate(key_count=Count('key')).filter(key_count__gt=2).order_by('key')
 
     tag_help = settings.TAG_HELP_LINKS
 
     return render_to_response('resources/edit.html', RequestContext(request, locals()))
+
+def tags(request):
+    tags = Tag.objects.values('key').annotate(key_count=Count('key')).order_by('key')
+    return render_to_response('resources/tags.html', RequestContext(request, locals()))
+    
     
 @login_required
-def by_tag(request, key, value=None, template='resources/list.html'):
+def tag_choices(request, key=None):
+    from django.utils import simplejson as json
+    from django.core.serializers.json import DateTimeAwareJSONEncoder
     
-    #key, _equals, value = tag.partition('=')
+    choices = Tag.objects.filter(key=key).values_list('value', flat=True).distinct()
     
-    resources = Resource.objects.filter(tags__key=key)
+    str = json.dumps({'choices':list(choices)}, cls=DateTimeAwareJSONEncoder, indent=2)
+    
+    return HttpResponse(str, mimetype='application/json') #
+    
+     
+@login_required
+def tag(request, key, value=None):
+    
+    tags = Tag.objects.filter(key=key)
     if value:
-        resources = resources.filter(tags__value=value)
-        
-    resources = resources.distinct()
-
-    return render_to_response(template, RequestContext(request, locals()))
+        tags = tags.filter(value=value)
     
+    tags = tags.select_related('resource').order_by('resource__shortname')
+    
+    return render_to_response('resources/resources_by_tag.html', RequestContext(request, locals()))
+
+
+@login_required
+def resources_by_tag(request, key, value=None):
+    
+    tags = Tag.objects.filter(key=key)
+    if value:
+        tags = tags.filter(value=value)
+    
+    tags = tags.select_related('resource').order_by('resource__shortname')
+    
+    return render_to_response('resources/resources_by_tag.html', RequestContext(request, locals()))
+
+@login_required
+def rename_tag(request):
+    
+    key = request.POST['key']
+    value = request.POST.get('value', None)
+    
+    if value:
+        tags = Tag.objects.filter(key=key, value=value)
+    else:
+        tags = Tag.objects.filter(key=key)
+
+    for tag in tags:
+        if value and 'new_value' in request.POST:
+            tag.value = request.POST['new_value']
+        if 'new_key' in request.POST:
+            tag.key = request.POST['new_key']
+        tag.save()
+        
+    if value:
+        return redirect_to(request, reverse('resources_with_tag', kwargs={'key':key, 'value': value}))
+    else:
+        return redirect_to(request, reverse('resources_with_key', kwargs={'key':key}))
+               

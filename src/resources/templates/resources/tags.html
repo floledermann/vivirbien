@@ -1,0 +1,18 @@
+{% extends "resources/base.html" %}
+{% load i18n %}
+
+{% block title %}Vivir Bien: {% trans "List of tags" %}{% endblock %}
+
+{% block resources_content %}
+{% include "resources/includes/actions.html" %}
+
+<h1>{% trans "All Tags" %}</h1>
+
+
+<ul class="tags-list">
+{% for tag in tags %}
+<li><a href="{% url resources_with_key key=tag.key %}">{{ tag.key }}</a> <span class="help">({{tag.key_count}})</span>
+</li>
+{% endfor %}
+</ul>
+{% endblock %}
