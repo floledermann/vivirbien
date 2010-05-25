@@ -38,3 +38,16 @@ TagFormSet = inlineformset_factory(Resource, Tag,
                                    extra=1,
                                    formfield_callback=tagformcallback)
 
+
+class ViewForm(ModelForm):
+    
+    #key = forms.CharField(widget=AutoCompleteWidget('keys', force_selection=False))
+    
+    class Meta:
+        model = View
+        exclude = ('creator','sub_views','order_by')
+
+QueryFormSet = inlineformset_factory(View, TagQuery,
+                                   exclude=('creator',),
+                                   extra=1,
+                                   formfield_callback=tagformcallback)

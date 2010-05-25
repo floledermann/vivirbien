@@ -26,20 +26,20 @@ var MEDIA_URL = "{{ MEDIA_URL}}";
 
 {% block resources_content %}
 {% include "resources/includes/actions.html" %}
-{% if resource %}
-<h1>{{ resource.name }}</h1>
+{% if view %}
+<h1>{{ view.name }}</h1>
 {% else %}
-<h1>{% trans "New resource" %}</h1>
+<h1>{% trans "New view" %}</h1>
 {% endif %}
 
-<form method="post" action="{% url resources_edit key=resource.shortname %}" autocomplete="off">
+<form method="post" action="{% url resources_edit_view name=view.shortname %}" autocomplete="off">
 <table>
 {{ form.as_table }}
 </table>
 
 {% if formset %}
 {{ formset.management_form }}
-<table class="edit-table tags-edit-table">
+<table class="edit-table queries-edit-table">
 {% for form in formset.forms %}
 {% if forloop.first %}
 <tr>
@@ -48,10 +48,11 @@ var MEDIA_URL = "{{ MEDIA_URL}}";
 {% endfor %}
 </tr>
 {% endif %}
-<tr{% if forloop.last %} class="extra"{% endif %}>
+<tr class="{% if forloop.first %}first{% endif %}{% if forloop.last %} extra{% endif %}">
     {% for field in form.visible_fields %}
         <td class="edit-{{field.name}}">{{field.errors}}{{ field }}
-        {% if forloop.first and forloop.parentloop.last %}
+        {% if forloop.parentloop.last %}
+        {% ifequal field.name "key" %}
         <select class="popular-tags">
 <option value="">{% trans "Common Tags:" %}</option>
 <option value="">--------------</option>
@@ -60,6 +61,7 @@ var MEDIA_URL = "{{ MEDIA_URL}}";
 {#{% include "resources/includes/tag_actions.html" %}#}
 {% endfor %}
 </select>
+{% endifequal %}
         {% endif %}
         </td>
     {% endfor %}
@@ -84,26 +86,15 @@ var MEDIA_URL = "{{ MEDIA_URL}}";
 {% endif %}
 
 <button type="submit">{% trans "Save" %}</button>
-<button name="action" value="add_tag" type="submit">{% trans "Save and continue" %}</button>
+<button name="action" value="add_row" type="submit">{% trans "Save and continue" %}</button>
 
-{% if resource %}
-<a class="action" href="{% url resources_resource key=resource.shortname %}">{% trans "Cancel" %}</a>
+{% if view %}
+<a class="action" href="{% url resources_view name=view.shortname %}">{% trans "Cancel" %}</a>
 {% else %}
 <a class="action" href="{% url resources_index %}">{% trans "Cancel" %}</a>
 {% endif %}
 
 </form>
 
-<div class="widget" id="widget-location">
-<!--
-<button class="button-lookup-address">{% trans "Look up from address" %}</button>
--->
-<div class="map"></div>
-</div>
-
-<div class="widget" id="widget-address">
-<button class="button-add-location">{% trans "Add location tag for this address" %}</button>
-<div class="map"></div>
-</div>
 
 {% endblock %}

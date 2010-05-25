@@ -117,32 +117,66 @@ function location_widget(el) {
 }
 
 function choice_widget(el, key) {
-	var widget = $('<div class="widget">loading choices...</div>');
+    var widget = $('<div class="widget">loading choices...</div>');
     widget.insertAfter(el);
     widget.show();
 
     $.getJSON('/resources/tag/' + key + '/choices.json',function(data) {
-    	var ul = $('<ul></ul>');
-    	for (var i=0; i<data.choices.length; i++) {
-    	   ul.append('<li><a class="value" href="#">' + data.choices[i] + '</a></li>');
-    	}
-    	widget.html('');
-    	widget.append(ul);
-    	
-    	ul.find('a.value').click(function(ev) {
-    		$(el).val($(this).html());
-    	});
+        var ul = $('Existing Values: <select><option value="">-</option></select>');
+        for (var i=0; i<data.choices.length; i++) {
+           ul.append('<option value="' + data.choices[i] + '">' + data.choices[i] + '</option>');
+        }
+        widget.html('');
+        widget.append(ul);
+        
+        ul.change(function(ev) {
+            $(el).val(ul.val());
+        });
+    });
+}
+
+function resource_choice(el, key) {
+    var widget = $('<div class="widget">loading choices...</div>');
+    widget.insertAfter(el);
+    widget.show();
+
+    $.getJSON('/resources/choices.json',function(data) {
+        var ul = $('Resource: <select><option value="">-</option></select>');
+        for (var i=0; i<data.choices.length; i++) {
+           ul.append('<option value="' + data.choices[i] + '">' + data.choices[i] + '</option>');
+        }
+        widget.html('');
+        widget.append(ul);
+        
+        ul.change(function(ev) {
+            $(el).val(ul.val());
+        });
     });
 }
 
 var editor_lookup = {
     'location': location_widget,
-    'activity': choice_widget
+    'activity': choice_widget,
+    'mode_of_production': choice_widget,
+    'mode_of_access': choice_widget,
+    'mode_of_distribution': choice_widget,
+    'decision_making': choice_widget,
+    'category': choice_widget,
+    'spatial_unit': choice_widget,
+    'organizational_unit': choice_widget,
+    'organizational_type': choice_widget,
+    'organisationsform': choice_widget,
+    'ownership': choice_widget,
+    'license': choice_widget,
+    'part_of': resource_choice
 }
 
 jQuery(function($) {
     $('#id_shortname').change(function() {
         this._dirty = true;
+    });
+    $('#id_shortname').each(function() {
+        if (this.value) this._dirty = true;
     });
     $('#id_name').keyup(function() {
         var el = $('#id_shortname');
@@ -177,9 +211,9 @@ jQuery(function($) {
         
     });  
     
-    $('.popular-tags a.key').click(function(ev) {
-        $('.tags-edit-table tr.extra td.edit-key input[type=text]').val($(this).html());
+    $('.popular-tags').change(function(ev) {
+        $('.edit-table tr.extra td.edit-key input[type=text]').val($(this).val());
         ev.preventDefault();
-        $('.tags-edit-table tr.extra td.edit-value textarea')[0].focus();
+        $('.edit-table tr.extra td.edit-value textarea')[0].focus();
     });  
 });

@@ -110,3 +110,7 @@ ul#messages {
     background-color: #ffffff;
     opacity: 0.6;
 }
+
+.queries-edit-table .first .edit-boolean {
+    visibility: hidden;
+}

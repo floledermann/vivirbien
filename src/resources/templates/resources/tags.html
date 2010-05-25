@@ -11,7 +11,8 @@
 
 <ul class="tags-list">
 {% for tag in tags %}
-<li><a href="{% url resources_with_key key=tag.key %}">{{ tag.key }}</a> <span class="help">({{tag.key_count}})</span>
+<li><a href="{% url resources_tag_key key=tag.key %}">{{ tag.key }}</a> <span class="help">({{tag.key_count}})</span>
+<a class="action" href="{% url resources_with_key key=tag.key %}">:</a>
 </li>
 {% endfor %}
 </ul>

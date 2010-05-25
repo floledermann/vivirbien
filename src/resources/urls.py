@@ -18,13 +18,22 @@ autocomplete.register(
 )
 
 urlpatterns = patterns('',
-    url(r'^$', views.list_view, name='resources_index'),
-    url(r'^map/$', views.map_view, name='resources_map'),
-    url(r'^list/$', views.list_view, name='resources_list'),
-    
+    url(r'^$', views.index, name='resources_index'),
+
+    url(r'^views/$', views.views, name='resources_views'),
+    url(r'^view/(?P<name>.*)/map/$', views.view, name='resources_view_map'),
+    url(r'^view/(?P<name>.*)/list/$', views.view, name='resources_view_list'),
+    url(r'^view/(?P<name>.*)/$', views.view, name='resources_view'),
+    url(r'^views/new/$', views.edit_view, name='resources_new_view'),
+    url(r'^views/edit/(?P<name>.*)/$', views.edit_view, name='resources_edit_view'),
+   
     url(r'^tags/$', views.tags, name='resources_tags'),
+    url(r'^tag/(?P<key>.*)=(?P<value>.*)/$', views.tag, name='resources_tag'),
+    url(r'^tag/(?P<key>.*)/$', views.tag, name='resources_tag_key'),
     url(r'^tools/rename_tag/$', views.rename_tag, name='resources_rename_tag'),
-    url(r'^tag/(?P<key>.*)/choices.json$', views.tag_choices, name='resources_tag_choices'),
+
+    url(r'^choices.json$', views.resource_choices),
+    url(r'^tag/(?P<key>.*)/choices.json$', views.tag_choices),
     
     url(r'^json/$', views.geojson, name='geojson'),
     url(r'^with/tag/(?P<key>.*)=(?P<value>.*)/$', views.resources_by_tag, name='resources_with_tag'),

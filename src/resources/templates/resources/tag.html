@@ -1,42 +1,40 @@
 {% extends "resources/base.html" %}
 {% load i18n %}
 
-{% block title %}Vivir Bien: {% trans "List of resources" %}{% endblock %}
+{% block title %}Vivir Bien: {% trans "Tag:" %} {{key}} = {% if value %}{{ value }}{% else %}*{% endif %}{% endblock %}
 
 {% block resources_content %}
 {% include "resources/includes/actions.html" %}
-{% if title %}
-<h1>{{ title }}</h1>
+<h1>{% trans "Tag:" %}<a href="{% url resources_tag_key key=key %}">{{key}}</a> = {% if value %}{{ value }}{% else %}*{% endif %}</h1>
+
+{% if user.is_staff %}
+<form class="action" method="post" action="{% url resources_rename_tag %}">
+Rename <em>all</em> such tags to:<br />
+<input type="hidden" name="key" value="{{ key }}" />
+{% if value %}
+<input type="hidden" name="value" value="{{ value }}" />
 {% endif %}
-{% if key %}
-<h2>{% trans "Resources with tag:" %} {{ key }}{% if value %} = {{ value }}{% endif %}</h2>
+Key: <input type="text" name="new_key" value="{{ key }}" />
+{% if value %}
+Value: <input type="text" name="new_value" value="{{ value }}" />
+{% endif %}
+<button type="submit">Submit</button>
+</form>
 {% endif %}
 
-{% if groups %}
-<div class="column">
-{% for group in groups %}
-<h2>{{ group.title }}
-{% if group.text %}
-<div class="help">{{ group.text|safe }}</div>
-{% endif %}
-</h2>
-<ul class="resourceslist">
-{% for resource in group.resources %}
-<li><a href="{% url resources_resource key=resource.shortname%}">{{ resource.name }}</a></li>
-{% endfor %}
-</ul>
-{% if forloop.counter|divisibleby:3 %}
-</div>
-<div class="column">
-{% endif %}
-{% endfor %}
-</div>
+{% regroup tags by value as value_groups %}
 
-{% else %}
 <ul class="resourceslist">
-{% for resource in resources %}
-<li><a href="{% url resources_resource key=resource.shortname%}">{{ resource.name }}</a></li>
+{% for value_tags in value_groups %}
+<li>
+<h3><a href="{% url resources_tag key=key value=value_tags.grouper %}">{{ value_tags.grouper }} <a class="action" href="{% url resources_with_tag key=key value=value_tags.grouper %}">:</a></h3>
+<div class="help">
+{% for tag in value_tags.list %}
+<a href="{% url resources_resource key=tag.resource.shortname %}">{{ tag.resource.name }}</a>{% if not forloop.last %}, {% endif %}
+{% endfor %}
+</div>
+</li>
 {% endfor %}
 </ul>
-{% endif %}
+
 {% endblock %}

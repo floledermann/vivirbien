@@ -1,0 +1,17 @@
+{% extends "resources/base.html" %}
+{% load i18n %}
+
+{% block title %}Vivir Bien: {% trans "List of views" %}{% endblock %}
+
+{% block resources_content %}
+{% include "resources/includes/actions.html" %}
+
+<h1>{% trans "All Views" %}</h1>
+
+
+<ul class="views-list">
+{% for view in views %}
+<li><a href="{% url resources_view name=view.shortname %}">{{ view.name }}</a></li>
+{% endfor %}
+</ul>
+{% endblock %}

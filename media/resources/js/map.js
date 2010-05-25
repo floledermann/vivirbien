@@ -54,14 +54,18 @@ $(document).ready(function(){
     map.setCenter (lonLat, zoom);
 
     var style = new OpenLayers.Style({
-        externalGraphic: media_url + "images/marker.png",
-        graphicWidth: 21,
-        graphicHeight: 25,
-        graphicXOffset: -10,
-        graphicYOffset: -25,
+        externalGraphic: media_url + "images/flowers.png",
+//        graphicWidth: 21,
+//        graphicHeight: 25,
+//        graphicXOffset: -10,
+//        graphicYOffset: -25,
+        graphicWidth: 32,
+        graphicHeight: 37,
+        graphicXOffset: -16,
+        graphicYOffset: -35,
         graphicTitle: '${title}',
         cursor: 'pointer',
-        graphicOpacity:0.7
+        graphicOpacity:0.8
     },{
         context: {
             title: function(feature) {

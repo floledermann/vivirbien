@@ -1,0 +1,32 @@
+{% extends "resources/base.html" %}
+{% load i18n %}
+
+{% block title %}Vivir Bien: {% trans "Resources" %}{% endblock %}
+
+{% block resources_content %}
+{% include "resources/includes/actions.html" %}
+
+<h1>{% trans "Vivir Bien" %}</h1>
+
+<h2>{% trans "Featured Views" %}</h2>
+<ul class="views-list">
+{% for view in featured_views %}
+<li><a href="{% url resources_view name=view.shortname %}">{{ view.name }}</a></li>
+{% endfor %}
+</ul>
+
+<h2>{% trans "Featured Resources" %}</h2>
+<ul class="resources-list">
+{% for resource in featured_resources %}
+<li><a href="{% url resources_resource key=resource.shortname%}">{{ resource.name }}</a></li>
+{% endfor %}
+</ul>
+
+<h2>{% trans "Newest Resources" %}</h2>
+<ul class="resources-list">
+{% for resource in latest_resources %}
+<li><a href="{% url resources_resource key=resource.shortname%}">{{ resource.name }}</a></li>
+{% endfor %}
+</ul>
+
+{% endblock %}

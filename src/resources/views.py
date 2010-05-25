@@ -106,9 +106,6 @@ def geojson(request):
     str = json.dumps(resources, cls=GeoJSONEncoder, indent=2)
     
     return HttpResponse(str, mimetype='application/json') #
-    
-    
-    
 
 @login_required
 def new(request):
@@ -156,6 +153,69 @@ def edit(request, key=None):
 
     return render_to_response('resources/edit.html', RequestContext(request, locals()))
 
+def view(request, name):
+    view = get_object_or_404(View, shortname=name)
+    
+    resources = view.get_resources()
+    
+    return render_to_response('resources/view.html', RequestContext(request, locals()))
+    
+def views(request):
+    views = View.objects.all()
+    return render_to_response('resources/views.html', RequestContext(request, locals()))
+
+@login_required
+def edit_view(request, name=None):
+    view = None
+    if name:
+        view = get_object_or_404(View, shortname=name)
+    
+    if request.method == "POST":
+        form = ViewForm(request.POST, request.FILES, instance=view)
+        if form.is_valid():
+            
+            if not view:
+                # new resource
+                view = form.save(commit=False)
+                view.creator = request.user
+                view.save()
+            else:
+                form.save()
+                
+            formset = QueryFormSet(request.POST, request.FILES, instance=view)
+            if formset.is_valid():
+                formset.saved_forms = []
+                formset.save_existing_objects()
+                queries = formset.save_new_objects(commit=False)
+                for query in queries:
+                    query.creator = request.user
+                    query.save()
+                if 'action' in request.POST and request.POST['action'] == 'add_row':
+                    return redirect_to(request, reverse('resources_edit_view', kwargs={'name':view.shortname}))               
+                else:
+                    return redirect_to(request, reverse('resources_view', kwargs={'name':view.shortname}))               
+        else:
+            formset = QueryFormSet(instance=view)
+    else:
+        form = ViewForm(instance=view)
+        formset = QueryFormSet(instance=view)
+        
+        popular_tags = Tag.objects.values('key').annotate(key_count=Count('key')).filter(key_count__gt=2).order_by('key')
+
+    tag_help = settings.TAG_HELP_LINKS
+
+    return render_to_response('resources/view_edit.html', RequestContext(request, locals()))
+
+def index(request):
+    
+    featured_views = View.objects.all() #filter(featured=True)
+    featured_resources = Resource.objects.filter(featured=True)
+    latest_resources = Resource.objects.order_by('-creation_date')[:15]
+    
+    return render_to_response('resources/index.html', RequestContext(request, locals()))
+
+
+
 def tags(request):
     tags = Tag.objects.values('key').annotate(key_count=Count('key')).order_by('key')
     return render_to_response('resources/tags.html', RequestContext(request, locals()))
@@ -172,6 +232,17 @@ def tag_choices(request, key=None):
     
     return HttpResponse(str, mimetype='application/json') #
     
+@login_required
+def resource_choices(request, key=None):
+    from django.utils import simplejson as json
+    from django.core.serializers.json import DateTimeAwareJSONEncoder
+    
+    choices = Resource.objects.values_list('shortname', flat=True).order_by('shortname')
+    
+    str = json.dumps({'choices':list(choices)}, cls=DateTimeAwareJSONEncoder, indent=2)
+    
+    return HttpResponse(str, mimetype='application/json') #
+    
      
 @login_required
 def tag(request, key, value=None):
@@ -180,9 +251,9 @@ def tag(request, key, value=None):
     if value:
         tags = tags.filter(value=value)
     
-    tags = tags.select_related('resource').order_by('resource__shortname')
+    tags = tags.select_related('resource').order_by('value')
     
-    return render_to_response('resources/resources_by_tag.html', RequestContext(request, locals()))
+    return render_to_response('resources/tag.html', RequestContext(request, locals()))
 
 
 @login_required
@@ -198,6 +269,7 @@ def resources_by_tag(request, key, value=None):
 
 @login_required
 def rename_tag(request):
+    from django.utils.http import urlquote
     
     key = request.POST['key']
     value = request.POST.get('value', None)
@@ -215,7 +287,7 @@ def rename_tag(request):
         tag.save()
         
     if value:
-        return redirect_to(request, reverse('resources_with_tag', kwargs={'key':key, 'value': value}))
+        return redirect_to(request, reverse('resources_tag', kwargs={'key':urlquote(key), 'value': urlquote(value)}))
     else:
-        return redirect_to(request, reverse('resources_with_key', kwargs={'key':key}))
+        return redirect_to(request, reverse('resources_tag_key', kwargs={'key':urlquote(key)}))
                

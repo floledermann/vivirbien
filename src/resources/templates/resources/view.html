@@ -1,0 +1,40 @@
+{% extends "resources/base.html" %}
+{% load i18n %}
+
+{% block title %}Vivir Bien: {{ view.name }}{% endblock %}
+
+{% block resources_content %}
+{% include "resources/includes/actions.html" %}
+
+<h1>{{ view.name }}</h1>
+
+{% include "resources/includes/view_actions.html" %}
+
+{% if groups %}
+<div class="column">
+{% for group in groups %}
+<h2>{{ group.title }}
+{% if group.text %}
+<div class="help">{{ group.text|safe }}</div>
+{% endif %}
+</h2>
+<ul class="resourceslist">
+{% for resource in group.resources %}
+<li><a href="{% url resources_resource key=resource.shortname%}">{{ resource.name }}</a></li>
+{% endfor %}
+</ul>
+{% if forloop.counter|divisibleby:3 %}
+</div>
+<div class="column">
+{% endif %}
+{% endfor %}
+</div>
+
+{% else %}
+<ul class="resourceslist">
+{% for resource in resources %}
+<li><a href="{% url resources_resource key=resource.shortname%}">{{ resource.name }}</a></li>
+{% endfor %}
+</ul>
+{% endif %}
+{% endblock %}
