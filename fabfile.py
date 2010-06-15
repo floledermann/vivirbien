@@ -11,10 +11,17 @@ from fabric.contrib import console, files
 
 import time
 import os
+import sys
 
 env.project_name = 'vivirbien'
 env.virtualenv_dir = 'env'
     
+if sys.platform == 'win32':
+    env.virtualenv_bin = 'Scripts'
+else:
+    env.virtualenv_bin = 'bin'
+
+env.ve_prefix = os.path.join(env.virtualenv_dir, env.virtualenv_bin)
 
 
 # defaults
@@ -95,7 +102,7 @@ def bootstrap():
     create_secret_settings(db_pass=db_pass)
 
 def testserver(fixture='testdata'):
-    local('python manage.py testserver fixtures\\%s' % fixture)
+    local(os.path.join(env.ve_prefix,'python manage.py testserver fixtures\\%s' % fixture))
 
 
 # ---------------------------------------------------------
@@ -147,7 +154,29 @@ def create_db():
     # CREATE ROLE foo LOGIN PASSWORD 'foo' NOINHERIT VALID UNTIL 'infinity';
     # CREATE DATABASE henka WITH ENCODING='UTF8' OWNER=henka;
 
-def create_secret_settings(db_pass='', email_pass=''):
+def create_local_db():  
+      
+    use_sqlite = console.confirm('Use sqlite instead of postgres DB?')
+
+    if not use_sqlite:
+        db_user = prompt('Local DB username:', default=env.project_name)
+        db_pass = prompt('Local DB password:')
+    
+        # TODO find a way to use provided password! (use SQL instead of command)    
+        # -e echo-sql S no-superuser D no-createdb R no-createrole l can-login
+        # P prompt-for-passwd -U <login role> -O <owner role> -h <hostname>
+        # TODO find a way to use provided password! (use SQL instead of command)
+        local('createuser -e -SDRlP -U postgres -h localhost %s' % db_user)
+        
+        # -U <login role> -O <owner role> -h <hostname>
+        local('createdb -e -E UTF8 -O %s -U postgres -h localhost %s' % (db_user, env.project_name))
+    else:
+        db_pass = ''
+
+    create_secret_settings(db_pass=db_pass, use_sqlite=use_sqlite)
+
+
+def create_secret_settings(db_pass='', email_pass='', use_sqlite=False):
     "Creates a settings_secret.py file in the target location"
 
     if not env.hosts and os.path.exists('settings_secret.py'):
@@ -156,7 +185,7 @@ def create_secret_settings(db_pass='', email_pass=''):
     import random
     secret_key = ''.join([random.choice("abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)") for i in range(50)])
 
-    if not db_pass:
+    if not db_pass and not use_sqlite:
         db_pass = prompt('DB password for %s:' % env.host, default='')
 
     content = """
@@ -164,7 +193,13 @@ def create_secret_settings(db_pass='', email_pass=''):
 SECRET_KEY = '%s'
 DATABASE_PASSWORD = '%s'
 EMAIL_HOST_PASSWORD = '%s'
-    """ % (secret_key, db_pass, email_pass)    
+    """ % (secret_key, db_pass, email_pass)
+    
+    if use_sqlite:
+        content = content + """
+DATABASE_ENGINE='sqlite3'
+DATABASE_NAME='%s.db'
+""" % (env.project_name)
     
     if env.hosts:    
         filename = 'settings_secret.py.temp'
@@ -212,8 +247,20 @@ def remove_site():
     require('sites_home', provided_by=[staging])
     sudo('cd /etc/apache2/sites-enabled/; rm %(project_name)s' % env)   
 
+def init_local():
+
+    if env.hosts:
+        abort('Error: init_local called on remote host')
+    
+    install_requirements()
+    create_local_db()
+    syncdb()
 
 def init():
+    if not env.hosts:
+        init_local()
+        return
+
     require('sites_home', provided_by = [staging])
     create_project_dir()
     deploy_nosyncdb()
@@ -296,11 +343,9 @@ def deploy():
     reload()
 
 def syncdb():
-    # TODO migrations fail in some cases when using sqlite
-    # in these cases migrations can be circumvented using 'python manage.py syncdb --all'
     if not env.hosts:
-        local('env\Scripts\python manage.py syncdb', capture=False)
-        local('env\Scripts\python manage.py migrate', capture=False)
+	    local(os.path.join(env.ve_prefix,'python manage.py syncdb'), capture=False)
+	    local(os.path.join(env.ve_prefix,'python manage.py migrate'), capture=False)
     else:
         # we are in a symlinked directory so we have to add one more '../' !
         run('cd %(sites_home)s%(project_name)s/current-release; ../../env/bin/python manage.py syncdb --noinput' % env) 
@@ -311,7 +356,7 @@ def convert_to_south(app_name=None):
         abort('Please specify an app name like create_migration:<appname>')
     if not env.hosts:
         # local codebase will be converted
-        local('env\Scripts\python manage.py convert_to_south %s' % app_name)
+        local(os.path.join(env.ve_prefix,'python manage.py convert_to_south %s' % app_name))
     else:
         # already deployed code; tell south to activate, migrations (created locally) must be already deployed!
         deploy_nosyncdb()
@@ -329,9 +374,9 @@ def create_migration(app_name=None, manual=False):
     else:
         auto_str = ''
     migration_name = prompt('Migration Name: ', validate=r'^[a-z_0-9]+$')
-    local('env\Scripts\python manage.py startmigration %s %s %s' % (app_name, migration_name, auto_str), capture=False)
+    local(os.path.join(env.ve_prefix,'python manage.py startmigration %s %s %s' % (app_name, migration_name, auto_str)), capture=False)
     if console.confirm('Please review migration code; Apply now?'):
-        local('env\Scripts\python manage.py migrate', capture=False)
+        local(os.path.join(env.ve_prefix,'python manage.py migrate'), capture=False)
         
 def translate():
     makemessages()
@@ -358,14 +403,14 @@ def compilemessages():
 
 def runserver():
     cmd = 'runserver'
-    local('env\Scripts\python manage.py ' + cmd, capture=False)
+    local(os.path.join(env.ve_prefix,'python manage.py ' + cmd), capture=False)
 # ---------------------------------------------------------
 # data handling
 # ---------------------------------------------------------
 
 def dump_data(filename='testdata.json'):
     "Dump the applications data into a fixture using manage.py dumpdata"
-    local('python manage.py dumpdata --indent=2 > fixtures\\%s' % filename)
+    local(os.path.join(env.ve_prefix,'python manage.py dumpdata --indent=2 > fixtures\\%s' % filename))
 
 def dump_db(db_name=env.project_name):
     require('hosts', provided_by = [staging])   
@@ -385,6 +430,18 @@ def copy_db(from_db, to_db):
         f.run('cd %s; psql -h %s -d %s -U %s -f %s-dump.sql' % (env.path, env.db_host, to_db, to_db, from_db)) 
         f.run('cd %s; rm %s-dump.sql' % (env.path, from_db)) 
 
+def fetchdata(appname):
+    require('hosts', provided_by = [staging])
+    with settings(warn_only=True):
+        run('mkdir %s%s/fixtures' % (env.sites_home, env.project_name))
+        run('rm %s%s/fixtures/%s.json' % (env.sites_home, env.project_name, appname))
+    run('cd %s%s/current-release; ../../env/bin/python manage.py dumpdata %s > ../../data/%s.json' % (env.sites_home, env.project_name, appname, appname))
+    with settings(warn_only=True):
+        local('mkdir data')
+    get('%s%s/fixtures/%s.json' % (env.sites_home, env.project_name, appname), 'data/%s.json' % appname)
+
+def loaddata(appname):
+    local(os.path.join(env.ve_prefix,'python manage.py loaddata fixtures/%s.json' % appname))
 # ---------------------------------------------------------
 # helper functions
 # ---------------------------------------------------------
