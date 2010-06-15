@@ -126,7 +126,11 @@ if DEPLOYMENT_CONFIG == 'server_architekt':
 
 else: # default
     
-    DJANGO_PROJECT_ROOT = 'C:/user/flo/projects/vivirbien/'
+    import sys
+    if sys.platform == 'win32':
+        DJANGO_PROJECT_ROOT = 'C:/user/flo/projects/vivirbien/'
+    else:
+        DJANGO_PROJECT_ROOT = '/home/flo/projects/vivirbien/'
     
     DATABASE_NAME = 'pcresources'
     DATABASE_USER = 'pcresources'
