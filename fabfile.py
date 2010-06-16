@@ -20,9 +20,13 @@ if sys.platform == 'win32':
     env.virtualenv_bin = 'Scripts'
 else:
     env.virtualenv_bin = 'bin'
+    
+import settings_project as settings_project
+
+env.project_name = settings_project.PROJECT_NAME
+env.project_domain = settings_project.PROJECT_DOMAIN
 
 env.ve_prefix = os.path.join(env.virtualenv_dir, env.virtualenv_bin)
-
 
 # defaults
 env.db_host = 'localhost'
@@ -305,8 +309,13 @@ def upload():
     run('cd %s%s/releases/%s && tar zxf ../../packages/%s.tar.gz' % (env.sites_home, env.project_name, env.release, env.release))
     # create symbolic link for secret settings
     run('cd %s%s/releases/%s; ln -s ../../settings_secret.py settings_secret.py' % (env.sites_home, env.project_name, env.release))
-    # create symbolic link for admin media
-    run('cd %s%s/releases/%s; ln -s ../../../env/lib/python2.5/site-packages/django/contrib/admin/media/ media/admin' % (env.sites_home, env.project_name, env.release))
+    
+    # create symbolic link for admin and app media
+    run('cd %s%s/releases/%s; ln -s ../../../env/lib/python2.5/site-packages/django/contrib/admin/media/ media/admin' % (env.sites_home, env.project_name, env.release))    
+    for app_path in settings_project.APP_MEDIA:
+        run('cd %s/releases/%s; ln -s ../../../%s media/%s' % (env.path, env.release, app_path[1], app_path[0]))
+
+    # symlink uploads dir
     run('cd %s%s/releases/%s; ln -s ../../../uploads/ media/uploads' % (env.sites_home, env.project_name, env.release))
     local('del releases\\%s.tar.gz' % env.release)
 
