@@ -14,14 +14,16 @@ urlpatterns = patterns('',
     (r'^i18n/', include('django.conf.urls.i18n')),
     (r'^accounts/', include('invitation.urls')),
     (r'^accounts/', include('registration.urls')),
-    (r'^resources/', include('resources.urls')),
     (r'^comments/', include('threadedcomments.urls')),
-    ('^$', 'django.views.generic.simple.redirect_to', {'url': '/wiki/Vivir%%20Bien/'}),
-    (r'^$', 'resources.views.list_view'),
+    (r'^resources/', include('resources.urls')),
+    ('^$', 'django.views.generic.simple.redirect_to', {'url': '/resources/'}),
+    #(r'^$', 'resources.views.index'),
 )
 
 if settings.SERVE_STATIC:
+    import os
     urlpatterns = patterns('',
+        (r'^media/resources/(?P<path>.*)$', 'django.views.static.serve', {'document_root': os.path.join(settings.DJANGO_PROJECT_ROOT, 'src/resources/media/resources/')}),
         (r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
     ) + urlpatterns
 
