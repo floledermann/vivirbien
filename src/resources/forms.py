@@ -49,5 +49,9 @@ class ViewForm(ModelForm):
 
 QueryFormSet = inlineformset_factory(View, TagQuery,
                                    exclude=('creator',),
-                                   extra=1,
-                                   formfield_callback=tagformcallback)
+                                   extra=1)
+
+TagMappingFormSet = inlineformset_factory(View, TagMapping,
+                                   exclude=('creator',),
+                                   extra=1)
+

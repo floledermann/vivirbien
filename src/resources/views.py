@@ -24,95 +24,7 @@ def resource(request, key):
     return render_to_response('resources/resource.html', RequestContext(request, locals()))
 
 @login_required
-def list_view(request, template='resources/list.html'):
-    
-    title = _('List of resources')
-    groups = []
-    
-    #resources = Resource.objects.all()
-    groups.append({'title':_('Resources with Location'),
-                   'text':_('Missing something? Add an <code>address</code> or <code>location</code> tag to make a resource show up here.'),
-                   'resources': Resource.objects.filter(Q(tags__key='address') | Q(tags__key='location')).distinct()})
-    groups.append({'title':_('Online Resources'),
-                   'text':_('Missing something? Add a <code>website</code> tag to make a resource show up here.'),
-                   'resources': Resource.objects.exclude(tags__key='address').exclude(tags__key='location').filter(tags__key='website').distinct()})
-    groups.append({'title':_('Other Resources'),
-                   'text':_('All resources that have neither a location nor a website.'),
-                   'resources': Resource.objects.exclude(tags__key='address').exclude(tags__key='location').exclude(tags__key='website').distinct()})
-    groups.append({'title':_('Recently Added'),
-                   'resources': Resource.objects.order_by('-creation_date')[:15]})
-    
-    return render_to_response(template, RequestContext(request, locals()))
-
-@login_required
-def map_view(request, template='resources/map.html'):
-    
-    title = _('Map of resources')
-    groups = []
-    
-    #resources = Resource.objects.all()
-    groups.append({'title':_('Resources missing on the Map'),
-                   'text':_('These resources have an <code>address</code>, but no <code>location</code> tag set.'),
-                   'resources': Resource.objects.filter(tags__key='address').exclude(tags__key='location').distinct()})
-    
-    return render_to_response(template, RequestContext(request, locals()))
-
-@login_required
-def geojson(request):
-    from django.utils import simplejson as json
-    from django.core import serializers
-    from django.db.models.query import QuerySet
-    from django.core.serializers.json import DateTimeAwareJSONEncoder
-    
-    resources = Resource.objects.filter(tags__key='location')
-    
-    class GeoJSONEncoder(DateTimeAwareJSONEncoder):
-        """ simplejson.JSONEncoder extension: handle querysets """
-        def default(self, obj):
-            if isinstance(obj, QuerySet):
-                return {
-                        'type': 'FeatureCollection',
-                        'features': list(obj)
-                }
-            if isinstance(obj, Resource):
-                location = obj.tags.filter(key='location').values_list('value', flat=True)
-                if len(location) > 0:
-                    lonlat = location[0].partition(':')[2].split(',')
-                    json = {
-                            'type':'Feature',
-                            'properties': {
-                                'title': obj.name,
-                                'url': reverse('resources_resource', kwargs={'key':obj.shortname}),
-                                'tags': {}
-                            }
-                    }
-                    
-                    for tag in obj.tags.all():
-                        json['properties']['tags'][tag.key] = tag.value
-                        
-                    try:
-                        json['geometry'] = {
-                                'type': 'Point', 
-                                'coordinates': [float(lonlat[0]),float(lonlat[1])]
-                            }
-                    except:
-                        # fail silently if something geos wrong with extracting coords
-                        pass
-                    return json
-                return None
-            return super(GeoJSONEncoder, self).default(obj)
-
-    
-    str = json.dumps(resources, cls=GeoJSONEncoder, indent=2)
-    
-    return HttpResponse(str, mimetype='application/json') #
-
-@login_required
-def new(request):
-    return render_to_response('resources/edit.html', RequestContext(request, locals()))
-
-@login_required
-def edit(request, key=None):
+def edit_resource(request, key=None):
     resource = None
     if key:
         resource = get_object_or_404(Resource, shortname=key)
@@ -153,10 +65,38 @@ def edit(request, key=None):
 
     return render_to_response('resources/edit.html', RequestContext(request, locals()))
 
+def all_resources(request):
+    resources = Resource.objects.all()
+    view = {'name': 'All Resources'}
+    return render_to_response('resources/view.html', RequestContext(request, locals()))
+    
 def view(request, name):
     view = get_object_or_404(View, shortname=name)
     
     resources = view.get_resources()
+    
+    q = None
+    for mapping in view.mappings.filter(show_in_list=True):
+        q = q and q | Q(key=str(mapping.key)) or Q(key=str(mapping.key))
+    
+    if q:
+        tags = Tag.objects.filter(q).select_related('resource').order_by('resource__shortname').values('resource_id','key','value')
+    
+        tags_dict = {}
+        for tag in tags:
+            if tag['resource_id'] in tags_dict:
+                tags_dict[tag['resource_id']].append({'key': tag['key'], 'value': tag['value']})
+            else:
+                tags_dict[tag['resource_id']] = [{'key': tag['key'], 'value': tag['value']}]
+    
+        tags = tags_dict
+        
+        for resource in resources:
+            if resource.id in tags_dict:
+                setattr(resource, 'view_tags', tags_dict[resource.id])
+        
+        #resources = map(lambda resource: setattr(resource, 'view_tags', tags_dict[resource.id]) or resource, resources)
+        #assert False, tags
     
     return render_to_response('resources/view.html', RequestContext(request, locals()))
     
@@ -171,7 +111,7 @@ def edit_view(request, name=None):
         view = get_object_or_404(View, shortname=name)
     
     if request.method == "POST":
-        form = ViewForm(request.POST, request.FILES, instance=view)
+        form = ViewForm(request.POST, instance=view, prefix='view')
         if form.is_valid():
             
             if not view:
@@ -181,34 +121,49 @@ def edit_view(request, name=None):
                 view.save()
             else:
                 form.save()
-                
-            formset = QueryFormSet(request.POST, request.FILES, instance=view)
-            if formset.is_valid():
-                formset.saved_forms = []
-                formset.save_existing_objects()
-                queries = formset.save_new_objects(commit=False)
+            
+            queryformset = QueryFormSet(request.POST, instance=view, prefix='queries')
+            valid1 = queryformset.is_valid()
+            if valid1:
+                queryformset.saved_forms = []
+                queryformset.save_existing_objects()
+                queries = queryformset.save_new_objects(commit=False)
                 for query in queries:
                     query.creator = request.user
                     query.save()
+                    
+            mappingformset = TagMappingFormSet(request.POST, instance=view, prefix='mappings')
+            valid2 = mappingformset.is_valid()
+            if valid2:
+                mappingformset.saved_forms = []
+                mappingformset.save_existing_objects()
+                mappings = mappingformset.save_new_objects(commit=False)
+                for mapping in mappings:
+                    mapping.creator = request.user
+                    mapping.save()
+            
+            if valid1 and valid2:       
                 if 'action' in request.POST and request.POST['action'] == 'add_row':
                     return redirect_to(request, reverse('resources_edit_view', kwargs={'name':view.shortname}))               
                 else:
                     return redirect_to(request, reverse('resources_view', kwargs={'name':view.shortname}))               
         else:
-            formset = QueryFormSet(instance=view)
+            queryformset = QueryFormSet(instance=view, prefix='queries')
+            mappingformset = TagMappingFormSet(instance=view, prefix='mappings')
     else:
-        form = ViewForm(instance=view)
-        formset = QueryFormSet(instance=view)
+        form = ViewForm(instance=view, prefix='view')
+        queryformset = QueryFormSet(instance=view, prefix='queries')
+        mappingformset = TagMappingFormSet(instance=view, prefix='mappings')
         
-        popular_tags = Tag.objects.values('key').annotate(key_count=Count('key')).filter(key_count__gt=2).order_by('key')
-
+    popular_tags = Tag.objects.values('key').annotate(key_count=Count('key')).filter(key_count__gt=2).order_by('key')
     tag_help = settings.TAG_HELP_LINKS
 
     return render_to_response('resources/view_edit.html', RequestContext(request, locals()))
 
+@login_required
 def index(request):
     
-    featured_views = View.objects.all() #filter(featured=True)
+    featured_views = View.objects.filter(featured=True)
     featured_resources = Resource.objects.filter(featured=True)
     latest_resources = Resource.objects.order_by('-creation_date')[:15]
     
@@ -291,3 +246,53 @@ def rename_tag(request):
     else:
         return redirect_to(request, reverse('resources_tag_key', kwargs={'key':urlquote(key)}))
                
+@login_required
+def view_json(request, name=None):
+    from django.utils import simplejson as json
+    from django.core import serializers
+    from django.db.models.query import QuerySet
+    from django.core.serializers.json import DateTimeAwareJSONEncoder
+
+    view = get_object_or_404(View, shortname=name)    
+    resources = view.get_resources().filter(tags__key='location')
+    
+    class GeoJSONEncoder(DateTimeAwareJSONEncoder):
+        """ simplejson.JSONEncoder extension: handle querysets """
+        def default(self, obj):
+            if isinstance(obj, QuerySet):
+                return {
+                        'type': 'FeatureCollection',
+                        'features': list(obj)
+                }
+            if isinstance(obj, Resource):
+                location = obj.tags.filter(key='location').values_list('value', flat=True)
+                if len(location) > 0:
+                    lonlat = location[0].partition(':')[2].split(',')
+                    json = {
+                            'type':'Feature',
+                            'properties': {
+                                'title': obj.name,
+                                'url': reverse('resources_resource', kwargs={'key':obj.shortname}),
+                                'tags': {}
+                            }
+                    }
+                    
+                    for tag in obj.tags.all():
+                        json['properties']['tags'][tag.key] = tag.value
+                        
+                    try:
+                        json['geometry'] = {
+                                'type': 'Point', 
+                                'coordinates': [float(lonlat[0]),float(lonlat[1])]
+                            }
+                    except:
+                        # fail silently if something geos wrong with extracting coords
+                        pass
+                    return json
+                return None
+            return super(GeoJSONEncoder, self).default(obj)
+
+    
+    str = json.dumps(resources, cls=GeoJSONEncoder, indent=2)
+    
+    return HttpResponse(str, mimetype='application/json') #
