@@ -419,7 +419,7 @@ def runserver():
 
 def dump_data(filename='testdata.json'):
     "Dump the applications data into a fixture using manage.py dumpdata"
-    local(os.path.join(env.ve_prefix,'python manage.py dumpdata --indent=2 > fixtures\\%s' % filename))
+    local(os.path.join(env.ve_prefix,'python manage.py dumpdata --indent=2 > fixtures\\%s' % filename), capture=False)
 
 def dump_db(db_name=env.project_name):
     require('hosts', provided_by = [staging])   
@@ -444,13 +444,13 @@ def fetchdata(appname):
     with settings(warn_only=True):
         run('mkdir %s%s/fixtures' % (env.sites_home, env.project_name))
         run('rm %s%s/fixtures/%s.json' % (env.sites_home, env.project_name, appname))
-    run('cd %s%s/current-release; ../../env/bin/python manage.py dumpdata %s > ../../data/%s.json' % (env.sites_home, env.project_name, appname, appname))
+    run('cd %s%s/current-release; ../../env/bin/python manage.py dumpdata %s > ../../fixtures/%s.json' % (env.sites_home, env.project_name, appname, appname))
     with settings(warn_only=True):
-        local('mkdir data')
-    get('%s%s/fixtures/%s.json' % (env.sites_home, env.project_name, appname), 'data/%s.json' % appname)
+        local('mkdir fixtures')
+    get('%s%s/fixtures/%s.json' % (env.sites_home, env.project_name, appname), 'fixtures/%s.json' % appname)
 
 def loaddata(appname):
-    local(os.path.join(env.ve_prefix,'python manage.py loaddata fixtures/%s.json' % appname))
+    local(os.path.join(env.ve_prefix,'python manage.py loaddata fixtures/%s.json' % appname), capture=False)
 # ---------------------------------------------------------
 # helper functions
 # ---------------------------------------------------------
