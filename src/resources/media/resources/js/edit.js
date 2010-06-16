@@ -212,8 +212,9 @@ jQuery(function($) {
     });  
     
     $('.popular-tags').change(function(ev) {
-        $('.edit-table tr.extra td.edit-key input[type=text]').val($(this).val());
+    	var $table = $(this).parents('.edit-table')
+        $table.find('tr.extra td.edit-key input[type=text]').val($(this).val());
         ev.preventDefault();
-        $('.edit-table tr.extra td.edit-value textarea')[0].focus();
+        $table.find('tr.extra td.edit-value textarea')[0].focus();
     });  
 });
