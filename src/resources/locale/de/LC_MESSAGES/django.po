@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-16 16:25+0200\n"
+"POT-Creation-Date: 2010-05-27 14:52+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,158 +16,295 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: .\models.py:10 .\models.py:45
+#: .\models.py:11
 msgid "(Will be part of the resources' URL)"
 msgstr "(Wird Teil der URL)"
 
-#: .\models.py:36
+#: .\models.py:46
+msgid "(Will be part of the views' URL)"
+msgstr "(Wird Teil der URL)"
+
+#: .\models.py:96
+msgid "All tags"
+msgstr "Alle Tags"
+
+#: .\models.py:99
 msgid "is present"
 msgstr "ist gesetzt."
 
-#: .\models.py:37
-msgid "equals"
-msgstr "ist gleich"
-
-#: .\models.py:38
+#: .\models.py:101
 msgid "begins with"
 msgstr "beginnt mit"
 
-#: .\models.py:63
-msgid "AND"
-msgstr "UND"
-
-#: .\models.py:63
-msgid "OR"
-msgstr "ODER"
-
-#: .\views.py:28 .\templates\resources\list.html.py:4
-#: .\templates\resources\map.html.py:4
-msgid "List of resources"
-msgstr "Alle Ressourcen"
-
-#: .\views.py:32
-msgid "Resources with Location"
-msgstr "Ressourcen mit Ortsangabe"
-
-#: .\views.py:33
-msgid ""
-"Missing something? Add an <code>address</code> or <code>location</code> tag "
-"to make a resource show up here."
+#: .\models.py:105
+msgid "and"
 msgstr ""
-"Fehlt etwas? Ergänze den <code>address</code> oder <code>location</code> "
-"Tag, damit eine Ressource hier aufscheint."
 
-#: .\views.py:35
-msgid "Online Resources"
-msgstr "Online Ressourcen"
-
-#: .\views.py:36
-msgid ""
-"Missing something? Add a <code>website</code> tag to make a resource show up "
-"here."
+#: .\models.py:106
+msgid "or"
 msgstr ""
-"Fehlt etwas? Ergänze den <code>website</code> Tag, damit eine Ressource hier "
-"aufscheint."
 
-#: .\views.py:38
-msgid "Other Resources"
-msgstr "Andere Ressourcen"
+#: .\models.py:147
+msgid "Default Icon"
+msgstr "Standard-Icon"
 
-#: .\views.py:39
-msgid "All resources that have neither a location nor a website."
-msgstr "Ressourcen die weder Ortsangabe noch Website haben."
+#: .\models.py:148
+msgid "Red"
+msgstr "Rot"
 
-#: .\views.py:41
-msgid "Recently Added"
-msgstr "Neueste Ressourcen"
-
-#: .\views.py:49
-#, fuzzy
-msgid "Map of resources"
-msgstr "Alle Ressourcen"
-
-#: .\views.py:53
-msgid "Resources missing on the Map"
-msgstr "Auf der Karte nicht angezeigt:"
-
-#: .\views.py:54
-msgid ""
-"These resources have an <code>address</code>, but no <code>location</code> "
-"tag set."
-msgstr ""
-"Diese Ressourcen haben den <code>address</code> Tag, aber nicht den <code>location</code> "
-"Tag gesetzt."
-
-#: .\templates\resources\edit.html.py:50
+#: .\templates\resources\edit.html.py:32
 msgid "New resource"
 msgstr "Neue Ressource"
 
-#: .\templates\resources\edit.html.py:85
+#: .\templates\resources\edit.html.py:56
+#: .\templates\resources\view_edit.html.py:59
+#: .\templates\resources\view_edit.html.py:99
+msgid "Common Tags:"
+msgstr "Häufige Tags:"
+
+#: .\templates\resources\edit.html.py:78
+#: .\templates\resources\view_edit.html.py:122
 msgid "Help:"
 msgstr "Hilfe:"
 
-#: .\templates\resources\edit.html.py:93
+#: .\templates\resources\edit.html.py:86
+#: .\templates\resources\view_edit.html.py:130
 msgid "Save"
 msgstr "Speichern"
 
-#: .\templates\resources\edit.html.py:94
+#: .\templates\resources\edit.html.py:87
+#: .\templates\resources\view_edit.html.py:131
 msgid "Save and continue"
 msgstr "Speichern &amp; weiter bearbeiten"
 
-#: .\templates\resources\edit.html.py:97 .\templates\resources\edit.html.py:99
+#: .\templates\resources\edit.html.py:90 .\templates\resources\edit.html.py:92
+#: .\templates\resources\view_edit.html.py:134
+#: .\templates\resources\view_edit.html.py:136
 msgid "Cancel"
 msgstr "Abbrechen"
 
-#: .\templates\resources\list.html.py:12 .\templates\resources\map.html.py:20
-#: .\templates\resources\resource.html.py:64
+#: .\templates\resources\edit.html.py:99
+msgid "Look up from address"
+msgstr "Adresse nachschlagen"
+
+#: .\templates\resources\edit.html.py:105
+msgid "Add location tag for this address"
+msgstr "Location für diese Adresse hinzufügen"
+
+#: .\templates\resources\index.html.py:4
+#: .\templates\resources\includes\actions.html.py:3
+msgid "Resources"
+msgstr "Ressourcen"
+
+#: .\templates\resources\index.html.py:9
+msgid "Vivir Bien: Resources for non-capitalist lifestyles"
+msgstr "Vivir Bien: Ressourcen für nichtkapitalistische Lebensweisen"
+
+#: .\templates\resources\index.html.py:12
+msgid ""
+"Vivir Bien compiles initiatives and structures that are outside the scope of "
+"profit-based capitalist logic. Within this broad scope, Vivir Bien provides "
+"a platform for activities based on different theoretical concepts and labels."
+msgstr ""
+"Vivir Bien erfasst Initiativen und Strukturen, die abseits kapitalistischer "
+"Gewinnlogik existieren. Aktivitäten mit verschiedenen theoretischen "
+"Hintergründen und Labels bekommen hier eine Plattform."
+
+#: .\templates\resources\index.html.py:14
+msgid "Read more in the Wiki..."
+msgstr "Mehr im Wiki..."
+
+#: .\templates\resources\index.html.py:17
+msgid "Featured Views"
+msgstr "Empfohlene Views"
+
+#: .\templates\resources\index.html.py:23
+msgid "all views..."
+msgstr "Alle Views..."
+
+#: .\templates\resources\index.html.py:28
+msgid "Featured Resources"
+msgstr "Empfohlene Ressourcen"
+
+#: .\templates\resources\index.html.py:34
+#: .\templates\resources\index.html.py:45
+msgid "all resources..."
+msgstr "Alle Ressourcen..."
+
+#: .\templates\resources\index.html.py:39
+msgid "Newest Resources"
+msgstr "Neueste Ressourcen"
+
+#: .\templates\resources\resource.html.py:63
+#: .\templates\resources\resources_by_tag.html.py:4
+#: .\templates\resources\resources_by_tag.html.py:8
+#: .\templates\resources\resources_by_tag.html.py:21
+#: .\templates\resources\view_list.html.py:12
+#: .\templates\resources\view_map.html.py:24
 msgid "Resources with tag:"
 msgstr "Ressourcen mit Tag:"
 
-#: .\templates\resources\resource.html.py:59
-msgid "Documentation for key:"
-msgstr "Dokumentation für Key:"
-
-#: .\templates\resources\resource.html.py:60
-msgid "Resources with key:"
-msgstr "Ressourcen mit Key:"
-
-#: .\templates\resources\resource.html.py:72
+#: .\templates\resources\resource.html.py:71
 msgid "Edit"
 msgstr "Bearbeiten"
 
-#: .\templates\resources\resource.html.py:76
+#: .\templates\resources\resource.html.py:75
 msgid "Comments for"
 msgstr "Kommentare zu"
 
-#: .\templates\resources\resource.html.py:81
+#: .\templates\resources\resource.html.py:80
 msgid "Comment by"
 msgstr "Kommentar von"
 
-#: .\templates\resources\resource.html.py:83
+#: .\templates\resources\resource.html.py:82
 msgid "Reply"
 msgstr "Antworten"
 
-#: .\templates\resources\resource.html.py:89
+#: .\templates\resources\resource.html.py:88
 msgid "New Comment"
 msgstr "Neuer Kommentar"
 
-#: .\templates\resources\includes\actions.html.py:3
-msgid "List"
-msgstr "Liste"
+#: .\templates\resources\resources_by_tag.html.py:11
+msgid "Wiki Page for Key:"
+msgstr "Wikiseite für Key:"
 
+#: .\templates\resources\tag.html.py:4 .\templates\resources\tag.html.py:8
+msgid "Tag:"
+msgstr "Tag:"
+
+#: .\templates\resources\tags.html.py:4
+msgid "List of tags"
+msgstr "Liste von Tags"
+
+#: .\templates\resources\tags.html.py:9
+msgid "All Tags"
+msgstr "Alle Tags"
+
+#: .\templates\resources\view.html.py:25
+msgid "This view shows resources with tags:"
+msgstr "Dieser View zeigt Ressourcen mit den Tags:"
+
+#: .\templates\resources\view.html.py:31
+msgid "Map Data Loading..."
+msgstr "Kartendaten werden geladen..."
+
+#: .\templates\resources\view_edit.html.py:32
+msgid "New view"
+msgstr "Neuer View"
+
+#: .\templates\resources\view_edit.html.py:41
+msgid "Filters"
+msgstr "Filter"
+
+#: .\templates\resources\view_edit.html.py:42
+msgid "Resources which meet these criteria will be listed in the view."
+msgstr "Ressourcen die diesen Kriterien entsprechen werden im View angezeigt."
+
+#: .\templates\resources\view_edit.html.py:81
+msgid "Mappings"
+msgstr "Mappings"
+
+#: .\templates\resources\view_edit.html.py:82
+msgid "Mappings determine the appearance of the resource."
+msgstr "Mappings bestimmen das Erscheinungsbild einer Ressource."
+
+#: .\templates\resources\view_list.html.py:4
+#: .\templates\resources\view_map.html.py:4
+msgid "List of resources"
+msgstr "Liste der Ressourcen"
+
+#: .\templates\resources\views.html.py:4
+msgid "List of views"
+msgstr "Liste von Views"
+
+#: .\templates\resources\views.html.py:9
 #: .\templates\resources\includes\actions.html.py:4
-msgid "Map"
-msgstr "Karte"
+msgid "Views"
+msgstr "Views"
+
+#: .\templates\resources\includes\actions.html.py:5
+msgid "Tags"
+msgstr "Tags"
 
 #: .\templates\resources\includes\actions.html.py:6
 msgid "Add resource"
 msgstr "Neue Ressource"
 
+#: .\templates\resources\includes\actions.html.py:7
+msgid "Add view"
+msgstr "Neuer View"
+
+#: .\templates\resources\includes\tag_actions.html.py:2
+msgid "Documentation for key:"
+msgstr "Dokumentation für Key:"
+
+#: .\templates\resources\includes\tag_actions.html.py:3
+msgid "Resources with key:"
+msgstr "Ressourcen mit Key:"
+
+#: .\templates\resources\includes\view_actions.html.py:3
+msgid "Edit view"
+msgstr "View bearbeiten"
+
+#~ msgid "equals"
+#~ msgstr "ist gleich"
+
+#~ msgid "AND"
+#~ msgstr "und"
+
+#~ msgid "OR"
+#~ msgstr "oder"
+
+#~ msgid "Resources with Location"
+#~ msgstr "Ressourcen mit Ortsangabe"
+
+#~ msgid ""
+#~ "Missing something? Add an <code>address</code> or <code>location</code> "
+#~ "tag to make a resource show up here."
+#~ msgstr ""
+#~ "Fehlt etwas? Ergänze den <code>address</code> oder <code>location</code> "
+#~ "Tag, damit eine Ressource hier aufscheint."
+
+#~ msgid "Online Resources"
+#~ msgstr "Online Ressourcen"
+
+#~ msgid ""
+#~ "Missing something? Add a <code>website</code> tag to make a resource show "
+#~ "up here."
+#~ msgstr ""
+#~ "Fehlt etwas? Ergänze den <code>website</code> Tag, damit eine Ressource "
+#~ "hier aufscheint."
+
+#~ msgid "Other Resources"
+#~ msgstr "Andere Ressourcen"
+
+#~ msgid "All resources that have neither a location nor a website."
+#~ msgstr "Ressourcen die weder Ortsangabe noch Website haben."
+
+#~ msgid "Recently Added"
+#~ msgstr "Neueste Ressourcen"
+
+#~ msgid "Map of resources"
+#~ msgstr "Karte der Ressourcen"
+
+#~ msgid "Resources missing on the Map"
+#~ msgstr "Auf der Karte nicht angezeigt:"
+
+#~ msgid ""
+#~ "These resources have an <code>address</code>, but no <code>location</"
+#~ "code> tag set."
+#~ msgstr ""
+#~ "Diese Ressourcen haben den <code>address</code> Tag, aber nicht den "
+#~ "<code>location</code> Tag gesetzt."
+
+#~ msgid "List"
+#~ msgstr "Liste"
+
+#~ msgid "Map"
+#~ msgstr "Karte"
+
 #~ msgid "Submit"
 #~ msgstr "Speichern"
-
-#~ msgid "All resources"
-#~ msgstr "Alle Ressourcen"
 
 #~ msgid "Edit this resource"
 #~ msgstr "Ressource bearbeiten"

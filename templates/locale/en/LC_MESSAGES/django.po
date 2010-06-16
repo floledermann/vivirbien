@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-16 16:25+0200\n"
+"POT-Creation-Date: 2010-05-27 14:52+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,31 +16,31 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: .\page_base.html.py:29
+#: .\page_base.html.py:28
 msgid "Resources for non-capitalist lifestyles"
 msgstr ""
 
-#: .\includes\navi.html.py:2
+#: .\includes\navi.html.py:3
 msgid "Resources"
 msgstr ""
 
-#: .\includes\navi.html.py:7
+#: .\includes\navi.html.py:8
 msgid "Welcome,"
 msgstr ""
 
-#: .\includes\navi.html.py:8
+#: .\includes\navi.html.py:9
 msgid "Not logged in"
 msgstr ""
 
-#: .\includes\navi.html.py:9 .\invitation\invitation_form.html.py:6
+#: .\includes\navi.html.py:10 .\invitation\invitation_form.html.py:6
 msgid "Invite a friend"
 msgstr ""
 
-#: .\includes\navi.html.py:10
+#: .\includes\navi.html.py:11
 msgid "Log out"
 msgstr ""
 
-#: .\includes\navi.html.py:12
+#: .\includes\navi.html.py:13
 msgid "language:"
 msgstr ""
 
