@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-05-27 14:52+0200\n"
+"POT-Creation-Date: 2010-06-16 14:15+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -116,11 +116,11 @@ msgstr "Mehr im Wiki..."
 
 #: .\templates\resources\index.html.py:17
 msgid "Featured Views"
-msgstr "Empfohlene Views"
+msgstr "Empfohlene Ansichten"
 
 #: .\templates\resources\index.html.py:23
 msgid "all views..."
-msgstr "Alle Views..."
+msgstr "Alle Ansichten..."
 
 #: .\templates\resources\index.html.py:28
 msgid "Featured Resources"
@@ -134,6 +134,10 @@ msgstr "Alle Ressourcen..."
 #: .\templates\resources\index.html.py:39
 msgid "Newest Resources"
 msgstr "Neueste Ressourcen"
+
+#: .\templates\resources\index.html.py:49
+msgid "Programmers wanted!"
+msgstr ""
 
 #: .\templates\resources\resource.html.py:63
 #: .\templates\resources\resources_by_tag.html.py:4
@@ -182,7 +186,7 @@ msgstr "Alle Tags"
 
 #: .\templates\resources\view.html.py:25
 msgid "This view shows resources with tags:"
-msgstr "Dieser View zeigt Ressourcen mit den Tags:"
+msgstr "Diese Ansicht zeigt Ressourcen mit den Tags:"
 
 #: .\templates\resources\view.html.py:31
 msgid "Map Data Loading..."
@@ -190,7 +194,7 @@ msgstr "Kartendaten werden geladen..."
 
 #: .\templates\resources\view_edit.html.py:32
 msgid "New view"
-msgstr "Neuer View"
+msgstr "Neue Ansicht"
 
 #: .\templates\resources\view_edit.html.py:41
 msgid "Filters"
@@ -198,7 +202,9 @@ msgstr "Filter"
 
 #: .\templates\resources\view_edit.html.py:42
 msgid "Resources which meet these criteria will be listed in the view."
-msgstr "Ressourcen die diesen Kriterien entsprechen werden im View angezeigt."
+msgstr ""
+"Ressourcen die diesen Kriterien entsprechen werden in dieser Ansicht "
+"angezeigt."
 
 #: .\templates\resources\view_edit.html.py:81
 msgid "Mappings"
@@ -206,7 +212,7 @@ msgstr "Mappings"
 
 #: .\templates\resources\view_edit.html.py:82
 msgid "Mappings determine the appearance of the resource."
-msgstr "Mappings bestimmen das Erscheinungsbild einer Ressource."
+msgstr "Mappings bestimmen das Erscheinungsbild einer Ressource in der Ansicht."
 
 #: .\templates\resources\view_list.html.py:4
 #: .\templates\resources\view_map.html.py:4
@@ -215,12 +221,12 @@ msgstr "Liste der Ressourcen"
 
 #: .\templates\resources\views.html.py:4
 msgid "List of views"
-msgstr "Liste von Views"
+msgstr "Liste von Ansichten"
 
 #: .\templates\resources\views.html.py:9
 #: .\templates\resources\includes\actions.html.py:4
 msgid "Views"
-msgstr "Views"
+msgstr "Ansichten"
 
 #: .\templates\resources\includes\actions.html.py:5
 msgid "Tags"
@@ -232,7 +238,7 @@ msgstr "Neue Ressource"
 
 #: .\templates\resources\includes\actions.html.py:7
 msgid "Add view"
-msgstr "Neuer View"
+msgstr "Neue Ansicht"
 
 #: .\templates\resources\includes\tag_actions.html.py:2
 msgid "Documentation for key:"
@@ -244,7 +250,7 @@ msgstr "Ressourcen mit Key:"
 
 #: .\templates\resources\includes\view_actions.html.py:3
 msgid "Edit view"
-msgstr "View bearbeiten"
+msgstr "Diese Ansicht bearbeiten"
 
 #~ msgid "equals"
 #~ msgstr "ist gleich"
