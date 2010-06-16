@@ -1,3 +1,58 @@
+
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, code,
+del, dfn, em, img, q, dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-weight: inherit;
+  font-style: inherit;
+  font-size: 100%;
+  font-family: inherit;
+  vertical-align: baseline;
+}
+
+p, div, span {
+    cursor: default;
+}
+
+a, a:active, a:visited, a:focus {
+    color: #3333cc;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    outline: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+html { font-size:100.01%; }
+
+body { 
+  line-height: 1.5; 
+}
+
+/* Tables still need 'cellspacing="0"' in the markup. */
+table { border-collapse: collapse; border-spacing: 0; }
+caption, th, td { text-align: left; font-weight: normal; }
+table, td, th { vertical-align: top; }
+
+blockquote:before, blockquote:after, q:before, q:after { content: ""; }
+blockquote, q { quotes: "" ""; }
+
+a img { border: none; }
+
+ul { list-style-type: none; }
+
+.clear { clear: both; }
+
+
+
 html, body {
     height: 100%;
 }
@@ -95,6 +150,19 @@ ul#messages {
     background-color: #eeeeee;
 }
 
+.view-page .map {
+    display: none;
+    float: right;
+    width: 600px;
+    margin: 0 0 5px 5px;
+}
+
+.view-page .map-loading {
+    float: right;
+    width: 600px;
+    text-align: right;
+}
+
 .map .olControlAttribution {
     bottom: 1px;
     right: 1px;
@@ -114,3 +182,25 @@ ul#messages {
 .queries-edit-table .first .edit-boolean {
     visibility: hidden;
 }
+
+.listbox {
+    float: left;
+    position: relative;
+    width: 200px;
+    padding: 5px;
+    margin-right: 5px;
+}
+
+.listbox a.more {
+    margin-top: 10px;
+    float: right;
+}
+
+.add-actions {
+    float: right;
+}
+
+.edit-order input {
+    width: 50px;
+}
+

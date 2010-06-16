@@ -1,6 +1,4 @@
 {% load texttools i18n %}
 <div class="actions">
-<a href="{% url resources_view_list name=view.shortname %}">{% trans "List" %}</a>
-| <a href="{% url resources_view_map name=view.shortname %}">{% trans "Map" %}</a>
-| <a href="{% url resources_edit_view name=view.shortname %}">{% trans "Edit" %}</a>
+<a href="{% url resources_edit_view name=view.shortname %}">{% trans "Edit view" %}</a>
 </div>

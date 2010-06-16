@@ -37,10 +37,12 @@ var MEDIA_URL = "{{ MEDIA_URL}}";
 {{ form.as_table }}
 </table>
 
-{% if formset %}
-{{ formset.management_form }}
+{% if queryformset %}
+<h2>{% trans "Filters" %}</h2>
+<div class="help">{% trans "Resources which meet these criteria will be listed in the view." %}</div>
+{{ queryformset.management_form }}
 <table class="edit-table queries-edit-table">
-{% for form in formset.forms %}
+{% for form in queryformset.forms %}
 {% if forloop.first %}
 <tr>
 {% for field in form.visible_fields %}
@@ -53,7 +55,47 @@ var MEDIA_URL = "{{ MEDIA_URL}}";
         <td class="edit-{{field.name}}">{{field.errors}}{{ field }}
         {% if forloop.parentloop.last %}
         {% ifequal field.name "key" %}
-        <select class="popular-tags">
+        <br /><select class="popular-tags">
+<option value="">{% trans "Common Tags:" %}</option>
+<option value="">--------------</option>
+{% for tag in popular_tags %}
+<option value="{{ tag.key }}">{{ tag.key }}</option>
+{#{% include "resources/includes/tag_actions.html" %}#}
+{% endfor %}
+</select>
+{% endifequal %}
+        {% endif %}
+        </td>
+    {% endfor %}
+    <td class="hidden">
+    {% for field in form.hidden_fields %}
+        {% if field.is_hidden %} {{ field }} {% endif %}
+    {% endfor %}
+    </td>
+</tr>
+{% endfor %}
+</table>
+{% endif %}
+
+{% if mappingformset %}
+<h2>{% trans "Mappings" %}</h2>
+<div class="help">{% trans "Mappings determine the appearance of the resource." %}</div>
+{{ mappingformset.management_form }}
+<table class="edit-table mappings-edit-table">
+{% for form in mappingformset.forms %}
+{% if forloop.first %}
+<tr>
+{% for field in form.visible_fields %}
+        <th>{{ field.label }}</th>
+{% endfor %}
+</tr>
+{% endif %}
+<tr class="{% if forloop.first %}first{% endif %}{% if forloop.last %} extra{% endif %}">
+    {% for field in form.visible_fields %}
+        <td class="edit-{{field.name}}">{{field.errors}}{{ field }}
+        {% if forloop.parentloop.last %}
+        {% ifequal field.name "key" %}
+        <br /><select class="popular-tags">
 <option value="">{% trans "Common Tags:" %}</option>
 <option value="">--------------</option>
 {% for tag in popular_tags %}
