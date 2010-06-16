@@ -7,7 +7,7 @@
 {% include "resources/includes/actions.html" %}
 <h1>{% trans "Tag:" %}<a href="{% url resources_tag_key key=key %}">{{key}}</a> = {% if value %}{{ value }}{% else %}*{% endif %}</h1>
 
-{% if user.is_staff %}
+{% if perms.resources.batch_rename_tags %}
 <form class="action" method="post" action="{% url resources_rename_tag %}">
 Rename <em>all</em> such tags to:<br />
 <input type="hidden" name="key" value="{{ key }}" />

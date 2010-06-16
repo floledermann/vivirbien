@@ -6,7 +6,7 @@
 </div>
 <div class="user-actions">
 <span class="username">{% if user.is_active %}{% trans "Welcome," %} {{ user.username }}
-{% else %}{% trans "Not logged in" %}{% endif %}</span>
+{% else %}{% trans "Not logged in" %} | <a href="/accounts/login/">{% trans "Log in" %}</a>{% endif %}</span>
 {% if user.is_active %}| <a class="{% active request "^/accounts/invite/" %}" href="/accounts/invite/">{% trans "Invite a friend" %}</a>{% endif %}
 {% if user.is_active %}| <a href="{% url auth_logout %}">{% trans "Log out" %}</a>{% endif %}
 | <form class="language-switcher" action="/i18n/setlang/" method="post">

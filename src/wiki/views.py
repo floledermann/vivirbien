@@ -75,7 +75,6 @@ def get_url(urlname, group=None, args=None, kw=None, bridge=None):
     else:
         return bridge.reverse(urlname, group, kwargs=kw)
         
-
 class ArticleEditLock(object):
     """ A soft lock to edting an article.
     """
@@ -125,7 +124,6 @@ def has_write_perm(user, group, is_member):
     return False
 
 
-@login_required
 def article_list(request,
                  group_slug=None, bridge=None,
                  article_qs=ALL_ARTICLES,
@@ -173,7 +171,6 @@ def article_list(request,
     return HttpResponseNotAllowed(['GET'])
 
 
-@login_required
 def view_article(request, title,
                  ArticleClass=Article, # to create an unsaved instance
                  group_slug=None, bridge=None,
@@ -533,7 +530,6 @@ def revert_to_revision(request, title,
     return HttpResponseNotAllowed(['POST'])
 
 
-@login_required
 def search_article(request,
                    group_slug=None, bridge=None,
                    article_qs=ALL_ARTICLES,

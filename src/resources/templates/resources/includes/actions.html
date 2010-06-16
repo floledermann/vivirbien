@@ -3,7 +3,9 @@
 <a href="{% url resources_index %}">{% trans "Resources" %}</a>
 | <a href="{% url resources_views %}">{% trans "Views" %}</a>
 | <a href="{% url resources_tags %}">{% trans "Tags" %}</a>
-<span class="add-actions"><a href="{% url resources_new %}">{% trans "Add resource" %}</a>
-| <a href="{% url resources_new_view %}">{% trans "Add view" %}</a></span>
+<span class="add-actions">
+{% if perms.resources.add_resource %}<a href="{% url resources_new %}">{% trans "Add resource" %}</a> | {% endif %}
+{% if perms.resources.add_view %}<a href="{% url resources_new_view %}">{% trans "Add view" %}</a>{% endif %}
+</span>
 
 </div>

@@ -1,6 +1,7 @@
 
 from django.template import RequestContext
-from django.contrib.auth.decorators import login_requiredfrom django.views.decorators.cache import cache_page
+from django.contrib.auth.decorators import login_required, permission_required
+from django.views.decorators.cache import cache_page
 from django.views.decorators.vary import vary_on_headers
 from django.views.generic.simple import redirect_to
 from django.shortcuts import render_to_response, get_object_or_404
@@ -17,12 +18,11 @@ from resources.models import *
 from resources.forms import *
 from resources import settings
 
-@login_required
-#@vary_on_headers('Accept-Language','Cookie')
 def resource(request, key):
     resource = get_object_or_404(Resource, shortname=key)
     return render_to_response('resources/resource.html', RequestContext(request, locals()))
 
+#@permission_required('resources.change_resource')
 @login_required
 def edit_resource(request, key=None):
     resource = None
@@ -30,7 +30,7 @@ def edit_resource(request, key=None):
         resource = get_object_or_404(Resource, shortname=key)
     
     if request.method == "POST":
-        form = ResourceForm(request.POST, request.FILES, instance=resource)
+        form = ResourceForm(request.user, request.POST, request.FILES, instance=resource)
         if form.is_valid():
             
             if not resource:
@@ -41,7 +41,7 @@ def edit_resource(request, key=None):
             else:
                 form.save()
                 
-            formset = TagFormSet(request.POST, request.FILES, instance=resource)
+            formset = TagFormSet(request.user, request.POST, request.FILES, instance=resource)
             if formset.is_valid():
                 formset.saved_forms = []
                 formset.save_existing_objects()
@@ -54,10 +54,10 @@ def edit_resource(request, key=None):
                 else:
                     return redirect_to(request, reverse('resources_resource', kwargs={'key':resource.shortname}))               
         else:
-            formset = TagFormSet(instance=resource)
+            formset = TagFormSet(request.user, instance=resource)
     else:
-        form = ResourceForm(instance=resource)
-        formset = TagFormSet(instance=resource)
+        form = ResourceForm(request.user, instance=resource)
+        formset = TagFormSet(request.user, instance=resource)
         
         popular_tags = Tag.objects.values('key').annotate(key_count=Count('key')).filter(key_count__gt=2).order_by('key')
 
@@ -65,11 +65,13 @@ def edit_resource(request, key=None):
 
     return render_to_response('resources/edit.html', RequestContext(request, locals()))
 
+
 def all_resources(request):
     resources = Resource.objects.all()
     view = {'name': 'All Resources'}
     return render_to_response('resources/view.html', RequestContext(request, locals()))
     
+
 def view(request, name):
     view = get_object_or_404(View, shortname=name)
     
@@ -100,10 +102,12 @@ def view(request, name):
     
     return render_to_response('resources/view.html', RequestContext(request, locals()))
     
+
 def views(request):
     views = View.objects.all()
     return render_to_response('resources/views.html', RequestContext(request, locals()))
 
+#@permission_required('resources.change_view')
 @login_required
 def edit_view(request, name=None):
     view = None
@@ -111,7 +115,7 @@ def edit_view(request, name=None):
         view = get_object_or_404(View, shortname=name)
     
     if request.method == "POST":
-        form = ViewForm(request.POST, instance=view, prefix='view')
+        form = ViewForm(request.user, request.POST, instance=view, prefix='view')
         if form.is_valid():
             
             if not view:
@@ -151,7 +155,7 @@ def edit_view(request, name=None):
             queryformset = QueryFormSet(instance=view, prefix='queries')
             mappingformset = TagMappingFormSet(instance=view, prefix='mappings')
     else:
-        form = ViewForm(instance=view, prefix='view')
+        form = ViewForm(request.user, instance=view, prefix='view')
         queryformset = QueryFormSet(instance=view, prefix='queries')
         mappingformset = TagMappingFormSet(instance=view, prefix='mappings')
         
@@ -160,7 +164,7 @@ def edit_view(request, name=None):
 
     return render_to_response('resources/view_edit.html', RequestContext(request, locals()))
 
-@login_required
+
 def index(request):
     
     featured_views = View.objects.filter(featured=True)
@@ -170,13 +174,11 @@ def index(request):
     return render_to_response('resources/index.html', RequestContext(request, locals()))
 
 
-
 def tags(request):
     tags = Tag.objects.values('key').annotate(key_count=Count('key')).order_by('key')
     return render_to_response('resources/tags.html', RequestContext(request, locals()))
-    
-    
-@login_required
+     
+
 def tag_choices(request, key=None):
     from django.utils import simplejson as json
     from django.core.serializers.json import DateTimeAwareJSONEncoder
@@ -187,7 +189,7 @@ def tag_choices(request, key=None):
     
     return HttpResponse(str, mimetype='application/json') #
     
-@login_required
+
 def resource_choices(request, key=None):
     from django.utils import simplejson as json
     from django.core.serializers.json import DateTimeAwareJSONEncoder
@@ -197,9 +199,8 @@ def resource_choices(request, key=None):
     str = json.dumps({'choices':list(choices)}, cls=DateTimeAwareJSONEncoder, indent=2)
     
     return HttpResponse(str, mimetype='application/json') #
-    
-     
-@login_required
+
+
 def tag(request, key, value=None):
     
     tags = Tag.objects.filter(key=key)
@@ -211,7 +212,6 @@ def tag(request, key, value=None):
     return render_to_response('resources/tag.html', RequestContext(request, locals()))
 
 
-@login_required
 def resources_by_tag(request, key, value=None):
     
     tags = Tag.objects.filter(key=key)
@@ -222,7 +222,7 @@ def resources_by_tag(request, key, value=None):
     
     return render_to_response('resources/resources_by_tag.html', RequestContext(request, locals()))
 
-@login_required
+@permission_required('resources.batch_rename_tags')
 def rename_tag(request):
     from django.utils.http import urlquote
     
@@ -245,8 +245,8 @@ def rename_tag(request):
         return redirect_to(request, reverse('resources_tag', kwargs={'key':urlquote(key), 'value': urlquote(value)}))
     else:
         return redirect_to(request, reverse('resources_tag_key', kwargs={'key':urlquote(key)}))
+
                
-@login_required
 def view_json(request, name=None):
     from django.utils import simplejson as json
     from django.core import serializers

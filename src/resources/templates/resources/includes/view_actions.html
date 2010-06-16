@@ -1,4 +1,6 @@
 {% load texttools i18n %}
 <div class="actions">
+{% if perms.resources.edit_view %}
 <a href="{% url resources_edit_view name=view.shortname %}">{% trans "Edit view" %}</a>
+{% endif %}
 </div>

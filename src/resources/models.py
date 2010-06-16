@@ -17,6 +17,9 @@ class Resource(models.Model):
     
     class Meta:
         ordering = ['name']
+        permissions = (
+            ('feature_resource', "Mark resource as featured"),
+        )
 
     def __unicode__(self):
         return self.name
@@ -34,6 +37,9 @@ class Tag(models.Model):
 
     class Meta:
         ordering = ['creation_date']
+        permissions = (
+            ('batch_rename_tags', "Batch rename tags"),
+        )
     
     def get_tag(self):
         part = self.value.partition(':')
@@ -56,6 +62,9 @@ class View(models.Model):
 
     class Meta:
         ordering = ['name']
+        permissions = (
+            ('feature_view', "Mark view as featured"),
+        )
 
     def __unicode__(self):
         return self.name

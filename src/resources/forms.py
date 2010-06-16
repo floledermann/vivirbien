@@ -22,6 +22,12 @@ from resources.models import *
 
 class ResourceForm(ModelForm):
     
+    def __init__(self, user, *args, **kwargs):
+        super(ResourceForm, self).__init__(*args, **kwargs)
+        
+        if not user.has_perm('resources.feature_resource'):
+            del self.fields['featured']
+        
     #key = forms.CharField(widget=AutoCompleteWidget('keys', force_selection=False))
     
     class Meta:
@@ -33,14 +39,27 @@ def tagformcallback(field):
         return forms.CharField(widget=AutoCompleteWidget('keys', force_selection=False))
     return field.formfield()
 
-TagFormSet = inlineformset_factory(Resource, Tag,
+_TagFormSet = inlineformset_factory(Resource, Tag,
                                    exclude=('creator',),
                                    extra=1,
                                    formfield_callback=tagformcallback)
 
+class TagFormSet(_TagFormSet):
+        
+    def __init__(self, user, *args, **kwargs):
+        if not user.has_perm('resources.delete_tag'):
+            self.can_delete = False
+        super(TagFormSet, self).__init__(*args, **kwargs)
+        
 
 class ViewForm(ModelForm):
     
+    def __init__(self, user, *args, **kwargs):
+        super(ViewForm, self).__init__(*args, **kwargs)
+        
+        if not user.has_perm('resources.feature_view'):
+            del self.fields['featured']
+
     #key = forms.CharField(widget=AutoCompleteWidget('keys', force_selection=False))
     
     class Meta:
