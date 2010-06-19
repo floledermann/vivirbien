@@ -32,11 +32,12 @@ class ResourceForm(ModelForm):
     
     class Meta:
         model = Resource
-        exclude = ('creator',)
+        exclude = ('creator','featured')
 
 def tagformcallback(field):
-    if field.name == 'key':
-        return forms.CharField(widget=AutoCompleteWidget('keys', force_selection=False))
+# autocomplete won't return distinct values, so disable for now
+#    if field.name == 'key':
+#        return forms.CharField(widget=AutoCompleteWidget('keys', force_selection=False))
     return field.formfield()
 
 _TagFormSet = inlineformset_factory(Resource, Tag,

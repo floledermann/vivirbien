@@ -11,6 +11,7 @@ class Resource(models.Model):
     shortname = models.SlugField(max_length=100, db_index=True, unique=True, help_text=_('(Will be part of the resources\' URL)'))
 
     featured = models.BooleanField(default=False)
+    protected = models.BooleanField(default=False, help_text=_('(Hidden from anonymous users)'))
     
     creator = models.ForeignKey(User, null=True)
     creation_date = models.DateTimeField(auto_now_add=True)
@@ -52,6 +53,7 @@ class View(models.Model):
     shortname = models.SlugField(max_length=100, db_index=True, unique=True, help_text=_('(Will be part of the views\' URL)'))
 
     featured = models.BooleanField(default=False)
+    protected = models.BooleanField(default=False, help_text=_('(Hidden from anonymous users)'))
 
     order_by = models.CharField(max_length=200, null=True, blank=True)
     

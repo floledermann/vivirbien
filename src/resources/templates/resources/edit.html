@@ -52,7 +52,7 @@ var MEDIA_URL = "{{ MEDIA_URL}}";
     {% for field in form.visible_fields %}
         <td class="edit-{{field.name}}">{{field.errors}}{{ field }}
         {% if forloop.first and forloop.parentloop.last %}
-        <select class="popular-tags">
+        <br /><select class="popular-tags">
 <option value="">{% trans "Common Tags:" %}</option>
 <option value="">--------------</option>
 {% for tag in popular_tags %}

@@ -68,14 +68,24 @@ def edit_resource(request, key=None):
 
 def all_resources(request):
     resources = Resource.objects.all()
+    
+    if not request.user.is_authenticated():
+        resources = resources.filter(protected=False)
+        
     view = {'name': 'All Resources'}
     return render_to_response('resources/view.html', RequestContext(request, locals()))
     
 
 def view(request, name):
+    
     view = get_object_or_404(View, shortname=name)
     
+    if view.protected and not request.user.is_authenticated():
+        return HttpResponse(status=403) # forbidden
+    
     resources = view.get_resources()
+    if not request.user.is_authenticated():
+        resources = resources.filter(protected=False)
     
     q = None
     for mapping in view.mappings.filter(show_in_list=True):
@@ -105,6 +115,8 @@ def view(request, name):
 
 def views(request):
     views = View.objects.all()
+    if not request.user.is_authenticated():
+        views = views.filter(protected=False)
     return render_to_response('resources/views.html', RequestContext(request, locals()))
 
 #@permission_required('resources.change_view')
@@ -167,10 +179,15 @@ def edit_view(request, name=None):
 
 def index(request):
     
-    featured_views = View.objects.filter(featured=True)
-    featured_resources = Resource.objects.filter(featured=True)
-    latest_resources = Resource.objects.order_by('-creation_date')[:15]
-    
+    if request.user.is_authenticated():
+        featured_views = View.objects.filter(featured=True)
+        featured_resources = Resource.objects.filter(featured=True)
+        latest_resources = Resource.objects.order_by('-creation_date')[:15]
+    else:
+        featured_views = View.objects.filter(featured=True, protected=False)
+        featured_resources = Resource.objects.filter(featured=True, protected=False)
+        latest_resources = Resource.objects.filter(protected=False).order_by('-creation_date')[:15]
+
     return render_to_response('resources/index.html', RequestContext(request, locals()))
 
 
@@ -179,17 +196,28 @@ def tags(request):
     return render_to_response('resources/tags.html', RequestContext(request, locals()))
      
 
+@login_required
 def tag_choices(request, key=None):
     from django.utils import simplejson as json
     from django.core.serializers.json import DateTimeAwareJSONEncoder
     
-    choices = Tag.objects.filter(key=key).values_list('value', flat=True).distinct()
+    choices = Tag.objects.filter(key=key).order_by('value').values_list('value', flat=True)
     
-    str = json.dumps({'choices':list(choices)}, cls=DateTimeAwareJSONEncoder, indent=2)
+    values = list(choices)
+    
+    last = values[-1]
+    for i in range(len(values)-2, -1, -1):
+        if last == values[i]:
+            del values[i]
+        else:
+            last = values[i]
+    
+    str = json.dumps({'choices':values}, cls=DateTimeAwareJSONEncoder, indent=2)
     
     return HttpResponse(str, mimetype='application/json') #
     
 
+@login_required
 def resource_choices(request, key=None):
     from django.utils import simplejson as json
     from django.core.serializers.json import DateTimeAwareJSONEncoder
@@ -207,7 +235,10 @@ def tag(request, key, value=None):
     if value:
         tags = tags.filter(value=value)
     
-    tags = tags.select_related('resource').order_by('value')
+    if request.user.is_authenticated():
+        tags = tags.select_related('resource').order_by('value')
+    else:
+        tags = tags.select_related('resource').filter(resource__protected=False).order_by('value')
     
     return render_to_response('resources/tag.html', RequestContext(request, locals()))
 
@@ -218,7 +249,10 @@ def resources_by_tag(request, key, value=None):
     if value:
         tags = tags.filter(value=value)
     
-    tags = tags.select_related('resource').order_by('resource__shortname')
+    if request.user.is_authenticated():
+        tags = tags.select_related('resource').order_by('resource__shortname')
+    else:
+        tags = tags.select_related('resource').filter(resource__protected=False).order_by('resource__shortname')
     
     return render_to_response('resources/resources_by_tag.html', RequestContext(request, locals()))
 
@@ -254,7 +288,12 @@ def view_json(request, name=None):
     from django.core.serializers.json import DateTimeAwareJSONEncoder
 
     view = get_object_or_404(View, shortname=name)    
+    if view.protected and not request.user.is_authenticated():
+        return HttpResponse(status=403) # forbidden
+
     resources = view.get_resources().filter(tags__key='location')
+    if not request.user.is_authenticated():
+        resources = resources.filter(protected=False)
     
     class GeoJSONEncoder(DateTimeAwareJSONEncoder):
         """ simplejson.JSONEncoder extension: handle querysets """

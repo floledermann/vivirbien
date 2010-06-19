@@ -10,7 +10,7 @@ from autocomplete.views import autocomplete
 
 autocomplete.register(
     id = 'keys',
-    queryset = Tag.objects.all().values('key').distinct(),
+    queryset = Tag.objects.values('key').distinct(),
     fields = ('key',),
     limit = 20,
     key = 'key',
