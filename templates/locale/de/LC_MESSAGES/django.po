@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-16 14:15+0200\n"
+"POT-Creation-Date: 2010-06-20 16:10+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -32,6 +32,10 @@ msgstr "Hallo,"
 msgid "Not logged in"
 msgstr "Nicht angemeldet"
 
+#: .\includes\navi.html.py:9 .\registration\login.html.py:27
+msgid "Log in"
+msgstr "Anmelden"
+
 #: .\includes\navi.html.py:10 .\invitation\invitation_form.html.py:6
 msgid "Invite a friend"
 msgstr "Leute einladen"
@@ -47,7 +51,7 @@ msgstr "Sprache:"
 #: .\invitation\invitation_form.html.py:8
 msgid "You can send an invitation code to a friend here."
 msgstr ""
-"<p>In der momentanen Phase ist die registrierung auf Vivir Bien nur mit "
+"<p>In der momentanen Phase ist die Registrierung auf Vivir Bien nur mit "
 "einem Einladungscode möglich. Du kannst hier einen Einladungscode an eine "
 "Emailadresse verschicken.</p><p>Einladungen sollten in der Anfangsphase nur "
 "an Leute, die unsere Ideen teilen, verschickt werden, bis wir diskutiert "
@@ -101,15 +105,23 @@ msgstr "Viel Spaß!"
 msgid "Activate your user"
 msgstr "Deinen User aktivieren"
 
-#: .\registration\login.html.py:7
+#: .\registration\login.html.py:8
 msgid "Your username and password didn't match. Please try again."
 msgstr "Username oder Passwort sind falsch. Bitte nochmals probieren."
 
-#: .\registration\login.html.py:22
-msgid "Log in"
-msgstr "Anmelden"
+#: .\registration\login.html.py:10
+msgid ""
+"Some areas of Vivir Bien are currently available only to registered users. "
+"Registrations are currently <em>invitation only</em> to ensure a certain "
+"level of trust between participants. If you want to contribute, <a href="
+"\"mailto:vivirbien@mediavirus.org\">get in touch</a>!"
+msgstr ""
+"Derzeit sind einige Bereiche von Vivir Bien nur registrierten Benutzerinnen "
+"zugänglich. Die Registrierung ist derzeit nur per Einladung möglich &mdash; "
+"wenn du bei Vivir Bien mitmachen willst, <a href=\"mailto:"
+"vivirbien@mediavirus.org\">kontaktiere uns</a>!"
 
-#: .\registration\login.html.py:26
+#: .\registration\login.html.py:31
 msgid "Forgotten your password or username?"
 msgstr "Passwort oder Username vergessen?"
 

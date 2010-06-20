@@ -45,11 +45,13 @@
 <a class="more" href="{% url resources_view name="all" %}">{% trans "all resources..." %}</a>
 </div>
 
-<!--
 <div class="listbox">
+<h2>{% trans "Current Project:<br />Eat &amp Drink" %}</h2>
+<p>{% blocktrans %}This summer we will focus on eating and drinking within the solidarity economy. Besides the general mapping activity that will continue as usual, we want to pay special attention to food production, processing and consumption!{% endblocktrans %}
+<a class="more" href="/wiki/ThemaEssenTrinken/">{% trans "Read more in the Wiki..." %}</a>
+</p>
 <h2>{% trans "Programmers wanted!" %}</h2>
-<p>Foo bla bla</p>
+<p>{% blocktrans %}If you are a programmer and you would like to contribute to an inspiring and technologically challenging project, <a href="mailto:vivirbien@mediavirus.org">get in touch</a>!{% endblocktrans %}</p>
 </div>
--->
 
 {% endblock %}

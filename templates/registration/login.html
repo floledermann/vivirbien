@@ -3,9 +3,14 @@
 
 {% block page_content %}
 
+<p>
 {% if form.errors %}
-<p>{% trans "Your username and password didn't match. Please try again." %}</p>
+{% trans "Your username and password didn't match. Please try again." %}
+{% else %}
+{% blocktrans %}Some areas of Vivir Bien are currently available only to registered users. Registrations are currently <em>invitation only</em> to ensure a certain level of trust between participants. If you want to contribute, <a href="mailto:vivirbien@mediavirus.org">get in touch</a>!{% endblocktrans %}
 {% endif %}
+</p>
+
 
 <form method="post" action="{% url django.contrib.auth.views.login %}">
 <table>

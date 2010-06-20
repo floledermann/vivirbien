@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-16 14:15+0200\n"
+"POT-Creation-Date: 2010-06-20 16:10+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -264,23 +264,23 @@ msgstr "Artikel nach Titel"
 msgid "This article does not exist."
 msgstr "Dieser Artikel existiert nicht."
 
-#: .\templates\wiki\view.html.py:14
+#: .\templates\wiki\view.html.py:15
 msgid ">Create it now</a>?"
 msgstr ">Jetzt anlegen</a>?"
 
-#: .\templates\wiki\view.html.py:23
+#: .\templates\wiki\view.html.py:26
 msgid "Edit this article"
 msgstr "Artikel bearbeiten"
 
-#: .\templates\wiki\view.html.py:25
+#: .\templates\wiki\view.html.py:28
 msgid "Editing history"
 msgstr "Änderungen"
 
-#: .\templates\wiki\view.html.py:27
+#: .\templates\wiki\view.html.py:31
 msgid "Remove this article"
 msgstr "Artikel löschen"
 
-#: .\templates\wiki\view.html.py:29
+#: .\templates\wiki\view.html.py:35
 msgid "Create this article"
 msgstr "Artikel anlegen"
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-16 14:15+0200\n"
+"POT-Creation-Date: 2010-06-20 16:10+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,6 +30,10 @@ msgstr ""
 
 #: .\includes\navi.html.py:9
 msgid "Not logged in"
+msgstr ""
+
+#: .\includes\navi.html.py:9 .\registration\login.html.py:27
+msgid "Log in"
 msgstr ""
 
 #: .\includes\navi.html.py:10 .\invitation\invitation_form.html.py:6
@@ -96,15 +100,19 @@ msgstr ""
 msgid "Activate your user"
 msgstr ""
 
-#: .\registration\login.html.py:7
+#: .\registration\login.html.py:8
 msgid "Your username and password didn't match. Please try again."
 msgstr ""
 
-#: .\registration\login.html.py:22
-msgid "Log in"
+#: .\registration\login.html.py:10
+msgid ""
+"Some areas of Vivir Bien are currently available only to registered users. "
+"Registrations are currently <em>invitation only</em> to ensure a certain "
+"level of trust between participants. If you want to contribute, <a href="
+"\"mailto:vivirbien@mediavirus.org\">get in touch</a>!"
 msgstr ""
 
-#: .\registration\login.html.py:26
+#: .\registration\login.html.py:31
 msgid "Forgotten your password or username?"
 msgstr ""
 

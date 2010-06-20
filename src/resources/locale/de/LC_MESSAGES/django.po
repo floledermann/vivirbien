@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-16 14:15+0200\n"
+"POT-Creation-Date: 2010-06-20 16:10+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,35 +20,39 @@ msgstr ""
 msgid "(Will be part of the resources' URL)"
 msgstr "(Wird Teil der URL)"
 
-#: .\models.py:46
+#: .\models.py:14 .\models.py:56
+msgid "(Hidden from anonymous users)"
+msgstr "(Nur für registrierte Nutzerinnen sichtbar)"
+
+#: .\models.py:53
 msgid "(Will be part of the views' URL)"
 msgstr "(Wird Teil der URL)"
 
-#: .\models.py:96
+#: .\models.py:107
 msgid "All tags"
 msgstr "Alle Tags"
 
-#: .\models.py:99
+#: .\models.py:110
 msgid "is present"
 msgstr "ist gesetzt."
 
-#: .\models.py:101
+#: .\models.py:112
 msgid "begins with"
 msgstr "beginnt mit"
 
-#: .\models.py:105
+#: .\models.py:116
 msgid "and"
-msgstr ""
+msgstr "und"
 
-#: .\models.py:106
+#: .\models.py:117
 msgid "or"
-msgstr ""
+msgstr "oder"
 
-#: .\models.py:147
+#: .\models.py:158
 msgid "Default Icon"
 msgstr "Standard-Icon"
 
-#: .\models.py:148
+#: .\models.py:159
 msgid "Red"
 msgstr "Rot"
 
@@ -92,7 +96,6 @@ msgid "Add location tag for this address"
 msgstr "Location für diese Adresse hinzufügen"
 
 #: .\templates\resources\index.html.py:4
-#: .\templates\resources\includes\actions.html.py:3
 msgid "Resources"
 msgstr "Ressourcen"
 
@@ -111,6 +114,7 @@ msgstr ""
 "Hintergründen und Labels bekommen hier eine Plattform."
 
 #: .\templates\resources\index.html.py:14
+#: .\templates\resources\index.html.py:51
 msgid "Read more in the Wiki..."
 msgstr "Mehr im Wiki..."
 
@@ -136,8 +140,34 @@ msgid "Newest Resources"
 msgstr "Neueste Ressourcen"
 
 #: .\templates\resources\index.html.py:49
-msgid "Programmers wanted!"
+msgid "Current Project:<br />Eat &amp Drink"
+msgstr "Aktuelles Projekt:<br />Essen &amp Trinken"
+
+#: .\templates\resources\index.html.py:50
+msgid ""
+"This summer we will focus on eating and drinking within the solidarity "
+"economy. Besides the general mapping activity that will continue as usual, "
+"we want to pay special attention to food production, processing and "
+"consumption!"
 msgstr ""
+"Diesen Sommer wollen wir neben den allgemeinen Mapping-Aktivitäten "
+"spezielles Augenmerk auf das Thema Essen &amp; Trinken in der solidarischen "
+"Ökonomie legen. Von der Produktion bis zum Konsum von Nahrungsmitteln soll "
+"das Thema theoretisch und praktisch vertieft werden."
+
+#: .\templates\resources\index.html.py:53
+msgid "Programmers wanted!"
+msgstr "Programmiererinnen gesucht!"
+
+#: .\templates\resources\index.html.py:54
+msgid ""
+"If you are a programmer and you would like to contribute to an inspiring and "
+"technologically challenging project, <a href=\"mailto:vivirbien@mediavirus."
+"org\">get in touch</a>!"
+msgstr ""
+"Du bist Programmiererin bzw. Programmierer und sucht ein sinnvolles, "
+"inspirierendes Projekt bei dem Du mitmachen kannst? <a href=\"mailto:"
+"vivirbien@mediavirus.org\">Lass' es uns wissen</a>!"
 
 #: .\templates\resources\resource.html.py:63
 #: .\templates\resources\resources_by_tag.html.py:4
@@ -148,23 +178,23 @@ msgstr ""
 msgid "Resources with tag:"
 msgstr "Ressourcen mit Tag:"
 
-#: .\templates\resources\resource.html.py:71
+#: .\templates\resources\resource.html.py:72
 msgid "Edit"
 msgstr "Bearbeiten"
 
-#: .\templates\resources\resource.html.py:75
+#: .\templates\resources\resource.html.py:77
 msgid "Comments for"
 msgstr "Kommentare zu"
 
-#: .\templates\resources\resource.html.py:80
+#: .\templates\resources\resource.html.py:82
 msgid "Comment by"
 msgstr "Kommentar von"
 
-#: .\templates\resources\resource.html.py:82
+#: .\templates\resources\resource.html.py:84
 msgid "Reply"
 msgstr "Antworten"
 
-#: .\templates\resources\resource.html.py:88
+#: .\templates\resources\resource.html.py:90
 msgid "New Comment"
 msgstr "Neuer Kommentar"
 
@@ -212,7 +242,8 @@ msgstr "Mappings"
 
 #: .\templates\resources\view_edit.html.py:82
 msgid "Mappings determine the appearance of the resource."
-msgstr "Mappings bestimmen das Erscheinungsbild einer Ressource in der Ansicht."
+msgstr ""
+"Mappings bestimmen das Erscheinungsbild einer Ressource in der Ansicht."
 
 #: .\templates\resources\view_list.html.py:4
 #: .\templates\resources\view_map.html.py:4
@@ -228,15 +259,19 @@ msgstr "Liste von Ansichten"
 msgid "Views"
 msgstr "Ansichten"
 
+#: .\templates\resources\includes\actions.html.py:3
+msgid "Main"
+msgstr "Start"
+
 #: .\templates\resources\includes\actions.html.py:5
 msgid "Tags"
 msgstr "Tags"
 
-#: .\templates\resources\includes\actions.html.py:6
+#: .\templates\resources\includes\actions.html.py:7
 msgid "Add resource"
 msgstr "Neue Ressource"
 
-#: .\templates\resources\includes\actions.html.py:7
+#: .\templates\resources\includes\actions.html.py:8
 msgid "Add view"
 msgstr "Neue Ansicht"
 
@@ -248,7 +283,7 @@ msgstr "Dokumentation für Key:"
 msgid "Resources with key:"
 msgstr "Ressourcen mit Key:"
 
-#: .\templates\resources\includes\view_actions.html.py:3
+#: .\templates\resources\includes\view_actions.html.py:4
 msgid "Edit view"
 msgstr "Diese Ansicht bearbeiten"
 
