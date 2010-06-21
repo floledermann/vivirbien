@@ -172,14 +172,14 @@ var editor_lookup = {
 }
 
 jQuery(function($) {
-    $('#id_shortname').change(function() {
+    $('#id_shortname, #id_view-shortname').change(function() {
         this._dirty = true;
     });
-    $('#id_shortname').each(function() {
+    $('#id_shortname, #id_view-shortname').each(function() {
         if (this.value) this._dirty = true;
     });
-    $('#id_name').keyup(function() {
-        var el = $('#id_shortname');
+    $('#id_name, #id_view-name').keyup(function() {
+        var el = $('#id_shortname, #id_view-shortname');
         if (! el[0]._dirty) {
             el.val(URLify($(this).val(), 100));
         }

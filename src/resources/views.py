@@ -87,15 +87,17 @@ def view(request, name):
     if not request.user.is_authenticated():
         resources = resources.filter(protected=False)
     
+    # extract tags for list display
     q = None
     for mapping in view.mappings.filter(show_in_list=True):
         q = q and q | Q(key=str(mapping.key)) or Q(key=str(mapping.key))
     
     if q:
-        tags = Tag.objects.filter(q).select_related('resource').order_by('resource__shortname').values('resource_id','key','value')
+        tags = Tag.objects.filter(q).select_related('resource').order_by('resource__shortname','key','value').values('resource_id','key','value')
     
         tags_dict = {}
         for tag in tags:
+            # just append key valur pairs, will be grouped in the template
             if tag['resource_id'] in tags_dict:
                 tags_dict[tag['resource_id']].append({'key': tag['key'], 'value': tag['value']})
             else:
