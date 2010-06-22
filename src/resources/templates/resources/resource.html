@@ -68,8 +68,10 @@ function hide_reply_form(comment_id, url, person_name) {
 </div>
 
 <div class="actions">
-{% if perms.resources.edit_resource or perms.resources.add_tag %}
+{% if request.user.is_authenticated %}
+{# {% if perms.resources.edit_resource or perms.resources.add_tag %} #}
 <a href="{% url resources_edit key=resource.shortname %}">{% trans "Edit" %}</a>
+{# {% endif %} #}
 {% endif %}
 </div>
 
