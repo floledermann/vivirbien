@@ -25,8 +25,8 @@ class ResourceForm(ModelForm):
     def __init__(self, user, *args, **kwargs):
         super(ResourceForm, self).__init__(*args, **kwargs)
         
-        if not user.has_perm('resources.feature_resource'):
-            del self.fields['featured']
+        #if not user.has_perm('resources.feature_resource'):
+        #    del self.fields['featured']
         
     #key = forms.CharField(widget=AutoCompleteWidget('keys', force_selection=False))
     

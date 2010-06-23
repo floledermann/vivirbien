@@ -139,9 +139,9 @@ class TagQuery(models.Model):
     def get_q(self):
         from django.db.models import Q
         q = {
-             0: Q(tags__key=str(self.key)),
-             1: Q(tags__key=str(self.key), tags__value=str(self.value)),
-             2: Q(tags__key=str(self.key), tags__value__startswith=str(self.value)),
+             0: Q(tags__key=self.key),
+             1: Q(tags__key=self.key, tags__value=self.value), #str(self.value)),
+             2: Q(tags__key=self.key, tags__value__startswith=self.value), #str(self.value)),
         }[self.comparison]
         
         if self.exclude:

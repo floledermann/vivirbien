@@ -27,7 +27,14 @@ Value: <input type="text" name="new_value" value="{{ value }}" />
 <ul class="resourceslist">
 {% for value_tags in value_groups %}
 <li>
-<h3><a href="{% url resources_tag key=key value=value_tags.grouper %}">{{ value_tags.grouper }} <a class="action" href="{% url resources_with_tag key=key value=value_tags.grouper %}">:</a></h3>
+<h3>
+{% if value_tags.list|length|add:"-1" %}
+    <a href="{% url resources_tag key=key value=value_tags.grouper %}">{{ value_tags.grouper }}</a>
+{% else %}
+    {{ value_tags.grouper }}
+{% endif %}
+{# <a class="action" href="{% url resources_with_tag key=key value=value_tags.grouper %}">:</a> #}
+</h3>
 <div class="help">
 {% for tag in value_tags.list %}
 <a href="{% url resources_resource key=tag.resource.shortname %}">{{ tag.resource.name }}</a>{% if not forloop.last %}, {% endif %}
