@@ -159,13 +159,23 @@ _icon_choices = [
     ('red', _('Red'))
 ]
 
+class Icon(models.Model):
+    
+    name = models.CharField(max_length=100)
+    image = models.ImageField(upload_to='uploads/icons/', help_text='Should be of square proportions. Will be resized to 20x20 pixels.')
+
+    def __unicode__(self):
+        return self.name
+        
 class TagMapping(models.Model):
     
     key = models.CharField(max_length=100, db_index=True)
     value = models.CharField(max_length=100, blank=True, null=True)
 
     show_in_list = models.BooleanField(default=False)
-    icon = models.CharField(max_length=100, blank=True, null=True, choices=_icon_choices, default='default')
+    icon = models.ForeignKey(Icon, blank=True, null=True)
+    
+    subicon = models.BooleanField(default=False)
     
     order = models.IntegerField(default=0)
 
@@ -176,3 +186,5 @@ class TagMapping(models.Model):
 
     class Meta:
         ordering = ['order','creation_date']
+
+    

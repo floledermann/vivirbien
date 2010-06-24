@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink"
+     width="100"
+     height="100"
+     style="background-color: #eeffee">
+
+<g transform="translate(50, 50)">
+<g id="marker" transform="translate(-14, -28)">
+<image x="3" y="3" width="20" height="20"
+   xlink:href="../images/icon.png" />
+<image width="26" height="28"
+   xlink:href="../images/marker_mask.png" />
+<g class="subicons" transform="translate(19, -3)">
+<g class="subicon" transform="translate(0, 0)">
+<image width="10" height="10"
+   xlink:href="../images/submarker_mask.png" />
+<image x="1" y="1" width="8" height="8"
+   xlink:href="../images/subicon.png" />
+</g>
+<g class="subicon" transform="translate(0, 10)">
+<image width="10" height="10"
+   xlink:href="../images/submarker_mask.png" />
+<image x="1" y="1" width="8" height="8"
+   xlink:href="../images/subicon.png" />
+</g>
+<g class="subicon" transform="translate(0, 20)">
+<image width="10" height="10"
+   xlink:href="../images/submarker_mask.png" />
+<image x="1" y="1" width="8" height="8"
+   xlink:href="../images/subicon.png" />
+</g>
+</g>
+</g>
+</g>
+
+</svg>    

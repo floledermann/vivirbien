@@ -41,7 +41,7 @@ class ViewAdmin(admin.ModelAdmin):
     save_on_top = True
 
 
-
 admin.site.register(Resource, ResourceAdmin)
 admin.site.register(View, ViewAdmin)
+admin.site.register(Icon)
 

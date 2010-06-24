@@ -12,6 +12,7 @@ commandline.bat
 \documents\
 \fixtures\
 \_resources\
+\design\
 \.hg\
 \.settings\
 \OpenLayers-2.8-debug\

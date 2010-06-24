@@ -27,11 +27,23 @@ function init_map() {
     map.addLayer(layer_osm);
     
     var style = new OpenLayers.Style({
+    	
+    	// fallback for non-svg browsers
         externalGraphic: '${icon}',
-        graphicWidth: '${width}',
-        graphicHeight: '${height}',
-        graphicXOffset: -13,
-        graphicYOffset: -29,
+        
+        icon: '${icon}',
+        mask: '${mask}',
+        subicons: '${subicons}',
+        subicontitles: ['Foo'],
+        subiconmask: MEDIA_URL + 'images/subicon_mask.png',
+        
+        iconXOffset: '${iconXOffset}',
+        iconYOffset: '${iconYOffset}',
+        
+        graphicWidth: 25,
+        graphicHeight: 28,
+        graphicXOffset: -14,
+        graphicYOffset: -28,
         graphicTitle: '${title}',
         graphicZIndex: 0,
         cursor: 'pointer',
@@ -42,15 +54,25 @@ function init_map() {
                 return (feature.cluster) ? feature.cluster.length + ' resources' : feature.data.title;
             },
             icon: function(feature) {
-            	return MEDIA_URL + 'images/' + (feature.cluster ? 'flowers.png' : 'flower.png');
+                return MEDIA_URL + 'images/default_icon.png';
             },
-            width: function(feature) {
-                return (feature.cluster) ? 30 : 26;
+            mask: function(feature) {
+                return MEDIA_URL + 'images/' + ((feature.cluster) ? 'cluster_mask.png' : 'marker_mask.png');
             },
-            height: function(feature) {
-                return (feature.cluster) ? 35 : 30;
-            }
-        }
+            subicons: function(feature) {
+            	if (feature.cluster) return "";
+            	var subicons = "";
+            	for (var i=0; i<icon_mappings.length; i++) {
+            		var mapping = icon_mappings[i];
+            		if (feature.data.tags[mapping[0]]) {
+            			subicons += MEDIA_URL + mapping[2] + "|";
+            		}
+            	}
+                return subicons;
+            },
+            iconXOffset: function(f) { return f.cluster ? 2 : 3 },
+            iconYOffset: function(f) { return f.cluster ? 1 : 3 },
+         }
     });
     
     var select_style = OpenLayers.Util.extend({}, style);
@@ -67,6 +89,7 @@ function init_map() {
             "default": style,
             "select": select_style}),
         strategies: [strategy2, strategy],
+        renderers: ['VivirBienRenderer', 'VML', 'Canvas'],
         projection: new OpenLayers.Projection("EPSG:4326"),
         rendererOptions: {yOrdering: true}
     });

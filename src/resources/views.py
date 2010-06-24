@@ -112,6 +112,8 @@ def view(request, name):
         #resources = map(lambda resource: setattr(resource, 'view_tags', tags_dict[resource.id]) or resource, resources)
         #assert False, tags
     
+    icon_mappings = view.mappings.exclude(icon=None)
+    
     return render_to_response('resources/view.html', RequestContext(request, locals()))
     
 
