@@ -8,7 +8,7 @@ _ = lambda s: s
 ADMINS = (
     ('Flo Ledermann', 'ledermann@ims.tuwien.ac.at'),
 )
-DEFAULT_FROM_EMAIL = 'ledermann@ims.tuwien.ac.at'
+DEFAULT_FROM_EMAIL = 'vivirbien@mediavirus.org'
 
 MANAGERS = ADMINS
 
