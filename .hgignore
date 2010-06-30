@@ -11,3 +11,4 @@ glob:Thumbs.db
 glob:media/js/OpenLayers-2.8-debug/
 glob:vivirbien.db
 glob:media/uploads/
+glob:documents/ripess/
