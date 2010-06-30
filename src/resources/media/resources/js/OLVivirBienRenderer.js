@@ -55,28 +55,29 @@ OpenLayers.Renderer.VivirBienRenderer = OpenLayers.Class(OpenLayers.Renderer.SVG
 			     node.removeChild(node.firstChild);
 			}
         	
-            pos = this.getPosition(node);
-
             var icon = document.createElementNS(this.xmlns, "image");
             icon.setAttributeNS(null, "width", 20);
             icon.setAttributeNS(null, "height", 20);
             icon.setAttributeNS(null, "x", style.iconXOffset || 0);
             icon.setAttributeNS(null, "y", style.iconYOffset || 0);            
-            icon.setAttributeNS(this.xlinkns, "href", style.icon);
+            icon.setAttributeNS(this.xlinkns, "href", style.iconBaseURL + style.icon);
             node.appendChild(icon);
 
             if (style.mask) {
 	            var mask = document.createElementNS(this.xmlns, "image");
 	            mask.setAttributeNS(null, "width", 26);
 	            mask.setAttributeNS(null, "height", 28);
-	            mask.setAttributeNS(this.xlinkns, "href", style.mask);
+	            mask.setAttributeNS(this.xlinkns, "href", style.iconBaseURL + style.mask);
 	            node.appendChild(mask);
             }
             
             if (style.subicons) {
-            	if (typeof style.subicons == "string") {
-            		style.subicons = style.subicons.split('|');
-            	}
+                if (typeof style.subicons == "string") {
+                    style.subicons = style.subicons.split('|');
+                }
+                if (style.subicontitles && typeof style.subicontitles == "string") {
+                    style.subicontitles = style.subicontitles.split('|');
+                }
             	for (var i=0; i<style.subicons.length; i++) {
             		var img = style.subicons[i];
             		// ignore empty strings
@@ -87,7 +88,7 @@ OpenLayers.Renderer.VivirBienRenderer = OpenLayers.Class(OpenLayers.Renderer.SVG
 		            sicon.setAttributeNS(null, "height", 8);
 		            sicon.setAttributeNS(null, "x", 20 + (i - i%3) / 3 * 10);
 		            sicon.setAttributeNS(null, "y", -1 + i%3 * 10);            
-		            sicon.setAttributeNS(this.xlinkns, "href", img);
+		            sicon.setAttributeNS(this.xlinkns, "href", style.iconBaseURL + img);
                     if (style.subicontitles && style.subicontitles[i]) {
                         sicon.setAttributeNS(null, "title", style.subicontitles[i]);    
                     }
@@ -98,7 +99,7 @@ OpenLayers.Renderer.VivirBienRenderer = OpenLayers.Class(OpenLayers.Renderer.SVG
 		                smask.setAttributeNS(null, "height", 10);
 	                    smask.setAttributeNS(null, "x", 19 + (i - i%3) / 3 * 10);
 	                    smask.setAttributeNS(null, "y", -2 + i%3 * 10);            
-		                smask.setAttributeNS(this.xlinkns, "href", style.subiconmask);
+		                smask.setAttributeNS(this.xlinkns, "href", style.iconBaseURL + style.subiconmask);
 	                    if (style.subicontitles && style.subicontitles[i]) {
 	                        smask.setAttributeNS(null, "title", style.subicontitles[i]);    
 	                    }
@@ -116,8 +117,10 @@ OpenLayers.Renderer.VivirBienRenderer = OpenLayers.Class(OpenLayers.Renderer.SVG
             var yOffset = (style.graphicYOffset != undefined) ?
                 style.graphicYOffset : -(0.5 * height);
 
-            //var opacity = style.graphicOpacity || style.fillOpacity;
+            var opacity = style.graphicOpacity || style.fillOpacity;
+            node.setAttributeNS(null, "style", "opacity: "+opacity);
             
+            pos = this.getPosition(node);
             node.setAttributeNS(null, "transform", "translate(" + (pos.x + xOffset).toFixed() + "," + (pos.y + yOffset).toFixed() + ")");
 
 	        if (style.pointerEvents) {

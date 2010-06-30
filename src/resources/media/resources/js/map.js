@@ -5,6 +5,53 @@ var zoom=12;
 
 var map;
 
+function get_icon(feature, mapping){
+	if (feature.data.tags[mapping['key']]) {
+		if (mapping['value']) {
+			for (var i=0; i<feature.data.tags[mapping['key']].length; i++) {
+				if (feature.data.tags[mapping['key']][i] == mapping['value']) {
+	                return {icon: mapping['icon'], tag: mapping['key'] + ' = ' + mapping['value']};
+				}
+			}
+		}
+		else {
+            return {icon: mapping['icon'], tag: mapping['key'] + ' = *'};
+		}
+	}  
+	return null;
+}
+
+function get_icons(feature) {
+	var icons = [];
+	var first_is_subicon = false;
+	for (var i=0; i<icon_mappings.length; i++) {
+	    var mapping = icon_mappings[i];
+	    if (icons.length == 0) {
+	    	// if we find the first icon, remeber if it should be a subicon
+	    	first_is_subicon = mapping['subicon_only'];
+	    }
+	    if (feature.cluster) {
+	        for (var j=0; j<feature.cluster.length; j++) {
+	            var icon = get_icon(feature.cluster[j], mapping)
+	            if (icon) {
+	                icons.push(icon);
+	                break;
+	            }
+	        }
+	    }
+	    else {
+	        var icon = get_icon(feature, mapping)
+	        if (icon) {
+	            icons.push(icon);
+	        }
+	    }
+	}
+	if (first_is_subicon || icons.length == 0) {
+		icons.splice(0, 0, {icon: 'images/default_icon.png'});
+	}
+	return icons;
+}
+
 function init_map() {
 	
     map = new OpenLayers.Map ("map", {
@@ -34,8 +81,9 @@ function init_map() {
         icon: '${icon}',
         mask: '${mask}',
         subicons: '${subicons}',
-        subicontitles: ['Foo'],
-        subiconmask: MEDIA_URL + 'images/subicon_mask.png',
+        subicontitles: '${subicontitles}',
+        iconBaseURL: MEDIA_URL,
+        subiconmask: 'images/subicon_mask.png',
         
         iconXOffset: '${iconXOffset}',
         iconYOffset: '${iconYOffset}',
@@ -54,21 +102,28 @@ function init_map() {
                 return (feature.cluster) ? feature.cluster.length + ' resources' : feature.data.title;
             },
             icon: function(feature) {
-                return MEDIA_URL + 'images/default_icon.png';
+                return get_icons(feature)[0].icon;
             },
             mask: function(feature) {
-                return MEDIA_URL + 'images/' + ((feature.cluster) ? 'cluster_mask.png' : 'marker_mask.png');
+                return 'images/' + ((feature.cluster) ? 'cluster_mask.png' : 'marker_mask.png');
             },
             subicons: function(feature) {
-            	if (feature.cluster) return "";
-            	var subicons = "";
-            	for (var i=0; i<icon_mappings.length; i++) {
-            		var mapping = icon_mappings[i];
-            		if (feature.data.tags[mapping[0]]) {
-            			subicons += MEDIA_URL + mapping[2] + "|";
-            		}
-            	}
-                return subicons;
+            	var iconstr = "";
+                var icons = get_icons(feature);
+                icons.splice(0,1);
+                for (var i=0; i<icons.length; i++) {
+                    iconstr += icons[i].icon + '|';
+                }
+                return iconstr;
+            },
+            subicontitles: function(feature) {
+            	var titles = "";
+                var icons = get_icons(feature);
+                icons.splice(0,1);
+                for (var i=0; i<icons.length; i++) {
+                	titles += icons[i].tag + '|';
+                }
+                return titles;
             },
             iconXOffset: function(f) { return f.cluster ? 2 : 3 },
             iconYOffset: function(f) { return f.cluster ? 1 : 3 },

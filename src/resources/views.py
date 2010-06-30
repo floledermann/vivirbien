@@ -321,7 +321,10 @@ def view_json(request, name=None):
                     }
                     
                     for tag in obj.tags.all():
-                        json['properties']['tags'][tag.key] = tag.value
+                        if tag.key in json['properties']['tags']:
+                            json['properties']['tags'][tag.key].append(tag.value)
+                        else:
+                            json['properties']['tags'][tag.key] = [tag.value]
                         
                     try:
                         json['geometry'] = {

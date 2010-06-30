@@ -175,7 +175,7 @@ class TagMapping(models.Model):
     show_in_list = models.BooleanField(default=False)
     icon = models.ForeignKey(Icon, blank=True, null=True)
     
-    subicon = models.BooleanField(default=False)
+    subicon = models.BooleanField(default=False, verbose_name=_('Subicon only'))
     
     order = models.IntegerField(default=0)
 
