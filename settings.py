@@ -69,6 +69,7 @@ INSTALLED_APPS = (
     'wiki',
     'resources',
     'threadedcomments',
+    'sorl.thumbnail',
 )
 
 TEMPLATE_DIRS = None

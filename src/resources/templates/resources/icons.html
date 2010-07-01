@@ -1,5 +1,6 @@
 {% extends "resources/base.html" %}
 {% load i18n %}
+{% load thumbnail %}
 
 {% block title %}Vivir Bien: {% trans "Icons" %}{% endblock %}
 
@@ -10,7 +11,8 @@
 
 <ul class="iconlist">
 {% for icon in icons %}
-<li><img src="{{ MEDIA_URL}}{{icon.image}}" /> {{ icon.name }}</li>
+{% thumbnail icon.image "20x20" as thumb %}
+<li><img src="{{ thumb }}" width="20" height="20"/> {{ icon.name }}</li>
 {% endfor %}
 </ul>
 
