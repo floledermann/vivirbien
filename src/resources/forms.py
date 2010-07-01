@@ -45,6 +45,13 @@ _TagFormSet = inlineformset_factory(Resource, Tag,
                                    extra=1,
                                    formfield_callback=tagformcallback)
 
+class IconForm(ModelForm):
+
+    class Meta:
+        model = Icon
+        exclude = ('creator')
+
+
 class TagFormSet(_TagFormSet):
         
     def __init__(self, user, *args, **kwargs):

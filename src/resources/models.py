@@ -161,11 +161,16 @@ _icon_choices = [
 
 class Icon(models.Model):
     
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, unique=True)
     image = models.ImageField(upload_to='uploads/icons/', help_text='Should be of square proportions. Will be resized to 20x20 pixels.')
+
+    creator = models.ForeignKey(User, null=True)
 
     def __unicode__(self):
         return self.name
+
+    class Meta:
+        ordering = ['name']
         
 class TagMapping(models.Model):
     

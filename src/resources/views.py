@@ -284,6 +284,27 @@ def rename_tag(request):
     else:
         return redirect_to(request, reverse('resources_tag_key', kwargs={'key':urlquote(key)}))
 
+@login_required
+def icons(request):
+    
+    icons = Icon.objects.all()
+    return render_to_response('resources/icons.html', RequestContext(request, locals()))
+
+@login_required
+def add_icon(request):
+    if request.method == "POST":
+        form = IconForm(request.POST, request.FILES)
+        if form.is_valid():            
+            # new icon
+            icon = form.save(commit=False)
+            icon.creator = request.user
+            icon.save()
+            return redirect_to(request, reverse('resources_icons'))               
+    else:
+        form = IconForm()
+        
+    return render_to_response('resources/icon_edit.html', RequestContext(request, locals()))
+    
                
 def view_json(request, name=None):
     from django.utils import simplejson as json

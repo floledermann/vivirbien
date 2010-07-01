@@ -34,6 +34,9 @@ urlpatterns = patterns('',
     url(r'^tag/(?P<key>.*)/$', views.tag, name='resources_tag_key'),
     url(r'^tools/rename_tag/$', views.rename_tag, name='resources_rename_tag'),
 
+    url(r'^icons/$', views.icons, name='resources_icons'),
+    url(r'^icons/add/$', views.add_icon, name='resources_new_icon'),
+
     url(r'^choices.json$', views.resource_choices),
     url(r'^tag/(?P<key>.*)/choices.json$', views.tag_choices),
     

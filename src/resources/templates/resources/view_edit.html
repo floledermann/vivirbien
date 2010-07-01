@@ -119,14 +119,13 @@ var MEDIA_URL = "{{ MEDIA_URL}}";
 
 {% if tag_help %}
 <div class="actions">
-{% trans "Help:" %} 
+{% trans "Help:" %}
+<a href="{% url resources_icons %}">{% trans "Icons" %}</a>
 {% for link in tag_help %}
-<a href="{{link.1}}">{{link.0}}</a>
-{% if not forloop.last %} | {% endif %}
+| <a href="{{link.1}}">{{link.0}}</a>
 {% endfor %}
 </div>
 {% endif %}
-
 <button type="submit">{% trans "Save" %}</button>
 <button name="action" value="add_row" type="submit">{% trans "Save and continue" %}</button>
 
