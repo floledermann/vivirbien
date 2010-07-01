@@ -75,8 +75,6 @@ function init_map() {
     
     var style = new OpenLayers.Style({
     	
-    	// fallback for non-svg browsers
-        externalGraphic: '${icon}',
         
         icon: '${icon}',
         mask: '${mask}',
@@ -87,19 +85,25 @@ function init_map() {
         
         iconXOffset: '${iconXOffset}',
         iconYOffset: '${iconYOffset}',
-        
-        graphicWidth: 25,
-        graphicHeight: 28,
-        graphicXOffset: -14,
-        graphicYOffset: -28,
+
         graphicTitle: '${title}',
         graphicZIndex: 0,
         cursor: 'pointer',
-        graphicOpacity:0.8
+        graphicOpacity:0.8,
+        
+        // fallback for non-svg browsers
+        externalGraphic: '${externalGraphic}',
+        graphicWidth: 20,
+        graphicHeight: 20,
+        graphicXOffset: -10,
+        graphicYOffset: -20
     },{
         context: {
             title: function(feature) {
                 return (feature.cluster) ? feature.cluster.length + ' resources' : feature.data.title;
+            },
+            externalGraphic: function(feature) {
+                return MEDIA_URL + get_icons(feature)[0].icon;
             },
             icon: function(feature) {
                 return get_icons(feature)[0].icon;
@@ -144,7 +148,7 @@ function init_map() {
             "default": style,
             "select": select_style}),
         strategies: [strategy2, strategy],
-        renderers: ['VivirBienRenderer', 'VML', 'Canvas'],
+        renderers: ['VivirBienRenderer', 'SVG', 'VML', 'Canvas'], //
         projection: new OpenLayers.Projection("EPSG:4326"),
         rendererOptions: {yOrdering: true}
     });

@@ -112,10 +112,8 @@ OpenLayers.Renderer.VivirBienRenderer = OpenLayers.Class(OpenLayers.Renderer.SVG
             if (style.graphicTitle) {
                 node.setAttributeNS(null, "title", style.graphicTitle);
             }
-            var xOffset = (style.graphicXOffset != undefined) ?
-                style.graphicXOffset : -(0.5 * width);
-            var yOffset = (style.graphicYOffset != undefined) ?
-                style.graphicYOffset : -(0.5 * height);
+            var xOffset = -13;
+            var yOffset = -28;
 
             var opacity = style.graphicOpacity || style.fillOpacity;
             node.setAttributeNS(null, "style", "opacity: "+opacity);
