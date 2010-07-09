@@ -20,6 +20,8 @@ class ResourceAdmin(admin.ModelAdmin):
     inlines = [TagInline]
     prepopulated_fields = {'shortname': ('name',)} 
     save_on_top = True
+    list_filter = ['creation_date', 'creator',]
+    #date_hierarchy = 'creation_date'
 
     fieldsets = (
         (None, {'fields': ('name', )}),
