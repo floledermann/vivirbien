@@ -8,7 +8,7 @@ from django.utils.translation import string_concat
 class Resource(models.Model):
     
     name = models.CharField(max_length=200)
-    shortname = models.SlugField(max_length=100, db_index=True, unique=True, help_text=_('(Will be part of the resources\' URL)'))
+    shortname = models.SlugField(max_length=200, db_index=True, unique=True, help_text=_('(Will be part of the resources\' URL)'))
 
     featured = models.BooleanField(default=False)
     protected = models.BooleanField(default=False, help_text=_('(Hidden from anonymous users)'))
