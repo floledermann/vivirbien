@@ -383,7 +383,7 @@ def create_migration(app_name=None, manual=False):
     else:
         auto_str = ''
     migration_name = prompt('Migration Name: ', validate=r'^[a-z_0-9]+$')
-    local(os.path.join(env.ve_prefix,'python manage.py startmigration %s %s %s' % (app_name, migration_name, auto_str)), capture=False)
+    local(os.path.join(env.ve_prefix,'python manage.py schemamigration %s %s %s' % (app_name, migration_name, auto_str)), capture=False)
     if console.confirm('Please review migration code; Apply now?'):
         local(os.path.join(env.ve_prefix,'python manage.py migrate'), capture=False)
         
