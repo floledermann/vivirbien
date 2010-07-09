@@ -82,8 +82,8 @@ WIKI_REQUIRES_LOGIN = True
 #WIKI_MARKUP_CHOICES = (
 #        ('creole', _(u'Creole')),
 #    )
-WIKI_WORD_RE = r'(?:[A-Za-z0-9:=\-_\s]+)'
-WIKI_URL_RE = r'(?:[A-Za-z0-9:=\-_\s]+)'
+WIKI_WORD_RE = r'(?:[A-Za-z0-9:=\-\._\s]+)'
+WIKI_URL_RE = r'(?:[A-Za-z0-9:=\-\._\s]+)'
 
 MARKUP_FILTER = ('creole', { })
 
