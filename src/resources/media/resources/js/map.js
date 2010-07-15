@@ -4,6 +4,7 @@ var lon=16.35;
 var zoom=12;
 
 var map;
+var select;
 
 function get_icon(feature, mapping){
 	if (feature.data.tags[mapping['key']]) {
@@ -83,6 +84,8 @@ function init_map() {
         iconBaseURL: MEDIA_URL,
         subiconmask: 'images/subicon_mask.png',
         
+        iconText: '${iconText}',
+        
         iconXOffset: '${iconXOffset}',
         iconYOffset: '${iconYOffset}',
 
@@ -107,6 +110,9 @@ function init_map() {
             },
             icon: function(feature) {
                 return get_icons(feature)[0].icon;
+            },
+            iconText: function(feature) {
+                return (feature.cluster) ? feature.cluster.length : '';
             },
             mask: function(feature) {
                 return 'images/' + ((feature.cluster) ? 'cluster_mask.png' : 'marker_mask.png');
@@ -160,14 +166,19 @@ function init_map() {
     map.setCenter (lonLat, zoom);
 */
 
-    var select = new OpenLayers.Control.SelectFeature(layer_vector, {
+    select = new OpenLayers.Control.SelectFeature(layer_vector, {
         onSelect: function(feature) {
             var content = "";
             if (feature.cluster) {
-                content += "<h4>" + feature.cluster.length + " Resources</h4>"
+            	var list = "";
+            	var bounds = new OpenLayers.Bounds();
                 for (var i=0; i < feature.cluster.length; i++) {
-                    content += "<a href='" + feature.cluster[i].data.url + "'>"+feature.cluster[i].data.title + "</a><br />";
+                	bounds.extend(feature.cluster[i].geometry.getBounds());
+                    list += "<a href='" + feature.cluster[i].data.url + "'>"+feature.cluster[i].data.title + "</a><br />";
                 }
+                content += '<h4>' + feature.cluster.length + ' Resources ';
+                content += '[<a href="#" onclick="select.unselectAll(); map.zoomToExtent(OpenLayers.Bounds.fromString(\'' + bounds.toBBOX() + '\'));">zoom</a>]</h4>';
+                content += list;
             }
             else {
                 content = "<a href='" + feature.data.url + "'>"+feature.data.title + "</a>";
@@ -194,6 +205,10 @@ function init_map() {
     function onPopupClose(evt) {
         select.unselectAll();
     }
+    
+//    map.events.register('movestart', null, function(event){
+//    	select.unselectAll();
+//    })
 }
 
 function add_content(features, adjust_viewport) {

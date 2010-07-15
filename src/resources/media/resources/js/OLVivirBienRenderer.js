@@ -71,6 +71,16 @@ OpenLayers.Renderer.VivirBienRenderer = OpenLayers.Class(OpenLayers.Renderer.SVG
 	            node.appendChild(mask);
             }
             
+            if (style.iconText) {
+            	var text = document.createElementNS(this.xmlns, "text");
+                text.setAttributeNS(null, "x", "3");
+                text.setAttributeNS(null, "y", "9");            
+                text.setAttributeNS(null, "style", "font-family: arial, helvetica, verdana; font-size: 9px;");            
+            	texttext = document.createTextNode(style.iconText);
+            	text.appendChild(texttext);
+            	node.appendChild(text);
+            }
+            
             if (style.subicons) {
                 if (typeof style.subicons == "string") {
                     style.subicons = style.subicons.split('|');
