@@ -22,16 +22,19 @@
 
 {% block footer %}
 	{% if article.id %}
-	   {% if perms.wiki.change_article %}
+        {% if request.user.is_authenticated %}
+	    {# {% if perms.wiki.change_article %} #}
 		<a href="{% url wiki_edit article.title %}">{% trans "Edit this article" %}</a>
         |
         <a href="{% url wiki_article_history article.title %}">{% trans "Editing history" %}</a>
         |{% endif %}
-        {% if perms.wiki.delete_article %}
-        <a href="{% url wiki_remove_article article.title %}">{% trans "Remove this article" %}</a> |
+        {% if request.user.is_authenticated %}
+        {# {% if perms.wiki.delete_article %} #}
+        {# <a href="{% url wiki_remove_article article.title %}">{% trans "Remove this article" %}</a> | #}
         {% endif %}
 	{% else %}
-	   {% if perms.wiki.add_article %}
+        {% if request.user.is_authenticated %}
+	    {# {% if perms.wiki.add_article %} #}
 		<a href="{% url wiki_edit article.title %}">{% trans "Create this article" %}</a>
 		{% endif %}
 	{% endif %}
