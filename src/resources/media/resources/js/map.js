@@ -183,7 +183,7 @@ function init_map() {
             else {
                 content = "<a href='" + feature.data.url + "'>"+feature.data.title + "</a>";
             }
-            popup = new OpenLayers.Popup.FramedCloud("chicken", 
+            popup = new OpenLayers.Popup.FramedCloud("infoWindow", 
                                      feature.geometry.getBounds().getCenterLonLat(),
                                      new OpenLayers.Size(100,100),
                                      content,
