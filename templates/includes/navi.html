@@ -16,6 +16,7 @@
 <option value="{{ lang.0 }}"{% ifequal lang.0 LANGUAGE_CODE%} selected="selected"{% endifequal %}>{{ lang.1 }}</option>
 {% endfor %}
 </select>
+{% csrf_token %}
 <input type="submit" value="Go" />
 </form>
 </div>

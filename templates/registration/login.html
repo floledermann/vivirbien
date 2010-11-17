@@ -23,7 +23,7 @@
     <td>{{ form.password }}</td>
 </tr>
 </table>
-
+{% csrf_token %}
 <button type="submit">{% trans "Log in" %}</button>
 <input type="hidden" name="next" value="{{ next }}" />
 </form>
