@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-20 16:10+0200\n"
+"POT-Creation-Date: 2010-11-23 16:26+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,39 +16,39 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: .\page_base.html.py:28
-msgid "Resources for non-capitalist lifestyles"
-msgstr "Ressourcen für nichtkapitalistische Lebensweisen"
+#: page_base.html:28
+msgid "Resources for a solidarity economy"
+msgstr "Ressourcen für solidarische Lebensweisen"
 
-#: .\includes\navi.html.py:3
+#: includes/navi.html:3
 msgid "Resources"
 msgstr "Ressourcen"
 
-#: .\includes\navi.html.py:8
+#: includes/navi.html:8
 msgid "Welcome,"
 msgstr "Hallo,"
 
-#: .\includes\navi.html.py:9
+#: includes/navi.html:9
 msgid "Not logged in"
 msgstr "Nicht angemeldet"
 
-#: .\includes\navi.html.py:9 .\registration\login.html.py:27
+#: includes/navi.html:9 registration/login.html:27
 msgid "Log in"
 msgstr "Anmelden"
 
-#: .\includes\navi.html.py:10 .\invitation\invitation_form.html.py:6
+#: includes/navi.html:10 invitation/invitation_form.html:6
 msgid "Invite a friend"
 msgstr "Leute einladen"
 
-#: .\includes\navi.html.py:11
+#: includes/navi.html:11
 msgid "Log out"
 msgstr "Abmelden"
 
-#: .\includes\navi.html.py:13
+#: includes/navi.html:13
 msgid "language:"
 msgstr "Sprache:"
 
-#: .\invitation\invitation_form.html.py:8
+#: invitation/invitation_form.html:8
 msgid "You can send an invitation code to a friend here."
 msgstr ""
 "<p>In der momentanen Phase ist die Registrierung auf Vivir Bien nur mit "
@@ -57,38 +57,38 @@ msgstr ""
 "an Leute, die unsere Ideen teilen, verschickt werden, bis wir diskutiert "
 "haben wie wir mit vertraulichen Informationen umgehen.</p>"
 
-#: .\invitation\invitation_form.html.py:15
+#: invitation/invitation_form.html:15
 msgid "Send Invitation"
 msgstr "Einladung verschicken"
 
-#: .\registration\activate.html.py:7 .\registration\activation_email.txt.py:2
+#: registration/activate.html:7 registration/activation_email.txt:2
 msgid "Welcome to"
 msgstr "Willkommen bei"
 
-#: .\registration\activate.html.py:10
+#: registration/activate.html:10
 #, python-format
 msgid "Your user %(username)s has been activated! Have fun!"
 msgstr ""
 "Dein User %(username)s wurde aktiviert! Jetzt geht's aber wirklich los... "
 "Viel Spass!"
 
-#: .\registration\activate.html.py:16
+#: registration/activate.html:16
 msgid "Password"
 msgstr "Passwort"
 
-#: .\registration\activate.html.py:19
+#: registration/activate.html:19
 msgid "login"
 msgstr "Anmelden"
 
-#: .\registration\activate.html.py:25
+#: registration/activate.html:25
 msgid "Invalid activation key!"
 msgstr "Ungültiger Aktivierungsschlüssel!"
 
-#: .\registration\activate.html.py:28
+#: registration/activate.html:28
 msgid "The given activation key is invalid or outdated!"
 msgstr "Der angegebene Registrierungsschlüssel ist ungültig oder abgelaufen!"
 
-#: .\registration\activation_email.txt.py:4
+#: registration/activation_email.txt:4
 #, python-format
 msgid ""
 "Please click on the link below within the next %(expiration_days)s days to "
@@ -97,19 +97,19 @@ msgstr ""
 "Bitte klicke innerhalb der nächsten %(expiration_days)s Tage auf folgenden "
 "Link, um deinen Account zu aktivieren:"
 
-#: .\registration\activation_email.txt.py:8
+#: registration/activation_email.txt:8
 msgid "Have fun!"
 msgstr "Viel Spaß!"
 
-#: .\registration\activation_email_subject.txt.py:1
+#: registration/activation_email_subject.txt:1
 msgid "Activate your user"
 msgstr "Deinen User aktivieren"
 
-#: .\registration\login.html.py:8
+#: registration/login.html:8
 msgid "Your username and password didn't match. Please try again."
 msgstr "Username oder Passwort sind falsch. Bitte nochmals probieren."
 
-#: .\registration\login.html.py:10
+#: registration/login.html:10
 msgid ""
 "Some areas of Vivir Bien are currently available only to registered users. "
 "Registrations are currently <em>invitation only</em> to ensure a certain "
@@ -121,19 +121,19 @@ msgstr ""
 "wenn du bei Vivir Bien mitmachen willst, <a href=\"mailto:"
 "vivirbien@mediavirus.org\">kontaktiere uns</a>!"
 
-#: .\registration\login.html.py:31
+#: registration/login.html:31
 msgid "Forgotten your password or username?"
 msgstr "Passwort oder Username vergessen?"
 
-#: .\registration\logout.html.py:6
+#: registration/logout.html:6
 msgid "You have been logged out!"
 msgstr "Du bist jetzt abgemeldet"
 
-#: .\registration\registration_complete.html.py:6
+#: registration/registration_complete.html:6
 msgid "Registration complete"
 msgstr "Registrierung abgeschlossen"
 
-#: .\registration\registration_complete.html.py:8
+#: registration/registration_complete.html:8
 msgid ""
 "An email with your personal account activation code has been sent to you."
 "<br />\n"
@@ -143,47 +143,47 @@ msgstr ""
 "nächsten<br />Minuten in deiner Inbox liegen!<br />(Die Aktivierung ist "
 "notwenig,um deine Email-Adresse zu überprüfen.)"
 
-#: .\wiki\base.html.py:16
+#: wiki/base.html:16
 msgid "List all articles"
 msgstr "Alle Artikel"
 
-#: .\wiki\base.html.py:17 .\wiki\recentchanges.html.py:5
+#: wiki/base.html:17 wiki/recentchanges.html:5
 msgid "Recent Changes"
 msgstr "Letzte Änderungen"
 
-#: .\wiki\edit.html.py:5
+#: wiki/edit.html:5
 msgid "Editing article"
 msgstr "Artikel bearbeiten"
 
-#: .\wiki\edit.html.py:9
+#: wiki/edit.html:9
 msgid "Edit"
 msgstr "Bearbeiten"
 
-#: .\wiki\edit.html.py:23
+#: wiki/edit.html:23
 msgid "Save"
 msgstr "Speichern"
 
-#: .\wiki\edit.html.py:29
+#: wiki/edit.html:29
 msgid "Wiki format help"
 msgstr "Wiki Formatierungshilfe"
 
-#: .\wiki\recentchanges.html.py:8
+#: wiki/recentchanges.html:8
 msgid "Action"
 msgstr "Aktion"
 
-#: .\wiki\recentchanges.html.py:9
+#: wiki/recentchanges.html:9
 msgid "Title"
 msgstr "Titel"
 
-#: .\wiki\recentchanges.html.py:10
+#: wiki/recentchanges.html:10
 msgid "Date"
 msgstr "Datum"
 
-#: .\wiki\recentchanges.html.py:11
+#: wiki/recentchanges.html:11
 msgid "Editor"
 msgstr "Autor"
 
-#: .\wiki\recentchanges.html.py:12
+#: wiki/recentchanges.html:12
 msgid "Comment"
 msgstr "Kommentar"
 

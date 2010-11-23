@@ -16,6 +16,9 @@ class Resource(models.Model):
     creator = models.ForeignKey(User, null=True)
     creation_date = models.DateTimeField(auto_now_add=True)
     
+    start_date = models.DateTimeField(null=True, blank=True, help_text=_('Format: yyyy-mm-dd hh:mm (time is optional)'))
+    end_date = models.DateTimeField(null=True, blank=True, help_text=_('Format: yyyy-mm-dd hh:mm (time is optional)'))
+    
     class Meta:
         ordering = ['name']
         permissions = (
@@ -61,6 +64,10 @@ class View(models.Model):
     
     creator = models.ForeignKey(User, null=True)
     creation_date = models.DateTimeField(auto_now_add=True)
+
+    include_past = models.BooleanField(default=False)
+    include_current  = models.BooleanField(default=True)
+    include_upcoming = models.BooleanField(default=False)
 
     class Meta:
         ordering = ['name']

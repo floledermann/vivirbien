@@ -125,7 +125,8 @@ a.action {
     padding: 1px 4px 0px 4px;
 }
 
-.listbox {
+.listbox,
+.navbox {
     border: 1px solid #aaaaaa;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;

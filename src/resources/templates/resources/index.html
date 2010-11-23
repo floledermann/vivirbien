@@ -1,39 +1,30 @@
 {% extends "resources/base.html" %}
-{% load i18n %}
+{% load i18n texttools %}
 
 {% block title %}Vivir Bien: {% trans "Resources" %}{% endblock %}
 
 {% block resources_content %}
 {% include "resources/includes/actions.html" %}
 
-<h1>{% trans "Vivir Bien: Resources for non-capitalist lifestyles" %}</h1>
+<h1>{% trans "Vivir Bien: Resources for a solidarity ecomomy" %}</h1>
 
 <p>
 {% blocktrans %}Vivir Bien compiles initiatives and structures that are outside the scope of profit-based capitalist logic. Within this broad scope, Vivir Bien provides a platform for activities based on different theoretical concepts and labels.{% endblocktrans %}
 <br />
 <a class="more" href="/wiki/Vivir%20Bien/">{% trans "Read more in the Wiki..." %}</a>
 </p>
-<div class="listbox">
+
+<div class="navbox">
 <h2>{% trans "Featured Views" %}</h2>
 <ul class="views-list">
 {% for view in featured_views %}
 <li><a href="{% url resources_view name=view.shortname %}">{{ view.name }}</a></li>
 {% endfor %}
 </ul>
+<div class="clear"></div>
 <a class="more" href="{% url resources_views %}">{% trans "all views..." %}</a>
+<div class="clear"></div>
 </div>
-
-<!--
-<div class="listbox">
-<h2>{% trans "Featured Resources" %}</h2>
-<ul class="resources-list">
-{% for resource in featured_resources %}
-<li><a href="{% url resources_resource key=resource.shortname%}">{{ resource.name }}</a></li>
-{% endfor %}
-</ul>
-<a class="more" href="{% url resources_view name="all" %}">{% trans "all resources..." %}</a>
-</div>
--->
 
 <div class="listbox">
 <h2>{% trans "Newest Resources" %}</h2>
@@ -46,12 +37,30 @@
 </div>
 
 <div class="listbox">
-<h2>{% trans "Current Project:<br />Eat &amp Drink" %}</h2>
+<h2>{% trans "Upcoming" %}</h2>
+<table class="resources-list">
+{% for resource in upcoming_resources %}
+<tr><th>
+<a href="{% url resources_resource key=resource.shortname%}">{{ resource.name }}</a>
+</th><td>{% smart_date resource.start_date resource.end_date %}</td></tr>
+{% endfor %}
+</table>
+<!--
+<a class="more" href="{% url resources_view name="all" %}">{% trans "all upcoming events..." %}</a>
+-->
+</div>
+
+
+<div class="listbox lastcol">
+<h2>{% trans "News" %}</h2>
+<h3>{% trans "Current Project:<br />Eat &amp Drink" %}</h3>
 <p>{% blocktrans %}This summer we will focus on eating and drinking within the solidarity economy. Besides the general mapping activity that will continue as usual, we want to pay special attention to food production, processing and consumption!{% endblocktrans %}
 <a class="more" href="/wiki/ThemaEssenTrinken/">{% trans "Read more in the Wiki..." %}</a>
 </p>
-<h2>{% trans "Programmers wanted!" %}</h2>
+<h3>{% trans "Programmers wanted!" %}</h3>
 <p>{% blocktrans %}If you are a programmer and you would like to contribute to an inspiring and technologically challenging project, <a href="mailto:vivirbien@mediavirus.org">get in touch</a>!{% endblocktrans %}</p>
 </div>
+
+
 
 {% endblock %}

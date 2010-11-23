@@ -42,12 +42,14 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 )
 
 MIDDLEWARE_CLASSES = (
+    # TODO: properly port to new CSRF protection mechanism, see http://docs.djangoproject.com/en/dev/ref/contrib/csrf/
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.middleware.csrf.CsrfResponseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.http.ConditionalGetMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware'
 )
 
 ROOT_URLCONF = 'urls'

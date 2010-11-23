@@ -14,6 +14,8 @@ from django.db.models import Count
 
 from django.utils.translation import ugettext_lazy as _
 
+from datetime import datetime, timedelta
+
 from resources.models import *
 from resources.forms import *
 from resources import settings
@@ -182,15 +184,16 @@ def edit_view(request, name=None):
 
 
 def index(request):
+
+    protect_attrs = {
+        True: {},
+        False: {'protected':False}
+    }[request.user.is_authenticated()]
     
-    if request.user.is_authenticated():
-        featured_views = View.objects.filter(featured=True)
-        featured_resources = Resource.objects.filter(featured=True)
-        latest_resources = Resource.objects.order_by('-creation_date')[:15]
-    else:
-        featured_views = View.objects.filter(featured=True, protected=False)
-        featured_resources = Resource.objects.filter(featured=True, protected=False)
-        latest_resources = Resource.objects.filter(protected=False).order_by('-creation_date')[:15]
+    featured_views = View.objects.filter(featured=True, **protect_attrs)
+    featured_resources = Resource.objects.filter(featured=True, **protect_attrs)
+    latest_resources = Resource.objects.filter(**protect_attrs).order_by('-creation_date')[:15]
+    upcoming_resources = Resource.objects.filter(start_date__gte=datetime.now().replace(hour=0, minute=0, second=0, microsecond=0), **protect_attrs).order_by('start_date')[:15]
 
     return render_to_response('resources/index.html', RequestContext(request, locals()))
 

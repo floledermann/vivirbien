@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-06-20 16:10+0200\n"
+"POT-Creation-Date: 2010-11-23 16:26+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,94 +16,113 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: .\models.py:11
+#: models.py:11
 msgid "(Will be part of the resources' URL)"
 msgstr "(Wird Teil der URL)"
 
-#: .\models.py:14 .\models.py:56
+#: models.py:14 models.py:59
 msgid "(Hidden from anonymous users)"
 msgstr "(Nur für registrierte Nutzerinnen sichtbar)"
 
-#: .\models.py:53
+#: models.py:19 models.py:20
+msgid "Format: yyyy-mm-dd hh:mm (time is optional)"
+msgstr "Format: yyyy-mm-dd hh:mm (Zeitangabe optional)"
+
+#: models.py:56
 msgid "(Will be part of the views' URL)"
 msgstr "(Wird Teil der URL)"
 
-#: .\models.py:107
+#: models.py:114
 msgid "All tags"
 msgstr "Alle Tags"
 
-#: .\models.py:110
+#: models.py:117
 msgid "is present"
 msgstr "ist gesetzt."
 
-#: .\models.py:112
+#: models.py:119
 msgid "begins with"
 msgstr "beginnt mit"
 
-#: .\models.py:116
+#: models.py:123
 msgid "and"
 msgstr "und"
 
-#: .\models.py:117
+#: models.py:124
 msgid "or"
 msgstr "oder"
 
-#: .\models.py:158
+#: models.py:165
 msgid "Default Icon"
 msgstr "Standard-Icon"
 
-#: .\models.py:159
+#: models.py:166
 msgid "Red"
 msgstr "Rot"
 
-#: .\templates\resources\edit.html.py:32
+#: models.py:190
+msgid "Subicon only"
+msgstr "Nur Subicon"
+
+#: templates/resources/edit.html:32
 msgid "New resource"
 msgstr "Neue Ressource"
 
-#: .\templates\resources\edit.html.py:56
-#: .\templates\resources\view_edit.html.py:59
-#: .\templates\resources\view_edit.html.py:99
+#: templates/resources/edit.html:58 templates/resources/view_edit.html:59
+#: templates/resources/view_edit.html:99
 msgid "Common Tags:"
 msgstr "Häufige Tags:"
 
-#: .\templates\resources\edit.html.py:78
-#: .\templates\resources\view_edit.html.py:122
+#: templates/resources/edit.html:83 templates/resources/view_edit.html:122
 msgid "Help:"
 msgstr "Hilfe:"
 
-#: .\templates\resources\edit.html.py:86
-#: .\templates\resources\view_edit.html.py:130
+#: templates/resources/edit.html:91 templates/resources/icon_edit.html:24
+#: templates/resources/view_edit.html:129
 msgid "Save"
 msgstr "Speichern"
 
-#: .\templates\resources\edit.html.py:87
-#: .\templates\resources\view_edit.html.py:131
+#: templates/resources/edit.html:92 templates/resources/view_edit.html:130
 msgid "Save and continue"
 msgstr "Speichern &amp; weiter bearbeiten"
 
-#: .\templates\resources\edit.html.py:90 .\templates\resources\edit.html.py:92
-#: .\templates\resources\view_edit.html.py:134
-#: .\templates\resources\view_edit.html.py:136
+#: templates/resources/edit.html:95 templates/resources/edit.html.py:97
+#: templates/resources/icon_edit.html:26
+#: templates/resources/view_edit.html:133
+#: templates/resources/view_edit.html:135
 msgid "Cancel"
 msgstr "Abbrechen"
 
-#: .\templates\resources\edit.html.py:99
+#: templates/resources/edit.html:104
 msgid "Look up from address"
 msgstr "Adresse nachschlagen"
 
-#: .\templates\resources\edit.html.py:105
+#: templates/resources/edit.html:110
 msgid "Add location tag for this address"
 msgstr "Location für diese Adresse hinzufügen"
 
-#: .\templates\resources\index.html.py:4
+#: templates/resources/icon_edit.html:16
+msgid "New Icon"
+msgstr "Neues Icon"
+
+#: templates/resources/icons.html:5 templates/resources/icons.html.py:9
+#: templates/resources/view_edit.html:123
+msgid "Icons"
+msgstr ""
+
+#: templates/resources/icons.html:10
+msgid "Add Icon"
+msgstr "Neues Icon"
+
+#: templates/resources/index.html:4
 msgid "Resources"
 msgstr "Ressourcen"
 
-#: .\templates\resources\index.html.py:9
-msgid "Vivir Bien: Resources for non-capitalist lifestyles"
-msgstr "Vivir Bien: Ressourcen für nichtkapitalistische Lebensweisen"
+#: templates/resources/index.html:9
+msgid "Vivir Bien: Resources for a solidarity ecomomy"
+msgstr "Vivir Bien: Ressourcen für solidarische Lebensweisen"
 
-#: .\templates\resources\index.html.py:12
+#: templates/resources/index.html:12
 msgid ""
 "Vivir Bien compiles initiatives and structures that are outside the scope of "
 "profit-based capitalist logic. Within this broad scope, Vivir Bien provides "
@@ -113,37 +132,43 @@ msgstr ""
 "Gewinnlogik existieren. Aktivitäten mit verschiedenen theoretischen "
 "Hintergründen und Labels bekommen hier eine Plattform."
 
-#: .\templates\resources\index.html.py:14
-#: .\templates\resources\index.html.py:51
+#: templates/resources/index.html:14 templates/resources/index.html.py:54
 msgid "Read more in the Wiki..."
 msgstr "Mehr im Wiki..."
 
-#: .\templates\resources\index.html.py:17
+#: templates/resources/index.html:18
 msgid "Featured Views"
 msgstr "Empfohlene Ansichten"
 
-#: .\templates\resources\index.html.py:23
+#: templates/resources/index.html:24
 msgid "all views..."
 msgstr "Alle Ansichten..."
 
-#: .\templates\resources\index.html.py:28
-msgid "Featured Resources"
-msgstr "Empfohlene Ressourcen"
-
-#: .\templates\resources\index.html.py:34
-#: .\templates\resources\index.html.py:45
-msgid "all resources..."
-msgstr "Alle Ressourcen..."
-
-#: .\templates\resources\index.html.py:39
+#: templates/resources/index.html:28
 msgid "Newest Resources"
 msgstr "Neueste Ressourcen"
 
-#: .\templates\resources\index.html.py:49
+#: templates/resources/index.html:34
+msgid "all resources..."
+msgstr "Alle Ressourcen..."
+
+#: templates/resources/index.html:38
+msgid "Upcoming"
+msgstr "Termine"
+
+#: templates/resources/index.html:46
+msgid "all upcoming resources..."
+msgstr "Alle Termine..."
+
+#: templates/resources/index.html:51
+msgid "News"
+msgstr "News"
+
+#: templates/resources/index.html:52
 msgid "Current Project:<br />Eat &amp Drink"
 msgstr "Aktuelles Projekt:<br />Essen &amp Trinken"
 
-#: .\templates\resources\index.html.py:50
+#: templates/resources/index.html:53
 msgid ""
 "This summer we will focus on eating and drinking within the solidarity "
 "economy. Besides the general mapping activity that will continue as usual, "
@@ -155,11 +180,11 @@ msgstr ""
 "Ökonomie legen. Von der Produktion bis zum Konsum von Nahrungsmitteln soll "
 "das Thema theoretisch und praktisch vertieft werden."
 
-#: .\templates\resources\index.html.py:53
+#: templates/resources/index.html:56
 msgid "Programmers wanted!"
 msgstr "Programmiererinnen gesucht!"
 
-#: .\templates\resources\index.html.py:54
+#: templates/resources/index.html:57
 msgid ""
 "If you are a programmer and you would like to contribute to an inspiring and "
 "technologically challenging project, <a href=\"mailto:vivirbien@mediavirus."
@@ -169,123 +194,124 @@ msgstr ""
 "inspirierendes Projekt bei dem Du mitmachen kannst? <a href=\"mailto:"
 "vivirbien@mediavirus.org\">Lass' es uns wissen</a>!"
 
-#: .\templates\resources\resource.html.py:63
-#: .\templates\resources\resources_by_tag.html.py:4
-#: .\templates\resources\resources_by_tag.html.py:8
-#: .\templates\resources\resources_by_tag.html.py:21
-#: .\templates\resources\view_list.html.py:12
-#: .\templates\resources\view_map.html.py:24
+#: templates/resources/resource.html:63
+#: templates/resources/resources_by_tag.html:4
+#: templates/resources/resources_by_tag.html:8
+#: templates/resources/resources_by_tag.html:21
+#: templates/resources/view_list.html:12 templates/resources/view_map.html:24
 msgid "Resources with tag:"
 msgstr "Ressourcen mit Tag:"
 
-#: .\templates\resources\resource.html.py:72
+#: templates/resources/resource.html:73
 msgid "Edit"
 msgstr "Bearbeiten"
 
-#: .\templates\resources\resource.html.py:77
+#: templates/resources/resource.html:79
 msgid "Comments for"
 msgstr "Kommentare zu"
 
-#: .\templates\resources\resource.html.py:82
+#: templates/resources/resource.html:84
 msgid "Comment by"
 msgstr "Kommentar von"
 
-#: .\templates\resources\resource.html.py:84
+#: templates/resources/resource.html:86
 msgid "Reply"
 msgstr "Antworten"
 
-#: .\templates\resources\resource.html.py:90
+#: templates/resources/resource.html:92
 msgid "New Comment"
 msgstr "Neuer Kommentar"
 
-#: .\templates\resources\resources_by_tag.html.py:11
+#: templates/resources/resources_by_tag.html:11
 msgid "Wiki Page for Key:"
 msgstr "Wikiseite für Key:"
 
-#: .\templates\resources\tag.html.py:4 .\templates\resources\tag.html.py:8
+#: templates/resources/tag.html:4 templates/resources/tag.html.py:8
 msgid "Tag:"
 msgstr "Tag:"
 
-#: .\templates\resources\tags.html.py:4
+#: templates/resources/tags.html:4
 msgid "List of tags"
 msgstr "Liste von Tags"
 
-#: .\templates\resources\tags.html.py:9
+#: templates/resources/tags.html:9
 msgid "All Tags"
 msgstr "Alle Tags"
 
-#: .\templates\resources\view.html.py:25
+#: templates/resources/view.html:34
 msgid "This view shows resources with tags:"
 msgstr "Diese Ansicht zeigt Ressourcen mit den Tags:"
 
-#: .\templates\resources\view.html.py:31
+#: templates/resources/view.html:40
 msgid "Map Data Loading..."
 msgstr "Kartendaten werden geladen..."
 
-#: .\templates\resources\view_edit.html.py:32
+#: templates/resources/view_edit.html:32
 msgid "New view"
 msgstr "Neue Ansicht"
 
-#: .\templates\resources\view_edit.html.py:41
+#: templates/resources/view_edit.html:41
 msgid "Filters"
 msgstr "Filter"
 
-#: .\templates\resources\view_edit.html.py:42
+#: templates/resources/view_edit.html:42
 msgid "Resources which meet these criteria will be listed in the view."
 msgstr ""
 "Ressourcen die diesen Kriterien entsprechen werden in dieser Ansicht "
 "angezeigt."
 
-#: .\templates\resources\view_edit.html.py:81
+#: templates/resources/view_edit.html:81
 msgid "Mappings"
 msgstr "Mappings"
 
-#: .\templates\resources\view_edit.html.py:82
+#: templates/resources/view_edit.html:82
 msgid "Mappings determine the appearance of the resource."
 msgstr ""
 "Mappings bestimmen das Erscheinungsbild einer Ressource in der Ansicht."
 
-#: .\templates\resources\view_list.html.py:4
-#: .\templates\resources\view_map.html.py:4
+#: templates/resources/view_list.html:4 templates/resources/view_map.html:4
 msgid "List of resources"
 msgstr "Liste der Ressourcen"
 
-#: .\templates\resources\views.html.py:4
+#: templates/resources/views.html:4
 msgid "List of views"
 msgstr "Liste von Ansichten"
 
-#: .\templates\resources\views.html.py:9
-#: .\templates\resources\includes\actions.html.py:4
+#: templates/resources/views.html:9
+#: templates/resources/includes/actions.html:4
 msgid "Views"
 msgstr "Ansichten"
 
-#: .\templates\resources\includes\actions.html.py:3
+#: templates/resources/includes/actions.html:3
 msgid "Main"
 msgstr "Start"
 
-#: .\templates\resources\includes\actions.html.py:5
+#: templates/resources/includes/actions.html:5
 msgid "Tags"
 msgstr "Tags"
 
-#: .\templates\resources\includes\actions.html.py:7
+#: templates/resources/includes/actions.html:9
 msgid "Add resource"
 msgstr "Neue Ressource"
 
-#: .\templates\resources\includes\actions.html.py:8
+#: templates/resources/includes/actions.html:12
 msgid "Add view"
 msgstr "Neue Ansicht"
 
-#: .\templates\resources\includes\tag_actions.html.py:2
+#: templates/resources/includes/tag_actions.html:2
 msgid "Documentation for key:"
 msgstr "Dokumentation für Key:"
 
-#: .\templates\resources\includes\tag_actions.html.py:3
+#: templates/resources/includes/tag_actions.html:3
 msgid "Resources with key:"
 msgstr "Ressourcen mit Key:"
 
-#: .\templates\resources\includes\view_actions.html.py:4
+#: templates/resources/includes/view_actions.html:5
 msgid "Edit view"
 msgstr "Diese Ansicht bearbeiten"
+
+#~ msgid "Featured Resources"
+#~ msgstr "Empfohlene Ressourcen"
 
 #~ msgid "equals"
 #~ msgstr "ist gleich"

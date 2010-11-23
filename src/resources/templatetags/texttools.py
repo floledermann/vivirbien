@@ -18,3 +18,31 @@ def in_list(value, list=''):
 @stringfilter
 def prefix(value, prefix):
     return "%s%s" % (prefix, value)
+
+@register.simple_tag
+def smart_date(start_date, end_date=None):
+    from datetime import datetime
+    from django.utils import dateformat
+
+    now = datetime.now()
+
+    components = []
+
+    components.append(dateformat.format(start_date,'j.n.'))
+    if start_date.year != now.year: components.append(str(start_date.year))
+    
+    start_time = start_date.time()
+    if start_time.hour > 0 or start_time.minute > 0: components.append(dateformat.time_format(start_time,', G:i'))
+
+    if end_date:
+        components.append(' - ')
+        if end_date.date() != start_date.date():
+            components.append(dateformat.format(end_date,'j.n.'))
+            if end_date.year != now.year: components.append(str(end_date.year))
+            components.append(',')
+
+        end_time = end_date.time()
+        if end_time.hour > 0 or end_time.minute > 0: components.append(dateformat.time_format(end_time,' G:i'))
+    
+    return ''.join(components)
+    

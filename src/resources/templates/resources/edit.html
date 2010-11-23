@@ -37,6 +37,8 @@ var MEDIA_URL = "{{ MEDIA_URL}}";
 {{ form.as_table }}
 </table>
 
+<h2>Tags</h2>
+
 {% if formset %}
 {{ formset.management_form }}
 <table class="edit-table tags-edit-table">
@@ -73,6 +75,9 @@ var MEDIA_URL = "{{ MEDIA_URL}}";
 </table>
 {% endif %}
 
+<!--
+<h2>Relations</h2>
+-->
 {% if tag_help %}
 <div class="actions">
 {% trans "Help:" %} 
@@ -82,7 +87,7 @@ var MEDIA_URL = "{{ MEDIA_URL}}";
 {% endfor %}
 </div>
 {% endif %}
-
+{% csrf_token %}
 <button type="submit">{% trans "Save" %}</button>
 <button name="action" value="add_tag" type="submit">{% trans "Save and continue" %}</button>
 

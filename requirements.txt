@@ -15,7 +15,7 @@ django-atomformat==0.1.1dev
 Markdown
 smartypants
 creole==1.0.1
-sorl-thumbnail
+sorl-thumbnail==3.2.5
 
 # -----------------------------
 
