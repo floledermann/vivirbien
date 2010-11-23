@@ -12,14 +12,17 @@ from fabric.contrib import console, files
 import time
 import os
 import sys
+import platform
 
 env.project_name = 'vivirbien'
 env.virtualenv_dir = 'env'
     
 if sys.platform == 'win32':
     env.virtualenv_bin = 'Scripts'
+    env.command_join = '&'
 else:
     env.virtualenv_bin = 'bin'
+    env.command_join = ';'
     
 import settings_project as settings_project
 
@@ -285,20 +288,20 @@ def init():
 def package():
     "Package the current state into a tarball for deployment."
     env.release = time.strftime('%Y-%m-%d.%H%M%S')
-    if os.path.isdir(os.path.join(os.getcwd(), '.svn')):
-        local('svn export . releases\\%s' % env.release)
-    else:
+    if platform.system() == "Windows":
         # xcopy cannot copy into a subdirectory even if it is excluded, so we
         # have to make a diversion via the temp directory
-        local('xcopy . %%TEMP%%\\releases\\%s\\ /e /c /q /exclude:.deploy-ignore'
+        local('xcopy . %%TEMP%%\\releases\\%s\\ /e /c /q /exclude:.deploy-ignore-win'
               % env.release)
         local('xcopy %%TEMP%%\\releases\\%s releases\\%s\\ /e /c /q'
               % (env.release, env.release))
-    # requires tar and gzip for windows http://gnuwin32.sourceforge.net/packages/gzip.htm http://sourceforge.net/projects/unxutils/
-    local('tar cf releases/%s.tar -C releases/%s/ .' % (env.release, env.release))    
-    local('gzip releases\\%s.tar' % env.release)
-    # local('copy releases\\%s.tar.gz releases\\latest.tar.gz' % env.release)
-    local('rmdir /s /q releases\\%s\\' % env.release)
+        # requires tar and gzip for windows http://gnuwin32.sourceforge.net/packages/gzip.htm http://sourceforge.net/projects/unxutils/
+        local('tar cf releases/%s.tar -C releases/%s/ .' % (env.release, env.release))    
+        local('gzip releases\\%s.tar' % env.release)
+         # local('copy releases\\%s.tar.gz releases\\latest.tar.gz' % env.release)
+        local('rmdir /s /q releases\\%s\\' % env.release)
+    else:
+        local('tar --exclude-from .deploy-ignore -zcf releases/%s.tar.gz *' % env.release)
 
 def upload():
     "Upload current build."
@@ -317,7 +320,10 @@ def upload():
 
     # symlink uploads dir
     run('cd %s%s/releases/%s; ln -s ../../../uploads/ media/uploads' % (env.sites_home, env.project_name, env.release))
-    local('del releases\\%s.tar.gz' % env.release)
+    if platform.system() == "Windows":
+        local('del releases\\%s.tar.gz' % env.release)
+    else:
+        local('rm releases/%s.tar.gz' % env.release)
 
 def activate():
     "Activate (symlink) our current release"
@@ -396,19 +402,19 @@ def translate():
 def makemessages():
     if env.hosts:
         abort('Please create translations locally')
-    local('cd templates & django-admin.py makemessages -l de -e html -e txt', capture=False)
-    local('cd templates & django-admin.py makemessages -l en -e html -e txt', capture=False)
-    local('cd src/wiki & django-admin.py makemessages -l de', capture=False)
-    local('cd src/resources & django-admin.py makemessages -l de', capture=False)
-    local('cd env/src/django-invitation/invitation & django-admin.py makemessages -l de -e html -e txt', capture=False)
+    local('cd templates %s django-admin.py makemessages -l de -e html -e txt' % env.command_join, capture=False)
+    local('cd templates %s django-admin.py makemessages -l en -e html -e txt' % env.command_join, capture=False)
+    local('cd src/wiki %s django-admin.py makemessages -l de' % env.command_join, capture=False)
+    local('cd src/resources %s django-admin.py makemessages -l de' % env.command_join, capture=False)
+    local('cd env/src/django-invitation/invitation %s django-admin.py makemessages -l de -e html -e txt' % env.command_join, capture=False)
 
 def compilemessages():
     if env.hosts:
         abort('Please create translations locally')
-    local('cd templates & django-admin.py compilemessages', capture=False)
-    local('cd src/wiki & django-admin.py compilemessages', capture=False)
-    local('cd src/resources & django-admin.py compilemessages', capture=False)
-    local('cd env/src/django-invitation/invitation & django-admin.py compilemessages', capture=False)
+    local('cd templates %s django-admin.py compilemessages' % env.command_join, capture=False)
+    local('cd src/wiki %s django-admin.py compilemessages' % env.command_join, capture=False)
+    local('cd src/resources %s django-admin.py compilemessages' % env.command_join, capture=False)
+    local('cd env/src/django-invitation/invitation %s django-admin.py compilemessages' % env.command_join, capture=False)
 
 def runserver():
     cmd = 'runserver'
