@@ -1,18 +1,23 @@
 {% extends "resources/base.html" %}
-{% load i18n texttools %}
+{% load i18n texttools tagging_tags %}
 
 {% block title %}Vivir Bien: {% trans "Resources" %}{% endblock %}
 
 {% block resources_content %}
 {% include "resources/includes/actions.html" %}
 
-<h1>{% trans "Vivir Bien: Resources for a solidarity ecomomy" %}</h1>
+{#{% tagged_objects "main" in snippets as news %}#}
 
+{% for snippet in news %}
+<h1>{{ snippet.title }}</h1>
 <p>
-{% blocktrans %}Vivir Bien compiles initiatives and structures that are outside the scope of profit-based capitalist logic. Within this broad scope, Vivir Bien provides a platform for activities based on different theoretical concepts and labels.{% endblocktrans %}
+{{ snippet.content }}
+{% if snippet.link %}
 <br />
-<a class="more" href="/wiki/Vivir%20Bien/">{% trans "Read more in the Wiki..." %}</a>
+<a class="more" href="{{ snippet.link }}">{% trans "Read more..." %}</a>
+{% endif %}
 </p>
+{% endfor %}
 
 <div class="navbox">
 <h2>{% trans "Featured Views" %}</h2>

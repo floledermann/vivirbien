@@ -73,6 +73,7 @@ INSTALLED_APPS = (
     'resources',
     'threadedcomments',
     'sorl.thumbnail',
+    'snippets'
 )
 
 TEMPLATE_DIRS = None

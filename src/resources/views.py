@@ -195,6 +195,9 @@ def index(request):
     latest_resources = Resource.objects.filter(**protect_attrs).order_by('-creation_date')[:15]
     upcoming_resources = Resource.objects.filter(start_date__gte=datetime.now().replace(hour=0, minute=0, second=0, microsecond=0), **protect_attrs).order_by('start_date')[:15]
 
+    #from snippets.models import Snippet
+    #snippets = Snippet.objects.all()
+
     return render_to_response('resources/index.html', RequestContext(request, locals()))
 
 
