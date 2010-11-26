@@ -53,11 +53,12 @@ class Snippet(models.Model):
     link = models.URLField(verify_exists=False, blank=True)
     slug = models.SlugField(blank=True)
 
+    date = models.DateTimeField(default=datetime.now)
+
     parent = models.ForeignKey('self', verbose_name=_('Parent Snippet'), null=True, blank=True)
 
     active = models.BooleanField(default=True)
 
-    creation_date = models.DateTimeField(auto_now_add=True)
     start_date = models.DateTimeField(blank=True, null=True)
     end_date = models.DateTimeField(blank=True, null=True)
 
@@ -67,7 +68,8 @@ class Snippet(models.Model):
         return self.title or self.content[:76] or '<Empty Snippet>'
 
     class Meta:
-        ordering = ('creation_date',)
+        ordering = ('date',)
+        unique_together = ('slug','parent')
 
 if 'tagging' in settings.INSTALLED_APPS:
     import tagging

@@ -9,14 +9,15 @@ class SnippetAdmin(admin.ModelAdmin):
         # this will work in 1.3
         #list_filter = ('rel_tags__tag__name', )
     else:
-        list_display = ('__unicode__', 'lang', 'active')
+        list_display = ('__unicode__', 'lang', 'active', 'date')
 
     list_filter = ('lang', 'creator', 'categories') #, 'parent'
+    prepopulated_fields = {'slug': ('title',)}
 
     def save_model(self, request, obj, form, change):
-        # only set on creation
         if not change:
             obj.creator = request.user
+
         # always save model! this is where it is done
         obj.save()
 
