@@ -12,11 +12,9 @@ class SnippetNode(template.Node):
         self.var_name = var_name
 
     def render(self, context):
-        context[self.var_name] = Snippet.objects.filter(
-            categories__title = self.category.resolve(context),
-            lang = context['LANGUAGE_CODE'],
-            active = True,
-        ).exclude(end_date__lt=datetime.now()).exclude(start_date__gt=datetime.now())
+        context[self.var_name] = Snippet.objects\
+                                        .current(context['LANGUAGE_CODE'])\
+                                        .filter(categories__title = self.category.resolve(context))
         return ''
 
 
