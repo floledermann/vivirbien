@@ -1,5 +1,5 @@
 from django import template
-from ..models import *
+from ..models import Snippet
 
 from datetime import datetime
 

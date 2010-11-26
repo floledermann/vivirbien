@@ -9,7 +9,7 @@
 {% snippets "main" as news %}
 
 {% for snippet in news %}
-<h1>{{ snippet.title }}</h1>
+<h1>{{ snippet.title|safe }}</h1>
 <p>
 {{ snippet.content|safe }}
 {% if snippet.link %}
@@ -59,7 +59,7 @@
 <h2>{% trans "News" %}</h2>
 {% snippets "news" as news %}
 {% for snippet in news %}
-<h3>{{ snippet.title }}</h3>
+<h3>{{ snippet.title|safe }}</h3>
 <p>{{ snippet.content|safe }}
 {% if snippet.link %}
 <a class="more" href="{{ snippet.link }}">{% trans "Read more..." %}</a>

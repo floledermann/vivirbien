@@ -5,13 +5,13 @@ from snippets.models import *
 
 class SnippetAdmin(admin.ModelAdmin):
     if 'tagging' in settings.INSTALLED_APPS:
-        list_display = ('__unicode__', 'lang', 'tag_str', 'active')
+        list_display = ('__unicode__', 'lang', 'tag_str', 'active', 'date')
         # this will work in 1.3
         #list_filter = ('rel_tags__tag__name', )
     else:
         list_display = ('__unicode__', 'lang', 'active', 'date')
 
-    list_filter = ('lang', 'creator', 'categories') #, 'parent'
+    list_filter = ('lang', 'categories') #, 'parent'
     prepopulated_fields = {'slug': ('title',)}
 
     def save_model(self, request, obj, form, change):
