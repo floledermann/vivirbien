@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-11-23 16:26+0000\n"
+"POT-Creation-Date: 2010-11-26 20:53+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -118,81 +118,37 @@ msgstr "Neues Icon"
 msgid "Resources"
 msgstr "Ressourcen"
 
-#: templates/resources/index.html:9
-msgid "Vivir Bien: Resources for a solidarity ecomomy"
-msgstr "Vivir Bien: Ressourcen für solidarische Lebensweisen"
+#: templates/resources/index.html:17 templates/resources/index.html.py:65
+msgid "Read more..."
+msgstr "Mehr Info..."
 
-#: templates/resources/index.html:12
-msgid ""
-"Vivir Bien compiles initiatives and structures that are outside the scope of "
-"profit-based capitalist logic. Within this broad scope, Vivir Bien provides "
-"a platform for activities based on different theoretical concepts and labels."
-msgstr ""
-"Vivir Bien erfasst Initiativen und Strukturen, die abseits kapitalistischer "
-"Gewinnlogik existieren. Aktivitäten mit verschiedenen theoretischen "
-"Hintergründen und Labels bekommen hier eine Plattform."
-
-#: templates/resources/index.html:14 templates/resources/index.html.py:54
-msgid "Read more in the Wiki..."
-msgstr "Mehr im Wiki..."
-
-#: templates/resources/index.html:18
+#: templates/resources/index.html:23
 msgid "Featured Views"
 msgstr "Empfohlene Ansichten"
 
-#: templates/resources/index.html:24
+#: templates/resources/index.html:30
 msgid "all views..."
 msgstr "Alle Ansichten..."
 
-#: templates/resources/index.html:28
+#: templates/resources/index.html:35
 msgid "Newest Resources"
 msgstr "Neueste Ressourcen"
 
-#: templates/resources/index.html:34
+#: templates/resources/index.html:41
 msgid "all resources..."
 msgstr "Alle Ressourcen..."
 
-#: templates/resources/index.html:38
+#: templates/resources/index.html:45
 msgid "Upcoming"
 msgstr "Termine"
 
-#: templates/resources/index.html:46
-msgid "all upcoming resources..."
+#: templates/resources/index.html:54
+msgid "all upcoming events..."
 msgstr "Alle Termine..."
 
-#: templates/resources/index.html:51
+#: templates/resources/index.html:59
 msgid "News"
 msgstr "News"
-
-#: templates/resources/index.html:52
-msgid "Current Project:<br />Eat &amp Drink"
-msgstr "Aktuelles Projekt:<br />Essen &amp Trinken"
-
-#: templates/resources/index.html:53
-msgid ""
-"This summer we will focus on eating and drinking within the solidarity "
-"economy. Besides the general mapping activity that will continue as usual, "
-"we want to pay special attention to food production, processing and "
-"consumption!"
-msgstr ""
-"Diesen Sommer wollen wir neben den allgemeinen Mapping-Aktivitäten "
-"spezielles Augenmerk auf das Thema Essen &amp; Trinken in der solidarischen "
-"Ökonomie legen. Von der Produktion bis zum Konsum von Nahrungsmitteln soll "
-"das Thema theoretisch und praktisch vertieft werden."
-
-#: templates/resources/index.html:56
-msgid "Programmers wanted!"
-msgstr "Programmiererinnen gesucht!"
-
-#: templates/resources/index.html:57
-msgid ""
-"If you are a programmer and you would like to contribute to an inspiring and "
-"technologically challenging project, <a href=\"mailto:vivirbien@mediavirus."
-"org\">get in touch</a>!"
-msgstr ""
-"Du bist Programmiererin bzw. Programmierer und sucht ein sinnvolles, "
-"inspirierendes Projekt bei dem Du mitmachen kannst? <a href=\"mailto:"
-"vivirbien@mediavirus.org\">Lass' es uns wissen</a>!"
 
 #: templates/resources/resource.html:63
 #: templates/resources/resources_by_tag.html:4
@@ -309,6 +265,8 @@ msgstr "Ressourcen mit Key:"
 #: templates/resources/includes/view_actions.html:5
 msgid "Edit view"
 msgstr "Diese Ansicht bearbeiten"
+
+
 
 #~ msgid "Featured Resources"
 #~ msgstr "Empfohlene Ressourcen"
