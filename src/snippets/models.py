@@ -7,6 +7,17 @@ from django.contrib.contenttypes import generic
 from django.utils.translation import ugettext_lazy as _
 
 
+class Category(models.Model):
+
+    title = models.SlugField(max_length=30)
+
+    def __unicode__(self):
+        return self.title
+
+    class Meta:
+        ordering = ('title',)
+
+
 class Snippet(models.Model):
 
     def get_upload_path(self, filename):
@@ -26,6 +37,8 @@ class Snippet(models.Model):
     else:
         # create dummy field for future install of tagging app
         tag_str = tagging.fields.CharField(_('Tags'), blank=True)
+
+    categories = models.ManyToManyField(Category, blank=True)
 
     link = models.URLField(verify_exists=False, blank=True)
     slug = models.SlugField(blank=True)

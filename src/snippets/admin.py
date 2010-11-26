@@ -11,10 +11,10 @@ class SnippetAdmin(admin.ModelAdmin):
     else:
         list_display = ('__unicode__', 'lang', 'active')
 
-    #list_filter = ('lang', 'creator')
+    list_filter = ('lang', 'creator', 'categories') #, 'parent'
 
     def save_model(self, request, obj, form, change):
-        # only set initially
+        # only set on creation
         if not change:
             obj.creator = request.user
         # always save model! this is where it is done
@@ -22,4 +22,5 @@ class SnippetAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Snippet, SnippetAdmin)
+admin.site.register(Category)
 

@@ -1,12 +1,12 @@
 {% extends "resources/base.html" %}
-{% load i18n texttools tagging_tags %}
+{% load i18n texttools snippets %}
 
 {% block title %}Vivir Bien: {% trans "Resources" %}{% endblock %}
 
 {% block resources_content %}
 {% include "resources/includes/actions.html" %}
 
-{#{% tagged_objects "main" in snippets as news %}#}
+{% snippets "main" as news %}
 
 {% for snippet in news %}
 <h1>{{ snippet.title }}</h1>
@@ -55,17 +55,17 @@
 -->
 </div>
 
-
 <div class="listbox lastcol">
 <h2>{% trans "News" %}</h2>
-<h3>{% trans "Current Project:<br />Eat &amp Drink" %}</h3>
-<p>{% blocktrans %}This summer we will focus on eating and drinking within the solidarity economy. Besides the general mapping activity that will continue as usual, we want to pay special attention to food production, processing and consumption!{% endblocktrans %}
-<a class="more" href="/wiki/ThemaEssenTrinken/">{% trans "Read more in the Wiki..." %}</a>
+{% snippets "news" as news %}
+{% for snippet in news %}
+<h3>{{ snippet.title }}</h3>
+<p>{{ snippet.content }}
+{% if snippet.link %}
+<a class="more" href="{{ snippet.link }}">{% trans "Read more..." %}</a>
+{% endif %}
 </p>
-<h3>{% trans "Programmers wanted!" %}</h3>
-<p>{% blocktrans %}If you are a programmer and you would like to contribute to an inspiring and technologically challenging project, <a href="mailto:vivirbien@mediavirus.org">get in touch</a>!{% endblocktrans %}</p>
+{% endfor %}
 </div>
-
-
 
 {% endblock %}
