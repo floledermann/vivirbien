@@ -30,7 +30,8 @@ urlpatterns = patterns('',
     url(r'^all/$', views.all_resources, name='resources_all'),
    
     url(r'^tags/$', views.tags, name='resources_tags'),
-    url(r'^tag/(?P<key>.*)=(?P<value>.*)/$', views.tag, name='resources_tag'),
+    # *? matches key non-greedy, matching only as few as possible characters if value has = sign in it
+    url(r'^tag/(?P<key>.*?)=(?P<value>.*)/$', views.tag, name='resources_tag'),
     url(r'^tag/(?P<key>.*)/$', views.tag, name='resources_tag_key'),
     url(r'^tools/rename_tag/$', views.rename_tag, name='resources_rename_tag'),
 
@@ -42,7 +43,8 @@ urlpatterns = patterns('',
     
     url(r'^json/view/(?P<name>.*)/$', views.view_json, name='geojson'),
     
-    url(r'^with/tag/(?P<key>.*)=(?P<value>.*)/$', views.resources_by_tag, name='resources_with_tag'),
+    # *? matches key non-greedy, matching only as few as possible characters if value has = sign in it
+    url(r'^with/tag/(?P<key>.*?)=(?P<value>.*)/$', views.resources_by_tag, name='resources_with_tag'),
     url(r'^with/tag/(?P<key>.*)/$', views.resources_by_tag, name='resources_with_key'),
     url(r'^resource/(?P<key>.*)/$', views.resource, name='resources_resource'),
     url(r'^new/$', views.edit_resource, name='resources_new'),
