@@ -1,0 +1,43 @@
+.actions .context-form {
+    float: right;
+}
+
+.resourceslist {
+    max-width: 250px;
+}
+
+.resource,
+.view {
+    margin: 1px;
+    padding: 1px 2px;
+    border: 1px solid #666;
+    background-color: #eee;
+    text-indent: 22px;
+    -moz-border-radius: 2px;
+    background-repeat: no-repeat;
+}
+
+.resource {
+    background-image: url('../images/resource-icon_20x20.png');
+}
+
+.view {
+    background-image: url('../images/view-icon_20x20.png');
+}
+
+.upcoming li {
+    clear: both;
+    position: relative;
+}
+
+.upcoming .resource {
+    float: left;
+    width: 50%;
+}
+
+.upcoming .date {
+    float: right;
+    font-size: 11px;
+    width: 45%;
+}
+
