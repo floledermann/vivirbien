@@ -103,6 +103,8 @@ RESOURCES_TAG_HELP_LINKS = [
     ('Tag-Proposals','/wiki/Tag-Proposals/'),
 ]
 
+AUTH_PROFILE_MODULE = 'resources.UserProfile'
+
 import os
 try:
     DEPLOYMENT_CONFIG = os.environ['DJANGO_CONFIG']

@@ -115,6 +115,7 @@ def view(request, name):
         #assert False, tags
     
     icon_mappings = view.mappings.exclude(icon=None)
+    context_form = ContextForm(instance=request.user.get_profile().context)
     
     return render_to_response('resources/view.html', RequestContext(request, locals()))
     
@@ -197,6 +198,8 @@ def index(request):
 
     #from snippets.models import Snippet
     #snippets = Snippet.objects.all()
+
+    context_form = ContextForm(instance=request.user.get_profile().context)
 
     return render_to_response('resources/index.html', RequestContext(request, locals()))
 
@@ -310,7 +313,24 @@ def add_icon(request):
         form = IconForm()
         
     return render_to_response('resources/icon_edit.html', RequestContext(request, locals()))
-    
+
+
+def set_context(request):
+
+    if request.POST:
+        if request.user.is_authenticated():
+            profile = request.user.get_profile()
+            form = ContextForm(request.POST, instance=profile.context)
+            if form.is_valid():
+                context = form.save()
+                #assert False, profile.context.area
+                # context not set on user before?
+                if not profile.context:
+                    profile.context = context
+                    profile.save()
+
+    return redirect_to(request, request.POST.get('next') or request.META.get('HTTP_REFERER') or reverse('resources_index'))
+
                
 def view_json(request, name=None):
     from django.utils import simplejson as json

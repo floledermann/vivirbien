@@ -45,5 +45,9 @@ class ViewAdmin(admin.ModelAdmin):
 
 admin.site.register(Resource, ResourceAdmin)
 admin.site.register(View, ViewAdmin)
+
 admin.site.register(Icon)
+admin.site.register(Area)
+admin.site.register(UserProfile)
+
 

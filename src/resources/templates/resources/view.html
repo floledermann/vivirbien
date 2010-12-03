@@ -4,6 +4,7 @@
 {% block title %}Vivir Bien: {{ view.name }}{% endblock %}
 
 {% block extra_head %}
+{{ block.super }}
 <!--<script src="{{ MEDIA_URL }}js/OpenLayers-2.8-debug/lib/OpenLayers.js"></script>-->
 <script type="text/javascript" src="{{ MEDIA_URL }}js/OpenLayers-2.8/OpenLayers.js"></script>
 <script type="text/javascript" src="http://www.openstreetmap.org/openlayers/OpenStreetMap.js"></script>
@@ -12,7 +13,8 @@
 <script type="text/javascript" src="{{ MEDIA_URL }}resources/js/map.js"></script>
 <script type="text/javascript">
 var MEDIA_URL = "{{ MEDIA_URL }}",
-    VIEW = "{{ view.shortname }}";
+    VIEW = "{{ view.shortname }}",
+    AREA = "{{ user.get_profile.context.area.bounds|default:""}}";
 
 var icon_mappings = [
 {% for mapping in icon_mappings %}
@@ -50,7 +52,7 @@ var icon_mappings = [
 </h2>
 <ul class="resourceslist">
 {% for resource in group.resources %}
-<li><a href="{% url resources_resource key=resource.shortname%}">{{ resource.name }}</a></li>
+<li class="resource"><a href="{% url resources_resource key=resource.shortname%}">{{ resource.name }}</a></li>
 {% endfor %}
 </ul>
 {% if forloop.counter|divisibleby:3 %}
@@ -63,7 +65,7 @@ var icon_mappings = [
 {% else %}
 <ul class="resourceslist">
 {% for resource in resources %}
-<li><a href="{% url resources_resource key=resource.shortname%}">{{ resource.name }}</a>
+<li class="resource"><a href="{% url resources_resource key=resource.shortname%}">{{ resource.name }}</a>
 <div class="help">
 {% regroup resource.view_tags by key as tag_list %}
 {% for group in tag_list %}

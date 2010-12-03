@@ -50,4 +50,7 @@ urlpatterns = patterns('',
     url(r'^new/$', views.edit_resource, name='resources_new'),
     url(r'^edit/(?P<key>.*)/$', views.edit_resource, name='resources_edit'),
     url('^autocomplete/(\w+)/$', autocomplete, name='autocomplete'),
+
+    url(r'^context/set/$', views.set_context, name='resources_set_context'),
+
 )

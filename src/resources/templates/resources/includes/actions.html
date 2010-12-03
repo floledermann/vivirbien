@@ -4,14 +4,20 @@
 | <a href="{% url resources_views %}">{% trans "Views" %}</a>
 | <a href="{% url resources_tags %}">{% trans "Tags" %}</a>
 {% if request.user.is_authenticated %}
+{% if context_form %}
+<form class="context-form" action="{% url resources_set_context %}" method="post">
+&nbsp;{{ context_form }}
+<button type="submit">Set</button>
+</form>
+{% endif %}
 <span class="add-actions">
 {# {% if perms.resources.add_resource %} #}
 <a href="{% url resources_new %}">{% trans "Add resource" %}</a> | 
 {# {% endif %} #}
 {# {% if perms.resources.add_view %} #}
-<a href="{% url resources_new_view %}">{% trans "Add view" %}</a>
+<a href="{% url resources_new_view %}">{% trans "Add view" %}</a> | 
 {# {% endif %} #}
 </span>
 {% endif %}
-
+<div class="clear"></div>
 </div>

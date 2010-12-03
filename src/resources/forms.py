@@ -1,6 +1,7 @@
 from django import forms
 from django.forms import ModelForm
 from django.forms.models import inlineformset_factory
+from django.utils.translation import ugettext_lazy as _
 
 from autocomplete.widgets import AutoCompleteWidget
 
@@ -82,3 +83,11 @@ TagMappingFormSet = inlineformset_factory(View, TagMapping,
                                    exclude=('creator',),
                                    extra=1)
 
+
+class ContextForm(ModelForm):
+
+    area = forms.ModelChoiceField(queryset=Area.objects.all(), required=False, empty_label=_('Everywhere'))
+    
+    class Meta:
+        model = Context
+        

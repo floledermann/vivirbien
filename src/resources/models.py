@@ -179,6 +179,7 @@ class Icon(models.Model):
     class Meta:
         ordering = ['name']
         
+
 class TagMapping(models.Model):
     
     key = models.CharField(max_length=100, db_index=True)
@@ -199,4 +200,27 @@ class TagMapping(models.Model):
     class Meta:
         ordering = ['order','creation_date']
 
+
+class Area(models.Model):
+    
+    name = models.CharField(max_length=100)
+    # for now just store a string with the bounds
+    # TODO look into geodjango    
+    bounds = models.CharField(max_length=255)
+
+    def __unicode__(self):
+        return self.name
+
+class Context(models.Model): 
+   
+    area = models.ForeignKey(Area, null=True, blank=True)
+
+
+class UserProfile(models.Model):
+
+    user = models.ForeignKey(User, unique=True, related_name='resources_profile')
+    context = models.ForeignKey(Context, null=True, blank=True)
+    
+    def __unicode__(self):
+        return self.user.username
     
