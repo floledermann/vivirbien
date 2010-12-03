@@ -381,7 +381,7 @@ def convert_to_south(app_name=None):
         syncdb()
         reload()
 
-def create_migration(app_name=None, manual=False):
+def create_migration(app_name=None, manual=False, kind='schema'):
     if not app_name:
         abort('Please specify an app name like create_migration:<appname>')
     if not manual:
@@ -389,10 +389,15 @@ def create_migration(app_name=None, manual=False):
     else:
         auto_str = ''
     migration_name = prompt('Migration Name: ', validate=r'^[a-z_0-9]+$')
-    local(os.path.join(env.ve_prefix,'python manage.py schemamigration %s %s %s' % (app_name, migration_name, auto_str)), capture=False)
+    local(os.path.join(env.ve_prefix,'python manage.py %smigration %s %s %s' % (kind, app_name, migration_name, auto_str)), capture=False)
     if console.confirm('Please review migration code; Apply now?'):
         local(os.path.join(env.ve_prefix,'python manage.py migrate'), capture=False)
-        
+
+def create_datamigration(*args, **kwargs):
+    kwargs.setdefault('kind', 'data')
+    kwargs.setdefault('manual', True)
+    create_migration(*args, **kwargs)
+  
 def translate():
     makemessages()
     if not console.confirm('Please review/edit translation files - continue?'):
