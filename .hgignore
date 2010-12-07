@@ -7,9 +7,8 @@ env/
 _resources/
 releases/
 .settings/
-glob:Thumbs.db
-glob:media/js/OpenLayers-2.8-debug/
-glob:vivirbien.db
-glob:media/uploads/
-glob:documents/ripess/
-glob:fixtures/auth.json
+Thumbs.db
+media/js/OpenLayers-2.8-debug/
+vivirbien.db
+media/uploads/
+fixtures/auth.json
