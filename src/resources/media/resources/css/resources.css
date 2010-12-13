@@ -2,6 +2,10 @@
     float: right;
 }
 
+.actions .search-form {
+    display: inline;
+}
+
 .resourceslist {
     max-width: 250px;
 }
@@ -22,7 +26,14 @@
 }
 
 .view {
+    xpadding: 3px 2px;
+    xtext-indent: 24px;
     background-image: url('../images/view-icon_20x20.png');
+    border: 1px dotted #aaa;
+}
+
+.empty {
+    color: #999;
 }
 
 .upcoming li {

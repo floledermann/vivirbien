@@ -3,21 +3,27 @@
 <a href="{% url resources_index %}">{% trans "Main" %}</a>
 | <a href="{% url resources_views %}">{% trans "Views" %}</a>
 | <a href="{% url resources_tags %}">{% trans "Tags" %}</a>
-{% if request.user.is_authenticated %}
+|
+<form class="search-form" action="{% url resources_search %}" method="get">
+<input name="q" type="text" size="15"/>
+<button type="submit">Search</button>
+</form>
 {% if context_form %}
-<form class="context-form" action="{% url resources_set_context %}" method="post">
+<form class="context-form autosubmit" action="{% url resources_set_context %}" method="post">
 &nbsp;{{ context_form }}
 <button type="submit">Set</button>
 </form>
 {% endif %}
+<div class="clear"></div>
+</div>
+{% if request.user.is_authenticated %}
 <span class="add-actions">
 {# {% if perms.resources.add_resource %} #}
-<a href="{% url resources_new %}">{% trans "Add resource" %}</a> | 
+<a href="{% url resources_new %}">(+) {% trans "Add resource" %}</a> | 
 {# {% endif %} #}
 {# {% if perms.resources.add_view %} #}
-<a href="{% url resources_new_view %}">{% trans "Add view" %}</a> | 
+<a href="{% url resources_new_view %}">(+) {% trans "Add view" %}</a>
 {# {% endif %} #}
 </span>
 {% endif %}
-<div class="clear"></div>
-</div>
+

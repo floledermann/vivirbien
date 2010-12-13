@@ -9,7 +9,7 @@
 {% else %}{% trans "Not logged in" %} | <a href="/accounts/login/">{% trans "Log in" %}</a>{% endif %}</span>
 {% if user.is_active %}| <a class="{% active request "^/accounts/invite/" %}" href="/accounts/invite/">{% trans "Invite a friend" %}</a>{% endif %}
 {% if user.is_active %}| <a href="{% url auth_logout %}">{% trans "Log out" %}</a>{% endif %}
-| <form class="language-switcher" action="/i18n/setlang/" method="post">
+| <form class="language-switcher autosubmit" action="/i18n/setlang/" method="post">
 {% trans "language:" %} 
 <select name="language">
 {% for lang in LANGUAGES %}
@@ -17,7 +17,7 @@
 {% endfor %}
 </select>
 {% csrf_token %}
-<input type="submit" value="Set" />
+<button type="submit">Set</button>
 </form>
 </div>
 <div class="clear"></div>
