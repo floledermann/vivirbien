@@ -211,9 +211,17 @@ class Area(models.Model):
     def __unicode__(self):
         return self.name
 
+    def delete(self):
+        self.context_set.clear()
+        super(Area, self).delete()
+
 class Context(models.Model): 
    
     area = models.ForeignKey(Area, null=True, blank=True)
+
+    def delete(self):
+        self.user_profile_set.clear()
+        super(Context, self).delete()
 
 
 class UserProfile(models.Model):
@@ -223,4 +231,12 @@ class UserProfile(models.Model):
     
     def __unicode__(self):
         return self.user.username
-    
+
+
+def user_post_save(sender, instance, created, **kwargs):
+    if created:    
+        UserProfile.objects.get_or_create(user=instance)
+  
+models.signals.post_save.connect(user_post_save, sender=User)
+
+

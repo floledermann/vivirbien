@@ -115,7 +115,7 @@ def view(request, name):
         #assert False, tags
     
     icon_mappings = view.mappings.exclude(icon=None)
-    context_form = ContextForm(instance=request.user.get_profile().context)
+    context_form = ContextForm(instance=_get_context(request))
     
     return render_to_response('resources/view.html', RequestContext(request, locals()))
     
@@ -184,6 +184,13 @@ def edit_view(request, name=None):
     return render_to_response('resources/view_edit.html', RequestContext(request, locals()))
 
 
+def _get_context(request):
+    if request.user.is_authenticated():
+        return request.user.get_profile().context
+    if 'context' in request.session:
+        return request.session['context']
+    request.session['context'] = Context()
+
 def index(request):
 
     protect_attrs = {
@@ -199,7 +206,7 @@ def index(request):
     #from snippets.models import Snippet
     #snippets = Snippet.objects.all()
 
-    context_form = ContextForm(instance=request.user.get_profile().context)
+    context_form = ContextForm(instance=_get_context(request))
 
     return render_to_response('resources/index.html', RequestContext(request, locals()))
 
@@ -314,6 +321,18 @@ def add_icon(request):
         
     return render_to_response('resources/icon_edit.html', RequestContext(request, locals()))
 
+def search(request):
+    
+    q = request.GET['q'].strip()
+    results = {}
+
+    results['resources'] = Resource.objects.filter(name__icontains=q)
+    results['tags'] = Tag.objects.filter(value__icontains=q)
+
+    import wiki
+    results['pages'] = wiki.models.Article.objects.filter(content__icontains=q)
+
+    return render_to_response('resources/search_results.html', RequestContext(request, locals()))    
 
 def set_context(request):
 
@@ -328,6 +347,10 @@ def set_context(request):
                 if not profile.context:
                     profile.context = context
                     profile.save()
+        else:
+            form = ContextForm(request.POST)
+            if form.is_valid():
+                request.session['context'] = form.save(commit=False)
 
     return redirect_to(request, request.POST.get('next') or request.META.get('HTTP_REFERER') or reverse('resources_index'))
 

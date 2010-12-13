@@ -52,5 +52,6 @@ urlpatterns = patterns('',
     url('^autocomplete/(\w+)/$', autocomplete, name='autocomplete'),
 
     url(r'^context/set/$', views.set_context, name='resources_set_context'),
+    url(r'^search/$', views.search, name='resources_search'),
 
 )
