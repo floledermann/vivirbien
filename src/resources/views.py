@@ -78,9 +78,18 @@ def all_resources(request):
     return render_to_response('resources/view.html', RequestContext(request, locals()))
     
 
-def view(request, name):
-    
+def view(request, name, mode=None):
+
     view = get_object_or_404(View, shortname=name)
+
+    if not mode:
+        # todo auto-discover appropriate mode
+        mode = 'map'        
+
+    if not mode in ['map','list','embed']:
+        raise Http404()
+    
+    template = 'resources/view_%s.html' % mode 
     
     if view.protected and not request.user.is_authenticated():
         return HttpResponse(status=403) # forbidden
@@ -117,7 +126,7 @@ def view(request, name):
     icon_mappings = view.mappings.exclude(icon=None)
     context_form = ContextForm(instance=_get_context(request))
     
-    return render_to_response('resources/view.html', RequestContext(request, locals()))
+    return render_to_response(template, RequestContext(request, locals()))
     
 
 def views(request):

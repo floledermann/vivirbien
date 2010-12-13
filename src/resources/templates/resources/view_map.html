@@ -1,0 +1,53 @@
+{% extends "resources/base.html" %}
+{% load i18n %}
+
+{% block title %}Vivir Bien: {{ view.name }}{% endblock %}
+
+{% block extra_head %}
+{{ block.super }}
+<!--<script src="{{ MEDIA_URL }}js/OpenLayers-2.8-debug/lib/OpenLayers.js"></script>-->
+<script type="text/javascript" src="{{ MEDIA_URL }}js/OpenLayers-2.8/OpenLayers.js"></script>
+<script type="text/javascript" src="http://www.openstreetmap.org/openlayers/OpenStreetMap.js"></script>
+<script type="text/javascript" src="{{ MEDIA_URL }}js/jquery-1.3.2.js"></script>
+<script type="text/javascript" src="{{ MEDIA_URL }}resources/js/OLVivirBienRenderer.js"></script>
+<script type="text/javascript" src="{{ MEDIA_URL }}resources/js/map.js"></script>
+<script type="text/javascript">
+var MEDIA_URL = "{{ MEDIA_URL }}",
+    VIEW = "{{ view.shortname }}",
+    AREA = "{{ user.get_profile.context.area.bounds|default:""}}";
+
+var icon_mappings = [
+{% for mapping in icon_mappings %}
+{key:"{{ mapping.key}}"{% if mapping.value %},value:"{{ mapping.value }}"{% endif %},icon:"{{ mapping.icon.image }}"}{% if not forloop.last %},
+{% endif %}
+{% endfor %}
+];
+
+</script>
+{% endblock %}
+
+{% block body_class %}{{ block.super }} view-map{% endblock %}
+
+{% block resources_content %}
+{% include "resources/includes/actions.html" %}
+
+<h1>{{ view.name }}</h1>
+<p class="help">
+{% trans "This view shows resources with tags:" %}<br />
+{{ view.get_description|safe }}
+</p>
+
+{% include "resources/includes/view_actions.html" %}
+
+<ul class="menu view-menu">
+<li class="active"><a href="">{% trans "Map" %}</a></li>
+<li><a href="">{% trans "Not on Map" %}</a></li>
+<li><a href="">{% trans "List All" %}</a></li>
+<li><a href="">{% trans "Upcoming" %}</a></li>
+<li><a href="">{% trans "Embed" %}</a></li>
+</ul>
+
+<div id="map" class="map"></div>
+<div class="map-loading">{% trans "Map Data Loading..." %}</div>
+
+{% endblock %}
