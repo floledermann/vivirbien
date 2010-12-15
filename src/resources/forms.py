@@ -86,7 +86,7 @@ TagMappingFormSet = inlineformset_factory(View, TagMapping,
 
 class ContextForm(ModelForm):
 
-    area = forms.ModelChoiceField(queryset=Area.objects.all(), required=False, empty_label=_('Everywhere'))
+    area = forms.ModelChoiceField(queryset=Area.objects.all(), required=False, empty_label=_('Everywhere'), label=_('Area'))
     
     class Meta:
         model = Context

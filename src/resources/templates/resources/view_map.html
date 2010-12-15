@@ -39,13 +39,7 @@ var icon_mappings = [
 
 {% include "resources/includes/view_actions.html" %}
 
-<ul class="menu view-menu">
-<li class="active"><a href="">{% trans "Map" %}</a></li>
-<li><a href="">{% trans "Not on Map" %}</a></li>
-<li><a href="">{% trans "List All" %}</a></li>
-<li><a href="">{% trans "Upcoming" %}</a></li>
-<li><a href="">{% trans "Embed" %}</a></li>
-</ul>
+{% include "resources/includes/view_modes.html" %}
 
 <div id="map" class="map"></div>
 <div class="map-loading">{% trans "Map Data Loading..." %}</div>

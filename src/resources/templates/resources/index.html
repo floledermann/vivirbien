@@ -43,12 +43,12 @@
 
 <div class="listbox">
 <h2>{% trans "Upcoming" %}</h2>
-<ul class="resources-list upcoming">
+<ul class="resources-list upcoming-list">
 {% for resource in upcoming_resources %}
-<li><div class="resource">
+<li><div class="upcoming">
+<div class="date">{% smart_date resource.start_date resource.end_date "l,&\n\b\s\p;j.n." %}</div>
 <a href="{% url resources_resource key=resource.shortname%}">{{ resource.name }}</a>
 </div>
-<div class="date">{% smart_date resource.start_date resource.end_date %}</div>
 {% endfor %}
 </table>
 <!--

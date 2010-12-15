@@ -1,0 +1,27 @@
+{% extends "resources/base.html" %}
+{% load i18n %}
+
+{% block title %}Vivir Bien: {{ view.name }}{% endblock %}
+
+{% block body_class %}{{ block.super }} view-page{% endblock %}
+
+{% block resources_content %}
+{% include "resources/includes/actions.html" %}
+
+<h1>{{ view.name }}</h1>
+<p class="help">
+{% trans "This view shows resources with tags:" %}<br />
+{{ view.get_description|safe }}
+</p>
+
+{% include "resources/includes/view_actions.html" %}
+
+{% include "resources/includes/view_modes.html" %}
+
+<h2>{% trans "Use the following code to embed this view in other websites:" %}</h2>
+
+<textarea class="embed-code">
+<iframe width="425" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://{{request.get_host}}{% url resources_view name=view.shortname mode="embed" %}"></iframe><br /><small><a href="http://{{request.get_host}}{% url resources_view name=view.shortname %}">{% trans "View" %} "{{ view.name }}" @ Vivir Bien</a></small>
+</textarea>
+
+{% endblock %}

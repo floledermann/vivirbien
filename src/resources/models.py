@@ -217,7 +217,7 @@ class Area(models.Model):
 
 class Context(models.Model): 
    
-    area = models.ForeignKey(Area, null=True, blank=True)
+    area = models.ForeignKey(Area, null=True, blank=True, verbose_name=_('Area'))
 
     def delete(self):
         self.user_profile_set.clear()
