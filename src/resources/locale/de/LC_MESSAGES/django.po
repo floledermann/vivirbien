@@ -8,13 +8,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-11-26 20:53+0000\n"
+"POT-Creation-Date: 2010-12-15 09:54+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: forms.py:89
+msgid "Everywhere"
+msgstr "Weltweit"
+
+#: forms.py:89 models.py:220
+msgid "Area"
+msgstr "Region"
 
 #: models.py:11
 msgid "(Will be part of the resources' URL)"
@@ -60,7 +68,7 @@ msgstr "Standard-Icon"
 msgid "Red"
 msgstr "Rot"
 
-#: models.py:190
+#: models.py:191
 msgid "Subicon only"
 msgstr "Nur Subicon"
 
@@ -108,7 +116,7 @@ msgstr "Neues Icon"
 #: templates/resources/icons.html:5 templates/resources/icons.html.py:9
 #: templates/resources/view_edit.html:123
 msgid "Icons"
-msgstr ""
+msgstr "Icons"
 
 #: templates/resources/icons.html:10
 msgid "Add Icon"
@@ -118,7 +126,7 @@ msgstr "Neues Icon"
 msgid "Resources"
 msgstr "Ressourcen"
 
-#: templates/resources/index.html:17 templates/resources/index.html.py:65
+#: templates/resources/index.html:17 templates/resources/index.html.py:66
 msgid "Read more..."
 msgstr "Mehr Info..."
 
@@ -139,14 +147,15 @@ msgid "all resources..."
 msgstr "Alle Ressourcen..."
 
 #: templates/resources/index.html:45
+#: templates/resources/includes/view_modes.html:8
 msgid "Upcoming"
 msgstr "Termine"
 
-#: templates/resources/index.html:54
+#: templates/resources/index.html:55
 msgid "all upcoming events..."
 msgstr "Alle Termine..."
 
-#: templates/resources/index.html:59
+#: templates/resources/index.html:60
 msgid "News"
 msgstr "News"
 
@@ -154,7 +163,6 @@ msgstr "News"
 #: templates/resources/resources_by_tag.html:4
 #: templates/resources/resources_by_tag.html:8
 #: templates/resources/resources_by_tag.html:21
-#: templates/resources/view_list.html:12 templates/resources/view_map.html:24
 msgid "Resources with tag:"
 msgstr "Ressourcen mit Tag:"
 
@@ -182,6 +190,11 @@ msgstr "Neuer Kommentar"
 msgid "Wiki Page for Key:"
 msgstr "Wikiseite für Key:"
 
+#: templates/resources/search_results.html:4
+#: templates/resources/search_results.html:8
+msgid "Search results for:"
+msgstr ""
+
 #: templates/resources/tag.html:4 templates/resources/tag.html.py:8
 msgid "Tag:"
 msgstr "Tag:"
@@ -193,14 +206,6 @@ msgstr "Liste von Tags"
 #: templates/resources/tags.html:9
 msgid "All Tags"
 msgstr "Alle Tags"
-
-#: templates/resources/view.html:34
-msgid "This view shows resources with tags:"
-msgstr "Diese Ansicht zeigt Ressourcen mit den Tags:"
-
-#: templates/resources/view.html:40
-msgid "Map Data Loading..."
-msgstr "Kartendaten werden geladen..."
 
 #: templates/resources/view_edit.html:32
 msgid "New view"
@@ -225,9 +230,25 @@ msgid "Mappings determine the appearance of the resource."
 msgstr ""
 "Mappings bestimmen das Erscheinungsbild einer Ressource in der Ansicht."
 
-#: templates/resources/view_list.html:4 templates/resources/view_map.html:4
-msgid "List of resources"
-msgstr "Liste der Ressourcen"
+#: templates/resources/view_embed.html:35 templates/resources/view_map.html:45
+#: templates/resources/view_overview.html:43
+msgid "Map Data Loading..."
+msgstr "Kartendaten werden geladen..."
+
+#: templates/resources/view_export.html:13
+#: templates/resources/view_list.html:31 templates/resources/view_map.html:36
+#: templates/resources/view_overview.html:36
+msgid "This view shows resources with tags:"
+msgstr "Diese Ansicht zeigt Ressourcen mit den Tags:"
+
+#: templates/resources/view_export.html:21
+msgid "Use the following code to embed this view in other websites:"
+msgstr ""
+"Mit diesem Code kann die Karte auf anderen Webseiten eingebunden werden:"
+
+#: templates/resources/view_export.html:24
+msgid "View"
+msgstr "Ansicht"
 
 #: templates/resources/views.html:4
 msgid "List of views"
@@ -247,10 +268,18 @@ msgid "Tags"
 msgstr "Tags"
 
 #: templates/resources/includes/actions.html:9
+msgid "Search"
+msgstr "Suche"
+
+#: templates/resources/includes/actions.html:14
+msgid "Set"
+msgstr "OK"
+
+#: templates/resources/includes/actions.html:22
 msgid "Add resource"
 msgstr "Neue Ressource"
 
-#: templates/resources/includes/actions.html:12
+#: templates/resources/includes/actions.html:25
 msgid "Add view"
 msgstr "Neue Ansicht"
 
@@ -266,7 +295,28 @@ msgstr "Ressourcen mit Key:"
 msgid "Edit view"
 msgstr "Diese Ansicht bearbeiten"
 
+#: templates/resources/includes/view_modes.html:4
+msgid "Overview"
+msgstr "Übersicht"
 
+#: templates/resources/includes/view_modes.html:5
+msgid "Map"
+msgstr "Karte"
+
+#: templates/resources/includes/view_modes.html:6
+msgid "Not on Map"
+msgstr "Ohne Ort"
+
+#: templates/resources/includes/view_modes.html:7
+msgid "List"
+msgstr "Liste"
+
+#: templates/resources/includes/view_modes.html:9
+msgid "Export"
+msgstr "Exportieren"
+
+#~ msgid "List of resources"
+#~ msgstr "Liste der Ressourcen"
 
 #~ msgid "Featured Resources"
 #~ msgstr "Empfohlene Ressourcen"
@@ -321,12 +371,6 @@ msgstr "Diese Ansicht bearbeiten"
 #~ msgstr ""
 #~ "Diese Ressourcen haben den <code>address</code> Tag, aber nicht den "
 #~ "<code>location</code> Tag gesetzt."
-
-#~ msgid "List"
-#~ msgstr "Liste"
-
-#~ msgid "Map"
-#~ msgstr "Karte"
 
 #~ msgid "Submit"
 #~ msgstr "Speichern"
