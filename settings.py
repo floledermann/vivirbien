@@ -17,7 +17,7 @@ DATABASE_PORT = '5432 '
 
 TIME_ZONE = 'Europe/Vienna'
 
-LANGUAGE_CODE = 'de'
+LANGUAGE_CODE = 'en'
 
 SITE_ID = 1
 

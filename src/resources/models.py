@@ -201,12 +201,18 @@ class TagMapping(models.Model):
         ordering = ['order','creation_date']
 
 
-class Area(models.Model):
-    
+from transmeta import TransMeta
+
+class Area(models.Model):   
+    __metaclass__ = TransMeta
+
     name = models.CharField(max_length=100)
     # for now just store a string with the bounds
     # TODO look into geodjango    
     bounds = models.CharField(max_length=255)
+
+    class Meta:
+        translate = ('name', )
 
     def __unicode__(self):
         return self.name
@@ -222,6 +228,11 @@ class Context(models.Model):
     def delete(self):
         self.user_profile_set.clear()
         super(Context, self).delete()
+
+    def to_json(self):
+        if self.area:
+            return "{area:[%s]}" % self.area.bounds        
+        return "{}"
 
 
 class UserProfile(models.Model):
