@@ -14,7 +14,7 @@
 <script type="text/javascript">
 var MEDIA_URL = "{{ MEDIA_URL }}",
     VIEW = "{{ view.shortname }}",
-    AREA = "{{ user.get_profile.context.area.bounds|default:""}}";
+    CONTEXT = {{ context.to_json }};
 
 var icon_mappings = [
 {% for mapping in icon_mappings %}

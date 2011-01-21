@@ -86,7 +86,7 @@ def view(request, name, mode='map'):
 #        # todo auto-discover appropriate mode
 #        mode = 'overview'        
 
-    if not mode in ['map','list','export','embed']:
+    if not mode in ['map','list','export','embed']: #'overview',
         raise Http404()
     
     template = 'resources/view_%s.html' % mode 
@@ -124,7 +124,9 @@ def view(request, name, mode='map'):
         #assert False, tags
     
     icon_mappings = view.mappings.exclude(icon=None)
-    context_form = ContextForm(instance=_get_context(request))
+
+    context = _get_context(request)
+    context_form = ContextForm(instance=context)
     
     return render_to_response(template, RequestContext(request, locals()))
     

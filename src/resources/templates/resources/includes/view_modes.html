@@ -1,7 +1,8 @@
 {% load i18n %}
 {% load navitools %}
 <ul class="menu view-menu">
-<!--<li class=""><a href="{% url resources_view name=view.shortname %}">{% trans "Overview" %}</a></li>-->
+<!--
+<li class="{% active request "/view/[a-zA-Z0-9-_\.]*/$" %}"><a href="{% url resources_view name=view.shortname %}">{% trans "Overview" %}</a></li>-->
 <li class="{% active request "/view/[a-zA-Z0-9-_\.]*/map/$" %}{% active request "/view/[a-zA-Z0-9-_\.]*/$" %}"><a href="{% url resources_view name=view.shortname mode="map" %}">{% trans "Map" %}</a></li>
 <!--<li class=""><a href="">{% trans "Not on Map" %}</a></li>-->
 <li class="{% active request "/view/[a-zA-Z0-9-_\.]*/list/$" %}"><a href="{% url resources_view name=view.shortname mode="list" %}">{% trans "List" %}</a></li>

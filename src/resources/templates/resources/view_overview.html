@@ -26,7 +26,7 @@ var icon_mappings = [
 </script>
 {% endblock %}
 
-{% block body_class %}{{ block.super }} view-page{% endblock %}
+{% block body_class %}{{ block.super }} view-overview{% endblock %}
 
 {% block resources_content %}
 {% include "resources/includes/actions.html" %}
@@ -40,31 +40,9 @@ var icon_mappings = [
 {% include "resources/includes/view_actions.html" %}
 {% include "resources/includes/view_modes.html" %}
 
-<div class="map-loading">{% trans "Map Data Loading..." %}</div>
-<div id="map" class="map"></div>
-
-{% if groups %}
-<div class="column">
-{% for group in groups %}
-<h2>{{ group.title }}
-{% if group.text %}
-<div class="help">{{ group.text|safe }}</div>
-{% endif %}
-</h2>
-<ul class="resourceslist">
-{% for resource in group.resources %}
-<li class="resource"><a href="{% url resources_resource key=resource.shortname%}">{{ resource.name }}</a></li>
-{% endfor %}
-</ul>
-{% if forloop.counter|divisibleby:3 %}
-</div>
-<div class="column">
-{% endif %}
-{% endfor %}
-</div>
-
-{% else %}
-<ul class="resourceslist">
+<div class="resourceslist">
+<h3>Resources not on the map:</h3>
+<ul class="">
 {% for resource in resources %}
 <li class="resource"><a href="{% url resources_resource key=resource.shortname%}">{{ resource.name }}</a>
 <div class="help">
@@ -76,5 +54,12 @@ var icon_mappings = [
 </li>
 {% endfor %}
 </ul>
-{% endif %}
+<div class="clear"></div>
+</div>
+
+<div class="map-loading">{% trans "Map Data Loading..." %}</div>
+<div id="map" class="map"></div>
+
+
+
 {% endblock %}

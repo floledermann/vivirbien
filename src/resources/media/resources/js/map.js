@@ -205,19 +205,26 @@ function init_map() {
     function onPopupClose(evt) {
         select.unselectAll();
     }
-    
+
+    if (CONTEXT.area) {
+        var bounds = OpenLayers.Bounds.fromArray(CONTEXT.area);
+        bounds = bounds.transform(map.displayProjection, map.projection)
+        map.zoomToExtent(bounds);
+        //map.zoomTo(4);
+        //map.setCenter(new OpenLayers.LonLat(100,10));
+    }
 //    map.events.register('movestart', null, function(event){
 //    	select.unselectAll();
 //    })
 }
 
 function add_content(features, adjust_viewport) {
-	bounds = new OpenLayers.Bounds();
-    for (var i=0; i<features.length; i++) {
-        bounds.extend(features[i].geometry);
-    }
     layer_vector.addFeatures(features);
     if (adjust_viewport) {
+	    var bounds = new OpenLayers.Bounds();
+        for (var i=0; i<features.length; i++) {
+            bounds.extend(features[i].geometry);
+        }
         map.zoomToExtent(bounds);
 	    if (features.length < 2) {
 	    	// single feature would cause full zoom-in
@@ -241,7 +248,7 @@ $(document).ready(function(){
 	    if (features.length > 0) {
             $('#map').show();
 	    	init_map();
-	    	add_content(features, true);
+	    	add_content(features, !CONTEXT.area);
 	    }
     });
 

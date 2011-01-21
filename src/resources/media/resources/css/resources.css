@@ -10,6 +10,25 @@
     max-width: 250px;
 }
 
+.view-overview .resourceslist {
+    max-width: none;
+    xheight: 50px;
+    xoverflow-y: auto;
+}
+
+.view-overview .resourceslist li {
+    float: left;
+    margin-right: 5px;
+}
+
+.view-overview .resourceslist h3{
+    float: left;
+    font-size: 14px;
+    line-height: 1;
+    margin: 4px 5px 0 0;
+}
+
+
 .resource,
 .view {
     margin: 1px;
