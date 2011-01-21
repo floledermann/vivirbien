@@ -18,39 +18,39 @@ msgstr ""
 
 #: feeds.py:101 feeds.py:211
 msgid "Anonimous"
-msgstr "Anonym"
+msgstr ""
 
 #: forms.py:53
 msgid "Must be a WikiWord."
-msgstr "Muss ein gültiger Wiki-Name sein."
+msgstr ""
 
 #: forms.py:71
 msgid "An article with this title already exists."
-msgstr "EIn Artikel dieses Namens exisitert bereits."
+msgstr ""
 
 #: management.py:10
 msgid "Article Edited"
-msgstr "Artikel bearbeitet"
+msgstr ""
 
 #: management.py:11
 msgid "your article has been edited"
-msgstr "Der Artikel wurde bearbeitet"
+msgstr ""
 
 #: management.py:13
 msgid "Article Revision Reverted"
-msgstr "Artikel-Version zurückgesetzt"
+msgstr ""
 
 #: management.py:14
 msgid "your revision has been reverted"
-msgstr "Die Version wurde zurückgesetzt"
+msgstr ""
 
 #: management.py:16
 msgid "Observed Article Changed"
-msgstr "Artikel-Beobachtung geändert"
+msgstr ""
 
 #: management.py:17
 msgid "an article you observe has changed"
-msgstr "Ein Artikel, den du beobachtest wurde geändert"
+msgstr ""
 
 #: models.py:39
 msgid "Creole"
@@ -70,23 +70,23 @@ msgstr ""
 
 #: models.py:61 templates/wiki/recentchanges.html:9
 msgid "Title"
-msgstr "Titel"
+msgstr ""
 
 #: models.py:62
 msgid "Content"
-msgstr "Inhalt"
+msgstr ""
 
 #: models.py:63
 msgid "Summary"
-msgstr "Zusammenfassung"
+msgstr ""
 
 #: models.py:69
 msgid "Article Creator"
-msgstr "Erstautor/in"
+msgstr ""
 
 #: models.py:71
 msgid "IP Address of the Article Creator"
-msgstr "IP Adresse von Erstautor/in"
+msgstr ""
 
 #: models.py:75
 msgid "Is removed?"
@@ -94,43 +94,43 @@ msgstr ""
 
 #: models.py:95 models.py:172
 msgid "Article"
-msgstr "Artikel"
+msgstr ""
 
 #: models.py:96
 msgid "Articles"
-msgstr "Artikel"
+msgstr ""
 
 #: models.py:175 templates/wiki/recentchanges.html:11
 msgid "Editor"
-msgstr "Autor"
+msgstr ""
 
 #: models.py:177
 msgid "IP Address of the Editor"
-msgstr "IP Adresse von Autor/in"
+msgstr ""
 
 #: models.py:180
 msgid "Revision Number"
-msgstr "Versionsnummer"
+msgstr ""
 
 #: models.py:183
 msgid "Old Title"
-msgstr "Alter Titel"
+msgstr ""
 
 #: models.py:188
 msgid "Content Patch"
-msgstr "Inhalts-Änderung"
+msgstr ""
 
 #: models.py:190
 msgid "Editor comment"
-msgstr "Kommentar"
+msgstr ""
 
 #: models.py:191
 msgid "Modified at"
-msgstr "Bearbeitet am"
+msgstr ""
 
 #: models.py:192
 msgid "Reverted Revision"
-msgstr "Zurückgesetzte Version"
+msgstr ""
 
 #: models.py:206
 msgid "Change set"
@@ -142,11 +142,11 @@ msgstr ""
 
 #: templates/feeds/history_description.html:3
 msgid "edited by user"
-msgstr "bearbeitet von User"
+msgstr ""
 
 #: templates/feeds/history_description.html:3
 msgid "at"
-msgstr "um"
+msgstr ""
 
 #: templates/notification/wiki_article_edited/notice.html:2
 #, python-format
@@ -154,8 +154,6 @@ msgid ""
 "The wiki article <a href=\"%(article_url)s\">%(article)s</a> has been edited "
 "by <a href=\"%(user_url)s\">%(user)s</a>."
 msgstr ""
-"Der Wiki Artikel <a href=\"%(article_url)s\">%(article)s</a> wurde von <a "
-"href=\"%(user_url)s\">%(user)s</a> geändert."
 
 #: templates/notification/wiki_observed_article_changed/notice.html:1
 #, python-format
@@ -163,8 +161,6 @@ msgid ""
 "The wiki article <a href=\"%(article_url)s\">%(observed)s</a>, that you "
 "observe, has changed."
 msgstr ""
-"Der Wiki Artikel \"<a href=\"%(article_url)s\">%(observed)s</a>\", den du "
-"beobachtest, wurde geändert."
 
 #: templates/notification/wiki_revision_reverted/notice.html:2
 #, python-format
@@ -172,16 +168,14 @@ msgid ""
 "Your revision <a href=\"%(revision_url)s\">%(revision)s</a> on <a href=\"%"
 "(article_url)s\">%(article)s</a> has been reverted."
 msgstr ""
-"Deine Änderung <a href=\"%(revision_url)s\">%(revision)s</a> von \"<a href="
-"\"%(article_url)s\">%(article)s</a>\" wurde zurückgesetzt."
 
 #: templates/wiki/base.html:20
 msgid "List all articles"
-msgstr "Alle Artikel"
+msgstr ""
 
 #: templates/wiki/base.html:21 templates/wiki/recentchanges.html:5
 msgid "Recent Changes"
-msgstr "Alle Änderungen"
+msgstr ""
 
 #: templates/wiki/changeset.html:14
 msgid "Markup:"
@@ -193,91 +187,91 @@ msgstr ""
 
 #: templates/wiki/confirm_remove.html:5
 msgid "Remove article"
-msgstr "Artikel entfernen"
+msgstr ""
 
 #: templates/wiki/confirm_remove.html:9
 msgid "Confirm deletion"
-msgstr "Löschen bestätigen"
+msgstr ""
 
 #: templates/wiki/confirm_remove.html:16
 msgid "Confirm"
-msgstr "Bestätigen"
+msgstr ""
 
 #: templates/wiki/edit.html:5
 msgid "Editing article"
-msgstr "Artikel bearbeiten"
+msgstr ""
 
 #: templates/wiki/edit.html:9
 msgid "Edit"
-msgstr "Bearbeiten"
+msgstr ""
 
 #: templates/wiki/edit.html:23
 msgid "Save"
-msgstr "Speichern"
+msgstr ""
 
 #: templates/wiki/history.html:6
 msgid "History for"
-msgstr "Änderungen für"
+msgstr ""
 
 #: templates/wiki/history.html:14
 msgid "Article History"
-msgstr "Artikel-Änderungen"
+msgstr ""
 
 #: templates/wiki/history.html:19
 msgid "At"
-msgstr "Datum"
+msgstr ""
 
 #: templates/wiki/history.html:20
 msgid "User"
-msgstr "User"
+msgstr ""
 
 #: templates/wiki/history.html:21 templates/wiki/recentchanges.html:12
 msgid "Comment"
-msgstr "Kommentar"
+msgstr ""
 
 #: templates/wiki/history.html:22 templates/wiki/history.html.py:52
 msgid "Revert"
-msgstr "Zurücksetzen"
+msgstr ""
 
 #: templates/wiki/history.html:41
 msgid "Current revision"
-msgstr "Aktuelle Version"
+msgstr ""
 
 #: templates/wiki/index.html:19
 msgid "Create a new article"
-msgstr "Neuen Artikel anlegen"
+msgstr ""
 
 #: templates/wiki/recentchanges.html:8
 msgid "Action"
-msgstr "Aktion"
+msgstr ""
 
 #: templates/wiki/recentchanges.html:10
 msgid "Date"
-msgstr "Datum"
+msgstr ""
 
 #: templates/wiki/searchbox.html:7
 msgid "Article by title"
-msgstr "Artikel nach Titel"
+msgstr ""
 
 #: templates/wiki/view.html:13
 msgid "This article does not exist."
-msgstr "Dieser Artikel existiert nicht."
+msgstr ""
 
 #: templates/wiki/view.html:15
 msgid ">Create it now</a>?"
-msgstr ">Jetzt anlegen</a>?"
+msgstr ""
 
 #: templates/wiki/view.html:27
 msgid "Edit this article"
-msgstr "Artikel bearbeiten"
+msgstr ""
 
 #: templates/wiki/view.html:29
 msgid "Editing history"
-msgstr "Änderungen"
+msgstr ""
 
 #: templates/wiki/view.html:38
 msgid "Create this article"
-msgstr "Artikel anlegen"
+msgstr ""
 
 #: templates/wiki/wiki_title.html:4
 #, python-format
@@ -287,10 +281,3 @@ msgid ""
 "s</a> </h1>\n"
 "    "
 msgstr ""
-"\n"
-"        <h1> Wiki für %(group_type)s <a href=\"%(group_url)s\">%(group_name)"
-"s</a> </h1>\n"
-"    "
-
-#~ msgid "Remove this article"
-#~ msgstr "Artikel löschen"

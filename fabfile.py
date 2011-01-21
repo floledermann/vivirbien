@@ -410,8 +410,11 @@ def makemessages():
     local('cd templates %s django-admin.py makemessages -l de -e html -e txt' % env.command_join, capture=False)
     local('cd templates %s django-admin.py makemessages -l en -e html -e txt' % env.command_join, capture=False)
     local('cd src/wiki %s django-admin.py makemessages -l de' % env.command_join, capture=False)
+    local('cd src/wiki %s django-admin.py makemessages -l en' % env.command_join, capture=False)
     local('cd src/resources %s django-admin.py makemessages -l de' % env.command_join, capture=False)
+    local('cd src/resources %s django-admin.py makemessages -l en' % env.command_join, capture=False)
     local('cd env/src/django-invitation/invitation %s django-admin.py makemessages -l de -e html -e txt' % env.command_join, capture=False)
+    local('cd env/src/django-invitation/invitation %s django-admin.py makemessages -l en -e html -e txt' % env.command_join, capture=False)
 
 def compilemessages():
     if env.hosts:
