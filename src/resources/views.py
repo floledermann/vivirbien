@@ -196,8 +196,13 @@ def edit_view(request, name=None):
 
 
 def _get_context(request):
+
     if request.user.is_authenticated():
+        if not request.user.get_profile().context:
+            request.user.get_profile().context = Context()
+            request.user.get_profile().save()
         return request.user.get_profile().context
+
     if 'context' in request.session:
         return request.session['context']
     request.session['context'] = Context()

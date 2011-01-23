@@ -14,7 +14,7 @@
 <script type="text/javascript">
 var MEDIA_URL = "{{ MEDIA_URL }}",
     VIEW = "{{ view.shortname }}",
-    AREA = "{{ user.get_profile.context.area.bounds|default:""}}";
+    CONTEXT = {{ context.to_json }};
 
 var icon_mappings = [
 {% for mapping in icon_mappings %}
@@ -41,7 +41,7 @@ var icon_mappings = [
 {% include "resources/includes/view_modes.html" %}
 
 <div class="resourceslist">
-<h3>Resources not on the map:</h3>
+<h3>Resources without location <a href="{% url resources_view name=view.shortname mode="list" %}">(See List)</a>:</h3>
 <ul class="">
 {% for resource in resources %}
 <li class="resource"><a href="{% url resources_resource key=resource.shortname%}">{{ resource.name }}</a>

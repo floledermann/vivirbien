@@ -213,9 +213,6 @@ function init_map() {
         //map.zoomTo(4);
         //map.setCenter(new OpenLayers.LonLat(100,10));
     }
-    else {
-        map.zoomTo(3);
-    }
 //    map.events.register('movestart', null, function(event){
 //    	select.unselectAll();
 //    })
@@ -251,6 +248,7 @@ $(document).ready(function(){
 	    if (features.length > 0) {
 	    	add_content(features, !CONTEXT.area);
 	    }
+
     });
 
     $('#map').show();
