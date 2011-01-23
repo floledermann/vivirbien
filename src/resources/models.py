@@ -5,6 +5,8 @@ from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 from django.utils.translation import string_concat
 
+from datetime import datetime
+
 class Resource(models.Model):
     
     name = models.CharField(max_length=200)
@@ -78,15 +80,19 @@ class View(models.Model):
     def __unicode__(self):
         return self.name
 
-    def _get_resources(self):
-        qs = Resource.objects.all()
-        for query in self.queries.all():
-            qs = query.apply(qs)
-            
-        return qs
+#    def _get_resources(self):
+#        qs = Resource.objects.all()
+#        for query in self.queries.all():
+#            qs = query.apply(qs)
+#            
+#        return qs
 
     def get_resources(self):
         qs = Resource.objects.all()
+        if not self.include_past:
+            qs = qs.exclude(end_date__lt=datetime.now())
+        if not self.include_upcoming:
+            qs = qs.exclude(start_date__gt=datetime.now())
         q = None
         for query in self.queries.all():
             if query.boolean == 0: #AND

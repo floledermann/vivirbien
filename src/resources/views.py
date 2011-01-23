@@ -86,7 +86,7 @@ def view(request, name, mode='map'):
 #        # todo auto-discover appropriate mode
 #        mode = 'overview'        
 
-    if not mode in ['map','list','export','embed']: #'overview',
+    if not mode in ['overview','map','list','export','embed']: #'overview',
         raise Http404()
     
     template = 'resources/view_%s.html' % mode 

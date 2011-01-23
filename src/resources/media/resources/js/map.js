@@ -213,6 +213,9 @@ function init_map() {
         //map.zoomTo(4);
         //map.setCenter(new OpenLayers.LonLat(100,10));
     }
+    else {
+        map.zoomTo(3);
+    }
 //    map.events.register('movestart', null, function(event){
 //    	select.unselectAll();
 //    })
@@ -246,11 +249,13 @@ $(document).ready(function(){
 	    var features = geojson_format.read(data);
 	    
 	    if (features.length > 0) {
-            $('#map').show();
-	    	init_map();
 	    	add_content(features, !CONTEXT.area);
 	    }
     });
+
+    $('#map').show();
+	init_map();
+
 
 });
 

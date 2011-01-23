@@ -42,6 +42,11 @@
     background-repeat: no-repeat;
 }
 
+.resource div,
+.view div {
+    text-indent: 0;
+}
+
 .resource {
     background-image: url('../images/resource-icon_20x20.png');
 }

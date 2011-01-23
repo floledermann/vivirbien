@@ -45,12 +45,6 @@ var icon_mappings = [
 <ul class="">
 {% for resource in resources %}
 <li class="resource"><a href="{% url resources_resource key=resource.shortname%}">{{ resource.name }}</a>
-<div class="help">
-{% regroup resource.view_tags by key as tag_list %}
-{% for group in tag_list %}
-{{ group.grouper }}: {% for tag in group.list %}{{ tag.value}}{% if not forloop.last %}, {% endif %}{% endfor %}<br />
-{% endfor %}
-</div>
 </li>
 {% endfor %}
 </ul>
