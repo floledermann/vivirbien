@@ -227,6 +227,7 @@ class Area(models.Model):
         self.context_set.clear()
         super(Area, self).delete()
 
+
 class Context(models.Model): 
    
     area = models.ForeignKey(Area, null=True, blank=True, verbose_name=_('Area'))
@@ -239,6 +240,54 @@ class Context(models.Model):
         if self.area:
             return "{area:[%s]}" % self.area.bounds        
         return "{}"
+
+
+class ResourceTemplate(models.Model):
+    __metaclass__ = TransMeta
+    
+    name = models.CharField(max_length=255, verbose_name=_('Name'))
+    shortname = models.SlugField(max_length=100, db_index=True, unique=True, help_text=_('(Will be part of the template\'s URL)'))
+    description = models.TextField(blank=True)
+
+    featured = models.BooleanField(default=False)
+
+    creator = models.ForeignKey(User, null=True)
+    creation_date = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        translate = ('name', 'description', )
+
+
+class TagTemplateGroup(models.Model):
+    __metaclass__ = TransMeta
+    
+    name = models.CharField(max_length=255, verbose_name=_('Name'))
+    template = models.ForeignKey(ResourceTemplate, related_name='tag_groups')
+    order = models.IntegerField(default=0)
+
+    creator = models.ForeignKey(User, null=True)
+    creation_date = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        translate = ('name', )
+
+
+class TagTemplate(models.Model):
+    __metaclass__ = TransMeta
+    
+    name = models.CharField(max_length=255, verbose_name=_('Name'))
+    key = models.CharField(max_length=100)
+    value = models.TextField(blank=True)
+
+    template = models.ForeignKey(ResourceTemplate, related_name='tags')
+    group = models.ForeignKey(TagTemplateGroup, related_name='tags')
+    order = models.IntegerField(default=0)
+
+    creator = models.ForeignKey(User, null=True)
+    creation_date = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        translate = ('name', )
 
 
 class UserProfile(models.Model):
