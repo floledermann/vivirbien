@@ -69,7 +69,9 @@ html, body {
 }
 
 .content {
-    width: 800px;
+    position: relative;
+    max-width: 850px;
+    margin: 0 auto;
 }
 
 .content p {
@@ -93,8 +95,13 @@ html, body {
     vertical-align: -2px;
 }
 
+.header-wrapper {
+}
+
 .header {
-    padding: 10px;
+    max-width: 850px;
+    margin: 0 auto;
+    padding: 10px 0;
 }
 
 
@@ -189,9 +196,9 @@ ul#messages {
 .listbox {
     float: left;
     position: relative;
-    width: 250px;
-    padding: 5px;
-    margin-right: 7px;
+    width: 30%;
+    padding: 1%;
+    margin-right: 1%;
 }
 
 html .lastcol {
@@ -201,7 +208,7 @@ html .lastcol {
 .navbox {
     clear: both;
     position: relative;
-    width: 790px;
+    xwidth: 790px;
     padding: 5px;
     margin: 10px 0;
 }

@@ -38,7 +38,7 @@ em {
     font-style: italic;
 }
 
-.header, .footer {
+.header-wrapper, .footer {
     background-color: #eeeeee; /*#eeeeee;*/
 }
 
