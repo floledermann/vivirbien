@@ -337,6 +337,55 @@ def add_icon(request):
         
     return render_to_response('resources/icon_edit.html', RequestContext(request, locals()))
 
+
+def templates(request):
+    templates = ResourceTemplate.objects.all()
+    if not request.user.is_authenticated():
+        templates = templates.filter(protected=False)
+    return render_to_response('resources/templates.html', RequestContext(request, locals()))
+
+
+def template(request, name):
+
+    template = get_object_or_404(ResourceTemplate, shortname=name)
+    resource = None
+
+    if request.method == "POST":
+        form = ResourceForm(request.user, request.POST, request.FILES, instance=resource)
+        if form.is_valid():
+            
+            if not resource:
+                # new resource
+                resource = form.save(commit=False)
+                resource.creator = request.user
+                resource.save()
+            else:
+                form.save()
+                
+            formset = TagFormSet(request.user, request.POST, request.FILES, instance=resource)
+
+            if formset.is_valid():
+                formset.saved_forms = []
+                formset.save_existing_objects()
+                tags = formset.save_new_objects(commit=False)
+                for tag in tags:
+                    tag.creator = request.user
+                    tag.save()
+                if 'action' in request.POST and request.POST['action'] == 'add_tag':
+                    return redirect_to(request, reverse('resources_edit', kwargs={'key':resource.shortname}))               
+                else:
+                    return redirect_to(request, reverse('resources_resource', kwargs={'key':resource.shortname}))               
+        else:
+            formset = TagFormSet(request.user, instance=resource)
+    else:
+        form = ResourceForm(request.user, instance=resource)
+        formset = TagFormSet(request.user, instance=resource)
+        
+        popular_tags = Tag.objects.values('key').annotate(key_count=Count('key')).filter(key_count__gt=2).order_by('key')
+    
+    return render_to_response('resources/template.html', RequestContext(request, locals()))
+
+
 def search(request):
     
     q = request.GET['q'].strip()

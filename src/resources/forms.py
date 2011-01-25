@@ -1,6 +1,7 @@
 from django import forms
-from django.forms import ModelForm
-from django.forms.models import inlineformset_factory
+from django.forms import Form, ModelForm
+from django.forms.models import inlineformset_factory, BaseInlineFormSet
+from django.forms.formsets import BaseFormSet
 from django.utils.translation import ugettext_lazy as _
 
 from autocomplete.widgets import AutoCompleteWidget
@@ -90,4 +91,21 @@ class ContextForm(ModelForm):
     
     class Meta:
         model = Context
-        
+
+class TemplateTagForm(ModelForm):
+    #key = forms.CharField(widget=forms.HiddenInput)
+    #value = forms.CharField(required=False)
+
+    class Meta:
+        model = Tag
+
+class BaseTemplateFormSet(BaseInlineFormSet):
+    def __init__(self, template, *args, **kwargs):
+        super(BaseTemplateFormSet, self).__init__(*args, **kwargs)
+
+TemplateFormSet = inlineformset_factory(Resource, Tag, formset=BaseTemplateFormSet, form=TemplateTagForm)
+
+
+
+
+

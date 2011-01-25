@@ -31,6 +31,32 @@ class ResourceAdmin(admin.ModelAdmin):
                      'classes': ('collapse', )}),
     )
 
+class TagTemplateInline(admin.TabularInline):
+    model = TagTemplate
+    extra = 1
+
+    def formfield_for_dbfield(self, db_field, **kwargs):
+        
+        field = super(TagTemplateInline, self).formfield_for_dbfield(db_field, **kwargs)
+               
+        if db_field.name == 'value':
+            field.widget = admin.widgets.AdminTextInputWidget()
+
+        return field
+
+
+class TagTemplateGroupInline(admin.TabularInline):
+    model = TagTemplateGroup
+    extra = 1
+
+from transmeta import get_fallback_fieldname
+
+class ResourceTemplateAdmin(admin.ModelAdmin):
+    inlines = [TagTemplateGroupInline, TagTemplateInline]
+    prepopulated_fields = {'shortname': (get_fallback_fieldname('name'),)} 
+    save_on_top = True
+
+
 class TagQueryInline(admin.TabularInline):
     
     model = TagQuery
@@ -45,6 +71,7 @@ class ViewAdmin(admin.ModelAdmin):
 
 admin.site.register(Resource, ResourceAdmin)
 admin.site.register(View, ViewAdmin)
+admin.site.register(ResourceTemplate, ResourceTemplateAdmin)
 
 admin.site.register(Icon)
 admin.site.register(Area)

@@ -1,0 +1,17 @@
+{% extends "resources/base.html" %}
+{% load i18n %}
+
+{% block title %}Vivir Bien: {% trans "List of templates" %}{% endblock %}
+
+{% block resources_content %}
+{% include "resources/includes/actions.html" %}
+
+<h1>{% trans "Templates" %}</h1>
+
+
+<ul class="templates-list">
+{% for template in templates %}
+<li><a href="{% url resources_template name=template.shortname %}">{{ template.name }}</a></li>
+{% endfor %}
+</ul>
+{% endblock %}

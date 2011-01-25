@@ -251,12 +251,14 @@ class ResourceTemplate(models.Model):
 
     featured = models.BooleanField(default=False)
 
-    creator = models.ForeignKey(User, null=True)
+    creator = models.ForeignKey(User, null=True, blank=True)
     creation_date = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         translate = ('name', 'description', )
 
+    def __unicode__(self):
+        return self.name
 
 class TagTemplateGroup(models.Model):
     __metaclass__ = TransMeta
@@ -265,12 +267,15 @@ class TagTemplateGroup(models.Model):
     template = models.ForeignKey(ResourceTemplate, related_name='tag_groups')
     order = models.IntegerField(default=0)
 
-    creator = models.ForeignKey(User, null=True)
+    creator = models.ForeignKey(User, null=True, blank=True)
     creation_date = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         translate = ('name', )
+        ordering = ['template','order']
 
+    def __unicode__(self):
+        return '%s : %s' % (self.template.name, self.name)
 
 class TagTemplate(models.Model):
     __metaclass__ = TransMeta
@@ -279,16 +284,18 @@ class TagTemplate(models.Model):
     key = models.CharField(max_length=100)
     value = models.TextField(blank=True)
 
+    multiple = models.BooleanField(default=False)
+
     template = models.ForeignKey(ResourceTemplate, related_name='tags')
     group = models.ForeignKey(TagTemplateGroup, related_name='tags')
     order = models.IntegerField(default=0)
 
-    creator = models.ForeignKey(User, null=True)
+    creator = models.ForeignKey(User, null=True, blank=True)
     creation_date = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         translate = ('name', )
-
+        ordering = ['group','order']
 
 class UserProfile(models.Model):
 
