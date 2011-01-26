@@ -379,7 +379,7 @@ def template(request, name):
             formset = TagFormSet(request.user, instance=resource)
     else:
         form = ResourceForm(request.user, instance=resource)
-        formset = TagFormSet(request.user, instance=resource)
+        formset = TemplateFormSet(request.user, template, instance=resource)
         
         popular_tags = Tag.objects.values('key').annotate(key_count=Count('key')).filter(key_count__gt=2).order_by('key')
     

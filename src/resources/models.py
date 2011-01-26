@@ -264,7 +264,7 @@ class TagTemplateGroup(models.Model):
     __metaclass__ = TransMeta
     
     name = models.CharField(max_length=255, verbose_name=_('Name'))
-    template = models.ForeignKey(ResourceTemplate, related_name='tag_groups')
+    template = models.ForeignKey(ResourceTemplate, related_name='groups')
     order = models.IntegerField(default=0)
 
     creator = models.ForeignKey(User, null=True, blank=True)

@@ -29,10 +29,12 @@ var MEDIA_URL = "{{ MEDIA_URL}}";
 {% if resource %}
 <h1>{{ resource.name }}</h1>
 {% else %}
-<h1>{% trans "New resource" %}</h1>
+<h1>{% trans "New resource" %} ({% trans "Template:" %} {{template.name}})</h1>
 {% endif %}
 
-<form method="post" action="{% url resources_edit key=resource.shortname %}" autocomplete="off">
+<form class="template-form" method="post" action="{% url resources_edit key=resource.shortname %}" autocomplete="off">
+
+<!--
 <table>
 {{ form.as_table }}
 </table>
@@ -46,11 +48,12 @@ var MEDIA_URL = "{{ MEDIA_URL}}";
 {% endfor %}
 {% endfor %}
 </table>
+-->
 
-
-<h2>{% trans "Other Tags" %}</h2>
 
 {% if formset %}
+<table class="edit-table tags-edit-table">
+<!--
 {{ formset.management_form }}
 <table class="edit-table tags-edit-table">
 {% for form in formset.forms %}
@@ -67,7 +70,7 @@ var MEDIA_URL = "{{ MEDIA_URL}}";
         {% if forloop.first and forloop.parentloop.last %}
         <br /><select class="popular-tags">
 <option value="">{% trans "Common Tags:" %}</option>
-<option value="">--------------</option>
+<option value="">xxx</option>
 {% for tag in popular_tags %}
 <option value="{{ tag.key }}">{{ tag.key }}</option>
 {#{% include "resources/includes/tag_actions.html" %}#}
@@ -83,6 +86,9 @@ var MEDIA_URL = "{{ MEDIA_URL}}";
     </td>
 </tr>
 {% endfor %}
+-->
+{{ formset.as_table }}
+
 </table>
 {% endif %}
 

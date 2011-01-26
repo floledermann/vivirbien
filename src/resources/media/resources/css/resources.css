@@ -130,3 +130,34 @@ textarea.embed-code {
     width: 100%;
     height: 120px;
 }
+
+.template-form table {
+    border-collapse: separate;
+    border-spacing: 4px;
+    xbackground-color: #ddd;
+}
+
+.template-form table tbody {
+    xdisplay: block;
+    margin: 5px;
+    padding: 5px;
+
+    background-color: #ddd;
+    border-collapse: collapse;
+
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+   
+}
+
+.template-form table td {
+    margin: 5px;
+    padding: 5px;
+    background-color: #ddd;
+
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+   
+}
