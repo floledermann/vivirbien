@@ -2,7 +2,7 @@ from django import forms
 from django.forms import Form, ModelForm
 from django.forms.models import inlineformset_factory, BaseInlineFormSet
 from django.forms.widgets import Widget
-from django.forms.formsets import BaseFormSet
+from django.forms.formsets import BaseFormSet, TOTAL_FORM_COUNT
 from django.utils.translation import ugettext_lazy as _
 from django.utils.encoding import force_unicode
 from django.utils.safestring import mark_safe
@@ -38,7 +38,7 @@ class ResourceForm(ModelForm):
     
     class Meta:
         model = Resource
-        exclude = ('creator','featured')
+        exclude = ('creator','featured','start_date','end_date')
 
 def tagformcallback(field):
 # autocomplete won't return distinct values, so disable for now

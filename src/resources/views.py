@@ -350,6 +350,17 @@ def template(request, name):
     template = get_object_or_404(ResourceTemplate, shortname=name)
     resource = None
 
+    form = ResourceForm(request.user)
+    formset = TemplateFormSet(request.user, template)
+            
+    return render_to_response('resources/template.html', RequestContext(request, locals()))
+
+def template_edit(request, name, resource=None):
+
+    template = get_object_or_404(ResourceTemplate, shortname=name)
+    if resource:
+        resource = get_object_or_404(Resource, shortname=resource)
+
     if request.method == "POST":
         form = ResourceForm(request.user, request.POST, request.FILES, instance=resource)
         if form.is_valid():
@@ -362,8 +373,7 @@ def template(request, name):
             else:
                 form.save()
                 
-            formset = TagFormSet(request.user, request.POST, request.FILES, instance=resource)
-
+            formset = TemplateFormSet(request.user, template, request.POST, request.FILES, instance=resource)
             if formset.is_valid():
                 formset.saved_forms = []
                 formset.save_existing_objects()
@@ -372,7 +382,7 @@ def template(request, name):
                     tag.creator = request.user
                     tag.save()
                 if 'action' in request.POST and request.POST['action'] == 'add_tag':
-                    return redirect_to(request, reverse('resources_edit', kwargs={'key':resource.shortname}))               
+                    return redirect_to(request, reverse('resources_template_edit', kwargs={'resource':resource.shortname, 'name':template.shortname}))               
                 else:
                     return redirect_to(request, reverse('resources_resource', kwargs={'key':resource.shortname}))               
         else:
@@ -380,8 +390,6 @@ def template(request, name):
     else:
         form = ResourceForm(request.user, instance=resource)
         formset = TemplateFormSet(request.user, template, instance=resource)
-        
-        popular_tags = Tag.objects.values('key').annotate(key_count=Count('key')).filter(key_count__gt=2).order_by('key')
     
     return render_to_response('resources/template.html', RequestContext(request, locals()))
 

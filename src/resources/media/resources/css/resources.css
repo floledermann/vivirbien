@@ -131,6 +131,11 @@ textarea.embed-code {
     height: 120px;
 }
 
+.template-form th {
+    font-size: 18px;
+}
+
+/*
 .template-form table {
     border-collapse: separate;
     border-spacing: 4px;
@@ -161,3 +166,4 @@ textarea.embed-code {
     border-radius: 5px;
    
 }
+*/

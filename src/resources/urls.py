@@ -27,7 +27,8 @@ urlpatterns = patterns('',
     url(r'^views/edit/(?P<name>.*)/$', views.edit_view, name='resources_edit_view'),
 
     url(r'^templates/$', views.templates, name='resources_templates'),
-    url(r'^template/(?P<name>.*)/$', views.template, name='resources_template'),
+    url(r'^template/(?P<name>.*)/(?P<resource>.*)/$', views.template_edit, name='resources_template_edit'),
+    url(r'^template/(?P<name>.*)/$', views.template_edit, name='resources_template_edit'),
 
     url(r'^all/$', views.all_resources, name='resources_all'),
    
