@@ -1,11 +1,13 @@
 from django import forms
 from django.forms import Form, ModelForm
-from django.forms.models import inlineformset_factory, BaseInlineFormSet, BaseModelFormSet
-from django.forms.widgets import Widget
-from django.forms.formsets import BaseFormSet, TOTAL_FORM_COUNT
+from django.forms.fields import IntegerField, BooleanField
+from django.forms.models import inlineformset_factory, BaseInlineFormSet, BaseModelFormSet, ModelChoiceField, InlineForeignKeyField
+from django.forms.widgets import Widget, HiddenInput
+from django.forms.formsets import BaseFormSet, TOTAL_FORM_COUNT, DELETION_FIELD_NAME, ORDERING_FIELD_NAME
 from django.utils.translation import ugettext_lazy as _
 from django.utils.encoding import force_unicode
 from django.utils.safestring import mark_safe
+from django.utils.text import capfirst
 from django.forms.util import flatatt
 from django.db import connections
 
@@ -151,7 +153,13 @@ class TemplateTagForm(ModelForm):
 class BaseTemplateFormSet(BaseInlineFormSet):
 
     def __init__(self, user, template, *args, **kwargs):
-        # data, initial is not supported / tested
+
+        # initial, can_order is not supported / tested
+        if kwargs.get('initial'):
+            raise ValueError('TemplateFormSet does not support initial values.')
+        if kwargs.get('can_order'):
+            raise ValueError('TemplateFormSet does not support ordering.')
+
         self.template = template
         self.templates = template.tags.all()
         super(BaseTemplateFormSet, self).__init__(*args, **kwargs)
@@ -178,7 +186,6 @@ class BaseTemplateFormSet(BaseInlineFormSet):
 
         for template in self.templates:
             tags = self.get_tags_by_key(template.key)
-            #assert False, self._tag_dict
             if not tags or len(tags)==0:
                 # create empty form
                 self.forms.append(self._construct_form(i, template=template))
@@ -197,7 +204,6 @@ class BaseTemplateFormSet(BaseInlineFormSet):
             self.forms.append(self._construct_form(i))
 
 
-# from inlineformset
     def _construct_form(self, i, **kwargs):
 
         defaults = {'auto_id': self.auto_id, 'prefix': self.add_prefix(i), 'empty_permitted' : True}
@@ -211,8 +217,6 @@ class BaseTemplateFormSet(BaseInlineFormSet):
             if isinstance(pk, list):
                 pk = pk[0]
             kwargs['instance'] = self._existing_object(pk)
-#        if i < self.initial_form_count() and not kwargs.get('instance'):
-#            kwargs['instance'] = self.get_queryset()[i]
 
         if self.data or self.files:
             defaults['data'] = self.data
@@ -220,7 +224,9 @@ class BaseTemplateFormSet(BaseInlineFormSet):
 
         defaults.update(kwargs)
         form = self.form(**defaults)
-        self.add_fields(form, i)
+        if kwargs.get('template'):
+            form._group = kwargs['template'].group
+        self.add_fields(form, kwargs.get('instance'))
 
         if self.save_as_new:
             # Remove the primary key from the form's data, we are only
@@ -234,16 +240,13 @@ class BaseTemplateFormSet(BaseInlineFormSet):
         setattr(form.instance, self.fk.get_attname(), self.instance.pk)
         return form
 
-    def add_fields(self, form, index):
+    def add_fields(self, form, instance):
 # BaseModelFormset
         """Add a hidden field for the object's primary key."""
         from django.db.models import AutoField, OneToOneField, ForeignKey
         self._pk_field = pk = self.model._meta.pk
         # If a pk isn't editable, then it won't be on the form, so we need to
-        # add it here so we can tell which object is which when we get the
-        # data back. Generally, pk.editable should be false, but for some
-        # reason, auto_created pk fields and AutoField's editable attribute is
-        # True, so check for that as well.
+        # add it here. 
         def pk_is_not_editable(pk):
             return ((not pk.editable) or (pk.auto_created or isinstance(pk, AutoField))
                 or (pk.rel and pk.rel.parent_link and pk_is_not_editable(pk.rel.to._meta.pk)))
@@ -251,12 +254,9 @@ class BaseTemplateFormSet(BaseInlineFormSet):
             if form.is_bound:
                 pk_value = form.instance.pk
             else:
-                try:
-                    if index is not None:
-                        pk_value = self.get_queryset()[index].pk
-                    else:
-                        pk_value = None
-                except IndexError:
+                if instance:
+                    pk_value = instance.pk
+                else:
                     pk_value = None
             if isinstance(pk, OneToOneField) or isinstance(pk, ForeignKey):
                 qs = pk.rel.to._default_manager.get_query_set()
@@ -265,13 +265,13 @@ class BaseTemplateFormSet(BaseInlineFormSet):
             qs = qs.using(form.instance._state.db)
             form.fields[self._pk_field.name] = ModelChoiceField(qs, initial=pk_value, required=False, widget=HiddenInput)
 
-# BaseFormSet
-        if self.can_order:
-            # Only pre-fill the ordering field for initial forms.
-            if index is not None and index < self.initial_form_count():
-                form.fields[ORDERING_FIELD_NAME] = IntegerField(label=_(u'Order'), initial=index+1, required=False)
-            else:
-                form.fields[ORDERING_FIELD_NAME] = IntegerField(label=_(u'Order'), required=False)
+# oderdering currently not supported
+#        if self.can_order:
+#            # Only pre-fill the ordering field for initial forms.
+#            if index is not None and index < self.initial_form_count():
+#                form.fields[ORDERING_FIELD_NAME] = IntegerField(label=_(u'Order'), initial=index+1, required=False)
+#            else:
+#                form.fields[ORDERING_FIELD_NAME] = IntegerField(label=_(u'Order'), required=False)
         if self.can_delete:
             form.fields[DELETION_FIELD_NAME] = BooleanField(label=_(u'Delete'), required=False)
 
@@ -310,26 +310,24 @@ class BaseTemplateFormSet(BaseInlineFormSet):
 
     def as_table(self):
         "Returns this formset rendered as HTML <tr>s -- excluding the <table></table>."
-        i = 0
-        html_forms = [form.as_tr() for form in self.forms]
+        #html_forms = [form.as_tr() for form in self.forms]
         html = []    
-        #assert False, self.template.groups.count()
-        #forms = u' '.join([form.as_table() for form in self.forms])
-        for group in self.template.groups.all():
-            #assert False, html_forms
-            html.append('<tbody><tr><th>%s</th></tr><tr>' % group.name)
-            group_size = group.tags.count()
-            html.append(u'</tr><tr>'.join(html_forms[i:i+group_size]))
-            html.append('</tr></tbody>')
-            i += group_size
-        html.append('<tbody><tr><th>Other tags</th></tr>')
-        for form in html_forms[i:]:
-            html.append('<tr>')
-            html.append(form)
+        group = None
+        for form in self.forms:
+            cur_group = getattr(form,'_group',None)
+            if cur_group != group:
+                if group:
+                    html.append('</tbody>')              
+                html.append('<tbody><tr><th>%s</th></tr><tr>' % (cur_group and cur_group.name or 'Other Tags'))
+                group = cur_group
+            else:
+                html.append('<tr>')
+            #assert False, group
+            html.append(form.as_tr())
             html.append('</tr>')
         return mark_safe(u'\n'.join([unicode(self.management_form), ''.join(html)]))
 
-TemplateFormSet = inlineformset_factory(Resource, Tag, formset=BaseTemplateFormSet, form=TemplateTagForm, extra=1, can_delete=False)
+TemplateFormSet = inlineformset_factory(Resource, Tag, formset=BaseTemplateFormSet, form=TemplateTagForm, extra=1, can_delete=True)
 
 
 
