@@ -103,6 +103,17 @@ class ContextForm(ModelForm):
         model = Context
 
 
+class ResourceTemplateForm(ModelForm):
+
+    class Meta:
+        model = ResourceTemplate
+        exclude = ('creator',)
+
+TagTemplateFormSet = inlineformset_factory(TagTemplateGroup, TagTemplate,
+                                   exclude=('creator',),
+                                   extra=1)
+
+
 class ConstWidget(Widget):
     """
     Non-editable Widget that only displays its value.

@@ -356,7 +356,40 @@ def template(request, name):
     return render_to_response('resources/template.html', RequestContext(request, locals()))
 
 def edit_template(request, name):
-    pass
+    template = get_object_or_404(ResourceTemplate, shortname=name)
+
+    if request.method == "POST":
+        form = ResourceTemplateForm(request.POST, request.FILES, instance=template)
+        if form.is_valid():
+            
+            if not template:
+                # new resource
+                template = form.save(commit=False)
+                template.creator = request.user
+                template.save()
+            else:
+                form.save()
+                
+            formset = TagTemplateFormSet(request.POST, request.FILES, instance=template)
+            if formset.is_valid():
+                formset.saved_forms = []
+                formset.save_existing_objects()
+                tags = formset.save_new_objects(commit=False)
+                for tag in tags:
+                    tag.creator = request.user
+                    tag.save()
+                if 'action' in request.POST and request.POST['action'] == 'add_tag':
+                    return redirect_to(request, reverse('resources_template_edit', kwargs={'name':template.shortname}))               
+                else:
+
+                    return redirect_to(request, reverse('resources_templates'))               
+        else:
+            formset = TagFormSet(request.user, instance=resource)
+    else:
+        form = ResourceTemplateForm(instance=template)
+        formset = TagTemplateFormSet(instance=template)
+
+    return render_to_response('resources/template_edit.html', RequestContext(request, locals()))
 
 def template_edit(request, name, resource=None):
 
