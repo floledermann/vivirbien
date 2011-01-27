@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-04 12:31+0100\n"
+"POT-Creation-Date: 2011-01-27 19:50+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,96 +16,116 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: forms.py:89
+#: forms.py:100
 msgid "Everywhere"
 msgstr ""
 
-#: forms.py:89 models.py:220
+#: forms.py:100 models.py:235
 msgid "Area"
 msgstr ""
 
-#: models.py:11
+#: forms.py:277
+msgid "Delete"
+msgstr ""
+
+#: forms.py:321
+msgid "Other Tags"
+msgstr ""
+
+#: models.py:13
 msgid "(Will be part of the resources' URL)"
 msgstr ""
 
-#: models.py:14 models.py:59
+#: models.py:16 models.py:63
 msgid "(Hidden from anonymous users)"
 msgstr ""
 
-#: models.py:19 models.py:20
+#: models.py:21 models.py:22
 msgid "Format: yyyy-mm-dd hh:mm (time is optional)"
 msgstr ""
 
-#: models.py:56
+#: models.py:60
 msgid "(Will be part of the views' URL)"
 msgstr ""
 
-#: models.py:114
+#: models.py:122
 msgid "All tags"
 msgstr ""
 
-#: models.py:117
+#: models.py:125
 msgid "is present"
 msgstr ""
 
-#: models.py:119
+#: models.py:127
 msgid "begins with"
 msgstr ""
 
-#: models.py:123
+#: models.py:131
 msgid "and"
 msgstr ""
 
-#: models.py:124
+#: models.py:132
 msgid "or"
 msgstr ""
 
-#: models.py:165
+#: models.py:173
 msgid "Default Icon"
 msgstr ""
 
-#: models.py:166
+#: models.py:174
 msgid "Red"
 msgstr ""
 
-#: models.py:191
+#: models.py:199
 msgid "Subicon only"
 msgstr ""
 
-#: templates/resources/edit.html:32
+#: models.py:250 models.py:268 models.py:285
+msgid "Name"
+msgstr ""
+
+#: models.py:251
+msgid "(Will be part of the template's URL)"
+msgstr ""
+
+#: templates/resources/edit.html:32 templates/resources/template.html:32
 msgid "New resource"
 msgstr ""
 
-#: templates/resources/edit.html:58 templates/resources/view_edit.html:59
-#: templates/resources/view_edit.html:99
+#: templates/resources/edit.html:58 templates/resources/template.html:76
+#: templates/resources/view_edit.html:59 templates/resources/view_edit.html:99
 msgid "Common Tags:"
 msgstr ""
 
-#: templates/resources/edit.html:83 templates/resources/view_edit.html:122
+#: templates/resources/edit.html:83 templates/resources/template.html:104
+#: templates/resources/view_edit.html:122
 msgid "Help:"
 msgstr ""
 
 #: templates/resources/edit.html:91 templates/resources/icon_edit.html:24
+#: templates/resources/template.html:112
 #: templates/resources/view_edit.html:129
 msgid "Save"
 msgstr ""
 
-#: templates/resources/edit.html:92 templates/resources/view_edit.html:130
+#: templates/resources/edit.html:92 templates/resources/template.html:113
+#: templates/resources/view_edit.html:130
 msgid "Save and continue"
 msgstr ""
 
 #: templates/resources/edit.html:95 templates/resources/edit.html.py:97
-#: templates/resources/icon_edit.html:26
+#: templates/resources/icon_edit.html:26 templates/resources/template.html:116
+#: templates/resources/template.html:118
 #: templates/resources/view_edit.html:133
 #: templates/resources/view_edit.html:135
 msgid "Cancel"
 msgstr ""
 
-#: templates/resources/edit.html:104
+#: templates/resources/edit.html:104 templates/resources/template.html:125
 msgid "Look up from address"
 msgstr ""
 
-#: templates/resources/edit.html:110
+#: templates/resources/edit.html:110 templates/resources/template.html:131
 msgid "Add location tag for this address"
 msgstr ""
 
@@ -147,7 +167,7 @@ msgid "all resources..."
 msgstr ""
 
 #: templates/resources/index.html:45
-#: templates/resources/includes/view_modes.html:8
+#: templates/resources/includes/view_modes.html:9
 msgid "Upcoming"
 msgstr ""
 
@@ -207,6 +227,18 @@ msgstr ""
 msgid "All Tags"
 msgstr ""
 
+#: templates/resources/template.html:32
+msgid "Template:"
+msgstr ""
+
+#: templates/resources/templates.html:4
+msgid "List of templates"
+msgstr ""
+
+#: templates/resources/templates.html:9
+msgid "Templates"
+msgstr ""
+
 #: templates/resources/view_edit.html:32
 msgid "New view"
 msgstr ""
@@ -228,7 +260,7 @@ msgid "Mappings determine the appearance of the resource."
 msgstr ""
 
 #: templates/resources/view_embed.html:35 templates/resources/view_map.html:45
-#: templates/resources/view_overview.html:43
+#: templates/resources/view_overview.html:54
 msgid "Map Data Loading..."
 msgstr ""
 
@@ -250,7 +282,11 @@ msgstr ""
 msgid "List of views"
 msgstr ""
 
-#: templates/resources/views.html:9
+#: templates/resources/views.html:8
+msgid "Add view"
+msgstr ""
+
+#: templates/resources/views.html:10
 #: templates/resources/includes/actions.html:4
 msgid "Views"
 msgstr ""
@@ -271,12 +307,8 @@ msgstr ""
 msgid "Set"
 msgstr ""
 
-#: templates/resources/includes/actions.html:22
+#: templates/resources/includes/actions.html:21
 msgid "Add resource"
-msgstr ""
-
-#: templates/resources/includes/actions.html:25
-msgid "Add view"
 msgstr ""
 
 #: templates/resources/includes/tag_actions.html:2
@@ -291,22 +323,22 @@ msgstr ""
 msgid "Edit view"
 msgstr ""
 
-#: templates/resources/includes/view_modes.html:4
+#: templates/resources/includes/view_modes.html:5
 msgid "Overview"
 msgstr ""
 
-#: templates/resources/includes/view_modes.html:5
+#: templates/resources/includes/view_modes.html:6
 msgid "Map"
 msgstr ""
 
-#: templates/resources/includes/view_modes.html:6
+#: templates/resources/includes/view_modes.html:7
 msgid "Not on Map"
 msgstr ""
 
-#: templates/resources/includes/view_modes.html:7
+#: templates/resources/includes/view_modes.html:8
 msgid "List"
 msgstr ""
 
-#: templates/resources/includes/view_modes.html:9
+#: templates/resources/includes/view_modes.html:10
 msgid "Export"
 msgstr ""
