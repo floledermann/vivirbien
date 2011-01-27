@@ -27,8 +27,10 @@ urlpatterns = patterns('',
     url(r'^views/edit/(?P<name>.*)/$', views.edit_view, name='resources_edit_view'),
 
     url(r'^templates/$', views.templates, name='resources_templates'),
-    url(r'^template/(?P<name>.*)/(?P<resource>.*)/$', views.template_edit, name='resources_template_edit'),
-    url(r'^template/(?P<name>.*)/$', views.template_edit, name='resources_template_edit'),
+    url(r'^template/(?P<name>.*)/$', views.edit_template, name='resources_template_edit'),
+    # temporary, until resource view support assigned template
+    url(r'^template-resource/(?P<name>.*)/(?P<resource>.*)/$', views.template_edit, name='resources_edit_with_template'),
+    url(r'^template-resource/(?P<name>.*)/$', views.template_edit, name='resources_edit_with_template'),
 
     url(r'^all/$', views.all_resources, name='resources_all'),
    

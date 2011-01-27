@@ -11,7 +11,7 @@
 
 <ul class="templates-list">
 {% for template in templates %}
-<li><a href="{% url resources_template name=template.shortname %}">{{ template.name }}</a></li>
+<li>{{ template.name }} <a href="{% url resources_edit_with_template name=template.shortname %}">{% trans "create" %}</a> <a href="{% url resources_template_edit name=template.shortname %}">{% trans "edit" %}</a></li>
 {% endfor %}
 </ul>
 {% endblock %}

@@ -355,6 +355,9 @@ def template(request, name):
             
     return render_to_response('resources/template.html', RequestContext(request, locals()))
 
+def edit_template(request, name):
+    pass
+
 def template_edit(request, name, resource=None):
 
     template = get_object_or_404(ResourceTemplate, shortname=name)
@@ -373,7 +376,7 @@ def template_edit(request, name, resource=None):
             else:
                 form.save()
                 
-            formset = TemplateFormSet(request.user, template, request.POST, request.FILES, instance=resource)
+            formset = TemplateFormSet(template, request.POST, request.FILES, instance=resource, can_delete=request.user.has_perm('resources.delete_tag'))
             if formset.is_valid():
                 formset.saved_forms = []
                 formset.save_existing_objects()
@@ -389,7 +392,7 @@ def template_edit(request, name, resource=None):
             formset = TagFormSet(request.user, instance=resource)
     else:
         form = ResourceForm(request.user, instance=resource)
-        formset = TemplateFormSet(request.user, template, instance=resource)
+        formset = TemplateFormSet(template, instance=resource, can_delete=request.user.has_perm('resources.delete_tag'))
     
     return render_to_response('resources/template.html', RequestContext(request, locals()))
 

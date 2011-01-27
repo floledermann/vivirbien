@@ -4,7 +4,7 @@ from django.forms.fields import IntegerField, BooleanField
 from django.forms.models import inlineformset_factory, BaseInlineFormSet, BaseModelFormSet, ModelChoiceField, InlineForeignKeyField
 from django.forms.widgets import Widget, HiddenInput
 from django.forms.formsets import BaseFormSet, TOTAL_FORM_COUNT, DELETION_FIELD_NAME, ORDERING_FIELD_NAME
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import string_concat, ugettext_lazy as _
 from django.utils.encoding import force_unicode
 from django.utils.safestring import mark_safe
 from django.utils.text import capfirst
@@ -43,6 +43,7 @@ class ResourceForm(ModelForm):
         model = Resource
         exclude = ('creator','featured','start_date','end_date')
 
+
 def tagformcallback(field):
 # autocomplete won't return distinct values, so disable for now
 #    if field.name == 'key':
@@ -54,19 +55,19 @@ _TagFormSet = inlineformset_factory(Resource, Tag,
                                    extra=1,
                                    formfield_callback=tagformcallback)
 
-class IconForm(ModelForm):
-
-    class Meta:
-        model = Icon
-        exclude = ('creator')
-
-
 class TagFormSet(_TagFormSet):
         
     def __init__(self, user, *args, **kwargs):
         if not user.has_perm('resources.delete_tag'):
             self.can_delete = False
         super(TagFormSet, self).__init__(*args, **kwargs)
+
+
+class IconForm(ModelForm):
+
+    class Meta:
+        model = Icon
+        exclude = ('creator')
         
 
 class ViewForm(ModelForm):
@@ -83,9 +84,11 @@ class ViewForm(ModelForm):
         model = View
         exclude = ('creator','sub_views','order_by')
 
+
 QueryFormSet = inlineformset_factory(View, TagQuery,
                                    exclude=('creator',),
                                    extra=1)
+
 
 TagMappingFormSet = inlineformset_factory(View, TagMapping,
                                    exclude=('creator',),
@@ -124,13 +127,9 @@ class ConstWidget(Widget):
 
 
 class TemplateTagForm(ModelForm):
-    #key = forms.CharField(widget=forms.HiddenInput)
-    #value = forms.CharField(required=False)
 
     def __init__(self, template=None, *args, **kwargs):
         self.template = template
-        #if not kwargs.get('instance'):
-        #    assert False, kwargs
         super(TemplateTagForm, self).__init__(*args, **kwargs)
         if self.template:
             self.fields['key'] = forms.CharField(widget=ConstWidget(label=template.name), initial=template.key)
@@ -151,10 +150,12 @@ class TemplateTagForm(ModelForm):
         
 
 class BaseTemplateFormSet(BaseInlineFormSet):
+    """
+    A customized FormSet for rendering a resource's tags according to a Template.
+    """
+    def __init__(self, template, *args, **kwargs):
 
-    def __init__(self, user, template, *args, **kwargs):
-
-        # initial, can_order is not supported / tested
+        # initial data and can_order is not supported
         if kwargs.get('initial'):
             raise ValueError('TemplateFormSet does not support initial values.')
         if kwargs.get('can_order'):
@@ -162,6 +163,8 @@ class BaseTemplateFormSet(BaseInlineFormSet):
 
         self.template = template
         self.templates = template.tags.all()
+        self.can_delete = kwargs.pop('can_delete', False)
+
         super(BaseTemplateFormSet, self).__init__(*args, **kwargs)
 
     def get_tags_by_key(self, key):
@@ -180,7 +183,7 @@ class BaseTemplateFormSet(BaseInlineFormSet):
         return self._tag_dict.get(key)
 
     def _construct_forms(self):
-        # instantiate all the forms and put them in self.forms
+
         self.forms = []
         i = 0
 
@@ -310,7 +313,6 @@ class BaseTemplateFormSet(BaseInlineFormSet):
 
     def as_table(self):
         "Returns this formset rendered as HTML <tr>s -- excluding the <table></table>."
-        #html_forms = [form.as_tr() for form in self.forms]
         html = []    
         group = None
         for form in self.forms:
@@ -318,16 +320,16 @@ class BaseTemplateFormSet(BaseInlineFormSet):
             if cur_group != group:
                 if group:
                     html.append('</tbody>')              
-                html.append('<tbody><tr><th>%s</th></tr><tr>' % (cur_group and cur_group.name or 'Other Tags'))
+                html.append(string_concat('<tbody><tr><th>', cur_group and cur_group.name or _('Other Tags'), '</th></tr><tr>'))
                 group = cur_group
             else:
                 html.append('<tr>')
-            #assert False, group
             html.append(form.as_tr())
             html.append('</tr>')
-        return mark_safe(u'\n'.join([unicode(self.management_form), ''.join(html)]))
+        #return mark_safe(u'\n'.join([unicode(self.management_form), ''.join(html)]))
+        return mark_safe(string_concat(unicode(self.management_form), *html))
 
-TemplateFormSet = inlineformset_factory(Resource, Tag, formset=BaseTemplateFormSet, form=TemplateTagForm, extra=1, can_delete=True)
+TemplateFormSet = inlineformset_factory(Resource, Tag, formset=BaseTemplateFormSet, form=TemplateTagForm, extra=1)
 
 
 
