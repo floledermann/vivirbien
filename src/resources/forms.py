@@ -1,12 +1,13 @@
 from django import forms
 from django.forms import Form, ModelForm
-from django.forms.models import inlineformset_factory, BaseInlineFormSet
+from django.forms.models import inlineformset_factory, BaseInlineFormSet, BaseModelFormSet
 from django.forms.widgets import Widget
 from django.forms.formsets import BaseFormSet, TOTAL_FORM_COUNT
 from django.utils.translation import ugettext_lazy as _
 from django.utils.encoding import force_unicode
 from django.utils.safestring import mark_safe
 from django.forms.util import flatatt
+from django.db import connections
 
 from autocomplete.widgets import AutoCompleteWidget
 
@@ -126,6 +127,8 @@ class TemplateTagForm(ModelForm):
 
     def __init__(self, template=None, *args, **kwargs):
         self.template = template
+        #if not kwargs.get('instance'):
+        #    assert False, kwargs
         super(TemplateTagForm, self).__init__(*args, **kwargs)
         if self.template:
             self.fields['key'] = forms.CharField(widget=ConstWidget(label=template.name), initial=template.key)
@@ -148,40 +151,152 @@ class TemplateTagForm(ModelForm):
 class BaseTemplateFormSet(BaseInlineFormSet):
 
     def __init__(self, user, template, *args, **kwargs):
+        # data, initial is not supported / tested
         self.template = template
+        self.templates = template.tags.all()
         super(BaseTemplateFormSet, self).__init__(*args, **kwargs)
+
+    def get_tags_by_key(self, key):
+        if not hasattr(self, '_tag_dict'):
+            self._tag_dict = {None:[]}
+            for tag in self.get_queryset():
+                for template in self.templates:
+                    if tag.key == template.key:
+                        if not tag.key in self._tag_dict:
+                            self._tag_dict[tag.key] = []
+                        self._tag_dict[tag.key].append(tag)
+                        break
+                else:
+                    self._tag_dict[None].append(tag)                
+                
+        return self._tag_dict.get(key)
 
     def _construct_forms(self):
         # instantiate all the forms and put them in self.forms
         self.forms = []
         i = 0
-        for tag_template in self.template.tags.all():
-            self.forms.append(self._construct_form(i, template=tag_template))
-            i += 1
+
+        for template in self.templates:
+            tags = self.get_tags_by_key(template.key)
+            #assert False, self._tag_dict
+            if not tags or len(tags)==0:
+                # create empty form
+                self.forms.append(self._construct_form(i, template=template))
+                i += 1
+            else:
+                for tag in tags:
+                    self.forms.append(self._construct_form(i, template=template, instance=tag))
+                    i += 1
+        tags = self.get_tags_by_key(None)
+        if tags:
+            for tag in tags:
+                self.forms.append(self._construct_form(i, instance=tag))
+                i += 1
 
         for i in xrange(i, i+self.extra):
             self.forms.append(self._construct_form(i))
 
+
+# from inlineformset
     def _construct_form(self, i, **kwargs):
-        """
-        Instantiates and returns the i-th form instance in a formset.
-        """
-        defaults = {'auto_id': self.auto_id, 'prefix': self.add_prefix(i)}
+
+        defaults = {'auto_id': self.auto_id, 'prefix': self.add_prefix(i), 'empty_permitted' : True}
+    
+        if self.is_bound and kwargs.get('instance'):
+            pk_key = "%s-%s" % (self.add_prefix(i), self.model._meta.pk.name)
+            pk = self.data[pk_key]
+            pk_field = self.model._meta.pk
+            pk = pk_field.get_db_prep_lookup('exact', pk,
+                connection=connections[self.get_queryset().db])
+            if isinstance(pk, list):
+                pk = pk[0]
+            kwargs['instance'] = self._existing_object(pk)
+#        if i < self.initial_form_count() and not kwargs.get('instance'):
+#            kwargs['instance'] = self.get_queryset()[i]
+
         if self.data or self.files:
             defaults['data'] = self.data
             defaults['files'] = self.files
-        if self.initial:
-            try:
-                defaults['initial'] = self.initial[i]
-            except IndexError:
-                pass
-        # Allow extra forms to be empty.
-        if i >= self.initial_form_count():
-            defaults['empty_permitted'] = True
+
         defaults.update(kwargs)
         form = self.form(**defaults)
         self.add_fields(form, i)
+
+        if self.save_as_new:
+            # Remove the primary key from the form's data, we are only
+            # creating new instances
+            form.data[form.add_prefix(self._pk_field.name)] = None
+
+            # Remove the foreign key from the form's data
+            form.data[form.add_prefix(self.fk.name)] = None
+
+        # Set the fk value here so that the form can do it's validation.
+        setattr(form.instance, self.fk.get_attname(), self.instance.pk)
         return form
+
+    def add_fields(self, form, index):
+# BaseModelFormset
+        """Add a hidden field for the object's primary key."""
+        from django.db.models import AutoField, OneToOneField, ForeignKey
+        self._pk_field = pk = self.model._meta.pk
+        # If a pk isn't editable, then it won't be on the form, so we need to
+        # add it here so we can tell which object is which when we get the
+        # data back. Generally, pk.editable should be false, but for some
+        # reason, auto_created pk fields and AutoField's editable attribute is
+        # True, so check for that as well.
+        def pk_is_not_editable(pk):
+            return ((not pk.editable) or (pk.auto_created or isinstance(pk, AutoField))
+                or (pk.rel and pk.rel.parent_link and pk_is_not_editable(pk.rel.to._meta.pk)))
+        if pk_is_not_editable(pk) or pk.name not in form.fields:
+            if form.is_bound:
+                pk_value = form.instance.pk
+            else:
+                try:
+                    if index is not None:
+                        pk_value = self.get_queryset()[index].pk
+                    else:
+                        pk_value = None
+                except IndexError:
+                    pk_value = None
+            if isinstance(pk, OneToOneField) or isinstance(pk, ForeignKey):
+                qs = pk.rel.to._default_manager.get_query_set()
+            else:
+                qs = self.model._default_manager.get_query_set()
+            qs = qs.using(form.instance._state.db)
+            form.fields[self._pk_field.name] = ModelChoiceField(qs, initial=pk_value, required=False, widget=HiddenInput)
+
+# BaseFormSet
+        if self.can_order:
+            # Only pre-fill the ordering field for initial forms.
+            if index is not None and index < self.initial_form_count():
+                form.fields[ORDERING_FIELD_NAME] = IntegerField(label=_(u'Order'), initial=index+1, required=False)
+            else:
+                form.fields[ORDERING_FIELD_NAME] = IntegerField(label=_(u'Order'), required=False)
+        if self.can_delete:
+            form.fields[DELETION_FIELD_NAME] = BooleanField(label=_(u'Delete'), required=False)
+
+# BaseInlineFormset
+        if self._pk_field == self.fk:
+            name = self._pk_field.name
+            kwargs = {'pk_field': True}
+        else:
+            # The foreign key field might not be on the form, so we poke at the
+            # Model field to get the label, since we need that for error messages.
+            name = self.fk.name
+            kwargs = {
+                'label': getattr(form.fields.get(name), 'label', capfirst(self.fk.verbose_name))
+            }
+            if self.fk.rel.field_name != self.fk.rel.to._meta.pk.name:
+                kwargs['to_field'] = self.fk.rel.field_name
+
+        form.fields[name] = InlineForeignKeyField(self.instance, **kwargs)
+
+        # Add the generated field to form._meta.fields if it's defined to make
+        # sure validation isn't skipped on that field.
+        if form._meta.fields:
+            if isinstance(form._meta.fields, tuple):
+                form._meta.fields = list(form._meta.fields)
+            form._meta.fields.append(self.fk.name)
 
     def total_form_count(self):
         """Returns the total number of forms in this FormSet."""

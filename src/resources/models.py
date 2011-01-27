@@ -51,7 +51,9 @@ class Tag(models.Model):
         part = self.value.partition(':')
         return self.key + '=' + part[0] + part[1]
 
-    
+    def __unicode__(self):
+        return '%s: %s' % (self.key, self.value)
+
 class View(models.Model):
     
     name = models.CharField(max_length=200)
