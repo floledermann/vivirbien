@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-27 19:50+0000\n"
+"POT-Creation-Date: 2011-01-28 14:19+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,36 +16,52 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: page_base.html:32
+#: page_base.html:12 page_base.html.py:19 page_base.html.py:33
 msgid "Resources for a solidarity economy"
 msgstr ""
 
-#: includes/navi.html:3
-msgid "Resources"
+#: page_base.html:34
+msgid "Data"
 msgstr ""
 
-#: includes/navi.html:8
+#: page_base.html:34
+msgid "Why?"
+msgstr ""
+
+#: page_base.html:34
+msgid "Credits"
+msgstr ""
+
+#: includes/navi.html:4
 msgid "Welcome,"
 msgstr ""
 
-#: includes/navi.html:9
+#: includes/navi.html:5
 msgid "Not logged in"
 msgstr ""
 
-#: includes/navi.html:9 registration/login.html:27
+#: includes/navi.html:5 registration/login.html:27
 msgid "Log in"
 msgstr ""
 
-#: includes/navi.html:10 invitation/invitation_form.html:6
+#: includes/navi.html:6 invitation/invitation_form.html:6
 msgid "Invite a friend"
 msgstr ""
 
-#: includes/navi.html:11
+#: includes/navi.html:7
 msgid "Log out"
 msgstr ""
 
-#: includes/navi.html:13
+#: includes/navi.html:9
 msgid "language:"
+msgstr ""
+
+#: includes/navi.html:20
+msgid "Resources"
+msgstr ""
+
+#: includes/navi.html:22
+msgid "About"
 msgstr ""
 
 #: invitation/invitation_form.html:8
