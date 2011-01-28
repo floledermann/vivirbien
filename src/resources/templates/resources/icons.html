@@ -5,9 +5,10 @@
 {% block title %}Vivir Bien: {% trans "Icons" %}{% endblock %}
 
 {% block resources_content %}
-{% include "resources/includes/actions.html" %}
+
 <h1>{% trans "Icons" %}</h1>
-<a class="action" href="{% url resources_new_icon %}">{% trans "Add Icon" %}</a>
+
+<a class="action add" href="{% url resources_new_icon %}">{% trans "Add Icon" %}</a>
 
 <ul class="iconlist">
 {% for icon in icons %}

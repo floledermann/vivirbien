@@ -1,10 +1,38 @@
-.actions .context-form {
-    float: right;
+
+.resources-header {
+    background-color: #eee;
+    padding: 5px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
 }
 
-.actions .search-form {
-    display: inline;
+.resources-header .context-form {
+    float: right;
+    margin-bottom: 0px;
 }
+
+.resources-header .search-form {
+    float: left;
+    margin-bottom: 0px;
+    padding: 3px;
+}
+
+.resources-header .navi li {
+    margin-bottom: 0px;
+}
+
+.context-form .field-wrapper {
+    padding: 3px 5px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+}
+
+.context-form .active {
+    background-color: #FE6F63;
+}
+
 
 .resourceslist {
     max-width: 250px;
@@ -135,35 +163,22 @@ textarea.embed-code {
     font-size: 18px;
 }
 
-/*
-.template-form table {
-    border-collapse: separate;
-    border-spacing: 4px;
-    xbackground-color: #ddd;
+.showmap, .showlist, .export {
+    padding: 2px 2px 2px 20px;
+    background-position: 0px 0px;
 }
 
-.template-form table tbody {
-    xdisplay: block;
-    margin: 5px;
-    padding: 5px;
-
-    background-color: #ddd;
-    border-collapse: collapse;
-
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
-   
+.showmap {
+    background-image: url('../../images/icons/globe_16x16.png');
 }
 
-.template-form table td {
-    margin: 5px;
-    padding: 5px;
-    background-color: #ddd;
-
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
-   
+.showlist {
+    background-image: url('../../images/icons/list_16x16.png');
 }
-*/
+
+.export {
+    background-image: url('../../images/icons/purse_16x16.png');
+}
+
+
+

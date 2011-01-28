@@ -224,6 +224,8 @@ def index(request):
 
     context_form = ContextForm(instance=_get_context(request))
 
+    #assert False, context_form.instance
+
     return render_to_response('resources/index.html', RequestContext(request, locals()))
 
 

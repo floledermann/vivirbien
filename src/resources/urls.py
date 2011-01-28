@@ -2,6 +2,7 @@
 
 from django.conf.urls.defaults import *
 from django.conf import settings
+from django.views.generic.simple import direct_to_template
 
 from resources import views
 
@@ -27,6 +28,7 @@ urlpatterns = patterns('',
     url(r'^views/edit/(?P<name>.*)/$', views.edit_view, name='resources_edit_view'),
 
     url(r'^templates/$', views.templates, name='resources_templates'),
+    url(r'^templates/new/$', views.edit_template, name='resources_template_edit'),
     url(r'^template/(?P<name>.*)/$', views.edit_template, name='resources_template_edit'),
     # temporary, until resource view support assigned template
     url(r'^template-resource/(?P<name>.*)/(?P<resource>.*)/$', views.template_edit, name='resources_edit_with_template'),
@@ -58,5 +60,6 @@ urlpatterns = patterns('',
 
     url(r'^context/set/$', views.set_context, name='resources_set_context'),
     url(r'^search/$', views.search, name='resources_search'),
+    url(r'^credits/$', direct_to_template, {'template': 'resources/credits.html'}, name='resources_credits'),
 
 )

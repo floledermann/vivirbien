@@ -25,7 +25,7 @@ var MEDIA_URL = "{{ MEDIA_URL}}";
 {% endblock %}
 
 {% block resources_content %}
-{% include "resources/includes/actions.html" %}
+
 {% if resource %}
 <h1>{{ resource.name }}</h1>
 {% else %}
@@ -88,21 +88,13 @@ var MEDIA_URL = "{{ MEDIA_URL}}";
 </div>
 {% endif %}
 {% csrf_token %}
-<button type="submit">{% trans "Save" %}</button>
-<button name="action" value="add_tag" type="submit">{% trans "Save and continue" %}</button>
-
-{% if resource %}
-<a class="action" href="{% url resources_resource key=resource.shortname %}">{% trans "Cancel" %}</a>
-{% else %}
-<a class="action" href="{% url resources_index %}">{% trans "Cancel" %}</a>
-{% endif %}
+<button class="action save" type="submit">{% trans "Save" %}</button>
+<button class="action reload" name="action" value="add_tag" type="submit">{% trans "Save and continue" %}</button>
+<a class="action cancel" href="{% if resource %}{% url resources_resource key=resource.shortname %}{% else %}{% url resources_index %}{% endif %}">{% trans "Cancel" %}</a>
 
 </form>
 
 <div class="widget" id="widget-location">
-<!--
-<button class="button-lookup-address">{% trans "Look up from address" %}</button>
--->
 <div class="map"></div>
 </div>
 

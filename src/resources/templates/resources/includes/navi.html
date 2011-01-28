@@ -1,24 +1,24 @@
 {% load i18n %}
-<div class="actions">
-<a href="{% url resources_index %}">{% trans "Main" %}</a>
-| <a href="{% url resources_views %}">{% trans "Views" %}</a>
-| <a href="{% url resources_tags %}">{% trans "Tags" %}</a>
-|
+<div class="resources-header">
+<ul class="navi">
+<li><a href="{% url resources_index %}">{% trans "Main" %}</a></li>
+<li><a href="{% url resources_views %}">{% trans "Views" %}</a></li>
+<li><a href="{% url resources_tags %}">{% trans "Tags" %}</a></li>
+</ul>
+
 <form class="search-form" action="{% url resources_search %}" method="get">
 <input name="q" type="text" size="15"/>
 <button type="submit">{% trans "Search" %}</button>
 </form>
+
 {% if context_form %}
 <form class="context-form autosubmit" action="{% url resources_set_context %}" method="post">
-&nbsp;{{ context_form }}
+<div class="field-wrapper{% if context_form.instance.area %} active{% endif %}">
+{{ context_form }}
+</div>
 <button type="submit">{% trans "Set" %}</button>
 </form>
 {% endif %}
 <div class="clear"></div>
 </div>
-{% if request.user.is_authenticated %}
-<span class="add-actions">
-<a href="{% url resources_templates %}">(+) {% trans "Add resource" %}</a>
-</span>
-{% endif %}
 

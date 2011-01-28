@@ -3,19 +3,20 @@
 
 {% block head %}
 {{ block.super }}
-<link rel="stylesheet" href="{{MEDIA_URL}}css/layout.css">
-<link rel="stylesheet" href="{{MEDIA_URL}}css/style.css">
+<link rel="stylesheet" href="{{MEDIA_URL}}css/base.css">
 
 {% block extra_head %}{% endblock %}
 
 {% endblock %}
+
+{% block title %}Vivir Bien: {% trans "Resources for a solidarity economy" %}{% endblock %}
 
 {% block body %}
 
 <div class="main-wrapper">
 <div class="header-wrapper">
 <div class="header">
-<div class="navi">
+<h1><a href="/">Vivir Bien</a><small>&mdash; {% trans "Resources for a solidarity economy" %}</small></h1>
 {% include "includes/navi.html" %}
 </div>
 </div>
@@ -30,7 +31,7 @@
 
 <div class="footer">
 Vivir bien &mdash; {% trans "Resources for a solidarity economy" %} &mdash;
-<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img alt="Creative Commons License" src="http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" /></a>
+Data <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img alt="Creative Commons License" src="http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" /></a> <small>[<a href="/wiki/License/">{% trans "Why?" %}</a>]</small> &mdash; <a href="{% url resources_credits %}">{% trans "Credits" %}</a>
 </div>
 
 

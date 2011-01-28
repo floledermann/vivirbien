@@ -1,9 +1,5 @@
 {% load i18n %}
 {% load navitools %}
-<a class="{% active request "^/resources/" %}" href="/resources/">{% trans "Resources" %}</a>
-| <a class="{% active request "^/wiki/" %}" href="/wiki/Vivir%20Bien/">Wiki</a>
-{% if user.is_staff %}| <a href="/admin/">Admin</a>{% endif %}
-</div>
 <div class="user-actions">
 <span class="username">{% if user.is_active %}{% trans "Welcome," %} {{ user.username }}
 {% else %}{% trans "Not logged in" %} | <a href="/accounts/login/">{% trans "Log in" %}</a>{% endif %}</span>
@@ -20,4 +16,10 @@
 <button type="submit">Set</button>
 </form>
 </div>
+<ul class="navi">
+<li class="{% active request "^/resources/" %}"><a href="/resources/">{% trans "Resources" %}</a></li>
+<li class="{% active request "^/wiki/" %}"><a href="/wiki/Vivir%20Bien/">Wiki</a></li>
+<li><a href="/wiki/About_{{LANGUAGE_CODE}}/">{% trans "About" %}</a></li>
+{% if user.is_staff %}<li><a href="/admin/">Admin</a></li>{% endif %}
+</ul>
 <div class="clear"></div>
