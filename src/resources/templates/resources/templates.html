@@ -7,17 +7,15 @@
 
 <h1>{% trans "Templates" %}</h1>
 
-<div class="actions">
-<a class="action add" href="{% url resources_template_edit %}">{% trans "Add Template" %}</a>
-</div>
 
 <ul class="templates-list">
 {% for template in templates %}
-<li>{{ template.name }} <a class="action add" href="{% url resources_edit_with_template name=template.shortname %}">{% trans "create" %}</a> <a class="action edit" href="{% url resources_template_edit name=template.shortname %}">{% trans "edit" %}</a></li>
+<li>{{ template.name }} <a class="action add" href="{% url resources_edit_with_template name=template.shortname %}">{% trans "New resource" %}</a> <a class="action edit" href="{% url resources_template_edit name=template.shortname %}">{% trans "edit" %}</a></li>
 {% endfor %}
 </ul>
 
 <div class="actions">
+<a class="action add" href="{% url resources_template_edit %}">{% trans "Add Template" %}</a>
 <a class="action add" href="{% url resources_new %}">{% trans "Create resource without template" %}</a>
 </div>
 

@@ -39,66 +39,14 @@ var MEDIA_URL = "{{ MEDIA_URL}}";
 {% endif %}
 
 <table>
-{{ form.as_table }}
+{{ form.as_p }}
 </table>
-
-<!--
-{% regroup template.tags.all by group as tag_groups %}
-<table>
-{% for tag_group in tag_groups %}
-<tr><td colspan="2"><h2>{{ tag_group.grouper.name }}</h2></td></tr>
-{% for tag in tag_group.list %}
-<tr><td>{{ tag.name }} [<code>{{ tag.key }}</code>]</td><td><input type="hidden" value="{{ tag.key }}" name="tags-{{forloop.counter0}}-key"/><input type="text"  name="tags-{{forloop.counter0}}-value" /></td></tr>
-{% endfor %}
-{% endfor %}
-</table>
--->
-
-
 {% if formset %}
 <table class="edit-table tags-edit-table">
-<!--
-{{ formset.management_form }}
-<table class="edit-table tags-edit-table">
-{% for form in formset.forms %}
-{% if forloop.first %}
-<tr>
-{% for field in form.visible_fields %}
-        <th>{{ field.label }}</th>
-{% endfor %}
-</tr>
-{% endif %}
-<tr{% if forloop.last %} class="extra"{% endif %}>
-    {% for field in form.visible_fields %}
-        <td class="edit-{{field.name}}">{{field.errors}}{{ field }}
-        {% if forloop.first and forloop.parentloop.last %}
-        <br /><select class="popular-tags">
-<option value="">{% trans "Common Tags:" %}</option>
-<option value="">xxx</option>
-{% for tag in popular_tags %}
-<option value="{{ tag.key }}">{{ tag.key }}</option>
-{#{% include "resources/includes/tag_actions.html" %}#}
-{% endfor %}
-</select>
-        {% endif %}
-        </td>
-    {% endfor %}
-    <td class="hidden">
-    {% for field in form.hidden_fields %}
-        {% if field.is_hidden %} {{ field }} {% endif %}
-    {% endfor %}
-    </td>
-</tr>
-{% endfor %}
--->
 {{ formset.as_table }}
-
 </table>
 {% endif %}
 
-<!--
-<h2>Relations</h2>
--->
 {% if tag_help %}
 <div class="actions">
 {% trans "Help:" %} 
@@ -109,14 +57,9 @@ var MEDIA_URL = "{{ MEDIA_URL}}";
 </div>
 {% endif %}
 {% csrf_token %}
-<button type="submit">{% trans "Save" %}</button>
-<button name="action" value="add_tag" type="submit">{% trans "Save and continue" %}</button>
-
-{% if resource %}
-<a class="action" href="{% url resources_resource key=resource.shortname %}">{% trans "Cancel" %}</a>
-{% else %}
-<a class="action" href="{% url resources_index %}">{% trans "Cancel" %}</a>
-{% endif %}
+<button class="action save" type="submit">{% trans "Save" %}</button>
+<button class="action reload" name="action" value="add_tag" type="submit">{% trans "Save and continue" %}</button>
+<a class="action cancel" href="{% if resource %}{% url resources_resource key=resource.shortname %}{% else %}{% url resources_index %}{% endif %}">{% trans "Cancel" %}</a>
 
 </form>
 

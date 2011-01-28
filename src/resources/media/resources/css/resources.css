@@ -180,5 +180,26 @@ textarea.embed-code {
     background-image: url('../../images/icons/purse_16x16.png');
 }
 
+.templates-list {
+    width: 350px;
+}
 
+.templates-list li {
+    xfloat: left;
+    padding-left: 8px;
+    xmargin-right: 5px;
+    line-height: 30px;
+    border: 1px solid #ccc;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+}
+
+.templates-list li .action {
+    float: right;
+    margin: 3px 3px 3px 0;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    line-height: 1.5;
+}
 

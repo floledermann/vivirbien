@@ -73,6 +73,11 @@ html, body {
     height: 100%;
 }
 
+body {
+    font-family: Georgia, serif;
+    font-size: 12px;
+}
+
 .main-wrapper {
     min-height: 100%;
     height: auto !important;
@@ -112,15 +117,33 @@ html, body {
 }
 
 .header-wrapper, .footer {
-    background-color: #eee;
+    background-color: #e4e4e4;
 }
 
 .header {
+    position: relative;
     max-width: 850px;
     margin: 0 auto;
     padding: 10px 0 0;
 }
 
+.header-wrapper {
+    position: relative;
+    background-image: url('../images/header_background.jpg');
+}
+
+.header-wrapper .credits {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-family: sans-serif;
+    font-size: 8px;
+    color: #aaa;
+}
+
+.header-wrapper .credits a {
+    text-decoration: none;
+}
 
 /* ------------------------------------------------ */
 
@@ -286,16 +309,10 @@ html .lastcol {
 }
 
 
-body {
-    font-family: Georgia, serif;
-    font-size: 12px;
-}
-
 
 h1 {
     font-size: 24px;
-    xline-height: 30px;
-    margin: 20px 0 10px;
+    margin: 10px 0 0;
 }
 
 .header h1 {
@@ -380,17 +397,23 @@ em {
     background-color: #ddd;
 }
 
-.add, .remove, .reload, .save, .cancel, .delete, .edit, .say {
+.cancel, .reload, .save, .delete, .say {
     padding-left: 23px;
     background-position: 3px 3px;
     background-repeat: no-repeat;
 }
 
+.add, .remove, .edit {
+    padding-left: 18px;
+    background-position: 4px 6px;
+    background-repeat: no-repeat;
+}
+
 .add {
-    background-image: url('../images/icons/plus_16x16.png');
+    background-image: url('../images/icons/plus_10x10.png');
 }
 .remove {
-    background-image: url('../images/icons/minus_16x16.png');
+    background-image: url('../images/icons/minus_10x10.png');
 }
 .reload {
     background-image: url('../images/icons/reload_16x16.png');
@@ -398,14 +421,14 @@ em {
 .save {
     background-image: url('../images/icons/disk_16x16.png');
 }
+.edit {
+    background-image: url('../images/icons/pen_10x10.png');
+}
 .cancel {
     background-image: url('../images/icons/X_16x16.png');
 }
 .delete {
     background-image: url('../images/icons/trash_16x16.png');
-}
-.edit {
-    background-image: url('../images/icons/pen_16x16.png');
 }
 .say {
     background-image: url('../images/icons/speechbubble_16x16.png');

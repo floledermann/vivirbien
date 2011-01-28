@@ -37,10 +37,10 @@ var MEDIA_URL = "{{ MEDIA_URL}}";
 
 
 
-<button type="submit">{% trans "Save" %}</button>
-<button name="action" value="add_row" type="submit">{% trans "Save and continue" %}</button>
+<button class="action save" type="submit">{% trans "Save" %}</button>
+<button class="action reload" name="action" value="add_row" type="submit">{% trans "Save and continue" %}</button>
 
-<a class="action" href="{% url resources_templates %}">{% trans "Cancel" %}</a>
+<a class="action cancel" href="{% url resources_templates %}">{% trans "Cancel" %}</a>
 
 </form>
 
