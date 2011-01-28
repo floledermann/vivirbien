@@ -203,3 +203,9 @@ textarea.embed-code {
     line-height: 1.5;
 }
 
+h4.toggle {
+    xwidth: 200px;
+    display: inline-block;
+    padding-right: 5px;
+}
+
