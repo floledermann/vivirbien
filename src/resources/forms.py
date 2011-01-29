@@ -53,6 +53,7 @@ def tagformcallback(field):
 _TagFormSet = inlineformset_factory(Resource, Tag,
                                    exclude=('creator',),
                                    extra=1,
+                                   fk_name='resource',
                                    formfield_callback=tagformcallback)
 
 class TagFormSet(_TagFormSet):
@@ -340,7 +341,7 @@ class BaseTemplateFormSet(BaseInlineFormSet):
         #return mark_safe(u'\n'.join([unicode(self.management_form), ''.join(html)]))
         return mark_safe(string_concat(unicode(self.management_form), *html))
 
-TemplateFormSet = inlineformset_factory(Resource, Tag, formset=BaseTemplateFormSet, form=TemplateTagForm, extra=1)
+TemplateFormSet = inlineformset_factory(Resource, Tag, formset=BaseTemplateFormSet, form=TemplateTagForm, extra=1, fk_name='resource')
 
 
 

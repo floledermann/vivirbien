@@ -5,6 +5,8 @@ from resources.models import *
 class TagInline(admin.TabularInline):
     model = Tag
     extra = 1
+    fk_name = 'resource'
+    readonly_fields = ['value_date','value_relation']
     
     def formfield_for_dbfield(self, db_field, **kwargs):
         

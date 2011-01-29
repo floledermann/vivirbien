@@ -4,8 +4,10 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 from django.utils.translation import string_concat
+from django.utils import formats
 
 from datetime import datetime
+import time
 
 class Resource(models.Model):
     
@@ -27,6 +29,10 @@ class Resource(models.Model):
             ('feature_resource', "Mark resource as featured"),
         )
 
+    def delete(self):
+        self.relations_to.clear()
+        super(Resource, self).delete()
+
     def __unicode__(self):
         return self.name
 
@@ -41,11 +47,35 @@ class Tag(models.Model):
     creator = models.ForeignKey(User, null=True)
     creation_date = models.DateTimeField(auto_now_add=True)
 
+    value_date = models.DateTimeField(null=True, blank=True, editable=False, db_index=True, help_text=_('Value field parsed as date.'))
+    value_relation = models.ForeignKey(Resource, related_name='relations_to', null=True, blank=True, editable=False, help_text=_('Value field parsed as relation to other resource.'))
+
     class Meta:
         ordering = ['creation_date']
         permissions = (
             ('batch_rename_tags', "Batch rename tags"),
         )
+
+    def save(self):
+        # try to parse value as date, if reasonably short
+        if len(self.value) < 25:
+            for format in formats.get_format('DATETIME_INPUT_FORMATS'):
+                try:
+                    self.value_date = datetime(*time.strptime(self.value, format)[:6])
+                except ValueError:
+                    continue
+
+        # try to parse value as relation, if it doesn't contain spaces
+        if len(self.value) <= 200 and self.value.strip().find(' ') == -1:
+            try:
+                relation = Resource.objects.get(shortname=self.value.strip())
+                self.value_relation = relation
+            except Resource.DoesNotExist:
+                pass
+
+            
+
+        super(Tag, self).save()
     
     def get_tag(self):
         part = self.value.partition(':')
