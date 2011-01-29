@@ -1,5 +1,5 @@
 {% extends "resources/base.html" %}
-{% load i18n %}
+{% load i18n fieldset %}
 
 {% block extra_head %}
 {{ block.super }}
@@ -33,9 +33,13 @@ var MEDIA_URL = "{{ MEDIA_URL}}";
 {% endif %}
 
 <form method="post" action="{% url resources_edit key=resource.shortname %}" autocomplete="off">
-<table>
-{{ form.as_table }}
-</table>
+{% fieldset name as fset from form %}
+{{ fset.as_p }}
+{% fieldset shortname,protected as fset from form %}
+<h4 class="toggle{% if not fset.errors %} off{% endif %}">advanced</h4>
+<fieldset class="advanced">
+{{ fset.as_p }}
+</fieldset>
 
 <h2>Tags</h2>
 
