@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-28 14:19+0000\n"
+"POT-Creation-Date: 2011-01-29 11:18+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -93,40 +93,41 @@ msgid "Credits"
 msgstr ""
 
 #: templates/resources/edit.html:32 templates/resources/template.html:32
+#: templates/resources/templates.html:13
 msgid "New resource"
 msgstr ""
 
-#: templates/resources/edit.html:58 templates/resources/view_edit.html:59
+#: templates/resources/edit.html:62 templates/resources/view_edit.html:59
 #: templates/resources/view_edit.html:99
 msgid "Common Tags:"
 msgstr ""
 
-#: templates/resources/edit.html:83 templates/resources/template.html:52
+#: templates/resources/edit.html:87 templates/resources/template.html:57
 #: templates/resources/view_edit.html:122
 msgid "Help:"
 msgstr ""
 
-#: templates/resources/edit.html:91 templates/resources/icon_edit.html:23
-#: templates/resources/template.html:60
+#: templates/resources/edit.html:95 templates/resources/icon_edit.html:23
+#: templates/resources/template.html:65
 #: templates/resources/template_edit.html:40
 #: templates/resources/view_edit.html:129
 msgid "Save"
 msgstr ""
 
-#: templates/resources/edit.html:92 templates/resources/template.html:61
+#: templates/resources/edit.html:96 templates/resources/template.html:66
 #: templates/resources/template_edit.html:41
 #: templates/resources/view_edit.html:130
 msgid "Save and continue"
 msgstr ""
 
-#: templates/resources/edit.html:93 templates/resources/icon_edit.html:25
-#: templates/resources/template.html:62
+#: templates/resources/edit.html:97 templates/resources/icon_edit.html:25
+#: templates/resources/template.html:67
 #: templates/resources/template_edit.html:43
 #: templates/resources/view_edit.html:132
 msgid "Cancel"
 msgstr ""
 
-#: templates/resources/edit.html:102 templates/resources/template.html:74
+#: templates/resources/edit.html:106 templates/resources/template.html:79
 msgid "Add location tag for this address"
 msgstr ""
 
@@ -233,7 +234,11 @@ msgstr ""
 msgid "Template:"
 msgstr ""
 
-#: templates/resources/template.html:68
+#: templates/resources/template.html:43
+msgid "advanced"
+msgstr ""
+
+#: templates/resources/template.html:73
 msgid "Look up from address"
 msgstr ""
 
@@ -247,10 +252,6 @@ msgstr ""
 
 #: templates/resources/templates.html:8
 msgid "Templates"
-msgstr ""
-
-#: templates/resources/templates.html:13
-msgid "create"
 msgstr ""
 
 #: templates/resources/templates.html:13
