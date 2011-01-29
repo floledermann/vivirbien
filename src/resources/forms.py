@@ -140,12 +140,14 @@ class ConstWidget(Widget):
 
 class TemplateTagForm(ModelForm):
 
+    value = forms.CharField(required=False, widget=forms.Textarea())
+
     def __init__(self, template=None, *args, **kwargs):
         self.template = template
         super(TemplateTagForm, self).__init__(*args, **kwargs)
         if self.template:
             self.fields['key'] = forms.CharField(widget=ConstWidget(label=template.name), initial=template.key)
-            self.fields['value'].widget=forms.TextInput()
+            #self.fields['value'].widget=forms.Textarea()
 
     class Meta:
         model = Tag
