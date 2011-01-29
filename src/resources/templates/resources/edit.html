@@ -35,7 +35,7 @@ var MEDIA_URL = "{{ MEDIA_URL}}";
 <form method="post" action="{% url resources_edit key=resource.shortname %}" autocomplete="off">
 {% fieldset name as fset from form %}
 {{ fset.as_p }}
-{% fieldset shortname,protected as fset from form %}
+{% fieldset shortname,template,protected as fset from form %}
 <h4 class="toggle{% if not fset.errors %} off{% endif %}">advanced</h4>
 <fieldset class="advanced">
 {{ fset.as_p }}

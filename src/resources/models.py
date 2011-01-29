@@ -12,10 +12,12 @@ import time
 class Resource(models.Model):
     
     name = models.CharField(max_length=200)
-    shortname = models.SlugField(max_length=200, db_index=True, unique=True, help_text=_('(Will be part of the resources\' URL)'))
+    shortname = models.SlugField(max_length=200, db_index=True, unique=True, help_text=_('(Will be part of the resources\' URL)'), verbose_name=_('Shortname'))
+
+    template = models.ForeignKey('ResourceTemplate', null=True, blank=True, verbose_name=_('Template'))
 
     featured = models.BooleanField(default=False)
-    protected = models.BooleanField(default=False, help_text=_('(Hidden from anonymous users)'))
+    protected = models.BooleanField(default=False, help_text=_('(Hidden from anonymous users)'), verbose_name=_('protected'))
     
     creator = models.ForeignKey(User, null=True)
     creation_date = models.DateTimeField(auto_now_add=True)
@@ -62,7 +64,8 @@ class Tag(models.Model):
         if len(self.value) < 25:
             for format in formats.get_format('DATETIME_INPUT_FORMATS'):
                 try:
-                    date = datetime(*time.strptime(self.value, format)[:6])
+                    parsed_date = datetime(*time.strptime(self.value, format)[:6])
+                    break
                 except ValueError:
                     continue
         self.value_date = parsed_date
