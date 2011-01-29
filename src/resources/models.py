@@ -58,22 +58,23 @@ class Tag(models.Model):
 
     def save(self):
         # try to parse value as date, if reasonably short
+        parsed_date = None
         if len(self.value) < 25:
             for format in formats.get_format('DATETIME_INPUT_FORMATS'):
                 try:
-                    self.value_date = datetime(*time.strptime(self.value, format)[:6])
+                    date = datetime(*time.strptime(self.value, format)[:6])
                 except ValueError:
                     continue
+        self.value_date = parsed_date
 
         # try to parse value as relation, if it doesn't contain spaces
+        parsed_relation = None
         if len(self.value) <= 200 and self.value.strip().find(' ') == -1:
             try:
-                relation = Resource.objects.get(shortname=self.value.strip())
-                self.value_relation = relation
+                parsed_relation = Resource.objects.get(shortname=self.value.strip())
             except Resource.DoesNotExist:
                 pass
-
-            
+        self.value_relation = parsed_relation
 
         super(Tag, self).save()
     
