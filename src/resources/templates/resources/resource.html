@@ -56,7 +56,7 @@ function hide_reply_form(comment_id, url, person_name) {
 <table class="tags-table">
 {% for tag in resource.tags.all %}
 <tr><td><a class="tag" href="{% url resources_tag_key key=tag.key %}">{{ tag.key }}</a>
-</td><td>{{ tag.value|linebreaksbr|urlize }}
+</td><td>{% if tag.value_relation %}<a href="{% url resources_resource key=tag.value_relation.shortname %}">{% endif %}{{ tag.value|linebreaksbr|urlize }}{% if tag.value_relation %}</a>{% endif %}
 </td></li>
 {% endfor %}
 </table>
