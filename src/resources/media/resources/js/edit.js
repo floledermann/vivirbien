@@ -61,7 +61,7 @@ function location_widget(el) {
            }
         }
         
-        map.setCenter (lonLat, 12);
+        map.setCenter (lonLat, 4);
         
         /*
         var control = new OpenLayers.Control.DrawFeature(layer_vector,
@@ -160,7 +160,8 @@ var editor_lookup = {
     'mode_of_production': choice_widget,
     'mode_of_access': choice_widget,
     'mode_of_distribution': choice_widget,
-    'decision_making': choice_widget,
+    'decisionmaking': choice_widget,
+    'motivation': choice_widget,
     'category': choice_widget,
     'spatial_unit': choice_widget,
     'organizational_unit': choice_widget,
@@ -168,7 +169,9 @@ var editor_lookup = {
     'organisationsform': choice_widget,
     'ownership': choice_widget,
     'license': choice_widget,
-    'part_of': resource_choice
+    'part_of': resource_choice,
+    'available_at': resource_choice,
+    'hosted_by': resource_choice
 }
 
 jQuery(function($) {
@@ -201,9 +204,9 @@ jQuery(function($) {
     });
     */
     
-    $('td.edit-value textarea').focus(function() {
+    $('textarea').focus(function() {
         $('.widget').hide();
-        var key = $(this).parents('tr').find('td.edit-key input[type=text]').val();
+        var key = $(this).parents('tr').find('td input[name$="-key"]').val();
         var widget_func = editor_lookup[key];
         if (widget_func) {
             widget_func(this, key);
@@ -218,3 +221,43 @@ jQuery(function($) {
         $table.find('tr.extra td.edit-value textarea')[0].focus();
     });  
 });
+
+/*
+TODO:
+http://djangosnippets.org/snippets/1389/
+
+function updateElementIndex(el, prefix, ndx) {
+		var id_regex = new RegExp('(' + prefix + '-\\d+)');
+		var replacement = prefix + '-' + ndx;
+		if ($(el).attr("for")) $(el).attr("for", $(el).attr("for").replace(id_regex, replacement));
+		if (el.id) el.id = el.id.replace(id_regex, replacement);
+		if (el.name) el.name = el.name.replace(id_regex, replacement);
+	}
+
+    function addForm(btn, prefix) {
+        var formCount = parseInt($('#id_' + prefix + '-TOTAL_FORMS').val());
+        var row = $('.dynamic-form:first').clone(true).get(0);
+        $(row).removeAttr('id').insertAfter($('.dynamic-form:last')).children('.hidden').removeClass('hidden');
+        $(row).children().not(':last').children().each(function() {
+    	    updateElementIndex(this, prefix, formCount);
+    	    $(this).val('');
+        });
+        $(row).find('.delete-row').click(function() {
+    	    deleteForm(this, prefix);
+        });
+        $('#id_' + prefix + '-TOTAL_FORMS').val(formCount + 1);
+        return false;
+    }
+
+    function deleteForm(btn, prefix) {
+        $(btn).parents('.dynamic-form').remove();
+        var forms = $('.dynamic-form');
+        $('#id_' + prefix + '-TOTAL_FORMS').val(forms.length);
+        for (var i=0, formCount=forms.length; i<formCount; i++) {
+    	    $(forms.get(i)).children().not(':last').children().each(function() {
+    	        updateElementIndex(this, prefix, i);
+    	    });
+        }
+        return false;
+    }
+*/
