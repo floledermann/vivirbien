@@ -107,7 +107,11 @@ def edit_with_template(request, resource=None, template=None):
         else:
             formset = TagFormSet(request.user, instance=resource)
     else:
-        form = ResourceForm(request.user, instance=resource)
+        if template and not resource:
+            # pre-initialize template field for new resources
+            form = ResourceForm(request.user, initial={'template':template})
+        else:
+            form = ResourceForm(request.user, instance=resource)
         formset = TemplateFormSet(template, instance=resource, can_delete=request.user.has_perm('resources.delete_tag'))
     
     return render_to_response('resources/edit_with_template.html', RequestContext(request, locals()))
@@ -262,7 +266,7 @@ def index(request):
     featured_views = View.objects.filter(featured=True, **protect_attrs)
     featured_resources = Resource.objects.filter(featured=True, **protect_attrs)
     latest_resources = Resource.objects.filter(**protect_attrs).order_by('-creation_date')[:15]
-    upcoming_resources = Resource.objects.filter(start_date__gte=datetime.now().replace(hour=0, minute=0, second=0, microsecond=0), **protect_attrs).order_by('start_date')[:15]
+    upcoming_resources = Resource.objects.filter(tags__value_date__gte=datetime.now().replace(hour=0, minute=0, second=0, microsecond=0), tags__key='start_date', **protect_attrs).order_by('tags__value_date')[:15]
 
     #from snippets.models import Snippet
     #snippets = Snippet.objects.all()
@@ -288,12 +292,13 @@ def tag_choices(request, key=None):
     
     values = list(choices)
     
-    last = values[-1]
-    for i in range(len(values)-2, -1, -1):
-        if last == values[i]:
-            del values[i]
-        else:
-            last = values[i]
+    if len(values) > 0:    
+        last = values[-1]
+        for i in range(len(values)-2, -1, -1):
+            if last == values[i]:
+                del values[i]
+            else:
+                last = values[i]
     
     str = json.dumps({'choices':values}, cls=DateTimeAwareJSONEncoder, indent=2)
     
