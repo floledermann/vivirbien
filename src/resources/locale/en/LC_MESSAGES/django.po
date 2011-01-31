@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-29 11:18+0000\n"
+"POT-Creation-Date: 2011-01-31 12:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,75 +16,95 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: forms.py:100
+#: forms.py:101
 msgid "Everywhere"
 msgstr ""
 
-#: forms.py:100 models.py:235
+#: forms.py:101 models.py:269
 msgid "Area"
 msgstr ""
 
-#: forms.py:290
+#: forms.py:293
 msgid "Delete"
 msgstr ""
 
-#: forms.py:334
-msgid "Other Tags"
+#: forms.py:337
+msgid "More Tags"
 msgstr ""
 
-#: models.py:13
+#: models.py:15
 msgid "(Will be part of the resources' URL)"
 msgstr ""
 
-#: models.py:16 models.py:63
+#: models.py:15
+msgid "Shortname"
+msgstr ""
+
+#: models.py:17
+msgid "Template"
+msgstr ""
+
+#: models.py:20 models.py:97
 msgid "(Hidden from anonymous users)"
 msgstr ""
 
-#: models.py:21 models.py:22
+#: models.py:20
+msgid "protected"
+msgstr ""
+
+#: models.py:25 models.py:26
 msgid "Format: yyyy-mm-dd hh:mm (time is optional)"
 msgstr ""
 
-#: models.py:60
+#: models.py:52
+msgid "Value field parsed as date."
+msgstr ""
+
+#: models.py:53
+msgid "Value field parsed as relation to other resource."
+msgstr ""
+
+#: models.py:94
 msgid "(Will be part of the views' URL)"
 msgstr ""
 
-#: models.py:122
+#: models.py:156
 msgid "All tags"
 msgstr ""
 
-#: models.py:125
+#: models.py:159
 msgid "is present"
 msgstr ""
 
-#: models.py:127
+#: models.py:161
 msgid "begins with"
 msgstr ""
 
-#: models.py:131
+#: models.py:165
 msgid "and"
 msgstr ""
 
-#: models.py:132
+#: models.py:166
 msgid "or"
 msgstr ""
 
-#: models.py:173
+#: models.py:207
 msgid "Default Icon"
 msgstr ""
 
-#: models.py:174
+#: models.py:208
 msgid "Red"
 msgstr ""
 
-#: models.py:199
+#: models.py:233
 msgid "Subicon only"
 msgstr ""
 
-#: models.py:250 models.py:268 models.py:285
+#: models.py:284 models.py:302 models.py:319
 msgid "Name"
 msgstr ""
 
-#: models.py:251
+#: models.py:285
 msgid "(Will be part of the template's URL)"
 msgstr ""
 
@@ -92,7 +112,8 @@ msgstr ""
 msgid "Credits"
 msgstr ""
 
-#: templates/resources/edit.html:32 templates/resources/template.html:32
+#: templates/resources/edit.html:32
+#: templates/resources/edit_with_template.html:32
 #: templates/resources/templates.html:13
 msgid "New resource"
 msgstr ""
@@ -102,33 +123,50 @@ msgstr ""
 msgid "Common Tags:"
 msgstr ""
 
-#: templates/resources/edit.html:87 templates/resources/template.html:57
+#: templates/resources/edit.html:87
+#: templates/resources/edit_with_template.html:57
 #: templates/resources/view_edit.html:122
 msgid "Help:"
 msgstr ""
 
-#: templates/resources/edit.html:95 templates/resources/icon_edit.html:23
-#: templates/resources/template.html:65
+#: templates/resources/edit.html:95
+#: templates/resources/edit_with_template.html:65
+#: templates/resources/icon_edit.html:23
 #: templates/resources/template_edit.html:40
 #: templates/resources/view_edit.html:129
 msgid "Save"
 msgstr ""
 
-#: templates/resources/edit.html:96 templates/resources/template.html:66
+#: templates/resources/edit.html:96
+#: templates/resources/edit_with_template.html:66
 #: templates/resources/template_edit.html:41
 #: templates/resources/view_edit.html:130
 msgid "Save and continue"
 msgstr ""
 
-#: templates/resources/edit.html:97 templates/resources/icon_edit.html:25
-#: templates/resources/template.html:67
+#: templates/resources/edit.html:97
+#: templates/resources/edit_with_template.html:67
+#: templates/resources/icon_edit.html:25
 #: templates/resources/template_edit.html:43
 #: templates/resources/view_edit.html:132
 msgid "Cancel"
 msgstr ""
 
-#: templates/resources/edit.html:106 templates/resources/template.html:79
+#: templates/resources/edit.html:106
+#: templates/resources/edit_with_template.html:79
 msgid "Add location tag for this address"
+msgstr ""
+
+#: templates/resources/edit_with_template.html:32
+msgid "Template:"
+msgstr ""
+
+#: templates/resources/edit_with_template.html:43
+msgid "advanced"
+msgstr ""
+
+#: templates/resources/edit_with_template.html:73
+msgid "Look up from address"
 msgstr ""
 
 #: templates/resources/icon_edit.html:15
@@ -182,31 +220,30 @@ msgstr ""
 msgid "News"
 msgstr ""
 
-#: templates/resources/resource.html:63
+#: templates/resources/resource.html:68
+msgid "Edit"
+msgstr ""
+
+#: templates/resources/resource.html:74
+msgid "Comments for"
+msgstr ""
+
+#: templates/resources/resource.html:79
+msgid "Comment by"
+msgstr ""
+
+#: templates/resources/resource.html:81
+msgid "Reply"
+msgstr ""
+
+#: templates/resources/resource.html:87
+msgid "New Comment"
+msgstr ""
+
 #: templates/resources/resources_by_tag.html:4
 #: templates/resources/resources_by_tag.html:8
 #: templates/resources/resources_by_tag.html:21
 msgid "Resources with tag:"
-msgstr ""
-
-#: templates/resources/resource.html:73
-msgid "Edit"
-msgstr ""
-
-#: templates/resources/resource.html:79
-msgid "Comments for"
-msgstr ""
-
-#: templates/resources/resource.html:84
-msgid "Comment by"
-msgstr ""
-
-#: templates/resources/resource.html:86
-msgid "Reply"
-msgstr ""
-
-#: templates/resources/resource.html:92
-msgid "New Comment"
 msgstr ""
 
 #: templates/resources/resources_by_tag.html:11
@@ -228,18 +265,6 @@ msgstr ""
 
 #: templates/resources/tags.html:8
 msgid "All Tags"
-msgstr ""
-
-#: templates/resources/template.html:32
-msgid "Template:"
-msgstr ""
-
-#: templates/resources/template.html:43
-msgid "advanced"
-msgstr ""
-
-#: templates/resources/template.html:73
-msgid "Look up from address"
 msgstr ""
 
 #: templates/resources/template_edit.html:30
