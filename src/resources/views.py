@@ -390,10 +390,9 @@ def add_icon(request):
     return render_to_response('resources/icon_edit.html', RequestContext(request, locals()))
 
 
+@login_required
 def templates(request):
     templates = ResourceTemplate.objects.all()
-    if not request.user.is_authenticated():
-        templates = templates.filter(protected=False)
     return render_to_response('resources/templates.html', RequestContext(request, locals()))
 
 
