@@ -334,7 +334,7 @@ class BaseTemplateFormSet(BaseInlineFormSet):
             if cur_group != group:
                 if group:
                     html.append('</tbody>')              
-                html.append(string_concat('<tbody><tr><th>', cur_group and cur_group.name or _('Other Tags'), '</th></tr><tr>'))
+                html.append(string_concat('<tbody><tr><th>', cur_group and cur_group.name or _('More Tags'), '</th></tr><tr>'))
                 group = cur_group
             else:
                 html.append('<tr>')

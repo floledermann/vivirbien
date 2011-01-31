@@ -201,9 +201,8 @@ a.tag:hover {
 }
 
 .templates-list li {
-    xfloat: left;
+    margin-bottom: 2px;
     padding-left: 8px;
-    xmargin-right: 5px;
     line-height: 30px;
     border: 1px solid #ccc;
     -moz-border-radius: 3px;
@@ -282,5 +281,7 @@ h4.toggle {
     visibility: hidden;
 }
 
-
+form td code {
+    font-size: 10px;
+}
 

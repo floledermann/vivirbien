@@ -38,6 +38,10 @@ em {
     font-style: italic;
 }
 
+select {
+    max-width: 300px;
+}
+
 .header-wrapper, .footer {
     background-color: #eeeeee; /*#eeeeee;*/
 }
