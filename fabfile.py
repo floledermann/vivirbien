@@ -357,6 +357,13 @@ def deploy():
     deploy_noreload()
     reload()
 
+def deploy_with_requirements():
+    "Deploy and update requirements before reloading."
+    deploy_nosyncdb()
+    install_requirements()
+    syncdb()
+    reload()
+
 def syncdb():
     if not env.hosts:
 	    local(os.path.join(env.ve_prefix,'python manage.py syncdb'), capture=False)
