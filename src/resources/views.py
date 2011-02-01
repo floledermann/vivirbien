@@ -127,7 +127,7 @@ def all_resources(request):
     return render_to_response('resources/view.html', RequestContext(request, locals()))
     
 
-def view(request, name, mode='map'):
+def view(request, name, mode=None):
 
     view = get_object_or_404(View, shortname=name)
 
@@ -135,7 +135,11 @@ def view(request, name, mode='map'):
 #        # todo auto-discover appropriate mode
 #        mode = 'overview'        
 
-    if not mode in ['overview','map','list','export','embed']: #'overview',
+    if not mode:
+        if view.show_map: mode = 'map'
+        else: mode = 'list'
+
+    if not mode in ['map','list','export','embed']: #'overview',
         raise Http404()
     
     template = 'resources/view_%s.html' % mode 

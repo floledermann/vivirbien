@@ -110,6 +110,8 @@ class View(models.Model):
     include_current  = models.BooleanField(default=True)
     include_upcoming = models.BooleanField(default=False)
     
+    show_map = models.BooleanField(default=True)
+
     class Meta:
         ordering = ['shortname']
         permissions = (
