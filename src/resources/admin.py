@@ -27,8 +27,8 @@ class ResourceAdmin(admin.ModelAdmin):
 
     fieldsets = (
         (None, {'fields': ('name', )}),
-        ('Navigation options', {'fields': ('shortname', ),
-                     'classes': ('collapse', )}),
+        ('Navigation options', {'fields': ('shortname', 'start_date', 'end_date'),
+                     'classes': ('xcollapse', )}),
         ('Editing', {'fields': ('creator', ),
                      'classes': ('collapse', )}),
     )
@@ -67,7 +67,7 @@ class TagQueryInline(admin.TabularInline):
 
 class ViewAdmin(admin.ModelAdmin):
     inlines = [TagQueryInline]
-    prepopulated_fields = {'shortname': ('name',)} 
+    prepopulated_fields = {'shortname': (get_fallback_fieldname('name'),)} 
     save_on_top = True
 
 

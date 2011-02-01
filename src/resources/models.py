@@ -6,6 +6,8 @@ from django.utils.translation import ugettext_lazy as _
 from django.utils.translation import string_concat
 from django.utils import formats
 
+from transmeta import TransMeta
+
 from datetime import datetime
 import time
 
@@ -89,6 +91,7 @@ class Tag(models.Model):
         return '%s: %s' % (self.key, self.value)
 
 class View(models.Model):
+    __metaclass__ = TransMeta
     
     name = models.CharField(max_length=200)
     shortname = models.SlugField(max_length=100, db_index=True, unique=True, help_text=_('(Will be part of the views\' URL)'))
@@ -106,12 +109,13 @@ class View(models.Model):
     include_past = models.BooleanField(default=False)
     include_current  = models.BooleanField(default=True)
     include_upcoming = models.BooleanField(default=False)
-
+    
     class Meta:
-        ordering = ['name']
+        ordering = ['shortname']
         permissions = (
             ('feature_view', "Mark view as featured"),
         )
+        translate = ('name', )
 
     def __unicode__(self):
         return self.name
@@ -242,8 +246,6 @@ class TagMapping(models.Model):
     class Meta:
         ordering = ['order','creation_date']
 
-
-from transmeta import TransMeta
 
 class Area(models.Model):   
     __metaclass__ = TransMeta
