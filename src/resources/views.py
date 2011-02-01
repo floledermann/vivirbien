@@ -71,6 +71,7 @@ def edit_resource(request, key=None):
     return render_to_response('resources/edit.html', RequestContext(request, locals()))
 
 
+@login_required
 def edit_with_template(request, resource=None, template=None):
 
     if resource and not isinstance(resource, Resource):
@@ -188,6 +189,7 @@ def views(request):
     views = View.objects.all()
     if not request.user.is_authenticated():
         views = views.filter(protected=False)
+
     return render_to_response('resources/views.html', RequestContext(request, locals()))
 
 #@permission_required('resources.change_view')
@@ -410,6 +412,7 @@ def template(request, name):
             
     return render_to_response('resources/template.html', RequestContext(request, locals()))
 
+@login_required
 def edit_template(request, name):
     template = get_object_or_404(ResourceTemplate, shortname=name)
 
