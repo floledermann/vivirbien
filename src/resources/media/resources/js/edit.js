@@ -157,6 +157,7 @@ function resource_choice(el, key) {
 var editor_lookup = {
     'location': location_widget,
     'activity': choice_widget,
+    'lang': choice_widget,
     'mode_of_production': choice_widget,
     'mode_of_access': choice_widget,
     'mode_of_distribution': choice_widget,
