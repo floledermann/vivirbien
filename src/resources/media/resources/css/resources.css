@@ -39,6 +39,7 @@
 
 .resourceslist {
     max-width: 250px;
+    margin-top: 10px;
 }
 
 .view-overview .resourceslist {
