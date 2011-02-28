@@ -1,0 +1,14 @@
+{% extends "invitation/base.html" %}
+{% load i18n %}
+
+{% block invitation_content %}
+
+<h2>{% trans "You have been invited to join Vivir Bien!" %}</h2>
+
+<p>
+<a href="/wiki/Vivir%20Bien/">{% trans "What is this?" %}</a>
+</p>
+
+<a href="{% url registration_register %}?invitation_key={{ invitation_key }}">-&gt; {% trans "proceed to registration" %}</a>
+
+{% endblock %}
