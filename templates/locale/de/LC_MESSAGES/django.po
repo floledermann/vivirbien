@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-31 12:11+0000\n"
+"POT-Creation-Date: 2011-02-08 21:39+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -76,6 +76,18 @@ msgstr ""
 #: invitation/invitation_form.html:15
 msgid "Send Invitation"
 msgstr "Einladung verschicken"
+
+#: invitation/invited.html:6
+msgid "You have been invited to join Vivir Bien!"
+msgstr "Du wurdest eingeladen bei Vivir Bien mitzumachen!"
+
+#: invitation/invited.html:9
+msgid "What is this?"
+msgstr "Um was geht's?"
+
+#: invitation/invited.html:12
+msgid "proceed to registration"
+msgstr "Weiter zur Registrierung"
 
 #: registration/activate.html:7 registration/activation_email.txt:2
 msgid "Welcome to"

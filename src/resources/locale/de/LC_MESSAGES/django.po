@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-31 12:11+0000\n"
+"POT-Creation-Date: 2011-02-08 21:39+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,7 +20,7 @@ msgstr ""
 msgid "Everywhere"
 msgstr "Weltweit"
 
-#: forms.py:101 models.py:269
+#: forms.py:101 models.py:273
 msgid "Area"
 msgstr "Region"
 
@@ -32,79 +32,79 @@ msgstr "Löschen"
 msgid "More Tags"
 msgstr "Weitere Tags"
 
-#: models.py:15
+#: models.py:17
 msgid "(Will be part of the resources' URL)"
 msgstr "(Wird Teil der URL)"
 
-#: models.py:15
+#: models.py:17
 msgid "Shortname"
 msgstr "Kürzel"
 
-#: models.py:17
+#: models.py:19
 msgid "Template"
 msgstr "Vorlage:"
 
-#: models.py:20 models.py:97
+#: models.py:22 models.py:100
 msgid "(Hidden from anonymous users)"
 msgstr "(Nur für registrierte Nutzerinnen sichtbar)"
 
-#: models.py:20
+#: models.py:22
 msgid "protected"
 msgstr "geschützt"
 
-#: models.py:25 models.py:26
+#: models.py:27 models.py:28
 msgid "Format: yyyy-mm-dd hh:mm (time is optional)"
 msgstr "Format: yyyy-mm-dd hh:mm (Zeitangabe optional)"
 
-#: models.py:52
+#: models.py:54
 msgid "Value field parsed as date."
 msgstr "Wert-Feld als Datum."
 
-#: models.py:53
+#: models.py:55
 msgid "Value field parsed as relation to other resource."
 msgstr "Wert-Feld als Relation auf andere Ressource."
 
-#: models.py:94
+#: models.py:97
 msgid "(Will be part of the views' URL)"
 msgstr "(Wird Teil der URL)"
 
-#: models.py:156
+#: models.py:162
 msgid "All tags"
 msgstr "Alle Tags"
 
-#: models.py:159
+#: models.py:165
 msgid "is present"
 msgstr "ist gesetzt."
 
-#: models.py:161
+#: models.py:167
 msgid "begins with"
 msgstr "beginnt mit"
 
-#: models.py:165
+#: models.py:171
 msgid "and"
 msgstr "und"
 
-#: models.py:166
+#: models.py:172
 msgid "or"
 msgstr "oder"
 
-#: models.py:207
+#: models.py:213
 msgid "Default Icon"
 msgstr "Standard-Icon"
 
-#: models.py:208
+#: models.py:214
 msgid "Red"
 msgstr "Rot"
 
-#: models.py:233
+#: models.py:239
 msgid "Subicon only"
 msgstr "Nur Subicon"
 
-#: models.py:284 models.py:302 models.py:319
+#: models.py:288 models.py:306 models.py:323
 msgid "Name"
 msgstr "Name"
 
-#: models.py:285
+#: models.py:289
 msgid "(Will be part of the template's URL)"
 msgstr "(Wird Teil der URL)"
 
