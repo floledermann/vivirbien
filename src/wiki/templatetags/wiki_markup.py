@@ -10,12 +10,12 @@ from template_utils.markup import formatter
 from template_utils.templatetags.generic_markup import *
 
 try:
-    from ..creole import Parser as CreoleParser
+    from creole import Parser as CreoleParser
     from wiki.creole2html import HtmlEmitter
 except ImportError, e:
     CreoleParser = None
 
-def creole(text, **kw):
+def format_creole(text, **kw):
     """Returns the text rendered by the Creole markup.
     """
     if CreoleParser is None and settings.DEBUG:
@@ -26,7 +26,7 @@ def creole(text, **kw):
     return emitter.emit()
 
 if CreoleParser is not None:
-    formatter.register('creole', creole)
+    formatter.register('creole', format_creole)
 
 register = template.Library()
 
