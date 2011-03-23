@@ -11,7 +11,7 @@ from django.utils.text import capfirst
 from django.forms.util import flatatt
 from django.db import connections
 
-from autocomplete.widgets import AutoCompleteWidget
+#from autocomplete.widgets import AutoCompleteWidget
 
 from resources.models import *
 
