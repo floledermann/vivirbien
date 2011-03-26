@@ -22,4 +22,5 @@ django-transmeta==0.5.1
 # -----------------------------
 
 -e hg+https://floledermann@bitbucket.org/floledermann/django-invitation/#egg=django-invitation
-hg+http://bitbucket.org/tyrion/django-autocomplete/#egg=django-autocomplete
+-e hg+https://floledermann@bitbucket.org/floledermann/openresources/#egg=openresources
+
