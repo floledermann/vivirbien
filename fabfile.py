@@ -314,7 +314,7 @@ def upload():
     run('cd %s%s/releases/%s; ln -s ../../settings_secret.py settings_secret.py' % (env.sites_home, env.project_name, env.release))
     
     # create symbolic link for admin and app media
-    run('cd %s%s/releases/%s; ln -s ../../../env/lib/python2.5/site-packages/django/contrib/admin/media/ media/admin' % (env.sites_home, env.project_name, env.release))    
+    run('cd %s%s/releases/%s; ln -s ../../../env/lib/python2.6/site-packages/django/contrib/admin/media/ media/admin' % (env.sites_home, env.project_name, env.release))    
     for app_path in settings_project.APP_MEDIA:
         run('cd %s/releases/%s; ln -s ../../../%s media/%s' % (env.path, env.release, app_path[1], app_path[0]))
 
