@@ -15,7 +15,7 @@ urlpatterns = patterns('',
     (r'^accounts/', include('invitation.urls')),
     (r'^accounts/', include('registration.urls')),
     (r'^comments/', include('threadedcomments.urls')),
-    (r'^resources/', include('resources.urls')),
+    (r'^resources/', include('openresources.urls')),
     ('^$', 'django.views.generic.simple.redirect_to', {'url': '/resources/'}),
     #(r'^$', 'resources.views.index'),
 )
@@ -23,7 +23,7 @@ urlpatterns = patterns('',
 if settings.SERVE_STATIC:
     import os
     urlpatterns = patterns('',
-        (r'^media/resources/(?P<path>.*)$', 'django.views.static.serve', {'document_root': os.path.join(settings.DJANGO_PROJECT_ROOT, 'src/resources/media/resources/')}),
+        (r'^media/openresources/(?P<path>.*)$', 'django.views.static.serve', {'document_root': os.path.join(settings.DJANGO_PROJECT_ROOT, 'env/src/openresources/openresources/media/')}),
         (r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
     ) + urlpatterns
 

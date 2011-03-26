@@ -71,7 +71,7 @@ INSTALLED_APPS = (
     'registration',
     'invitation',
     'wiki',
-    'resources',
+    'openresources',
     'threadedcomments',
     'sorl.thumbnail',
     'snippets'
@@ -99,10 +99,11 @@ INVITATIONS_PER_USER = 99
 
 LOGIN_REDIRECT_URL = '/'
 
-RESOURCES_TAG_HELP_LINKS = [
+OPENRESOURCES_TAG_HELP_LINKS = [
     ('Tags','/wiki/Tags/'),
     ('Tag-Proposals','/wiki/Tag-Proposals/'),
 ]
+OPENRESOURCES_MAP_ATTRIBUTION = 'Resource Data CC-By-NC-SA by <a href="http://vivirbien.mediavirus.org/">Vivir Bien</a>'
 
 AUTH_PROFILE_MODULE = 'resources.UserProfile'
 

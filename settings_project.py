@@ -8,6 +8,6 @@ TRANSLATE_APPS = [
 ]
 
 APP_MEDIA = [
-    #('admin','env/src/django-grappelli/grappelli/media/'),
-    ('resources','current-release/src/resources/media/resources/'),
+    ('openresources','env/src/openresources/openresources/media/'),
+    #('resources','current-release/src/resources/media/resources/'),
 ]
