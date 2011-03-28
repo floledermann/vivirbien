@@ -16,8 +16,8 @@ urlpatterns = patterns('',
     (r'^accounts/', include('registration.urls')),
     (r'^comments/', include('threadedcomments.urls')),
     (r'^resources/', include('openresources.urls')),
-    ('^$', 'django.views.generic.simple.redirect_to', {'url': '/resources/'}),
-    #(r'^$', 'resources.views.index'),
+    #('^$', 'django.views.generic.simple.redirect_to', {'url': '/resources/'}),
+    (r'^$', 'openresources.views.index'),
 )
 
 if settings.SERVE_STATIC:
