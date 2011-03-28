@@ -12,3 +12,4 @@ media/js/OpenLayers-2.8-debug/
 vivirbien.db
 media/uploads/
 fixtures/auth.json
+glob:old
