@@ -68,7 +68,7 @@ class Snippet(models.Model):
         return self.title or self.content[:76] or '<Empty Snippet>'
 
     class Meta:
-        ordering = ('date',)
+        ordering = ('-date',)
         unique_together = ('slug','parent')
 
 if 'tagging' in settings.INSTALLED_APPS:
