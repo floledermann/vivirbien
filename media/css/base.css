@@ -456,3 +456,22 @@ html .toggle.on {
     background-image: url('../images/icons/toggle-minus_16x16.png');
 }
 
+/* override default style of openresources */
+
+html .resource,
+html .view {
+    background-position: 0 0;
+}
+
+html .resource {
+    background-image: url('../images/resource-icon_20x20.png');
+}
+
+html .view {
+    background-image: url('../images/view-icon_20x20.png');
+}
+
+
+
+
+

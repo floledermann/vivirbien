@@ -104,6 +104,7 @@ OPENRESOURCES_TAG_HELP_LINKS = [
     ('Tag-Proposals','/wiki/Tag-Proposals/'),
 ]
 OPENRESOURCES_MAP_ATTRIBUTION = 'Resource Data CC-By-NC-SA by <a href="http://vivirbien.mediavirus.org/">Vivir Bien</a>'
+OPENRESOURCES_DEFAULT_RESOURCE_ICON = 'images/resource-icon_20x20.png'
 
 AUTH_PROFILE_MODULE = 'resources.UserProfile'
 
