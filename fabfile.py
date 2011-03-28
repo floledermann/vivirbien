@@ -357,7 +357,7 @@ def deploy():
     deploy_noreload()
     reload()
 
-def deploy_with_requirements():
+def deploy_requirements():
     "Deploy and update requirements before reloading."
     deploy_nosyncdb()
     install_requirements()
