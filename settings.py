@@ -68,13 +68,14 @@ INSTALLED_APPS = (
     'tagging',
 #    'emailconfirmation',
 #    'friends',
+#    'model_i18n',
     'registration',
     'invitation',
     'wiki',
     'openresources',
     'threadedcomments',
     'sorl.thumbnail',
-    'snippets'
+    'snippets',
 )
 
 TEMPLATE_DIRS = None
@@ -107,6 +108,10 @@ OPENRESOURCES_MAP_ATTRIBUTION = 'Resource Data CC-By-NC-SA by <a href="http://vi
 OPENRESOURCES_DEFAULT_RESOURCE_ICON = 'images/resource-icon_20x20.png'
 
 AUTH_PROFILE_MODULE = 'openresources.UserProfile'
+
+SOUTH_MIGRATION_MODULES = {
+    'openresources': 'openresources_migrations',
+}
 
 import os
 try:
