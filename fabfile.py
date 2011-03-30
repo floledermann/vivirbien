@@ -414,21 +414,24 @@ def translate():
 def makemessages():
     if env.hosts:
         abort('Please create translations locally')
+    #local('django-admin.py makemessages -l de --ignore=env/* --ignore=old/* --ignore=src/* --ignore=templates/*', capture=False)
+    #local('django-admin.py makemessages -l en --ignore=env/* --ignore=old/* --ignore=src/* --ignore=templates/*', capture=False)
     local('cd templates %s django-admin.py makemessages -l de -e html -e txt' % env.command_join, capture=False)
     local('cd templates %s django-admin.py makemessages -l en -e html -e txt' % env.command_join, capture=False)
     local('cd src/wiki %s django-admin.py makemessages -l de' % env.command_join, capture=False)
     local('cd src/wiki %s django-admin.py makemessages -l en' % env.command_join, capture=False)
-    local('cd src/resources %s django-admin.py makemessages -l de' % env.command_join, capture=False)
-    local('cd src/resources %s django-admin.py makemessages -l en' % env.command_join, capture=False)
+    local('cd env/src/openresources/openresources %s django-admin.py makemessages -l de' % env.command_join, capture=False)
+    local('cd env/src/openresources/openresources %s django-admin.py makemessages -l en' % env.command_join, capture=False)
     local('cd env/src/django-invitation/invitation %s django-admin.py makemessages -l de -e html -e txt' % env.command_join, capture=False)
     local('cd env/src/django-invitation/invitation %s django-admin.py makemessages -l en -e html -e txt' % env.command_join, capture=False)
 
 def compilemessages():
     if env.hosts:
         abort('Please create translations locally')
+    #local('django-admin.py compilemessages', capture=False)
     local('cd templates %s django-admin.py compilemessages' % env.command_join, capture=False)
     local('cd src/wiki %s django-admin.py compilemessages' % env.command_join, capture=False)
-    local('cd src/resources %s django-admin.py compilemessages' % env.command_join, capture=False)
+    local('cd env/src/openresources/openresources %s django-admin.py compilemessages' % env.command_join, capture=False)
     local('cd env/src/django-invitation/invitation %s django-admin.py compilemessages' % env.command_join, capture=False)
 
 def runserver():

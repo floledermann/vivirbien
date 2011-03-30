@@ -97,6 +97,7 @@ ACCOUNT_INVITATION_DAYS = 30
 ACCOUNT_ACTIVATION_DAYS = 14
 INVITE_MODE = True
 INVITATIONS_PER_USER = 99
+#INVITATION_DEFAULT_MESSAGE = _('INVITATION_DEFAULT_MESSAGE')
 
 LOGIN_REDIRECT_URL = '/'
 
@@ -159,11 +160,6 @@ else: # default
     MEDIA_URL = '/media/'
     ADMIN_MEDIA_PREFIX = MEDIA_URL + 'admin/'
     
-    EMAIL_HOST = 'mail.subnet.at'
-    EMAIL_PORT = 25
-    EMAIL_HOST_USER = 'flo@subnet.at'
-    EMAIL_USE_TLS = True
-
 
 #
 # settings depending on project base dir
