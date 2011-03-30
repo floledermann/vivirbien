@@ -13,3 +13,6 @@ vivirbien.db
 media/uploads/
 fixtures/auth.json
 glob:old
+glob:documents/ripess/
+glob:documents/
+glob:vivirbien (copy).db
