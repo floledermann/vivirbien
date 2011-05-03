@@ -21,6 +21,9 @@ django-transmeta==0.5.1
 
 # -----------------------------
 
+#-e svn+http://django-modeltranslation.googlecode.com/svn/trunk/#egg=django-modeltranslation
+#-e git+https://github.com/floledermann/django-model-i18n.git#egg=django-model-i18n
+
 -e hg+https://floledermann@bitbucket.org/floledermann/django-invitation/#egg=django-invitation
 -e hg+https://floledermann@bitbucket.org/floledermann/openresources/#egg=openresources
 
