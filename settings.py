@@ -1,3 +1,4 @@
+# coding: utf-8
 
 DEBUG = False
 TEMPLATE_DEBUG = False
@@ -27,6 +28,7 @@ USE_L10N = True
 LANGUAGES = (
     ('en', 'English'),
     ('de', 'Deutsch'),
+    ('fr', 'Français (alpha)'),
 )
 
 TEMPLATE_LOADERS = (
@@ -111,7 +113,7 @@ OPENRESOURCES_DEFAULT_RESOURCE_ICON = 'images/resource-icon_20x20.png'
 AUTH_PROFILE_MODULE = 'openresources.UserProfile'
 
 SOUTH_MIGRATION_MODULES = {
-    'openresources': 'openresources_migrations',
+    'openresources': 'openresources.migrations_transmeta',
 }
 
 import os
