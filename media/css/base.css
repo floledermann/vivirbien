@@ -471,6 +471,10 @@ html .view {
     background-image: url('../images/view-icon_20x20.png');
 }
 
+.index-map-wrapper {
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+}
 
 
 
