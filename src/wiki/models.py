@@ -13,8 +13,8 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
 from django.db.models.query import QuerySet
 
-from tagging.fields import TagField
-from tagging.models import Tag
+#from tagging.fields import TagField
+#from tagging.models import Tag
 
 from wiki.utils import get_ct
 
@@ -78,7 +78,7 @@ class Article(models.Model):
     object_id = models.PositiveIntegerField(null=True)
     group = generic.GenericForeignKey('content_type', 'object_id')
 
-    tags = TagField()
+    tags = models.CharField(max_length=255, blank=True)
 
     objects = QuerySetManager()
 
