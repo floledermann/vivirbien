@@ -28,7 +28,7 @@ USE_L10N = True
 LANGUAGES = (
     ('en', 'English'),
     ('de', 'Deutsch'),
-    ('fr', 'Francais (alpha)'), #'Français (alpha)'
+    ('fr', 'Français (alpha)'),
 )
 
 TEMPLATE_LOADERS = (
@@ -41,6 +41,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request',
     'django.core.context_processors.i18n',
     'django.core.context_processors.media',
+    'django.core.context_processors.static',
     'django.core.context_processors.debug',
 )
 
@@ -53,6 +54,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.http.ConditionalGetMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
 )
 
 ROOT_URLCONF = 'urls'
@@ -67,7 +69,7 @@ INSTALLED_APPS = (
     'south',
 # -----------------------------
     'template_utils',
-    'tagging',
+#    'tagging',
 #    'emailconfirmation',
 #    'friends',
 #    'model_i18n',

@@ -16,8 +16,8 @@ Markdown
 smartypants
 creole==1.0.1
 sorl-thumbnail==3.2.5
-django-tagging==0.3.1
-django-transmeta==0.6.9
+# django-tagging==0.3.1
+django-transmeta==0.6.6
 
 # -----------------------------
 
