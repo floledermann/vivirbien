@@ -9,14 +9,13 @@ admin.autodiscover()
 urlpatterns = patterns('',
                        
     (r'^admin/doc/', include('django.contrib.admindocs.urls')),
-    (r'^admin/(.*)', include(admin.site.urls)),
+    (r'^admin/', include(admin.site.urls)),
     (r'^wiki/', include('wiki.urls')),
     (r'^i18n/', include('django.conf.urls.i18n')),
     (r'^accounts/', include('invitation.urls')),
     (r'^accounts/', include('registration.urls')),
     (r'^comments/', include('threadedcomments.urls')),
     (r'^resources/', include('openresources.urls')),
-    #('^$', 'django.views.generic.simple.redirect_to', {'url': '/resources/'}),
     (r'^$', 'openresources.views.index'),
 )
 
