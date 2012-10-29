@@ -618,6 +618,33 @@ def copy_db(from_db, to_db):
         f.run('cd %s; psql -h %s -d %s -U %s -f %s-dump.sql' % (env.path, env.db_host, to_db, to_db, from_db)) 
         f.run('cd %s; rm %s-dump.sql' % (env.path, from_db)) 
 
+def fetchdata(appname=''):
+    require('hosts', provided_by = [on])
+    with settings(warn_only=True):
+        run('mkdir %s/fixtures' % (env.path,))
+    if appname:
+        excludes_str = ''
+        fixture_name = '%s_%s.json' % (appname, datestr)
+    else:
+        excludes = [
+            'contenttypes'
+            'sessions'
+            'auth.permission'
+            'auth.message'
+            'admin'
+            'south'
+            'registration'
+            'invitation'
+        ]
+        excludes_str = ' --exclude='.join(excludes)
+        fixture_name = 'all_%s.json' % (datestr,)
+    run('cd %s/current-release; ../../env/bin/python manage.py dumpdata --natural --indent 2 %s %s > ../../fixtures/%s' % (env.path, excludes_str, appname, fixture_name))
+    with settings(warn_only=True):
+        local('mkdir fixtures')
+    get('%s/fixtures/%s' % (env.path, fixture_name), 'fixtures/%s' % fixture_name)
+
+def loaddata(appname):
+    local(os.path.join(env.ve_prefix,'python manage.py loaddata fixtures/%s.json' % appname), capture=False)
 
 # ---------------------------------------------------------
 # backup
