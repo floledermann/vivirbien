@@ -9,7 +9,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
                        
     (r'^admin/doc/', include('django.contrib.admindocs.urls')),
-    (r'^admin/(.*)', admin.site.root),
+    (r'^admin/(.*)', include(admin.site.urls)),
     (r'^wiki/', include('wiki.urls')),
     (r'^i18n/', include('django.conf.urls.i18n')),
     (r'^accounts/', include('invitation.urls')),

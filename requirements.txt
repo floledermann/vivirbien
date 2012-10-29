@@ -4,9 +4,9 @@
 
 # -----------------------------
 
-Django==1.2.3
-docutils==0.5
-South==0.7.1
+Django==1.4.2
+docutils==0.9.1
+South==0.7.6
 
 # -----------------------------
 
@@ -17,7 +17,7 @@ smartypants
 creole==1.0.1
 sorl-thumbnail==3.2.5
 django-tagging==0.3.1
-django-transmeta==0.5.1
+django-transmeta==0.6.9
 
 # -----------------------------
 

@@ -14,12 +14,12 @@ from django.shortcuts import get_object_or_404, render_to_response
 from django.views.generic.simple import redirect_to
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.contenttypes.models import ContentType
-from django.contrib.syndication.feeds import FeedDoesNotExist
+#from django.contrib.syndication.feeds import FeedDoesNotExist
 
 from wiki.forms import ArticleForm, SearchForm
 from wiki.models import Article, ChangeSet
-from wiki.feeds import (RssArticleHistoryFeed, AtomArticleHistoryFeed,
-                        RssHistoryFeed, AtomHistoryFeed)
+#TODO: port to Django 1.4 feeds framework
+#from wiki.feeds import (RssArticleHistoryFeed, AtomArticleHistoryFeed, RssHistoryFeed, AtomHistoryFeed)
 from wiki.utils import get_ct, login_required
 
 
@@ -710,22 +710,24 @@ def article_history_feed(request, feedtype, title,
                          is_private=None,
                          *args, **kw):
 
-    feeds = {'rss' : RssArticleHistoryFeed,
-             'atom' : AtomArticleHistoryFeed}
-    ArticleHistoryFeed = feeds.get(feedtype, RssArticleHistoryFeed)
+    pass
 
-    try:
-        feedgen = ArticleHistoryFeed(title, request,
-                                     group_slug, bridge,
-                                     article_qs, changes_qs,
-                                     extra_context,
-                                     *args, **kw).get_feed(title)
-    except FeedDoesNotExist:
-        raise Http404
+#    feeds = {'rss' : RssArticleHistoryFeed,
+#             'atom' : AtomArticleHistoryFeed}
+#    ArticleHistoryFeed = feeds.get(feedtype, RssArticleHistoryFeed)
 
-    response = HttpResponse(mimetype=feedgen.mime_type)
-    feedgen.write(response, 'utf-8')
-    return response
+#    try:
+#        feedgen = ArticleHistoryFeed(title, request,
+#                                     group_slug, bridge,
+#                                     article_qs, changes_qs,
+#                                     extra_context,
+#                                     *args, **kw).get_feed(title)
+#    except FeedDoesNotExist:
+#        raise Http404
+
+#    response = HttpResponse(mimetype=feedgen.mime_type)
+#    feedgen.write(response, 'utf-8')
+#    return response
 
 
 def history_feed(request, feedtype,
@@ -736,19 +738,21 @@ def history_feed(request, feedtype,
                  is_private=None,
                  *args, **kw):
 
-    feeds = {'rss' : RssHistoryFeed,
-             'atom' : AtomHistoryFeed}
-    HistoryFeed = feeds.get(feedtype, RssHistoryFeed)
+    pass
 
-    try:
-        feedgen = HistoryFeed(request,
-                              group_slug, bridge,
-                              article_qs, changes_qs,
-                              extra_context,
-                              *args, **kw).get_feed()
-    except FeedDoesNotExist:
-        raise Http404
+#    feeds = {'rss' : RssHistoryFeed,
+#             'atom' : AtomHistoryFeed}
+#    HistoryFeed = feeds.get(feedtype, RssHistoryFeed)
 
-    response = HttpResponse(mimetype=feedgen.mime_type)
-    feedgen.write(response, 'utf-8')
-    return response
+#    try:
+#        feedgen = HistoryFeed(request,
+#                              group_slug, bridge,
+#                              article_qs, changes_qs,
+#                              extra_context,
+#                              *args, **kw).get_feed()
+#    except FeedDoesNotExist:
+#        raise Http404
+
+#    response = HttpResponse(mimetype=feedgen.mime_type)
+#    feedgen.write(response, 'utf-8')
+#    return response

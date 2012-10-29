@@ -28,16 +28,16 @@ USE_L10N = True
 LANGUAGES = (
     ('en', 'English'),
     ('de', 'Deutsch'),
-    ('fr', 'Français (alpha)'),
+    ('fr', 'Francais (alpha)'), #'Français (alpha)'
 )
 
 TEMPLATE_LOADERS = (
-    'django.template.loaders.filesystem.load_template_source',
-    'django.template.loaders.app_directories.load_template_source',
+    'django.template.loaders.filesystem.Loader',
+    'django.template.loaders.app_directories.Loader',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
-    'django.core.context_processors.auth',
+    'django.contrib.auth.context_processors.auth',
     'django.core.context_processors.request',
     'django.core.context_processors.i18n',
     'django.core.context_processors.media',
@@ -47,7 +47,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 MIDDLEWARE_CLASSES = (
     # TODO: properly port to new CSRF protection mechanism, see http://docs.djangoproject.com/en/dev/ref/contrib/csrf/
     'django.middleware.csrf.CsrfViewMiddleware',
-    'django.middleware.csrf.CsrfResponseMiddleware',
+    #'django.middleware.csrf.CsrfResponseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -107,7 +107,7 @@ OPENRESOURCES_TAG_HELP_LINKS = [
     ('Tags','/wiki/Tags/'),
     ('Tag-Proposals','/wiki/Tag-Proposals/'),
 ]
-OPENRESOURCES_MAP_ATTRIBUTION = 'Resource Data CC-By-NC-SA by <a href="http://vivirbien.mediavirus.org/">Vivir Bien</a>'
+OPENRESOURCES_MAP_ATTRIBUTION = 'Resource Data CC-By-NC-SA by <a href="http://vivirbien.mediavirus.org/" target="_blank">Vivir Bien</a>'
 OPENRESOURCES_DEFAULT_RESOURCE_ICON = 'images/resource-icon_20x20.png'
 
 AUTH_PROFILE_MODULE = 'openresources.UserProfile'
