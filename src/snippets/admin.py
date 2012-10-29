@@ -12,6 +12,8 @@ class SnippetAdmin(admin.ModelAdmin):
         list_display = ('__unicode__', 'lang', 'active', 'date')
 
     list_filter = ('lang', 'categories') #, 'parent'
+    list_editable = ('active',)
+
     prepopulated_fields = {'slug': ('title',)}
 
     def save_model(self, request, obj, form, change):
