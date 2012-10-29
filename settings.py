@@ -43,6 +43,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.media',
     'django.core.context_processors.static',
     'django.core.context_processors.debug',
+    'django.contrib.messages.context_processors.messages',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -66,6 +67,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.admin',
     'django.contrib.admindocs',
+    'django.contrib.messages',
     'south',
 # -----------------------------
     'template_utils',
@@ -142,28 +144,9 @@ if DEPLOYMENT_CONFIG == 'server_architekt':
     ADMIN_MEDIA_PREFIX = MEDIA_URL + 'admin/'
     
     EMAIL_HOST = 'mail.semicolon.at'
-     
+  
 
-else: # default
-    
-    import sys
-    if sys.platform == 'win32':
-        DJANGO_PROJECT_ROOT = 'C:/user/flo/projects/vivirbien/'
-    else:
-        DJANGO_PROJECT_ROOT = '/home/flo/projects/vivirbien/'
-    
-    DATABASE_NAME = 'pcresources'
-    DATABASE_USER = 'pcresources'
-    
-    # overrides
-    
-    DEBUG = True
-    TEMPLATE_DEBUG = True    
-    SERVE_STATIC = True
-
-    MEDIA_URL = '/media/'
-    ADMIN_MEDIA_PREFIX = MEDIA_URL + 'admin/'
-    
+from settings_secret import *
 
 #
 # settings depending on project base dir
@@ -182,5 +165,4 @@ LOCALE_PATHS = (
 )
 
 
-from settings_secret import *
 
