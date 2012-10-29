@@ -46,7 +46,7 @@ class Snippet(models.Model):
         rel_tags = generic.GenericRelation(tagging.models.TaggedItem)
     else:
         # create dummy field for future install of tagging app
-        tag_str = tagging.fields.CharField(_('Tags'), blank=True)
+        tag_str = models.CharField(_('Tags'), max_length=255, blank=True)
 
     categories = models.ManyToManyField(Category, blank=True)
 
