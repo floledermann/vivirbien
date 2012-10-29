@@ -98,8 +98,8 @@ class ArticleEditLock(object):
         """
         if not self.is_mine(request):
             user = request.user
-            user.message_set.create(
-                message=self.message_template%self.created_at)
+            # TODO: port to Django 1.4 Messaging framework
+            #user.message_set.create(message=self.message_template%self.created_at)
 
     def is_mine(self, request):
         return self.user_ip == get_real_ip(request)
@@ -273,7 +273,8 @@ def edit_article(request, title,
                     user_message = u"Your article was created successfully."
                 else:
                     user_message = u"Your article was edited successfully."
-                request.user.message_set.create(message=user_message)
+                # TODO: port to Django 1.4
+                #request.user.message_set.create(message=user_message)
 
             if ((article is None) and (group_slug is not None)):
                 form.group = group
@@ -284,7 +285,7 @@ def edit_article(request, title,
                 'title': new_article.title,
             }, bridge=bridge)
             
-            url = url.replace("%", "%%")
+            #url = url.replace("%", "%%")
 
             return redirect_to(request, url)
 
@@ -515,9 +516,8 @@ def revert_to_revision(request, title,
             article.revert_to(revision, get_real_ip(request))
 
 
-        if request.user.is_authenticated():
-            request.user.message_set.create(
-                message=u"The article was reverted successfully.")
+        #if request.user.is_authenticated():
+        #    request.user.message_set.create(message=u"The article was reverted successfully.")
                 
         url = get_url('wiki_article_history', group, kw={
             'title': title,
