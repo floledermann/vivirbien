@@ -1,5 +1,7 @@
 from django.conf.urls.defaults import *
 from django.conf import settings
+from registration.views import register
+from vivirbien.forms import RegistrationFormNoEmail
 
 #django.views.generic.simple.redirect_to
 
@@ -12,11 +14,17 @@ urlpatterns = patterns('',
     (r'^admin/', include(admin.site.urls)),
     (r'^wiki/', include('wiki.urls')),
     (r'^i18n/', include('django.conf.urls.i18n')),
-    (r'^accounts/', include('invitation.urls')),
-    (r'^accounts/', include('registration.urls')),
+    url(r'^accounts/register/$',
+        register,
+        {
+            'backend': 'registration.backends.simple.SimpleBackend',
+            'success_url': 'index',
+            'form_class': RegistrationFormNoEmail},
+        name='registration_register'),
+    (r'^accounts/', include('registration.backends.simple.urls')),
     (r'^comments/', include('threadedcomments.urls')),
     (r'^resources/', include('openresources.urls')),
-    (r'^$', 'openresources.views.index'),
+    url(r'^$', 'openresources.views.index',name='index'),
 )
 
 if settings.SERVE_STATIC:
