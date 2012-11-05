@@ -1,0 +1,144 @@
+body {
+    font-family: Georgia, serif;
+    font-size: 12px;
+}
+
+
+h1 {
+    font-size: 28px;
+    line-height: 30px;
+    margin: 20px 0 10px;
+}
+
+h2 {
+    font-size: 18px;
+    line-height: 20px;
+    margin: 12px 0 6px;
+}
+
+h3 {
+    font-size: 16px;
+    line-height: 18px;
+    margin: 10px 0 5px;
+}
+
+h4 {
+    font-weight: bold;
+}
+
+label {
+    padding-right: 5px;
+}
+
+code {
+    font-family: monospace;
+}
+
+em {
+    font-style: italic;
+}
+
+select {
+    max-width: 300px;
+}
+
+.header-wrapper, .footer {
+    background-color: #eeeeee; /*#eeeeee;*/
+}
+
+.header .active {
+    background: #ffffff;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    padding: 5px;
+}
+
+.header a,
+.actions a,
+a.action {
+    color: #000000;
+}
+
+.username,
+.language-switcher {
+    color: #666666;
+}
+
+.resource-details {
+    margin-bottom: 20px;
+}
+
+.comments,
+.actions {
+    background-color: #eeeeee;
+    xborder: 1px solid #999999;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    padding: 3px;
+    max-width: 100%;
+    margin-bottom: 10px;
+}
+
+.action {
+    background-color: #eeeeee;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    padding: 2px 4px;
+}
+
+.comment {
+    background-color: #ffffff;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    padding: 3px;
+    margin-bottom: 5px;
+}
+
+.comment p {
+    margin-bottom: 6px;
+}
+
+.help {
+    font-size: 10px;
+    color: #999999;
+}
+
+.resource-page .content h2 {
+    xmargin-top: 10px;
+}
+
+.errorlist {
+    background-color: #ffaaaa;
+    margin-bottom: 5px;
+    padding: 3px 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.popular-tags {
+    margin-bottom: 10px;
+}
+
+.popular-tags .action {
+    font-size: 10px;
+    padding: 1px 4px 0px 4px;
+}
+
+.listbox,
+.navbox {
+    border: 1px solid #aaaaaa;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    
+}
+
+/* TODO: remove this when autocomplete widget has settled */
+.yui-skin-sam td .yui-ac-input {
+    position: static;
+}
