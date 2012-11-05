@@ -9,12 +9,13 @@ _ = lambda s: s
 ADMINS = (
     ('Flo Ledermann', 'ledermann@ims.tuwien.ac.at'),
 )
-DEFAULT_FROM_EMAIL = 'vivirbien@mediavirus.org'
+MANAGERS = (
+    ('Vivir Bien Redaktion', 'vivirbien@mediavirus.org'),
+)
 
-MANAGERS = ADMINS
-
-DATABASE_ENGINE = 'postgresql_psycopg2'
-DATABASE_PORT = '5432 '
+SERVER_EMAIL = 'vivirbien@mediavirus.org'
+DEFAULT_FROM_EMAIL = SERVER_EMAIL
+EMAIL_SUBJECT_PREFIX = '[Vivir Bien Server] '
 
 TIME_ZONE = 'Europe/Vienna'
 
@@ -68,6 +69,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.admindocs',
     'django.contrib.messages',
+    'django.contrib.staticfiles',
     'south',
 # -----------------------------
     'template_utils',
@@ -76,12 +78,13 @@ INSTALLED_APPS = (
 #    'friends',
 #    'model_i18n',
     'registration',
-    'invitation',
+#    'invitation',
     'wiki',
     'openresources',
     'threadedcomments',
     'sorl.thumbnail',
     'snippets',
+    'vivirbien'
 )
 
 TEMPLATE_DIRS = None
@@ -112,38 +115,31 @@ OPENRESOURCES_TAG_HELP_LINKS = [
     ('Tag-Proposals','/wiki/Tag-Proposals/'),
 ]
 OPENRESOURCES_MAP_ATTRIBUTION = 'Resource Data CC-By-NC-SA by <a href="http://vivirbien.mediavirus.org/" target="_blank">Vivir Bien</a>'
-OPENRESOURCES_DEFAULT_RESOURCE_ICON = 'images/resource-icon_20x20.png'
+OPENRESOURCES_DEFAULT_RESOURCE_ICON = '/images/resource-icon_20x20.png'
 
 AUTH_PROFILE_MODULE = 'openresources.UserProfile'
 
 SOUTH_MIGRATION_MODULES = {
     'openresources': 'openresources.migrations_transmeta',
 }
+    
+#if DEPLOYMENT_CONFIG == 'server_architekt':
 
-import os
-try:
-    DEPLOYMENT_CONFIG = os.environ['DJANGO_CONFIG']
-except KeyError:
-    DEPLOYMENT_CONFIG = None
-    print('Warning: Environment variable "DJANGO_CONFIG" not defined, using default!')
-    
-if DEPLOYMENT_CONFIG == 'server_architekt':
-
-    DJANGO_PROJECT_ROOT = '/home/flo/sites/vivirbien/current-release/'
-    
-    DATABASE_HOST = 'mail.semicolon.at'
-    DATABASE_NAME = 'vivirbien'
-    DATABASE_USER = 'vivirbien'
-    
-    # overrides
-    
-    DEBUG = False
-    TEMPLATE_DEBUG = DEBUG
-    
-    MEDIA_URL = 'http://vivirbien-media.floledermann.com/'
-    ADMIN_MEDIA_PREFIX = MEDIA_URL + 'admin/'
-    
-    EMAIL_HOST = 'mail.semicolon.at'
+#    DJANGO_PROJECT_ROOT = '/home/flo/sites/vivirbien/current-release/'
+#    
+#    DATABASE_HOST = 'mail.semicolon.at'
+#    DATABASE_NAME = 'vivirbien'
+#    DATABASE_USER = 'vivirbien'
+#    
+#    # overrides
+#    
+#    DEBUG = False
+#    TEMPLATE_DEBUG = DEBUG
+#    
+#    MEDIA_URL = 'http://vivirbien-media.floledermann.com/'
+#    ADMIN_MEDIA_PREFIX = MEDIA_URL + 'admin/'
+#    
+#    EMAIL_HOST = 'mail.semicolon.at'
   
 
 from settings_secret import *
@@ -151,6 +147,10 @@ from settings_secret import *
 #
 # settings depending on project base dir
 #
+
+STATICFILES_DIRS = (
+    DJANGO_RELEASE_ROOT + 'static/',
+)
 
 if not TEMPLATE_DIRS:
     TEMPLATE_DIRS = (

@@ -30,7 +30,7 @@ urlpatterns = patterns('',
 if settings.SERVE_STATIC:
     import os
     urlpatterns = patterns('',
-        (r'^media/openresources/(?P<path>.*)$', 'django.views.static.serve', {'document_root': os.path.join(settings.DJANGO_PROJECT_ROOT, 'env/src/openresources/openresources/media/')}),
+        #(r'^media/openresources/(?P<path>.*)$', 'django.views.static.serve', {'document_root': os.path.join(settings.DJANGO_PROJECT_ROOT, 'env/src/openresources/openresources/media/')}),
         (r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
     ) + urlpatterns
 
