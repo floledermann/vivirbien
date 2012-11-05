@@ -8,10 +8,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-30 16:17+0100\n"
+"POT-Creation-Date: 2012-11-03 14:41+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -40,27 +41,33 @@ msgstr "Hallo,"
 msgid "Not logged in"
 msgstr "Nicht angemeldet"
 
-#: includes/navi.html:5 registration/login.html:27
+#: includes/navi.html:5 registration/login.html:6
+#: registration/login.html.py:32 registration/password_reset_complete.html:11
+#: registration/registration_form.html:12
 msgid "Log in"
 msgstr "Anmelden"
 
-#: includes/navi.html:6 invitation/invitation_form.html:6
+#: includes/navi.html:7 invitation/invitation_form.html:6
 msgid "Invite a friend"
 msgstr "Leute einladen"
 
-#: includes/navi.html:7
+#: includes/navi.html:9 registration/login.html:14
+msgid "Sign up"
+msgstr "Registrieren"
+
+#: includes/navi.html:11
 msgid "Log out"
 msgstr "Abmelden"
 
-#: includes/navi.html:9
+#: includes/navi.html:13
 msgid "language:"
 msgstr "Sprache:"
 
-#: includes/navi.html:20
+#: includes/navi.html:24
 msgid "Resources"
 msgstr "Ressourcen"
 
-#: includes/navi.html:22
+#: includes/navi.html:26
 msgid "About"
 msgstr "About"
 
@@ -88,6 +95,38 @@ msgstr "Um was geht's?"
 #: invitation/invited.html:12
 msgid "proceed to registration"
 msgstr "Weiter zur Registrierung"
+
+#: openresources/index.html:13 openresources/index.html.py:35
+msgid "Read more..."
+msgstr "Mehr..."
+
+#: openresources/index.html:29
+msgid "News"
+msgstr ""
+
+#: openresources/resource.html:67
+msgid "Related resources"
+msgstr "Ähnliche Ressourcen"
+
+#: openresources/resource.html:78 wiki/edit.html:9
+msgid "Edit"
+msgstr "Bearbeiten"
+
+#: openresources/resource.html:86
+msgid "Comments for"
+msgstr "Kommentare für"
+
+#: openresources/resource.html:91
+msgid "Comment by"
+msgstr "Kommentar von"
+
+#: openresources/resource.html:93
+msgid "Reply"
+msgstr "Antworten"
+
+#: openresources/resource.html:99
+msgid "New Comment"
+msgstr "Neuer Kommentar"
 
 #: registration/activate.html:7 registration/activation_email.txt:2
 msgid "Welcome to"
@@ -133,29 +172,113 @@ msgstr "Viel Spaß!"
 msgid "Activate your user"
 msgstr "Deinen User aktivieren"
 
-#: registration/login.html:8
+#: registration/login.html:9
 msgid "Your username and password didn't match. Please try again."
 msgstr "Username oder Passwort sind falsch. Bitte nochmals probieren."
 
-#: registration/login.html:10
-msgid ""
-"Some areas of Vivir Bien are currently available only to registered users. "
-"Registrations are currently <em>invitation only</em> to ensure a certain "
-"level of trust between participants. If you want to contribute, <a href="
-"\"mailto:vivirbien@mediavirus.org\">get in touch</a>!"
-msgstr ""
-"Derzeit sind einige Bereiche von Vivir Bien nur registrierten Benutzerinnen "
-"zugänglich. Die Registrierung ist derzeit nur per Einladung möglich &mdash; "
-"wenn du bei Vivir Bien mitmachen willst, <a href=\"mailto:"
-"vivirbien@mediavirus.org\">kontaktiere uns</a>!"
+#: registration/login.html:14
+msgid "Don't have an account at Vivir Bien?"
+msgstr "Noch kein Account angelegt?"
 
-#: registration/login.html:31
+#: registration/login.html:15 registration/registration_form.html:13
 msgid "Forgotten your password or username?"
 msgstr "Passwort oder Username vergessen?"
 
 #: registration/logout.html:6
 msgid "You have been logged out!"
 msgstr "Du bist jetzt abgemeldet"
+
+#: registration/password_reset_complete.html:7
+msgid "Password reset complete"
+msgstr "Passwort erfolgreich geändert"
+
+#: registration/password_reset_complete.html:9
+msgid "Your password has been set. You may go ahead and log in now."
+msgstr ""
+
+#: registration/password_reset_confirm.html:9
+msgid "Enter new password"
+msgstr ""
+
+#: registration/password_reset_confirm.html:11
+msgid ""
+"Please enter your new password twice so we can verify you typed it in "
+"correctly."
+msgstr ""
+
+#: registration/password_reset_confirm.html:15
+msgid "New password:"
+msgstr ""
+
+#: registration/password_reset_confirm.html:17
+msgid "Confirm password:"
+msgstr ""
+
+#: registration/password_reset_confirm.html:18
+msgid "Change my password"
+msgstr ""
+
+#: registration/password_reset_confirm.html:23
+msgid "Password reset unsuccessful"
+msgstr ""
+
+#: registration/password_reset_confirm.html:25
+msgid ""
+"The password reset link was invalid, possibly because it has already been "
+"used.  Please request a new password reset."
+msgstr ""
+
+#: registration/password_reset_done.html:7
+msgid "Password reset successful"
+msgstr ""
+
+#: registration/password_reset_done.html:9
+msgid ""
+"We've e-mailed you instructions for setting your password to the e-mail "
+"address you submitted. You should be receiving it shortly."
+msgstr ""
+
+#: registration/password_reset_email.html:2
+#, python-format
+msgid ""
+"You're receiving this e-mail because you requested a password reset for your "
+"user account at %(site_name)s."
+msgstr ""
+
+#: registration/password_reset_email.html:4
+msgid "Please go to the following page and choose a new password:"
+msgstr ""
+
+#: registration/password_reset_email.html:8
+msgid "Your username, in case you've forgotten:"
+msgstr ""
+
+#: registration/password_reset_email.html:10
+msgid "Thanks for using our site!"
+msgstr ""
+
+#: registration/password_reset_email.html:12
+#, python-format
+msgid "The %(site_name)s team"
+msgstr ""
+
+#: registration/password_reset_form.html:7
+msgid "Password reset"
+msgstr "Passwort zurücksetzen"
+
+#: registration/password_reset_form.html:9
+msgid ""
+"Forgotten your password? Enter your e-mail address below, and we'll e-mail "
+"instructions for setting a new one."
+msgstr ""
+
+#: registration/password_reset_form.html:13
+msgid "E-mail address:"
+msgstr ""
+
+#: registration/password_reset_form.html:13
+msgid "Reset my password"
+msgstr ""
 
 #: registration/registration_complete.html:6
 msgid "Registration complete"
@@ -171,6 +294,24 @@ msgstr ""
 "nächsten<br />Minuten in deiner Inbox liegen!<br />(Die Aktivierung ist "
 "notwenig,um deine Email-Adresse zu überprüfen.)"
 
+#: registration/registration_form.html:6
+msgid "Sign up for using Vivir Bien"
+msgstr "Bei Vivir Bien registrieren"
+
+#: registration/registration_form.html:9
+msgid ""
+"You can register an account for Vivir Bien anonymously, without giving us "
+"your email address. Please note that in this case you will not have a way to "
+"recover your password should you ever forget it!"
+msgstr ""
+"Du kannst einen Account für Vivir Bien anlegen, ohne eine E-Mail Adresse "
+"anzugeben. Bitte beachte dass es in diesem Fall keine Möglichkeit gibt auf "
+"deinen Account zuzugreifen falls du dein Passwort vergessen solltest!"
+
+#: registration/registration_form.html:12
+msgid "Already have an account at Vivir Bien?"
+msgstr "Bereits bei Vivir Bien registriert?"
+
 #: wiki/base.html:16
 msgid "List all articles"
 msgstr "Alle Artikel"
@@ -183,15 +324,11 @@ msgstr "Letzte Änderungen"
 msgid "Editing article"
 msgstr "Artikel bearbeiten"
 
-#: wiki/edit.html:9
-msgid "Edit"
-msgstr "Bearbeiten"
-
-#: wiki/edit.html:23
+#: wiki/edit.html:24
 msgid "Save"
 msgstr "Speichern"
 
-#: wiki/edit.html:29
+#: wiki/edit.html:30
 msgid "Wiki format help"
 msgstr "Wiki Formatierungshilfe"
 
@@ -214,6 +351,17 @@ msgstr "Autor"
 #: wiki/recentchanges.html:12
 msgid "Comment"
 msgstr "Kommentar"
+
+#~ msgid ""
+#~ "Some areas of Vivir Bien are currently available only to registered "
+#~ "users. Registrations are currently <em>invitation only</em> to ensure a "
+#~ "certain level of trust between participants. If you want to contribute, "
+#~ "<a href=\"mailto:vivirbien@mediavirus.org\">get in touch</a>!"
+#~ msgstr ""
+#~ "Derzeit sind einige Bereiche von Vivir Bien nur registrierten "
+#~ "Benutzerinnen zugänglich. Die Registrierung ist derzeit nur per Einladung "
+#~ "möglich &mdash; wenn du bei Vivir Bien mitmachen willst, <a href=\"mailto:"
+#~ "vivirbien@mediavirus.org\">kontaktiere uns</a>!"
 
 #~ msgid "Untitled Page"
 #~ msgstr "Ohne Titel"

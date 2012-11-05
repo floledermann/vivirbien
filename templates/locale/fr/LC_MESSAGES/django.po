@@ -16,6 +16,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1)\n"
 
 #: page_base.html:12 page_base.html.py:20 page_base.html.py:34
 msgid "Resources for a solidarity economy"
@@ -74,10 +75,6 @@ msgstr ""
 #: invitation/invitation_form.html:8
 msgid "You can send an invitation code to a friend here."
 msgstr ""
-"<p>In the current phase, registration for Vivir Bien is only possible with "
-"an invitation key. You can send an invitation key to an email address here.</"
-"p><p>Invitations should only be sent to people you trust in sharing our "
-"goals until we have discussed how we deal with confident information.</p>"
 
 #: invitation/invitation_form.html:15
 msgid "Send Invitation"
