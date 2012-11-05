@@ -3,12 +3,17 @@
 
 {% block page_content %}
 
-<p>
+<h2>{% trans "Log in" %}</h2>
 {% if form.errors %}
+<p class="error">
 {% trans "Your username and password didn't match. Please try again." %}
-{% else %}
-{% blocktrans %}Some areas of Vivir Bien are currently available only to registered users. Registrations are currently <em>invitation only</em> to ensure a certain level of trust between participants. If you want to contribute, <a href="mailto:vivirbien@mediavirus.org">get in touch</a>!{% endblocktrans %}
+</p>
 {% endif %}
+
+<p>
+{% trans "Don't have an account at Vivir Bien?" %} <a href="{% url registration_register %}">{% trans "Sign up" %}</a>!<br />
+<a href="{% url auth_password_reset %}">{% trans "Forgotten your password or username?" %}</a>
+
 </p>
 
 
@@ -27,6 +32,4 @@
 <button type="submit">{% trans "Log in" %}</button>
 <input type="hidden" name="next" value="{{ next }}" />
 </form>
-
-<a href="{% url auth_password_reset %}">{% trans "Forgotten your password or username?" %}</a>
 {% endblock page_content %}

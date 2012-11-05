@@ -1,9 +1,17 @@
 {% extends "page_base.html" %}
+{% load i18n %}
 
 {% block page_content %}
 
-<h2>Anmeldung</h2>
+<h2>{% trans "Sign up for using Vivir Bien" %}</h2>
 
+<p>
+{% blocktrans %}You can register an account for Vivir Bien anonymously, without giving us your email address. Please note that in this case you will not have a way to recover your password should you ever forget it!{% endblocktrans %}
+</p>
+<p>
+{% trans "Already have an account at Vivir Bien?" %} <a href="{% url auth_login %}">{% trans "Log in" %}</a>!<br />
+<a href="{% url auth_password_reset %}">{% trans "Forgotten your password or username?" %}</a>
+</p>
 <form action="{% url registration_register %}" method="POST">
 {% if invitation_key %}
 <input type="hidden" name="invitation_key" value="{{ invitation_key }}" />
@@ -14,6 +22,7 @@
 {% csrf_token %}
 <input type="submit" value="Submit" />
 </form>
+
 
 
 {% endblock %}
