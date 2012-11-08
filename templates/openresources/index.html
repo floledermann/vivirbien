@@ -3,9 +3,10 @@
 
 {% block top_content %}
 {% snippets "main" as news %}
-
+<!--
 {% for snippet in news %}
-<h1>{{ snippet.title|safe }}</h1>
+{% if snippet.title %}<h1>{{ snippet.title|safe }}</h1>{% endif %}
+{% if snippet.content %}
 <p>
 {{ snippet.content|safe }}
 {% if snippet.link %}
@@ -13,7 +14,9 @@
 <a class="more" href="{{ snippet.link }}">{% trans "Read more..." %}</a>
 {% endif %}
 </p>
+{% endif %}
 {% endfor %}
+-->
 {% endblock %}
 
 {% block middle_content %}

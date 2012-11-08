@@ -419,14 +419,6 @@ em {
     padding: 1px 4px 0px 4px;
 }
 
-.listbox,
-.navbox {
-    border: 1px solid #aaaaaa;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    border-radius: 5px;   
-}
-
 /* TODO: remove this when autocomplete widget has settled */
 .yui-skin-sam td .yui-ac-input {
     position: static;
