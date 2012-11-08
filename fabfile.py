@@ -215,7 +215,7 @@ HOSTS = {
     'hosting': {
         'host': None, #'user@host:port',
         'user': 'user',
-        'path': '/home/sites/%(project_name)s',
+        'path': '/home/flo/sites/%(project_name)s',
         'db_host': 'localhost',
         'needs_reload': True,
         'make_folder_world_writeable' : None,
@@ -329,10 +329,12 @@ def create_project_dir():
         run('mkdir -p %s/packages' % (env.path,))
         run('mkdir %s/log' % (env.path,))
         run('mkdir -p %s/media/uploads' % (env.path,))
+        run('mkdir -p %s/collected_static' % (env.path,))
     # change permissions for writable folder
     cmd = env.host_settings.get('make_folder_world_writeable','chown -R www-data:www-data')
     if cmd:
         run('%s %s/media' % (cmd, env.path))
+        run('%s %s/collected_static' % (cmd, env.path))
 
 def create_virtualenv():
     if env.hosts:
@@ -459,9 +461,9 @@ def collect_static():
     if not env.hosts:
         local('%s manage.py collectstatic --noinput' % local_python, capture=False) #-v0 
     else:
-        with settings(warn_only=True):
+        #with settings(warn_only=True):
             # hack: delete file to be overridden by our own version
-            run('cd %(path)s && rm collected_static/grappelli/js/SelectFilter2.js' % env)
+        #    run('cd %(path)s && rm collected_static/grappelli/js/SelectFilter2.js' % env)
         # we are in a symlinked directory so we have to add one more '../' !
         run('cd %(path)s/current-release && ../../env/bin/python manage.py collectstatic --noinput' % env) 
 
@@ -649,6 +651,7 @@ def loaddata(appname):
 # ---------------------------------------------------------
 # backup
 # ---------------------------------------------------------
+
 
 def backup():
     # we need to back up these things:
