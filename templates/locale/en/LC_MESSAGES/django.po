@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-03 14:41+0100\n"
+"POT-Creation-Date: 2012-11-08 21:34+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -95,11 +95,11 @@ msgstr ""
 msgid "proceed to registration"
 msgstr ""
 
-#: openresources/index.html:13 openresources/index.html.py:35
+#: openresources/index.html:14 openresources/index.html.py:34
 msgid "Read more..."
 msgstr ""
 
-#: openresources/index.html:29
+#: openresources/index.html:28
 msgid "News"
 msgstr ""
 

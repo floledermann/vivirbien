@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-03 14:41+0100\n"
+"POT-Creation-Date: 2012-11-08 21:34+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -96,11 +96,11 @@ msgstr "Um was geht's?"
 msgid "proceed to registration"
 msgstr "Weiter zur Registrierung"
 
-#: openresources/index.html:13 openresources/index.html.py:35
+#: openresources/index.html:14 openresources/index.html.py:34
 msgid "Read more..."
 msgstr "Mehr..."
 
-#: openresources/index.html:29
+#: openresources/index.html:28
 msgid "News"
 msgstr ""
 
@@ -194,33 +194,35 @@ msgstr "Passwort erfolgreich geändert"
 
 #: registration/password_reset_complete.html:9
 msgid "Your password has been set. You may go ahead and log in now."
-msgstr ""
+msgstr "Das neue Passwort wurde gespeichert. Du kannst dich jetzt anmelden."
 
 #: registration/password_reset_confirm.html:9
 msgid "Enter new password"
-msgstr ""
+msgstr "Neues Passwort eingeben"
 
 #: registration/password_reset_confirm.html:11
 msgid ""
 "Please enter your new password twice so we can verify you typed it in "
 "correctly."
 msgstr ""
+"Bitte gib dein neues Passwort zwei mal ein um zu überprüfen dass es richtig "
+"geschrieben ist."
 
 #: registration/password_reset_confirm.html:15
 msgid "New password:"
-msgstr ""
+msgstr "Neues Passwort:"
 
 #: registration/password_reset_confirm.html:17
 msgid "Confirm password:"
-msgstr ""
+msgstr "Passwort bestätigen:"
 
 #: registration/password_reset_confirm.html:18
 msgid "Change my password"
-msgstr ""
+msgstr "Passwort ändern"
 
 #: registration/password_reset_confirm.html:23
 msgid "Password reset unsuccessful"
-msgstr ""
+msgstr "Passwort Zurücksetzen gescheitert"
 
 #: registration/password_reset_confirm.html:25
 msgid ""
@@ -230,13 +232,15 @@ msgstr ""
 
 #: registration/password_reset_done.html:7
 msgid "Password reset successful"
-msgstr ""
+msgstr "Passwort erfolgreich zurückgesetzt"
 
 #: registration/password_reset_done.html:9
 msgid ""
 "We've e-mailed you instructions for setting your password to the e-mail "
 "address you submitted. You should be receiving it shortly."
 msgstr ""
+"Wir haben eine E-Mail mit Anweisungen zum ändern deines Passworts an die von "
+"dir angegebene Adresse geschickt."
 
 #: registration/password_reset_email.html:2
 #, python-format
@@ -244,23 +248,25 @@ msgid ""
 "You're receiving this e-mail because you requested a password reset for your "
 "user account at %(site_name)s."
 msgstr ""
+"Du erhältst diese Email da das Zurücksetzen deines Passworts auf "
+"%(site_name)s beantragt wurde."
 
 #: registration/password_reset_email.html:4
 msgid "Please go to the following page and choose a new password:"
-msgstr ""
+msgstr "Bitte suche die folgende Seite auf und wähle ein neues Passwort:"
 
 #: registration/password_reset_email.html:8
 msgid "Your username, in case you've forgotten:"
-msgstr ""
+msgstr "Dein Benutzer*innenname, falls du ihn vergessen hast:"
 
 #: registration/password_reset_email.html:10
 msgid "Thanks for using our site!"
-msgstr ""
+msgstr "Danke!"
 
 #: registration/password_reset_email.html:12
 #, python-format
 msgid "The %(site_name)s team"
-msgstr ""
+msgstr "Das %(site_name)s Team"
 
 #: registration/password_reset_form.html:7
 msgid "Password reset"
@@ -271,14 +277,16 @@ msgid ""
 "Forgotten your password? Enter your e-mail address below, and we'll e-mail "
 "instructions for setting a new one."
 msgstr ""
+"Passwort vergessen? Gib' deine E-mail Adresse hier ein, und wir mailen dir "
+"die Anweisungen zum zurücksetzen deines Passworts."
 
 #: registration/password_reset_form.html:13
 msgid "E-mail address:"
-msgstr ""
+msgstr "E-mail Adresse:"
 
 #: registration/password_reset_form.html:13
 msgid "Reset my password"
-msgstr ""
+msgstr "Passwort zurücksetzen"
 
 #: registration/registration_complete.html:6
 msgid "Registration complete"
