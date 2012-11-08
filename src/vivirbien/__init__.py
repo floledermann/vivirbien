@@ -9,13 +9,13 @@ from registration.signals import user_registered
 from openresources.models import Resource
 
 def user_registered_callback(sender, user, request, **kwargs):
-    mail_managers('[Vivir Bien]: New user registered', 'Username: %s\nEmail: %s' % (user.username, user.email))
+    mail_managers('New user registered: %s' % user.username, 'Username: %s\nEmail: %s' % (user.username, user.email))
 
 user_registered.connect(user_registered_callback, dispatch_uid='vivirbien.signals')
 
 def resource_created_callback(sender , instance, created, raw, **kwargs):
     if sender == Resource and created and not raw:
-        mail_managers('[Vivir Bien]: New resource created', 'Name: %s\nURL: http://%s%s' % (instance.name, Site.objects.get_current().domain, reverse('openresources_resource', kwargs={'key':instance.shortname})))
+        mail_managers('New resource created: %s' % instance.name, 'Name: %s\nURL: http://%s%s' % (instance.name, Site.objects.get_current().domain, reverse('openresources_resource', kwargs={'key':instance.shortname})))
 
 post_save.connect(resource_created_callback, dispatch_uid='vivirbien.signals')
         
