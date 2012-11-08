@@ -40,14 +40,14 @@
 
 <VirtualHost *:80>
 	ServerAdmin mail@floledermann.com
-	ServerName vivirbien-media.floledermann.com
+	ServerName vivirbien-media.mediavirus.org
 
 	<Directory /home/flo/sites/vivirbien/>
 		Options +FollowSymLinks		
 	</Directory>
 
-	DocumentRoot /home/flo/sites/vivirbien/current-release/media
-	<Directory /home/flo/sites/vivirbien/current-release/media>
+	DocumentRoot /home/flo/sites/vivirbien/media
+	<Directory /home/flo/sites/vivirbien/media>
 		Order allow,deny
 		allow from all
 	</Directory>
@@ -63,6 +63,35 @@
 
     LogLevel warn
 	ErrorLog /home/flo/sites/vivirbien/log/apache-error.log
-	CustomLog /home/flo/sites/vivirbien/log/apache-access.log combined
+	#CustomLog /home/flo/sites/vivirbien/log/apache-access.log combined
+	
+</VirtualHost>
+
+<VirtualHost *:80>
+	ServerAdmin mail@floledermann.com
+	ServerName vivirbien-static.mediavirus.org
+
+	<Directory /home/flo/sites/vivirbien/>
+		Options +FollowSymLinks		
+	</Directory>
+
+	DocumentRoot /home/flo/sites/vivirbien/collected_static
+	<Directory /home/flo/sites/vivirbien/collected_static>
+		Order allow,deny
+		allow from all
+	</Directory>
+
+	ExpiresActive On
+	ExpiresByType image/gif A604800
+	ExpiresByType image/png A604800
+	ExpiresByType image/jpg A604800
+	ExpiresByType image/jpeg A604800
+	ExpiresByType text/javascript A604800
+	ExpiresByType application/x-javascript A604800
+	ExpiresByType text/css A604800
+
+    LogLevel warn
+	ErrorLog /home/flo/sites/vivirbien/log/apache-error.log
+	#CustomLog /home/flo/sites/vivirbien/log/apache-access.log combined
 	
 </VirtualHost>
