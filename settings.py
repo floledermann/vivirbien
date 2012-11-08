@@ -142,27 +142,40 @@ SOUTH_MIGRATION_MODULES = {
 #    EMAIL_HOST = 'mail.semicolon.at'
   
 
-from settings_secret import *
+# these settings will be replaced by site-specific settings below
+MEDIA_URL = ''
+STATIC_URL = ''
+MEDIA_ROOT = None
+STATIC_ROOT = None
+TEMPLATE_DIRS = None
+DJANGO_PROJECT_ROOT = ''
+DJANGO_RELEASE_ROOT = ''
+
+# load site-specific settings
+try:
+    from settings_secret import *
+except ImportError:
+    pass
 
 #
-# settings depending on project base dir
+# settings depending on project base dir, only if not set explicitly
 #
+
+if not DJANGO_PROJECT_ROOT:
+    import warnings
+    warnings.warn('DJANGO_PROJECT_ROOT not set! (Maybe the project is not yet initialized?)')
+
+if not DJANGO_RELEASE_ROOT:
+    DJANGO_RELEASE_ROOT = DJANGO_PROJECT_ROOT
 
 STATICFILES_DIRS = (
     DJANGO_RELEASE_ROOT + 'static/',
 )
 
-if not TEMPLATE_DIRS:
-    TEMPLATE_DIRS = (
-        DJANGO_PROJECT_ROOT + 'templates',
-    )
-
-if not MEDIA_ROOT:
-    MEDIA_ROOT = DJANGO_PROJECT_ROOT + 'media/'
-
-LOCALE_PATHS = (
-    DJANGO_PROJECT_ROOT + 'templates/locale/',
-)
+MEDIA_ROOT = MEDIA_ROOT or DJANGO_PROJECT_ROOT + 'media/'
+STATIC_ROOT = STATIC_ROOT or DJANGO_PROJECT_ROOT + 'collected_static/'
+TEMPLATE_DIRS = TEMPLATE_DIRS or (DJANGO_RELEASE_ROOT + 'templates',)
+LOCALE_PATHS = (DJANGO_RELEASE_ROOT + 'templates/locale/',)
 
 
 
