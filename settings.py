@@ -84,7 +84,7 @@ INSTALLED_APPS = (
     'threadedcomments',
     'sorl.thumbnail',
     'snippets',
-    'vivirbien'
+    'vivirbien',
 )
 
 TEMPLATE_DIRS = None

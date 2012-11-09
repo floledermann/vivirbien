@@ -18,7 +18,7 @@ urlpatterns = patterns('',
         register,
         {
             'backend': 'registration.backends.simple.SimpleBackend',
-            'success_url': 'index',
+            'success_url': 'openresources_index',
             'form_class': RegistrationFormNoEmail},
         name='registration_register'),
     (r'^accounts/', include('registration.backends.simple.urls')),
