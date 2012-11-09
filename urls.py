@@ -1,9 +1,9 @@
 from django.conf.urls.defaults import *
 from django.conf import settings
+from django.views.generic.simple import redirect_to
+
 from registration.views import register
 from vivirbien.forms import RegistrationFormNoEmail
-
-#django.views.generic.simple.redirect_to
 
 from django.contrib import admin
 admin.autodiscover()
@@ -23,8 +23,10 @@ urlpatterns = patterns('',
         name='registration_register'),
     (r'^accounts/', include('registration.backends.simple.urls')),
     (r'^comments/', include('threadedcomments.urls')),
-    (r'^resources/', include('openresources.urls')),
-    url(r'^$', 'openresources.views.index',name='index'),
+    # we now run resources app directly in / - redirect old urls
+    (r'^resources/(?P<rest>.*)', redirect_to, {'url': '/%(rest)s'}),
+    (r'^', include('openresources.urls')),
+    #url(r'^$', 'openresources.views.index',name='index'),
 )
 
 if settings.SERVE_STATIC:
