@@ -465,7 +465,7 @@ def collect_static():
             # hack: delete file to be overridden by our own version
         #    run('cd %(path)s && rm collected_static/grappelli/js/SelectFilter2.js' % env)
         # we are in a symlinked directory so we have to add one more '../' !
-        run('cd %(path)s/current-release && ../../env/bin/python manage.py collectstatic --noinput' % env) 
+        sudo('cd %(path)s/current-release && ../../env/bin/python manage.py collectstatic --noinput' % env) 
 
 def activate():
     "Activate (symlink) our current release"
