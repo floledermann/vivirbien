@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-08 21:34+0100\n"
+"POT-Creation-Date: 2012-11-09 20:55+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,19 +18,19 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1)\n"
 
-#: page_base.html:12 page_base.html.py:20 page_base.html.py:34
+#: page_base.html:15 page_base.html.py:23 page_base.html.py:37
 msgid "Resources for a solidarity economy"
 msgstr ""
 
-#: page_base.html:35
+#: page_base.html:38
 msgid "Data"
 msgstr ""
 
-#: page_base.html:35
+#: page_base.html:38
 msgid "Why?"
 msgstr ""
 
-#: page_base.html:35
+#: page_base.html:38
 msgid "Credits"
 msgstr ""
 
@@ -64,12 +64,12 @@ msgstr ""
 msgid "language:"
 msgstr ""
 
-#: includes/navi.html:24
+#: includes/navi.html:23
 msgid "Resources"
 msgstr ""
 
-#: includes/navi.html:26
-msgid "About"
+#: includes/navi.html:24
+msgid "About &amp; Documentation"
 msgstr ""
 
 #: invitation/invitation_form.html:8

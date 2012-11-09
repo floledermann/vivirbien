@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-08 21:34+0100\n"
+"POT-Creation-Date: 2012-11-09 20:55+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,19 +17,19 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: page_base.html:12 page_base.html.py:20 page_base.html.py:34
+#: page_base.html:15 page_base.html.py:23 page_base.html.py:37
 msgid "Resources for a solidarity economy"
 msgstr "Ressourcen für solidarische Lebensweisen"
 
-#: page_base.html:35
+#: page_base.html:38
 msgid "Data"
 msgstr "Daten"
 
-#: page_base.html:35
+#: page_base.html:38
 msgid "Why?"
 msgstr "Warum?"
 
-#: page_base.html:35
+#: page_base.html:38
 msgid "Credits"
 msgstr "Credits"
 
@@ -63,13 +63,13 @@ msgstr "Abmelden"
 msgid "language:"
 msgstr "Sprache:"
 
-#: includes/navi.html:24
+#: includes/navi.html:23
 msgid "Resources"
 msgstr "Ressourcen"
 
-#: includes/navi.html:26
-msgid "About"
-msgstr "About"
+#: includes/navi.html:24
+msgid "About &amp; Documentation"
+msgstr "Info &amp; Dokumentation"
 
 #: invitation/invitation_form.html:8
 msgid "You can send an invitation code to a friend here."
@@ -359,6 +359,9 @@ msgstr "Autor"
 #: wiki/recentchanges.html:12
 msgid "Comment"
 msgstr "Kommentar"
+
+#~ msgid "About"
+#~ msgstr "About"
 
 #~ msgid ""
 #~ "Some areas of Vivir Bien are currently available only to registered "
