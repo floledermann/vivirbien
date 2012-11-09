@@ -10,17 +10,7 @@ h1 {
     margin: 20px 0 10px;
 }
 
-h2 {
-    font-size: 18px;
-    line-height: 20px;
-    margin: 12px 0 6px;
-}
 
-h3 {
-    font-size: 16px;
-    line-height: 18px;
-    margin: 10px 0 5px;
-}
 
 h4 {
     font-weight: bold;
@@ -45,6 +35,12 @@ select {
 .header-wrapper, .footer {
     background-color: #eeeeee; /*#eeeeee;*/
 }
+
+.header-wrapper {
+    background-image: url('../images/header_background.jpg');
+    background-repeat: repeat-x;
+}
+
 
 .header .active {
     background: #ffffff;
@@ -71,7 +67,7 @@ a.action {
 
 .comments,
 .actions {
-    background-color: #eeeeee;
+    xbackground-color: #eeeeee;
     xborder: 1px solid #999999;
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
@@ -79,14 +75,6 @@ a.action {
     padding: 3px;
     max-width: 100%;
     margin-bottom: 10px;
-}
-
-.action {
-    background-color: #eeeeee;
-    -moz-border-radius: 4px;
-    -webkit-border-radius: 4px;
-    border-radius: 4px;
-    padding: 2px 4px;
 }
 
 .comment {
@@ -131,7 +119,7 @@ a.action {
 
 .listbox,
 .navbox {
-    border: 1px solid #aaaaaa;
+    xborder: 1px solid #aaaaaa;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
     border-radius: 5px;
@@ -142,3 +130,45 @@ a.action {
 .yui-skin-sam td .yui-ac-input {
     position: static;
 }
+
+html .resource,
+html .view {
+    background-position: 0 0;
+}
+
+html .resource {
+    background-image: url('../images/resource-icon_20x20.png');
+}
+
+html .view {
+    background-image: url('../images/view-icon_20x20.png');
+}
+
+.index-map-wrapper {
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+}
+
+html .resource,
+html .view {
+    background-position: 0 0;
+}
+
+html .resource {
+    background-image: url('../images/resource-icon_20x20.png');
+}
+
+html .view {
+    background-image: url('../images/view-icon_20x20.png');
+}
+
+.index-map-wrapper {
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+}
+
+
+
+
+
+
