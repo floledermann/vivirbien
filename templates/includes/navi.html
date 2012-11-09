@@ -10,8 +10,7 @@
 {% endif %}
 {% if user.is_active %}| <a href="{% url auth_logout %}">{% trans "Log out" %}</a>{% endif %}
 | <form class="language-switcher autosubmit" action="/i18n/setlang/" method="post">
-{% trans "language:" %} 
-<select name="language">
+{% trans "language:" %} <select name="language">
 {% for lang in LANGUAGES %}
 <option value="{{ lang.0 }}"{% ifequal lang.0 LANGUAGE_CODE%} selected="selected"{% endifequal %}>{{ lang.1 }}</option>
 {% endfor %}
@@ -22,8 +21,7 @@
 </div>
 <ul class="navi">
 <li class="{% active request "^/resources/" %} {% active request "^/$" %}"><a href="/">{% trans "Resources" %}</a></li>
-<li class="{% active request "^/wiki/" %}"><a href="/wiki/Vivir%20Bien/">Wiki</a></li>
-<li><a href="/wiki/About_{{LANGUAGE_CODE}}/">{% trans "About" %}</a></li>
+<li class="{% active request "^/wiki/" %}"><a href="/wiki/Vivir%20Bien/">{% trans "About &amp; Documentation" %}</a></li>
 {% if user.is_staff %}<li><a href="/admin/">Admin</a></li>{% endif %}
 </ul>
 <div class="clear"></div>
