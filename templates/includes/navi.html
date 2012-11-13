@@ -20,7 +20,7 @@
 </form>
 </div>
 <ul class="navi">
-<li class="{% active request "^/resource/" %} {% active request "^/view/" %} {% active request "^/search/" %} {% active request "^/$" %}"><a href="/">{% trans "Resources" %}</a></li>
+<li class="{% active request "^/resource/" %} {% active request "^/view" %} {% active request "^/in/" %} {% active request "^/search/" %} {% active request "^/$" %}"><a href="/">{% trans "Resources" %}</a></li>
 <li class="{% active request "^/wiki/" %}"><a href="/wiki/Vivir%20Bien/">{% trans "About &amp; Documentation" %}</a></li>
 {% if user.is_staff %}<li><a href="/admin/">Admin</a></li>{% endif %}
 </ul>
