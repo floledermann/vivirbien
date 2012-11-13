@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-09 20:55+0100\n"
+"POT-Creation-Date: 2012-11-13 12:15+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -59,10 +59,6 @@ msgstr "Registrieren"
 msgid "Log out"
 msgstr "Abmelden"
 
-#: includes/navi.html:13
-msgid "language:"
-msgstr "Sprache:"
-
 #: includes/navi.html:23
 msgid "Resources"
 msgstr "Ressourcen"
@@ -104,27 +100,19 @@ msgstr "Mehr..."
 msgid "News"
 msgstr ""
 
-#: openresources/resource.html:67
-msgid "Related resources"
-msgstr "Ähnliche Ressourcen"
-
-#: openresources/resource.html:78 wiki/edit.html:9
-msgid "Edit"
-msgstr "Bearbeiten"
-
-#: openresources/resource.html:86
+#: openresources/includes/resource_bottom.html:3
 msgid "Comments for"
 msgstr "Kommentare für"
 
-#: openresources/resource.html:91
+#: openresources/includes/resource_bottom.html:8
 msgid "Comment by"
 msgstr "Kommentar von"
 
-#: openresources/resource.html:93
+#: openresources/includes/resource_bottom.html:10
 msgid "Reply"
 msgstr "Antworten"
 
-#: openresources/resource.html:99
+#: openresources/includes/resource_bottom.html:16
 msgid "New Comment"
 msgstr "Neuer Kommentar"
 
@@ -229,6 +217,8 @@ msgid ""
 "The password reset link was invalid, possibly because it has already been "
 "used.  Please request a new password reset."
 msgstr ""
+"Dieser Link ist ungültig - wahrscheinlich wurde er schon verwendet. Bitte "
+"fordere einen neuen Link zum Zurücksetzen des Passworts an."
 
 #: registration/password_reset_done.html:7
 msgid "Password reset successful"
@@ -332,6 +322,10 @@ msgstr "Letzte Änderungen"
 msgid "Editing article"
 msgstr "Artikel bearbeiten"
 
+#: wiki/edit.html:9
+msgid "Edit"
+msgstr "Bearbeiten"
+
 #: wiki/edit.html:24
 msgid "Save"
 msgstr "Speichern"
@@ -359,6 +353,12 @@ msgstr "Autor"
 #: wiki/recentchanges.html:12
 msgid "Comment"
 msgstr "Kommentar"
+
+#~ msgid "language:"
+#~ msgstr "Sprache:"
+
+#~ msgid "Related resources"
+#~ msgstr "Ähnliche Ressourcen"
 
 #~ msgid "About"
 #~ msgstr "About"

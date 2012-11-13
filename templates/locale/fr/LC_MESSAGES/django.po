@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-09 20:55+0100\n"
+"POT-Creation-Date: 2012-11-13 12:15+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -60,10 +60,6 @@ msgstr ""
 msgid "Log out"
 msgstr ""
 
-#: includes/navi.html:13
-msgid "language:"
-msgstr ""
-
 #: includes/navi.html:23
 msgid "Resources"
 msgstr ""
@@ -100,27 +96,19 @@ msgstr ""
 msgid "News"
 msgstr ""
 
-#: openresources/resource.html:67
-msgid "Related resources"
-msgstr ""
-
-#: openresources/resource.html:78 wiki/edit.html:9
-msgid "Edit"
-msgstr ""
-
-#: openresources/resource.html:86
+#: openresources/includes/resource_bottom.html:3
 msgid "Comments for"
 msgstr ""
 
-#: openresources/resource.html:91
+#: openresources/includes/resource_bottom.html:8
 msgid "Comment by"
 msgstr ""
 
-#: openresources/resource.html:93
+#: openresources/includes/resource_bottom.html:10
 msgid "Reply"
 msgstr ""
 
-#: openresources/resource.html:99
+#: openresources/includes/resource_bottom.html:16
 msgid "New Comment"
 msgstr ""
 
@@ -308,6 +296,10 @@ msgstr ""
 
 #: wiki/edit.html:5
 msgid "Editing article"
+msgstr ""
+
+#: wiki/edit.html:9
+msgid "Edit"
 msgstr ""
 
 #: wiki/edit.html:24
