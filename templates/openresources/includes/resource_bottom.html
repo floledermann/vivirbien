@@ -1,0 +1,19 @@
+{% load i18n threadedcommentstags %}
+{% get_threaded_comment_tree for resource as tree %}
+<h2>{% trans "Comments for" %} {{ resource.name }}</h2>
+{% if tree %}
+<div class="comments">
+{% for comment in tree %}
+    <div style="margin-left: {{ comment.depth }}em;" class="comment">
+        <h3>{% trans "Comment by" %} {{ comment.user.username }}:</h3>
+        {{ comment.comment|linebreaks }}
+        <a class="action say" id="c{{ comment.id }}" href="javascript:show_reply_form('c{{ comment.id }}','{% get_comment_url resource comment %}','{{ comment.user.username }}')">{% trans "Reply" %}</a>
+    </div>
+{% endfor %}
+</div>
+{% endif %}
+<div class="actions">
+<a class="action say" id="newcomment" href="javascript:show_reply_form('newcomment','{% get_comment_url resource %}')">{% trans "New Comment" %}</a>
+</div>
+
+
