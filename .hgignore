@@ -16,3 +16,5 @@ glob:old
 glob:documents/ripess/
 glob:documents/
 glob:vivirbien (copy).db
+glob:*.sqlite
+glob:*.db
