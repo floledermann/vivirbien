@@ -85,6 +85,13 @@ INSTALLED_APPS = (
     'sorl.thumbnail',
     'snippets',
     'vivirbien',
+    'compressor',
+)
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',
 )
 
 TEMPLATE_DIRS = None
@@ -122,25 +129,10 @@ AUTH_PROFILE_MODULE = 'openresources.UserProfile'
 SOUTH_MIGRATION_MODULES = {
     'openresources': 'openresources.migrations_transmeta',
 }
-    
-#if DEPLOYMENT_CONFIG == 'server_architekt':
 
-#    DJANGO_PROJECT_ROOT = '/home/flo/sites/vivirbien/current-release/'
-#    
-#    DATABASE_HOST = 'mail.semicolon.at'
-#    DATABASE_NAME = 'vivirbien'
-#    DATABASE_USER = 'vivirbien'
-#    
-#    # overrides
-#    
-#    DEBUG = False
-#    TEMPLATE_DEBUG = DEBUG
-#    
-#    MEDIA_URL = 'http://vivirbien-media.floledermann.com/'
-#    ADMIN_MEDIA_PREFIX = MEDIA_URL + 'admin/'
-#    
-#    EMAIL_HOST = 'mail.semicolon.at'
-  
+COMPRESS_ENABLED = True
+COMPRESS_JS_FILTERS = []
+COMPRESS_PARSER = 'compressor.parser.HtmlParser'
 
 # these settings will be replaced by site-specific settings below
 MEDIA_URL = ''

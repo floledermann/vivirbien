@@ -18,3 +18,4 @@ glob:documents/
 glob:vivirbien (copy).db
 glob:*.sqlite
 glob:*.db
+glob:collected_static/

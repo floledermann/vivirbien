@@ -18,6 +18,7 @@ creole==1.0.1
 sorl-thumbnail==3.2.5
 django-transmeta==0.6.6
 django-registration==0.8
+django_compressor==1.2
 
 # django-tagging==0.3.1
 
