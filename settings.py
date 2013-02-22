@@ -130,7 +130,8 @@ SOUTH_MIGRATION_MODULES = {
     'openresources': 'openresources.migrations_transmeta',
 }
 
-COMPRESS_ENABLED = True
+# enable explicitly if you want to test when DEBUG == True
+#COMPRESS_ENABLED = True
 COMPRESS_JS_FILTERS = []
 COMPRESS_PARSER = 'compressor.parser.HtmlParser'
 
